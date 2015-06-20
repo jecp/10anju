@@ -1,0 +1,21 @@
+<section data-ng-controller="ArticlesController" data-ng-init="find()">
+	<div class="col-md-12">
+		<div class="article_list_top">
+			<a data-ng-repeat="article in articles | filter:user._id" data-ng-href="#!/articles/{{article._id}}" class="">
+				<div class="text-right article_content">
+					<h3 class="list-group-item-heading" data-ng-bind="article.title"></h3>
+					<span class="small list-group-item-text">
+						发表于
+						<span data-ng-bind="article.created | date:'yyyy-MM-dd hh:mm:ss'"></span>
+					</span>
+				</div>
+				<div class="article_content_top">
+					<p class="list-group-item-text" ng-bind-html="article.content | limitTo:200"></p><span class="text-muted">仅显示简介，详情请点击查看</span>
+				</div>
+			</a>
+		</div>
+		<div class="alert alert-warning text-center" data-ng-hide="!articles.$resolved || articles.length">
+			No Articles yet, why don't you <a href="/#!/articles/create">create one</a>?
+		</div>
+	</div>
+</section>

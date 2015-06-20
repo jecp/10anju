@@ -1,0 +1,39 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
+	<div class="col-md-9">
+		<div class="page-header">
+			<p ng-bind-html="article.title"></p>
+		</div>
+		<div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
+			<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<small>
+			<em class="text-muted">
+				发表于
+				<span data-ng-bind="article.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="article.user.username"></span>
+			</em>
+		</small>
+		<p class="lead" ng-bind-html="article.content"></p>
+	</div>
+	<div class="col-md-3" data-ng-controller="GoodsController">
+		<div class="article_right_goods">
+			<div class="good_detail_samecat">
+				<ul class="breadcrumb text-right">同类精选<span class="glyphicon glyphicon-thumbs-up"></span></ul>
+				<div class="good_subcat_list" data-ng-init="listSubcat()">
+					<li data-ng-repeat="item in goods | filter:article.title | limitTo: 3">
+						<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
+							<img ng-src="{{item.main_img}}" alt="" class="thumbnail">
+							<label for="" data-ng-bind="item.title" class="h5"></label>
+						</a>
+					</li>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

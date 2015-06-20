@@ -1,0 +1,57 @@
+<section data-ng-controller="OrdersController" data-ng-init="findOne()">
+	<div class="mt10"></div>
+	<div class="order_detail">
+		<div class="od_top">
+			<div class="odt_title col-md-8">
+				<h3>订单</h3>
+			</div>
+			<div class="odt_erweima col-md-4">
+				<img src="/modules/core/imgs/1.png" style="max-width:80px;">
+			</div>
+		</div>
+		<div class="od_header">
+			<div><div class="col-xs-3">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div></div>
+			<div><div class="col-xs-3">入驻社区：<span class="text-muted" data-ng-bind="order.user.ccenter.name"></span></div></div>
+			<div><div class="col-xs-3">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div></div>
+			<div><div class="col-xs-3">购买时间：<span class="text-muted" data-ng-bind="order.day"></span></div></div>
+			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div></div>
+			<div><div class="col-xs-3">收货地址：<span class="text-muted" data-ng-bind="{{order.user.username}}"></span></div></div>
+			<div><div class="col-xs-3">买家留言：<span class="text-muted" data-ng-bind="{{order.user.username}}"></span></div></div>
+		</div>
+		<div class="od_table">
+			<table class="table table-hover table-bordered">
+				<thead>
+		    		<tr>
+		    			<!-- <th>id</th> -->
+		    			<th>图片</th>
+		    			<th>商品名称</th>
+		    			<th>数量</th>
+		    			<th>单价</th>
+		                <th>赠品/试用品</th>
+		    			<th>实付</th>
+		    		</tr>
+				</thead>
+				<tbody data-ng-repeat="item in order.goods">
+					<tr>
+						<!-- <td><span></span></td> -->
+						<td class="col-md-3 col-xs-3">
+		                    <a href="/#!/carts/{{item._id}}">
+		                        <img ng-src="{{item.goods.main_img}}" alt="" class="thumbnail" style="max-width:120px;">
+		                    </a>
+						</td>
+						<td><span data-ng-bind="item.goods.title"></span></td>
+						<td><span data-ng-bind="item.amount"></span></td>
+						<td><span data-ng-bind="item.goods.price"></span></td>
+		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
+						<td><span data-ng-bind="item.total"></span></td>
+					</tr>
+				</tbody>
+				</table>
+		</div>
+		<div class="od_footer">
+			<div>合计数量： 实付金额：</div>
+			<div></div>
+			<div>备注：</div>
+		</div>
+	</div>
+</section>

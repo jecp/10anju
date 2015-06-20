@@ -1,0 +1,326 @@
+<section data-ng-controller="GoodsController" data-ng-init="findOne()" ng-show="good">
+	<div class="row">
+		<div class="col-md-9">
+			<!-- 分类导航及标题 -->
+			<div class="page-header ">
+				<div class="good_detail_top_nav">
+					<ol class="breadcrumb">
+					  <li><a href="/#!/goods">首页</a></li>
+					  <li><a href="/#!/categories">分类</a></li>
+					  <li><a href="/#!/categories/{{good.category._id}}" data-ng-bind="good.category.name"></a></li>
+					  <li><a href="/#!/goods/subcat/{{good.subcat}}" data-ng-bind="good.subcat"></a></li>
+					  <li class="active" data-ng-bind="good.name"></li>
+					</ol>
+					<h3 data-ng-bind="good.title"></h3>
+				</div>
+				<!-- 商品详情 -->
+				<div class="good_detail_top">
+					<div class="row">
+						<div class="good_detail_up">
+							<div class="col-md-6 pull-left">
+								<!-- 图片部分 -->
+								<div class="good_detail_bigimg">
+									<img ng-src="{{good.main_img}}" class="good_main_img" alt="{{good.title}}">
+								</div>
+								<div class="mt5"></div>
+								<div class="good_img_array">
+									<label class="good_detail_img_array" data-ng-repeat="item in good.img">
+										<img class="good_detail_img_small" ng-src="{{item}}" alt="">
+									</label>
+								</div>
+								<div class="good_detail_sharezone">
+									<div class="col-xs-12">分享到</div>
+										<div class="col-xs-6">
+											<a href="#">
+												<span class="glyphicon glyphicon-heart">喜欢</span>
+											</a>
+										</div>
+										<div class="col-xs-6">
+											<a href="#">
+												<span class="glyphicon glyphicon-star">关注</span>
+											</a>
+										</div>
+								</div>
+							</div>
+							<div class="col-md-6 good_detail_formfield">
+								<div class="good_detail_mainattr" data-ng-controller="CartsController">
+									<form class="form-horizontal" data-ng-submit="create()" novalidate>
+										<div class="detail_top">
+											<div>
+												<p>
+													<span class="text-muted h5" data-ng-bind="good.summary"></span>
+												</p>
+											</div>
+										<div class="mt5"></div>
+										<div>
+											<p>
+												<span class="text-muted col-xs-4">产地</span>
+												<span class="col-xs-8" data-ng-bind="good.origin"></span>
+											</p>
+										</div>
+										<div>
+											<p>
+												<span class="text-muted col-xs-4">规格</span>
+												<span class="col-xs-8" data-ng-bind="good.spec"><b>kg</b></span>
+											</p>
+											<span class="text-muted col-xs-4">净重</span>
+											<span class="col-xs-8" data-ng-bind="good.weight"></span>
+											<span class="weight-warning pull-right">
+											</span>
+										</div>
+										<div>
+											<span class="text-muted col-xs-4">储存方法</span>
+											<span class="col-xs-8" data-ng-bind="good.storage_method"></span>
+											<span class="pull-right label label-default"><span class="h3">生鲜商品</span>以实际送达重量为准<span class="h3">!</span></span>
+										</div>
+										<div class="mt5"></div>
+										<div class="good_detail_price">
+											<ul class="price-meta">
+												<li class="">
+													<span class="col-xs-4">价格</span>
+													<div class="">
+														<strong><em>&yen;&nbsp;</em><b class="good_price" data-ng-bind="good.price | number:2"></b></strong>
+													<span class="pull-right">
+														<em class="per" data-ng-bind="good.price/good.weight/2 | number:2"></em>
+														<span class="text-muted">元/500g</span>
+													</span>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div>
+											<p>
+												<span class="text-muted col-xs-4">配送方式</span>
+												<span class="col-xs-8" data-ng-bind="good.delivery"></span>
+											</p>
+										</div>
+										<div class="mt5"></div>
+										</div>
+										<div class="row"></div>
+											<!-- 购物按钮 -->
+											<div class="good_detail_action well">
+												<!-- 购物逻辑 -->
+												<div class="good_detail_buy_icon">
+													<div class="good_for_sale" ng-show="good.sale !== null">
+														<div>
+															<h6>
+																<span class="text-muted col-xs-5">促销价</span>
+																<span class="col-xs-7"><i>￥&nbsp;</i><em data-ng-bind="good.sale"></em></span>
+															</h6>
+														</div>
+													</div>
+													<div class="mt10"></div>
+													<div class="col-md-6 col-xs-6">
+														<div class="buy">
+															<a href="/#!/goods/{{good._id}}/cart" class="btn btn-primary"><b>立即购买</b>
+																<i class="glyphicon glyphicon-check"></i>
+															</a>
+														</div>
+													</div>
+													<div class="col-md-6 col-xs-6 pull-right">
+														<div class="cart">
+															<div class="form-group">
+																<input type="submit" class="btn btn-default" value="加入购物篮">
+															</div>
+															<div data-ng-show="error" class="text-danger">
+																<strong data-ng-bind="error"></strong>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="mt5"></div>
+											</div>
+										</form>
+										<div class="good_feature_icon h3 pull-right">
+											<span class="feature_icon feature_icon_local"><span class="glyphicon glyphicon-picture"></span>产地直供</span>
+											<span class="feature_icon feature_icon_origin"><span class="glyphicon glyphicon-leaf"></span>绿色优选</span>
+											<span class="feature_icon feature_icon_freedelivery"><span class="glyphicon glyphicon-home"></span>免费配送</span>
+										</div>
+										<div class="mt5"></div>
+										<div class="clearfix">
+											<div class="mt10"></div>
+											<div class="good_detail_amount">
+												<div class="col-xs-6">
+													<span class="red">累计售出</span>
+													<a href="#">	
+														<span class="red" ng-data-bind="good.amount"></span>
+													</a>
+												</div>
+												<div class="col-xs-6">
+													<span class="red">评论</span>
+													<a href="">
+														<span class="red" ng-data-bind="good.comments"></span>
+													</a>
+												</div>
+											</div>
+										</div>							
+									</div>
+								</div>
+							</div>
+					</div>				
+				</div>
+			</div>
+			<!-- header end -->
+			<div class="good_detail_nav_content">
+				<div class="detail_attr">
+					<dl>
+						<dt>适宜人群</dt>
+						<dd><span data-ng-repeat="item in good.suitable">
+								<a href="#">
+									<span class="" data-ng-bind="item"></span>
+								</a>
+							</span>
+						</dd>
+					</dl>
+					<dl>
+						<dt>功效</dt>
+						<dd><span data-ng-repeat="item in good.feature">
+								<a href="#">
+									<span class="" data-ng-bind="item"></span>
+								</a>
+							</span>
+						</dd>
+					</dl>
+					<dl>
+						<dt>适用疾病</dt>
+						<dd><span data-ng-repeat="item in good.therapy">
+								<a href="#">
+									<span class="" data-ng-bind="item"></span>
+								</a>
+							</span>
+						</dd>
+					</dl>
+					<dl>
+						<dt>禁忌</dt>
+						<dd><span data-ng-repeat="item in good.avoid">
+								<a href="#">
+									<span class="" data-ng-bind="item"></span>
+								</a>
+							</span>
+						</dd>
+					</dl>
+				</div>
+				<div class="good_detail_content">
+					<!-- new tab -->
+					<tabset>
+						<tab>
+							<tab-heading>商品详情</tab-heading>
+							<div class="good_detail_detail">
+								<p class="good_detail_text_14px" ng-bind-html="good.detail" class="good_detail"></p>
+								<img ng-src="{{good.main_img}}" alt="">
+								<img ng-src="{{good.img[0]}}" alt="">
+							</div>
+						</tab>
+						<tab>
+							<tab-heading>营养价值</tab-heading>
+							<div class="good_detail_yingyang">
+								<p class="good_detail_text_14px" ng-bind-html="good.nutrition"></p>
+							</div>
+						</tab>
+						<tab>
+							<tab-heading>家常菜谱</tab-heading>
+							<div class="good_detail_shiyongfangfa">
+								<p class="good_detail_text_14px" ng-bind-html="good.recipes"></p>
+							</div>
+						</tab>
+						<tab>
+							<tab-heading>健康搭配</tab-heading>
+							<div class="good_detail_collection">
+								<p class="good_detail_text_14px" ng-bind-html="good.collection"></p>
+							</div>
+						</tab>
+						<tab>
+							<tab-heading>小百科</tab-heading>
+							<div class="good_detail_wiki">
+								<p class="good_detail_text_14px" ng-bind-html="good.wiki"></p>
+							</div>
+						</tab>
+					</tabset>
+				</div>
+				<div class="good_detail_common">
+					<div class="pay">
+						<div class="good_detail_common_h3"><span class="h3 g_d_common">下单&支付</span></div>
+						<p class="good_detail_common_text">
+							<ol>
+								<li>1. 注册会员(需验证手机号，无需支付任何费用)</li>
+								<li>2. 浏览心仪商品，下单</li>
+								<li>3. 选择合适支付方式
+									<ol>
+										<li>3.1 在线支付.(预售商品中的生鲜产品需称重后付款，不适于此项)</li>
+										<li>3.2 隔日付/当面付。可以通过支付宝/pos机/现金方式，最长支付期限达5天。</li>
+									</ol>
+								</li>
+								<li>4. 支付成功将有回单，请向工作人员索取。(在线支付回单会随商品送达。)</li>		
+							</ol>
+						</p>
+					</div>
+					<div class="delivery">
+						<div class="good_detail_common_h3"><span class="h3 g_d_common">配送说明</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 时间: 初定每日6：30AM-10:30AM</li>
+								<li>2. 地点: 小区直配--送至小区固定位置(详见<a href="/#!/ccenters/">小区目录</a>)</li>
+								<li>3. 分发: 除老弱病残等不便自取者外，所有货物请客户在上述时间范围内至上述地点自提。</li>
+								<li>4. 逾期未收货: 顺延至次日分发。(生鲜订单除外)，建议与邻居协商代领。</li>
+							</ol>
+						</p>
+					</div>
+					<div class="confirm">
+						<div class="good_detail_common_h3 good_detail_common_confirm"><span class="h3 g_d_common">收货&确认</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 随货配有订单，共三联(订单联、支付确认联及送货联)</li>
+								<li>2. 订单联客户收存</li>
+								<li>3. 支付确认联，如已支付，由客户保存，否则签字后交至工作人员处。</li>
+								<li>4. 送货联，客户签字后交由工作人员收回。</li>
+							</ol>
+						</p>
+					</div>
+					<div class="quality">
+						<div class="good_detail_common_h3 good_detail_common_quality"><span class="h3 g_d_common">质量保证&无货退款</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 保证所有产品均可当面退货、拒收(全部或部分)</li>
+								<li>2. 所有产品均可无货退款，需填写退货单并写明原由，帮助我们改进。</li>
+							</ol></p>
+					</div>
+				</div>
+		    </div>
+		</div>
+		<!-- 右侧相关栏 -->
+		<div class="good_detail_push col-md-3 pull-right" >
+			<div class="row good_detail_wikizone">
+				<ul class="breadcrumb text-right">精彩推荐<span class="glyphicon glyphicon-thumbs-up"></span></ul>
+				<!-- accordion begin -->
+				<accordion close-others="oneAtATime">
+					<accordion-group ng-show="good.wiki !== null" is-open="status.FirstOpen" is-disabled="status.isDisabled">
+						<accordion-heading>小百科</accordion-heading>{{good.wiki}}
+					</accordion-group>
+					<accordion-group ng-show="good.suitable.length > 0" is-open="status.open">
+						<accordion-heading>适宜人群
+						</accordion-heading>{{good.suitable}}
+					</accordion-group>
+					<accordion-group ng-show="good.feature.length > 0" is-open="status.close">
+						<accordion-heading>功效
+						</accordion-heading>{{good.feature}}
+					</accordion-group>
+				</accordion>
+				<!-- accordion end -->
+			</div>
+			<div class="row">
+				<div class="good_detail_samecat">
+					<ul class="breadcrumb text-right">同类精选<span class="glyphicon glyphicon-thumbs-up"></span></ul>
+					<div class="good_subcat_list" data-ng-init="listSubcat()">
+						<li data-ng-repeat="item in goods">
+							<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
+								<img ng-src="{{item.main_img}}" alt="" class="thumbnail">
+								<label for="" data-ng-bind="item.title" class="h5"></label>
+							</a>
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

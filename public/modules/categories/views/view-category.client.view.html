@@ -1,0 +1,26 @@
+<section data-ng-controller="CategoriesController" data-ng-init="findOne()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="good_detail_top_nav">
+                    <ol class="breadcrumb">
+                      <li><a href="/#!/goods">首页</a></li>
+                      <li><a href="/#!/categories">分类</a></li>
+                      <li><a href="/#!/categories/{{category._id}}" data-ng-bind="category.name"></a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="category_list">
+                <div data-ng-repeat="item in category.goods">
+                    <div class="thumbnail col-md-3">
+                        <a href="/#!/goods/{{item._id}}" class="">
+                            <img ng-src="{{item.main_img}}" alt="">
+                            <span data-ng-bind="item.title"></span>
+                        </a>
+                        <p>￥<span data-ng-bind="item.price"></span><span class="pull-right" data-ng-bind="item.delivery"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>

@@ -1,0 +1,30 @@
+@media (min-width: 992px) {
+	.nav-users {
+		position: fixed;
+	}
+}
+.remove-account-container {
+	display: inline-block;
+	position: relative;
+}
+.btn-remove-account {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+}
+/* user_signin */
+.user_signin{margin-top: 86px;min-height:480px;padding-bottom: 190px;}
+.user_signin_profile{font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;color: #444443;}
+/* user_profile_left */
+.user_profile_left{float:auto;margin-bottom: 80px;}
+.user_profile_detail{background-color: #ccc;}
+
+/* avatar */
+.avatar img{padding:5px;width: 230px;height: 230px;overflow: hidden;}
+
+/* star_num */
+.user_profile_attr{border-top:1px solid #eee;border-bottom:1px solid #eee;padding-top:15px;padding-bottom: 10px;padding-left:15px;margin-bottom:10px;  }
+.vcard_star{float: left;width: 33.333%;font-size: 11px;text-transform: capitalize;}
+
+/* user_cart*/
+.user_cart_list img{max-width: 120px;overflow: hidden;}

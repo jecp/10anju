@@ -1,0 +1,152 @@
+<section data-ng-controller="GoodsController" data-ng-init="findOne()">
+    <div class="row">
+        <div class="col-md-8 pull-left">
+            <div class="page-header">
+                <p>
+                    <span class="h3" data-ng-bind="good.title"></span>
+                    <span class="label label-danger pull-right h5">商品编辑页</span>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label" for="name">商品名称</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.name" id="name" class="form-control" placeholder="商品名称" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">商品标题</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.title" id="title" class="form-control" placeholder="商品标题" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="summary">商品简介</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.summary" id="summary" class="form-control" placeholder="商品简介" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="spec">商品规格</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.spec" id="spec" class="form-control" placeholder="商品规格" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="price">价格</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.price" id="price" class="form-control" placeholder="价格" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="weight">净重</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.weight" id="weight" class="form-control" placeholder="净重" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="origin">产地</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.origin" id="origin" class="form-control" placeholder="产地" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="delivery">配送方式</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.delivery" id="delivery" class="form-control" placeholder="配送方式" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="main_img">主图</label>
+                            <div class="controls">
+                                <input type="url" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="主图" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="stock">库存</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.stock" id="stock" class="form-control" placeholder="库存" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="wiki">百科</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.wiki" id="wiki" class="form-control" placeholder="百科" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="detail">详细描述</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.detail" id="detail" class="form-control" placeholder="详细描述" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="img">配图</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.img" id="img" class="form-control" placeholder="配图" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="nutrition">营养价值</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.nutrition" id="nutrition" class="form-control" placeholder="营养价值" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="recipes">食用方法</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.recipes" id="recipes" class="form-control" placeholder="食用方法" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="collocation">健康搭配</label>
+                            <div class="controls">
+                                <textarea type="text" data-ng-model="good.collocation" id="collocation" class="form-control" placeholder="健康搭配" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="更新" class="btn btn-default">
+                        </div>
+                        <div data-ng-show="error" class="text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 realtime_show">
+            <div class="page-header">
+                <p>
+                    <span class="h3" data-ng-bind="good.title"></span>
+                    <span class="label label-danger pull-right h5">商品预览</span>
+                </p>
+            </div>
+            <div>
+                <p ng-bind-html="good.name"></p>
+            </div>
+            <div>
+                <p ng-bind-html="good.title"></p>
+            </div>
+            <div><p ng-bind-html="good.summary"></p></div>
+            <div><p ng-bind-html="good.spec"></p></div>
+            <div><p ng-bind-html="good.price"></p></div>
+            <div><p ng-bind-html="good.weight"></p></div>
+            <div><p ng-bind-html="good.origin"></p></div>
+            <div><p ng-bind-html="good.delivery"></p></div>
+            <div><img src="{{good.main_img}}" alt="" class="thumbnail"></div>
+            <div><p ng-bind-html="good.stock"></p></div>
+            <div><p ng-bind-html="good.wiki"></p></div>
+            <div><p ng-bind-html="good.detail"></p></div>
+            <div><p ng-bind-html="good.img"></p></div>
+            <div><p ng-bind-html="good.nutrition"></p></div>
+            <div><p ng-bind-html="good.suitable"></p></div>
+            <div><p ng-bind-html="good.feature"></p></div>
+            <div><p ng-bind-html="good.therapy"></p></div>
+            <div><p ng-bind-html="good.avoid"></p></div>
+            <div><p ng-bind-html="good.recipes"></p></div>
+            <div></div>
+        </div>
+    </div>    
+</section>

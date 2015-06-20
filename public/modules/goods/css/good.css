@@ -1,0 +1,108 @@
+ul li{list-style-type: none;}
+.good_detail_push{margin-top: 20px;padding-top: 20px;}
+.good_main_img{
+	max-width: 370px;overflow: hidden;
+}
+li{list-style-type: none;}
+/* dl dt dd*/
+dl {
+margin-bottom:5px;
+}
+dl dt {
+background:#5f9be3;
+color:#fff;
+float:left;
+font-weight:bold;
+margin-right:10px;
+padding:5px;
+}
+dl dd {
+margin:2px 0;
+padding:5px 0;
+}
+.mt10{height:10px;}
+.mt5{height:5px;clear:both;}
+.fr{float:right;}
+/* good_list */
+/*.good_list_listitem{height:100%;margin-right:25px;position: relative;float:left;display: inline;}*/
+.good_list_top{font-size: 12px;
+    position: relative;
+    background: url(http://d03.res.meilishuo.net/img/_o/10/c3/06c05fe57d047c9c87c86ba4d21c_44_63.ch.png) no-repeat;
+    height: 63px;
+    line-height: 63px;
+    width: 44px;}
+.m_ico {
+    float: left;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    margin-right: 1px;
+}
+.mark {
+    width: 220px;
+    position: absolute;
+    left: 5px;
+    top: -1px;
+}
+.good_list_listitem{padding-bottom: 16px;}
+.good_list_listitem :hover label{border: 1px solid #f69;}
+.good_list_listitem img{overflow: hidden;}
+.grid-4{width:25%;}
+.good_list_add{margin-bottom: 5px;margin-top: 2px;}
+.good_list_buy{font-size:15px;padding:5px;background-color: #375D1E;color:#000;}
+.good_list_cart{padding:5px;background-color: #F0A851;color:#000;}
+.good_list_img{max-width: 100%;overflow: hidden;}
+.good_list_price{margin-top: 2px;border-top: 1px dashed #ccc;}
+/* good_detail */
+.good_detail_up{margin-bottom: 20px;}
+/*.warp_good_detail_content{}*/
+.good_main_img{max-width:370px;overflow: hidden;}
+.good_detail_img_array{overflow: hidden;border:1px solid #ccc;}
+.good_detail_img_array img{max-width: 72px;}
+.good_detail_bigimg{border: 1px solid #ccc;}
+.good_detail_bigimg img{width:100%;overflow: hidden;}
+.good_detail_img_small{max-width:280px;overflow: hidden;}
+
+/* good_detail_top */
+.good_detail_top{margin-bottom: 30px; padding:5px;}
+.good_detail_price{display:block;background-color: #FFF2E8;}
+
+/* detail_top */
+.detail_top{padding:5px;border:1px dashed #ccc;display:block;}
+.good_for_sale{height:30px;margin-bottom: 10px;border-bottom: 1px solid #ccc;}
+.good_detail_action{margin-top: 10px;}
+.good_detail_content img{max-width: 100%;overflow:hidden;}
+
+/* good_detail_price_block */
+.good_detail_price_block{padding: 10px;background-color: #FFF2E8;}
+.good_detail_buy_icon{margin-top: 15px;}
+.weight-warning{display:block;color: #1C9A32;color:white;font-size: 14px;}
+/* price */
+.price-meta{padding: 10px;background-color: #FFF2E8;}
+.good_price{font-size: 32px;color:red;}
+
+
+/* feature_icon_local */
+/*.good_feature_icon{}*/
+.feature_icon{clear: both;height:40px;width: 100px;color:white;background-color:#1C9A32;padding: 6px;}
+.feature_icon_local{font-size:75%;}
+.feature_icon_origin{font-size:75%;}
+.feature_icon_freedelivery{font-size:75%;}
+
+/* good_detail_content */
+.good_detail_content{display:block;content:'';margin-top:40px;}
+.good_subcat_list{width:95%;overflow: hidden;padding-left: 10px;}
+.right_subcat_list img{width:100%;overflow: hidden;}
+.good_nav{clear:both;display:block;margin-top:30px;}
+
+/* good_detail_nav_content */
+.detail_attr{display:block;margin-bottom: 30px;}
+
+.feature_label{background-color: #ccc;color:#000;width: 60px;height:28px;}
+/* edit */
+.realtime_show img{width:100%;overflow: hidden;}
+
+/* good_detail_text_14px */
+.good_detail_text_14px{padding:10px 5px 5px 5px;font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;color: #444443;}
+.good_detail_common_h3{margin-top:20px;border-bottom:1px solid green;margin-bottom: 5px;}
+.g_d_common{background-color:green;color:white;}

@@ -1,0 +1,84 @@
+<section data-ng-controller="CartsController" data-ng-init="findOne()">
+	<div class="row">
+		<div class="col-md-10">
+			<div class="page-header">
+				<div class="title">
+					<h1>我的购物篮<span class="small pull-right" data-ng-bind="cart.number | date:'medium' "></span></h1>
+				</div>
+			</div>
+			<!-- 购物篮begin -->
+			<div class="cart_view_list">
+				<div class="cart_view_list_header">
+					<div class="row">
+						<table class="table table-hover table-response">
+							<thead>
+								<tr>
+									<th>
+										<input type="checkbox">全选
+									</th>
+									<th>货品</th>
+									<th>数量</th>
+									<th>单价(元)</th>
+									<th>赠品/免费试用</th>
+									<th>金额(元)</th>
+									<th>删除</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="checkbox">
+									</td>
+									<td>
+										<a href="/#!/goods/{{cart.goods._id}}">
+											<img ng-src="{{cart.goods.main_img}}" class="col-xs-3" alt="">
+											<p data-ng-bind="cart.goods.title"></p>
+										</a>
+									</td>
+									<td>
+										<input type="text" data-ng-model="cart.amount">
+										<p>{{cart.amount}}</p>
+									</td>
+									<td data-ng-bind="cart.goods.price" data-ng-model="cart.goods.price"></td>
+									<td><span ng-if="cart.goods.for_free == true">赠品</span><span ng-if="cart.goods.free_try == true">试用品</span></td>
+									<td name="total" >
+										<div data-ng-model="total" value="{{cart.amount*cart.goods.price}}">{{cart.amount*cart.goods.price}}</div>
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+						<div class="h1">{{total}}={{total.value}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="page-header">总计:</div>
+				<div class="page-body">
+					<h1>{{total}}</h1>
+					<span class="pull-right"></span>
+					<h3 data-ng-bind="cart.total">{{cart.total}}</h3>
+				</div>
+				<div class="" data-ng-controller="OrdersController">
+			        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+			            <fieldset>
+			                <div class="form-group">
+			                    <input type="submit" class="btn btn-default" value="结算">
+			                </div>
+							<div data-ng-show="error" class="text-danger">
+								<strong data-ng-bind="error"></strong>
+							</div>
+			            </fieldset>
+			        </form>
+				</div>
+			</div>
+		<div class="col-md-2" data-ng-init="find()">
+		    <div class="list-group">
+		        <a data-ng-repeat="cart in carts" data-ng-href="#!/carts/{{item._id}}" class="list-group-item">
+		        	<!-- <img ng-src="{{cart.goodId.main_img}}" alt=""> -->
+					<h4 class="list-group-item-heading" data-ng-bind="cart.name"></h4>
+		        </a>
+			</div>	
+		</div>
+	</div>
+</section>

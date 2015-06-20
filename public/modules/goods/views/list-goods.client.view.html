@@ -1,0 +1,95 @@
+<section>
+    <div class="row">
+        <div class="col-md-3 pull-right">
+          <div class="page-header">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="panel-title">公告</div>
+              </div>
+              <div class="panel-body"><p class="h5">暴雨黄色预警，受影响小区有...</p></div>
+            </div>
+          </div>
+          <!-- <ul>
+            <h4>{{user.username}}的购物车
+              <span>(共{{vm.cartCount()}}件 总计 {{vm.cartTotal()}} 元)</span></h4>
+            <li data-ng-repeat="item in carts.goods">
+              <a href=""><img src="" alt=""></a>
+            </li>
+          </ul> -->
+        </div>
+        <div class="col-md-9">
+          <div class="mt20"></div>
+          <div class="mt20"></div>
+            <div class="good_detail_top_nav">
+              <ol class="breadcrumb">
+                <li><a href="/#!/goods">首页</a></li>
+                <li><a href="/#!/categories">分类</a></li>
+              </ol>
+            </div>
+            <div data-ng-controller="CategoriesController" data-ng-init="find()">
+              <tabset>
+                <tab>
+                  <tab-heading>
+                    <span>全部</span>
+                  </tab-heading>
+                  <div data-ng-controller="GoodsController">
+                    <div class="good_list_all" data-ng-init="find()">
+                      <li data-ng-repeat="good in goods" class="" role="listitem">
+                        <div class="grid-4 col-xs-6">
+                            <div class="">
+                              <div class="good_list_listitem">
+                                <label>
+                                  <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
+                                  <div class="good_list_thumbnail">
+                                    <a href="/#!/goods/{{good._id}}">
+                                      <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                                      <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                                    </a>
+                                  </div> 
+                                  <div class="good_list_price">
+                                    <div> 
+                                      <span>￥</span><span style="color:red;" data-ng-bind="good.price | number:2"></span><span class="pull-right" data-ng-bind="good.delivery"></span>
+                                    </div>
+                                  </div>
+                                  <!-- <div class="row good_list_add">
+                                    <p class="text-right">
+                                      <span class="btn btn-primary btn-sm" role="button" ng-click="vm.addToCart(item)" title="加入购物车"><i
+                                          class="glyphicon glyphicon-shopping-cart"></i></span>
+                                      <span class="btn btn-warning btn-sm" role="button" ng-click="vm.buy(item)" title="直接购买当前商品">立即购买</span>
+                                    </p>
+                                  </div> -->
+                                </label>
+                              </div>
+                            </div>                    
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </tab>
+                <tab data-ng-repeat="cat in categories">
+                  <tab-heading>
+                    <span data-ng-bind="cat.name"></span>
+                  </tab-heading>
+                  <div data-ng-controller="GoodsController">
+                    <div class="good_list_all" data-ng-init="find()">
+                      <li data-ng-repeat="good in goods | filter:cat._id" class="" role="listitem">
+                        <div class="col-md-3">
+                            <div class="good_list_listitem">
+                                <a href="/#!/goods/{{good._id}}">
+                                    <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                                    <h4 data-ng-bind="good.title"></h4>
+                                </a>
+                                <div class="good_list_price">
+                                  <span>￥</span><span style="color:red;" data-ng-bind="good.price | number:2"></span><span class="pull-right" data-ng-bind="good.delivery"></span>
+                                </div>
+                            </div>                    
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </tab>
+              </tabset>
+            </div>
+        </div> 
+    </div>
+</section>

@@ -1,0 +1,78 @@
+<section class="row" data-ng-controller="AuthenticationController">
+	<div class="user_signin">
+		<div class="col-md-6 col-xs-12 user_signin_profile">
+			<h2 class="col-md-12 text-center">会员权益</h2>
+			<div class="col-md-12">
+				<p>
+					<ol>
+						<li>1. 享受<strong>小区直配(免费)</strong>服务</li>
+						<li>2. 一定额度内<strong>先购买享用后付费</strong></li>
+						<li>3. 食安居会员专享“菜篮子”</li>
+						<li>4. 完全免费的代购服务，<strong>指定商品规格指定价格</strong>，我们跑腿送上门</li>
+						<li>5. 食安居日常精选 <strong>赠品/试用品</strong> 服务</li>
+						<li>6. <strong>无货退款/无条件退款</strong></li>
+					</ol>
+				</p>
+				<div class="">
+					<p class="text-right">
+						<a href="/#!/member-rights">点我了解更多</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title text-right">
+						食安居会员注册
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+							<fieldset class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
+								<div>
+									<div class="form-group">
+										<label for="username" class="col-md-2 control-label">用户名</label>
+										<div class="col-md-10">
+											<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="用户名，可用中文">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email" class="col-md-2 control-label">邮箱</label>
+										<div class="col-md-10">
+											<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="常用邮箱，验证及找回密码时必需">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="password" class="col-md-2 control-label">密码</label>
+										<div class="col-md-10">
+											<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-offset-2 col-md-10">
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" id="agreement" name="agreement" ng-click="agreement == true" data-ng-model="credentials.agreement" ng-change="true">阅读并接受<a href="/#!/protocal" target="_blank">用户协议</a>
+												</label>
+											</div>
+										</div>
+									</div>								
+									<div class="text-center form-group">
+										<span ng-if="credentials.agreement!=true"><span class="glyphicon glyphicon-exclamation-sign"></span>勾选同意才能继续</span>
+										<button type="submit" ng-if="credentials.agreement==true" class="btn btn-large btn-primary">注册</button>&nbsp; or&nbsp;
+										<a href="/#!/signin" class="show-signup">登录</a>
+									</div>
+									<div data-ng-show="error" class="text-center text-danger">
+										<strong data-ng-bind="error"></strong>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

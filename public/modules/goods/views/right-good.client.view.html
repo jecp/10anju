@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="good_detail_push col-md-3 pull-right">
+		<ol class="breadcrumb text-right">右侧</ol>
+		<span>右侧导航栏</span>
+		<div class="col-md-2">
+		    <p class="gonggao">这里放公告</p>
+		</div>
+		<div class="col-md-10">
+	        <div class="page-header">
+	            <h7 class="text-right">三个订单，满足日常所需。</h7>
+	        </div>
+	        <ul class="nav nav-tabs">
+	           <li class="active"><a href="/">全部</a></li>
+	           <li class="dropdown">
+	              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                 蔬菜 <span class="caret"></span>
+	              </a>
+	              <ul class="dropdown-menu">
+	                 <li><a href="#">叶菜类</a></li>
+	                 <li><a href="#">根茎类</a></li>
+	                 <li><a href="#">果实类</a></li>
+	                 <li><a href="#">菇类</a></li>
+	                 <li class="divider"></li>
+	                 <li><a href="#">配菜类</a></li>
+	              </ul>
+	           </li>
+	           <li><a href="#">水果</a></li>
+	           <li><a href="#">粮油调料</a></li>
+	        </ul>
+	        <div class="">
+	            <li data-ng-repeat="good in goods" class="" role="listitem">
+	                <div class="col-md-3">
+	                    <div class="good_list_listitem">
+	                        <a href="/#!/goods/{{good._id}}">
+	                            <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+	                            <h4 data-ng-bind="good.title"></h4>
+	                        </a>
+	                        <p>￥<span data-ng-bind="good.price"></span><span class="pull-right" data-ng-bind="good.delivery"></span></p>
+	                    </div>                    
+	                </div>                    
+	            </li>
+	        </div>
+	    </div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+.navbar-brand{color:red;}
+
+/* */
+.mt20{margin-top:20px; }
+
+a{text-decoration:none; }
+a:hover {
+	color:#FF538C;text-decoration: none;
+}
+
+/* help center css */
+header, nav, article, section, aside, footer, figure {
+	display:block
+}
+
+/* my_left */
+.my_left{background-color: #fbfbfb;margin-top:35px;}
+
+/* my_count_sub */
+.my_count{content:'';margin-top:30px;border:1px solid #ccc;border-radius:5px;box-shadow:3px 3px #fbfbfb;margin-bottom: 10px;}
+.my_count_sub{clear:both;margin-top:5px;padding-bottom:  10px;}
+.my_count_num{float:left;width: 33.333%;font-size: 11px;text-transform: capitalize;}
+
+/* footer_content */
+.footer_content{margin-top:60px;background-color: rgba(0,0,0,0.1);}
+
+/* protocal_head */
+.protocal_head{height: 40px;border-top: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;background-color: #fafafa;box-shadow: 1px 1px 2px #f7f7f7;}

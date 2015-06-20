@@ -1,0 +1,70 @@
+<section data-ng-controller="GoodsController" data-ng-init="listSubcat()">
+    <div class="row">
+        <div class="col-md-2 pull-right">
+            <p class="gonggao">这里放公告</p>
+        </div>
+        <div class="col-md-10">
+            <div class="page-header">
+                <!-- <h1>商品列表</h1> -->
+                <h7 class="text-right">三个订单，满足日常所需。</h7>
+            </div>
+            
+            <div class="">
+                <li data-ng-repeat="good in goods" class="" role="listitem">
+                    <div class="col-md-3">
+                        <div class="good_list_listitem">
+                            <a href="/#!/goods/{{good._id}}">
+                                <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                                <h4 data-ng-bind="good.title"></h4>
+                            </a>
+                            <p>￥<span data-ng-bind="good.price"></span><span class="pull-right" data-ng-bind="good.delivery"></span></p>
+                        </div>                    
+                    </div>
+<!--                     <article class="post">
+                        <a data-ng-href="#!/goods/{{good._id}}">
+                            <img data-ng-src="{{good.main_img}}" class="good_main_img" alt="">
+                        </a>
+                        <div class="post-detail">
+                            <div class="btitle">
+                                <h3>
+                                    <a class="Source-Han-Sans-Medium" href="#!/goods/{{good._id}}" rel="bookmark">{{good.name}}</a>
+                                </h3>
+                            </div>
+                            <div class="post-data fonts pull-left">
+                                <a href="#" title="赞">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                    <span>0</span>
+                                </a>
+                                <a href="#" title="评论">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <span>0</span>
+                                </a>
+                                <a href="#" title="分享">
+                                    <i class="glyphicon glyphicon-share"></i>
+                                    <span>3</span>
+                                </a>
+                            </div>
+                            <div class="post-category good_index_buy pull-right">
+                                <input type="button" ng-click="buy($index)" value="直接购买">
+                            </div>
+                        </div>
+                    </article>   -->                      
+                </li>
+            </div>
+        </div>
+    </div>
+<!--     <div class="list-group">
+        <a data-ng-repeat="good in goods" data-ng-href="#!/goods/{{good._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="good.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="good.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="good.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!goods.$resolved || goods.length">
+    	No Goods yet, why don't you <a href="/#!/goods/create">create one</a>?
+    </div> -->
+</section>

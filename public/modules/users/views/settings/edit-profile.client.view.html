@@ -1,0 +1,155 @@
+<section class="row" data-ng-controller="SettingsController">
+	<div class="col-md-12 mt20">
+		<div class="col-md-4 user_profile_left">
+			<div class="avatar">
+				<img ng-src="{{user.avatar}}" ng-if="user.avatar !== null" alt="" ng-mouseenter="item.popover= true" ng-mouseleave ="item.popover = false">
+				<img ng-src="http://gravatar.com/avatar/cfd8a518f61419ed239a2cc9bef7ddf1?s=256" ng-if="user.avatar === null" alt="">
+			</div>
+			<div>
+				<div class="mt10"></div>			
+				<div class="username">
+					<p data-ng-bind="user.username"></p>
+				</div>
+				<div class="user_profile_attr">
+					<div class="email">
+						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
+						<p><span class="glyphicon glyphicon-time">&nbsp;</span><span data-ng-bind="user.created | date"></span></p>
+						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="user.ccenter"></span></p>
+					</div>
+				</div>
+				<div class="vcard_stars">
+					<div>
+						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.followers.length"></h4><span class="text-muted">粉丝</span></a>
+						<a  class="vcard_star" href="#"><h4>7</h4><span class="text-muted">圈子</span></a>
+						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.following.length"></h4><span class="text-muted">关注</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- add -->
+		<div class="col-md-8 pull-right">
+			<div class="breadcrumb"><strong>Tips:</strong><span>在这里可以上传头像，查看/修改个人资料</span>
+			</div>
+			<!-- tabs begin -->
+			<div class="">
+				<tabset>
+					<tab>
+						<tab-heading>
+							<span>我的美文</span>
+						</tab-heading>
+						<div data-ng-include="'/modules/articles/views/list-articles.client.view.html'" ></div>
+					</tab>
+					<tab>
+						<tab-heading>购物篮</tab-heading>
+						<div class="carts" class="" >
+							<div data-ng-include="'/modules/carts/views/list-carts.client.view.html'" ></div>
+						</div>
+					</tab>
+					<tab heading="订单">
+						<div class="orders" class="" >
+							<div data-ng-include="'/modules/orders/views/list-orders.client.view.html'" ></div>
+						</div>
+					</tab>
+					<tab heading="收藏">
+						<div class="collections" class="" >
+							<div data-ng-include="'/modules/collections/views/list-collections.client.view.html'" ></div>
+						</div>
+					</tab>
+				</tabset>
+				<!-- <ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="/#articles" data-toggle="tab">文章</a></li>
+					<li><a href="#ios" data-toggle="tab">收藏</a></li>
+					<li><a href="/#carts" data-toggle="tab">购物篮</a></li>
+					<li><a href="/#orders" data-toggle="tab">订单</a></li>
+				</ul> -->
+			</div>
+			<!-- <div class="tab-content">				
+				<div id="orders" class="tab-pane active">
+					
+				</div>
+				<div>1</div>
+				<div class="tab-pane fade" id="carts">
+				      
+				   </div>
+				<div class="">
+					<div data-ng-include="'/modules/orders/views/list-orders.client.view.html'" ></div>
+				</div>
+				<div id="articles" class="">
+					<div data-ng-include="'/modules/carts/views/list-carts.client.view.html'" ></div>
+				</div>
+				<div class="carts" class="" >
+					<div data-ng-include="'/modules/articles/views/list-articles.client.view.html'" ></div>
+				</div>
+				<div class="">
+					<div data-ng-include="'/modules/collections/views/list-collections.client.view.html'" ></div>
+				</div>
+			</div> -->			
+			<!-- tabs end -->
+<!-- 			<div class="user_cart" data-ng-controller="CartsController" data-ng-init="find()">
+				<div class="panel panel-default user_cart_list">
+					<div class="panel-heading">
+						<h3 class="panel-title">购物篮</h3>
+					</div>
+					<ul class="list-group">
+						<li class="list-group-item" data-ng-repeat="cart in carts"><a href="/#!/carts/{{cart._id}}">
+							<img ng-src="{{cart.goods[0].goodId.main_img}}" alt="" class="thumbnail"></a><span data-ng-bind="cart.name"></span><li data-ng-bind="cart.goods.price"></li><li data-ng-bind="cart.goods.amount"></li><span data-ng-bind="cart.created | date: 'yyyy-MM-dd hh:mm:ss EEEE'" class="text-muted pull-right"></span></li>
+					</ul>
+				</div>
+			</div> -->
+			<!-- form field -->
+			<div>
+					<!-- <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" enctype="multipart/form-data" autocomplete="off">
+						<fieldset>
+							<div class="user_headimg">
+								<div class="form-group" ng-if="user.headimg !== undefined">
+									<a href="#">
+										<img ng-src="{{user.headimg}}" alt="">
+									</a>
+									<h5>不满意，重新上传头像</h5>
+									<input type="file" name="headimg" data-ng-model="headimg">
+									<h5>&nbsp;或&nbsp;引用网络图片</h5>
+									<input type="url" name="headimg" data-ng-model="headimg">
+									<h1>{{headimg_upload}}</h1>
+								</div>
+								<div class="user_profile_head_img" ng-show="user.headimg===undefined">
+									<img ng-src="{{headimg}}" alt="">
+									<a href="#"  data-ng-model="headimg_upload" value="true"><h5>上传头像，做个有面子的人</h5>&nbsp;或&nbsp;引用网络图片</a>
+									<input type="url" name="headimg" data-ng-model="headimg">
+									<h1>{{headimg_upload}}</h1>
+									<input type="file" name="headimg" data-ng-model="headimg">
+									<h7>{{headimg}}</h7>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<input type="text" id="firstName" name="firstName" class="form-control col-xs-3" data-ng-model="user.firstName" placeholder="姓">	
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<input type="text" id="lastName" name="lastName" class="form-control col-xs-8" data-ng-model="user.lastName" placeholder="名">
+								</div>
+							</div>
+							<div class="form-group">
+								<span for="email">Email</span>
+								<input type="email" id="email" name="email" class="form-control col-xs-10" data-ng-model="user.email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<span for="username">昵称</span>
+								<input type="text" id="username" name="username" class="form-control col-xs-10" data-ng-model="user.username" placeholder="Username">
+							</div>
+							<div class="text-center form-group">
+								<button type="submit" class="btn btn-large btn-primary">保存</button>
+							</div>
+							<div data-ng-show="success" class="text-center text-success">
+								<strong>恭喜小主，保存成功！</strong>
+							</div>
+							<div data-ng-show="error" class="text-center text-danger">
+								<strong data-ng-bind="error"></strong>
+							</div>
+						</fieldset>
+					</form> -->
+			</div>
+		</div>
+	</div>
+</section>
