@@ -20,7 +20,16 @@ var OrderSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	goods: [],
+	detail:[{
+		goods: {type:Schema.ObjectId,
+			ref:'Good'},
+		amount:{type:Number,default:1},
+		price:{type:Number}
+	}],
+	cart:{
+		type:Schema.ObjectId,
+		ref:'Cart'
+	},
 	total:{
 		type: Number,
 		default: 0
@@ -35,6 +44,10 @@ var OrderSchema = new Schema({
 			enum: ['check', 'wechat', 'alipay', 'pos']
 		}],
 		default: ['alipay']
+	},
+	status: {
+		type:Boolean,
+		default: false
 	},
 	user: {
 		type: Schema.ObjectId,

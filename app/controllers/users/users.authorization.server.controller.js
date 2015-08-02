@@ -52,3 +52,24 @@ exports.hasAuthorization = function(roles) {
 		});
 	};
 };
+
+/**
+ * User admin routing middleware
+ */
+exports.adminRequired = function(req, res, next) {
+	var _this = req.user;
+	console.log('this :' + _this);
+
+	User.findOne({_id:_this._id,roles:'admin'},function (err,user){
+		if (err){console.log(err);}
+		else if(user){
+			console.log('admin user is:' + user);
+			return next();
+		}
+		else {
+			return res.status(403).send({
+				message: 'User is not Admin'
+			});
+		}
+	});
+};

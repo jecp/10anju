@@ -8,30 +8,65 @@ var mongoose = require('mongoose'),
 	Cart = mongoose.model('Cart'),
 	Good = mongoose.model('Good'),
 	_ = require('lodash');
-
 /**
  * Create a Cart
  */
 exports.create = function(req, res) {
-	var cart = new Cart(req.body);
-	cart.user = req.user;
-
-	Good.update({_id:req.body.goods},{$inc:{sold:1}},function (err,next){
-		if(err){
-			console.log(err);
-			return next;
-		}
-	});
-
-	cart.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(cart);
-		}
-	});
+	var sgoods = req.body.detail.goods;
+	var sprice = req.body.detail.price;
+	var _total = req.body.total;
+	var _goods = {
+			goods:sgoods,
+			amount:1,
+			price:sprice,
+		};
+	if (sgoods){
+		Cart.findOne({user:req.user,day:req.body.day,order_status:false,'detail.goods':sgoods},function(err,cart){
+			if (err){console.log(err);}
+			else if(cart){
+				var i = cart.detail.length;
+				while(i--){
+					if (sgoods.toString() === cart.detail[i].goods.toString()){
+						cart.detail[i].amount += 1;
+						cart.total += sprice;
+					}
+				}
+				if (i){				
+					cart.save(function (err,cart){
+						if (err){console.log(err);}
+						else {
+							res.jsonp(cart);
+						}
+					});
+				} else {
+					cart.update({$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
+						res.jsonp(cart);
+					});
+				}
+			} else{
+				Cart.findOneAndUpdate({user:req.user,day:req.body.day,order_status:false},{$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
+					if(err){console.log(err);}
+					else if(cart){
+						res.jsonp(cart);
+					}
+					else {
+						var _cart = new Cart(req.body);
+						_cart.user = req.user;
+						_cart.detail = _goods;
+						_cart.save(function (err,cart) {
+							if (err) {
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)
+								});
+							} else {
+								res.jsonp(cart);
+							}
+						});
+					}
+				});
+			}
+		});
+	}
 };
 
 /**
@@ -61,6 +96,28 @@ exports.update = function(req, res) {
 };
 
 /**
+ * Change the goods total in cart
+ */
+exports.changeAmount = function(req, res) {
+	Cart.findOne({_id:req.body.cart._id},function (err,cart) {
+
+		var i = cart.detail.length;
+		while(i--){
+			if (req.body.goodId.toString() === cart.detail[i].goods.toString()){
+				cart.total += cart.detail[i].price * (req.body.cart_amount-cart.detail[i].amount);
+				cart.detail[i].amount = req.body.cart_amount;
+			}
+		}			
+		cart.save(function (err,cart){
+			if (err){console.log(err);}
+			else {
+				res.jsonp(cart);
+			}
+		});
+	});
+};
+
+/**
  * Delete an Cart
  */
 exports.delete = function(req, res) {
@@ -78,21 +135,46 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Delete an Cart.goods
+ */
+exports.deleteGoods = function(req, res) {
+	Cart.findOne({_id:req.body.cart._id,'detail.goods':req.body.goodId._id},function (err,cart){
+
+		var i = cart.detail.length;
+		while(i--){
+			if (req.body.goodId._id.toString() === cart.detail[i].goods.toString()){
+				// cart.detail.slice(i,1);
+				cart.detail.pull(cart.detail[i]);
+				cart.total -= req.body.total;
+			}
+		}
+		cart.save(function (err,cart){
+			if (err) {console.log(err);}
+			else{
+				res.send(cart);
+			}
+		});		
+	});
+};
+
+/**
  * List of Carts
  */
 exports.list = function(req, res) {
-	var userId = req.user._id;
+	if (req.user) {
+		var userId = req.user._id;
 
-	if (userId) {
-		Cart.find({user:userId}).sort('-created').populate('goods', 'main_img price spec sale title for_free free_try').exec(function(err, carts) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				res.jsonp(carts);
-			}
-		});
+		if (userId) {
+			Cart.find({user:userId}).sort('-created').populate('detail.goods', 'main_img price spec weight origin delivery sale title for_free free_try').exec(function(err, carts) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(carts);
+				}
+			});
+		}
 	}
 };
 
@@ -100,7 +182,7 @@ exports.list = function(req, res) {
  * Cart middleware
  */
 exports.cartByID = function(req, res, next, id) { 
-	Cart.findById(id).populate('user', 'displayName').populate('goods', 'main_img price spec sale title for_free free_try').exec(function(err, cart) {
+	Cart.findById(id).populate('user', 'displayName').populate('detail.goods', 'main_img price spec sale title for_free free_try').exec(function(err, cart) {
 		if (err) return next(err);
 		if (! cart) return next(new Error('Failed to load Cart ' + id));
 		req.cart = cart ;

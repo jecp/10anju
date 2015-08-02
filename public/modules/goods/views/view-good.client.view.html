@@ -22,29 +22,26 @@
 								<div class="good_detail_bigimg">
 									<img ng-src="{{good.main_img}}" class="good_main_img" alt="{{good.title}}">
 								</div>
-								<div class="mt5"></div>
 								<div class="good_img_array">
-									<label class="good_detail_img_array" data-ng-repeat="item in good.img">
+									<label data-ng-repeat="item in good.img" class="good_detail_img_array">
 										<img class="good_detail_img_small" ng-src="{{item}}" alt="">
 									</label>
 								</div>
 								<div class="good_detail_sharezone">
-									<div class="col-xs-12">分享到</div>
-										<div class="col-xs-6">
-											<a href="#">
-												<span class="glyphicon glyphicon-heart">喜欢</span>
-											</a>
-										</div>
-										<div class="col-xs-6">
-											<a href="#">
-												<span class="glyphicon glyphicon-star">关注</span>
-											</a>
-										</div>
+									<!-- <div class="col-xs-12">分享到</div> -->
+									<div class="col-xs-6">
+										<a id="J_AddFavorite" href="javascript:;" data-aldurl="/#!/goods/like/:good._id" class="favorite"><i></i><span>收藏商品</span></a>
+									</div>
+									<div class="col-xs-6">
+										<a href="/#!/goods_like/{{good._id}}" ng-click="like()">
+											<span class="glyphicon glyphicon-star">关注<span data-ng-bind="good.like" class="text-muted"></span></span>
+										</a>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6 good_detail_formfield">
-								<div class="good_detail_mainattr" data-ng-controller="CartsController">
-									<form class="form-horizontal" data-ng-submit="create()" novalidate>
+								<div class="good_detail_mainattr">
+									<form class="form-horizontal" novalidate>
 										<div class="detail_top">
 											<div>
 												<p>
@@ -81,7 +78,7 @@
 													<div class="">
 														<strong><em>&yen;&nbsp;</em><b class="good_price" data-ng-bind="good.price | number:2"></b></strong>
 													<span class="pull-right">
-														<em class="per" data-ng-bind="good.price/good.weight/2 | number:2"></em>
+														<em class="per" data-ng-bind="good.price/good.weight*500 | number:2"></em>
 														<span class="text-muted">元/500g</span>
 													</span>
 													</div>
@@ -111,16 +108,19 @@
 													</div>
 													<div class="mt10"></div>
 													<div class="col-md-6 col-xs-6">
-														<div class="buy">
-															<a href="/#!/goods/{{good._id}}/cart" class="btn btn-primary"><b>立即购买</b>
-																<i class="glyphicon glyphicon-check"></i>
-															</a>
+														<div class="buy" data-ng-controller="OrdersController">
+															<div class="form-group">
+																<input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-default" value="立即购买" ng-click="buy()">
+															</div>
+															<div data-ng-show="error" class="text-danger">
+																<strong data-ng-bind="error"></strong>
+															</div>
 														</div>
 													</div>
 													<div class="col-md-6 col-xs-6 pull-right">
-														<div class="cart">
+														<div class="cart" data-ng-controller="CartsController">
 															<div class="form-group">
-																<input type="submit" class="btn btn-default" value="加入购物篮">
+																<button ng-click="create()" class="btn btn-default">加入购物篮</button>
 															</div>
 															<div data-ng-show="error" class="text-danger">
 																<strong data-ng-bind="error"></strong>
@@ -140,16 +140,22 @@
 										<div class="clearfix">
 											<div class="mt10"></div>
 											<div class="good_detail_amount">
-												<div class="col-xs-6">
-													<span class="red">累计售出</span>
+												<div class="col-xs-4">
+													<span class="text-muted h7">累计售出:&nbsp;</span>
 													<a href="#">	
-														<span class="red" ng-data-bind="good.amount"></span>
+														<span class="red" data-ng-bind="good.sold"></span>
 													</a>
 												</div>
-												<div class="col-xs-6">
-													<span class="red">评论</span>
+<!-- 												<div class="col-xs-4">
+													<span class="h7 text-muted">评论:</span>
 													<a href="">
-														<span class="red" ng-data-bind="good.comments"></span>
+														<span class="red" data-ng-bind="good.comments"></span>
+													</a>
+												</div> -->
+												<div class="col-xs-4">
+													<span class="h7 text-muted">展现:</span>
+													<a href="">
+														<span class="red" data-ng-bind="good.pv"></span>
 													</a>
 												</div>
 											</div>
@@ -192,9 +198,9 @@
 					</dl>
 					<dl>
 						<dt>禁忌</dt>
-						<dd><span data-ng-repeat="item in good.avoid">
+						<dd><span>
 								<a href="#">
-									<span class="" data-ng-bind="item"></span>
+									<span class="" data-ng-bind="good.avoid"></span>
 								</a>
 							</span>
 						</dd>
@@ -204,33 +210,33 @@
 					<!-- new tab -->
 					<tabset>
 						<tab>
-							<tab-heading>商品详情</tab-heading>
+							<tab-heading class="panel-heading">商品详情</tab-heading>
 							<div class="good_detail_detail">
 								<p class="good_detail_text_14px" ng-bind-html="good.detail" class="good_detail"></p>
 								<img ng-src="{{good.main_img}}" alt="">
-								<img ng-src="{{good.img[0]}}" alt="">
+								<img data-ngng-src="{{good.img[0]}}" alt="">
 							</div>
 						</tab>
 						<tab>
-							<tab-heading>营养价值</tab-heading>
+							<tab-heading class="panel-heading">营养价值</tab-heading>
 							<div class="good_detail_yingyang">
 								<p class="good_detail_text_14px" ng-bind-html="good.nutrition"></p>
 							</div>
 						</tab>
 						<tab>
-							<tab-heading>家常菜谱</tab-heading>
+							<tab-heading class="panel-heading">家常菜谱</tab-heading>
 							<div class="good_detail_shiyongfangfa">
 								<p class="good_detail_text_14px" ng-bind-html="good.recipes"></p>
 							</div>
 						</tab>
 						<tab>
-							<tab-heading>健康搭配</tab-heading>
+							<tab-heading class="panel-heading">健康搭配</tab-heading>
 							<div class="good_detail_collection">
 								<p class="good_detail_text_14px" ng-bind-html="good.collection"></p>
 							</div>
 						</tab>
 						<tab>
-							<tab-heading>小百科</tab-heading>
+							<tab-heading class="panel-heading">小百科</tab-heading>
 							<div class="good_detail_wiki">
 								<p class="good_detail_text_14px" ng-bind-html="good.wiki"></p>
 							</div>
@@ -298,11 +304,15 @@
 					</accordion-group>
 					<accordion-group ng-show="good.suitable.length > 0" is-open="status.open">
 						<accordion-heading>适宜人群
-						</accordion-heading>{{good.suitable}}
+						</accordion-heading><a href="" data-ng-repeat="item in good.suitable"><label for=""><span>&nbsp;{{item}}&nbsp;</span></label></a>
+					</accordion-group>
+					<accordion-group ng-show="good.therapy.length > 0" is-open="status.open">
+						<accordion-heading>适用疾病
+						</accordion-heading><a href="" data-ng-repeat="item in good.therapy"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
 					</accordion-group>
 					<accordion-group ng-show="good.feature.length > 0" is-open="status.close">
 						<accordion-heading>功效
-						</accordion-heading>{{good.feature}}
+						</accordion-heading><a href="" data-ng-repeat="item in good.feature"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
 					</accordion-group>
 				</accordion>
 				<!-- accordion end -->
@@ -311,9 +321,9 @@
 				<div class="good_detail_samecat">
 					<ul class="breadcrumb text-right">同类精选<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 					<div class="good_subcat_list" data-ng-init="listSubcat()">
-						<li data-ng-repeat="item in goods">
+						<li data-ng-repeat="item in goods | filter:good.subcat">
 							<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
-								<img ng-src="{{item.main_img}}" alt="" class="thumbnail">
+								<img ng-src="{{item.main_img}}" alt="" class="thumbnail good_detail_push">
 								<label for="" data-ng-bind="item.title" class="h5"></label>
 							</a>
 						</li>

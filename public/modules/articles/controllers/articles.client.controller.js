@@ -7,12 +7,14 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		$scope.create = function() {
 			var article = new Articles({
 				title: this.title,
+				subcat: this.subcat,
 				content: this.content
 			});
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
 
 				$scope.title = '';
+				$scope.subcat = '';
 				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;

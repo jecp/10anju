@@ -11,8 +11,14 @@ module.exports = function(app) {
 
 	app.route('/carts/:cartId')
 		.get(users.requiresLogin, carts.hasAuthorization, carts.read)
-		.put(users.requiresLogin, carts.hasAuthorization, carts.update)
+		.put(users.requiresLogin, carts.hasAuthorization, users.adminRequired, carts.update)
 		.delete(users.requiresLogin, carts.hasAuthorization, carts.delete);
+
+	app.route('/carts_goods')
+		.post(users.requiresLogin, carts.changeAmount);
+
+	app.route('/carts_goods_delete')
+		.post(users.requiresLogin, carts.deleteGoods);
 
 	// Finish by binding the Cart middleware
 	app.param('cartId', carts.cartByID);

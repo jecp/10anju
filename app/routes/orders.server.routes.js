@@ -6,13 +6,19 @@ module.exports = function(app) {
 
 	// Orders Routes
 	app.route('/orders')
-		.get(orders.list)
+		.get(users.requiresLogin, orders.list)
 		.post(users.requiresLogin, orders.create);
 
 	app.route('/orders/:orderId')
 		.get(orders.read)
-		.put(users.requiresLogin, orders.hasAuthorization, orders.update)
+		.put(users.requiresLogin, orders.hasAuthorization,  users.adminRequired, orders.update)
 		.delete(users.requiresLogin, orders.hasAuthorization, orders.delete);
+
+	app.route('/orders_goods')
+		.post(users.requiresLogin, orders.changeAmount);
+
+	app.route('/orders_goods_delete')
+		.post(users.requiresLogin, orders.deleteGoods);
 
 	// Finish by binding the Order middleware
 	app.param('orderId', orders.orderByID);

@@ -7,7 +7,8 @@ var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller.js'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+	Ccenter = mongoose.model('Ccenter');
 
 /**
  * Update user details
@@ -45,6 +46,36 @@ exports.update = function(req, res) {
 		res.status(400).send({
 			message: 'User is not signed in'
 		});
+	}
+};
+
+/**
+ * Update user details
+ */
+exports.register = function(req, res) {
+	if (req.user) {
+		if (req.body.roomNum) {
+			User.findOne({_id:req.user._id,ccenter:req.body.ccenter._id},function(err, user) {
+				if (err){console.log(err);}
+				else if(!user) {
+					User.findOneAndUpdate({_id:req.user._id},{ccenter:req.body.ccenter._id,roomNum:req.body.roomNum},function (err,user){
+						if(err){console.log(err);}
+						else{
+							Ccenter.findOneAndUpdate({_id:req.body.ccenter._id},{$push:{user:user._id}},function (err,ccenter){
+								if (err){console.log(err);}
+								else{
+									res.send({
+										message:'您已成功在小区安家'
+									});
+								}
+							});	
+						}
+					});				
+				}else{
+					res.send({message:'您已入驻过啦！'});
+				}
+			});
+		}
 	}
 };
 

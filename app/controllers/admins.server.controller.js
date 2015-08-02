@@ -34,10 +34,10 @@ exports.login = function(req, res) {
 	var apwd = req.password;
 	console.log('username:'+req.username+';password:'+req.password);
 
-	Admin.find({name:aname},function (err,admin){
+	Admin.findOne({name:aname},function (err,admin){
 		if (err) {console.log(err);}
 		if (!admin){
-			message: errorHandler.getErrorMessage(err);
+			console.log(err);
 			res.redirect('/#!/goods');
 		}
 	});

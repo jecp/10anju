@@ -63,6 +63,13 @@ var UserSchema = new Schema({
 	salt: {
 		type: String
 	},
+	mobile: {
+		type: Number,
+		unique: '',
+		validate: [validateLocalStrategyProperty, '手机号已被注册存在'],
+		required: '手机号不能为空',
+		trim: true
+	},
 	provider: {
 		type: String,
 		required: 'Provider is required'
@@ -101,6 +108,9 @@ var UserSchema = new Schema({
 		type:Schema.ObjectId,
 		ref:'Ccenter'
 	},
+	roomNum: {
+		type: Number,
+	},
 	avatar:{
 		type:String
 	},
@@ -111,6 +121,14 @@ var UserSchema = new Schema({
 	following:[{
 		type:Schema.ObjectId,
 		ref:'User'
+	}],
+	goods_like:[{
+		type:Schema.ObjectId,
+			ref:'Good'
+	}],
+	articles_like:[{
+		type:Schema.ObjectId,
+			ref:'Article'
 	}]
 });
 

@@ -55,10 +55,21 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			}
 		};
 
+		// Register in a ccenter
+		$scope.register = function(ccenter){
+			$http.post('/users_ccenter', {roomNum:$scope.ccenterDetails.roomNum,ccenter:this.ccenter}).success(function(response) {
+				$scope.success = true;
+				$scope.message = response.message;
+				alert(response.message);
+				$location.path('/settings/profile');
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};
+
 		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
-
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.success = true;

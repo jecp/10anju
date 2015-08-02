@@ -3,7 +3,8 @@
 	<div class="order_detail">
 		<div class="od_top">
 			<div class="odt_title col-md-8">
-				<h3>订单</h3>
+				<h3 data-ng-bind="order.name"></h3>
+				<span class="label label-default" data-ng-bind="order.status"></span>
 			</div>
 			<div class="odt_erweima col-md-4">
 				<img src="/modules/core/imgs/1.png" style="max-width:80px;">
@@ -15,8 +16,8 @@
 			<div><div class="col-xs-3">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div></div>
 			<div><div class="col-xs-3">购买时间：<span class="text-muted" data-ng-bind="order.day"></span></div></div>
 			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div></div>
-			<div><div class="col-xs-3">收货地址：<span class="text-muted" data-ng-bind="{{order.user.username}}"></span></div></div>
-			<div><div class="col-xs-3">买家留言：<span class="text-muted" data-ng-bind="{{order.user.username}}"></span></div></div>
+			<div><div class="col-xs-3">支付状态：<span class="text-muted" ng-if="order.status == false">未付款</span><span class="text-muted" ng-if="order.status == true">已付款</span></div></div>
+			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="{{order.user.ccenter.detail}}"></span></div></div>
 		</div>
 		<div class="od_table">
 			<table class="table table-hover table-bordered">
@@ -29,29 +30,42 @@
 		    			<th>单价</th>
 		                <th>赠品/试用品</th>
 		    			<th>实付</th>
+		    			<th>删除</th>
 		    		</tr>
 				</thead>
-				<tbody data-ng-repeat="item in order.goods">
+				<tbody data-ng-repeat="item in order.detail">
 					<tr>
 						<!-- <td><span></span></td> -->
 						<td class="col-md-3 col-xs-3">
-		                    <a href="/#!/carts/{{item._id}}">
-		                        <img ng-src="{{item.goods.main_img}}" alt="" class="thumbnail" style="max-width:120px;">
+		                    <a href="/#!/goods/{{item.goods._id}}">
+		                        <img ng-src="{{item.goods.main_img}}" alt="" class="thumbnail" style="max-width:60px;">
 		                    </a>
 						</td>
 						<td><span data-ng-bind="item.goods.title"></span></td>
-						<td><span data-ng-bind="item.amount"></span></td>
-						<td><span data-ng-bind="item.goods.price"></span></td>
+						<td><input type="text" data-ng-model="item.amount">
+							<button type="btn btn-primary" ng-click="changeAmount()" >更新</button></td>
+						<td><span data-ng-bind="item.price"></span></td>
 		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
-						<td><span data-ng-bind="item.total"></span></td>
+						<td><span data-ng-bind="item.amount*item.price"></span></td>
+						<td><button class="btn btn-danger del" type="button" data-ng-click="delOrder();" id="{{item._id}}">删除</button></td>
+						<!-- 怎么样保证total收集到的数据实时呢？ -->
 					</tr>
 				</tbody>
-				</table>
+			</table>
 		</div>
 		<div class="od_footer">
-			<div>合计数量： 实付金额：</div>
-			<div></div>
+			<div>商品数量：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total"></span></div>
 			<div>备注：</div>
+			<div><span></span><input class="col-md-12" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz"></div>
+		</div>
+		<div class="ft10"></div>
+		<div class="od_submit" ng-controller="OrdersController">
+			<form action="" class="" novalidate>
+				<input type="hidden" id="uid" data-ng-model="uid" value={{window.user._id}}>
+				<input type="hidden" id="oid" data-ng-model="oid" value={{order._id}}>
+				<input type="hidden" id="total" data-ng-model="total" value={{order.total}}>
+				<div><input type="submit" class="btn btn-default" ng-click="pay()" value="确认提交"></div>
+			</form>
 		</div>
 	</div>
 </section>

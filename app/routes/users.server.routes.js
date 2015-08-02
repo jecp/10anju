@@ -20,6 +20,9 @@ module.exports = function(app) {
 	app.route('/auth/reset/:token').get(users.validateResetToken);
 	app.route('/auth/reset/:token').post(users.reset);
 
+	// Register in an ccenter
+	app.route('/users_ccenter/').post(users.register);
+
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(users.signup);
 	app.route('/auth/signin').post(users.signin);

@@ -32,6 +32,9 @@ var ArticleSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	subcat: {
+		type: String
 	}
 });
 

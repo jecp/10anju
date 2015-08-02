@@ -1,77 +1,55 @@
 <section data-ng-controller="CartsController" data-ng-init="find()">
-    <div class="user_cart">
-        <div class="user_cart_list">
-            <ul class="list-group">
-            	<table class="table table-hover table-bordered">
-            		<thead>
-                		<tr>
-                			<th>图片</th>
-                			<th>商品名称</th>
-                			<th>数量</th>
-                			<th>单价</th>
-                            <th>赠品/试用品</th>
-                			<th>实付</th>
-                            <th>删除</th>
-                		</tr>
-            		</thead>
-            		<tbody data-ng-repeat="cart in carts">
-            			<tr>
-            				<td>
-                                <a href="/#!/carts/{{cart._id}}">
-                                    <img ng-src="{{cart.goods.main_img}}" alt="" class="thumbnail">
-                                </a>
-            				</td>
-            				<td><span data-ng-bind="cart.goods.title"></span></td>
-            				<td><span data-ng-bind="cart.amount"></span></td>
-            				<td><span data-ng-bind="cart.goods.price"></span></td>
-                            <td><span ng-if="cart.goods.for_free == true">赠品</span><span ng-if="cart.goods.free_try == true">试用品</span></td>
-            				<td><span data-ng-bind="cart.total"></span></td>
-                            <td>
-                                <button class="btn btn-danger del" type="button" data-ng-click="del();" name="cart" id="{{cart._id}}">删除</button>
-                            </td>
-            			</tr>
-            		</tbody>
-            	</table>
-            </ul>
-            <div class="summary" data-ng-controller="OrdersController">
-                <div>
-                    <span>货物种类：</span>
-                        <label><span data-ng-bind="carts.length" class="text-muted"></span>种</label>
-                    <span>数量总计：</span>
-                        <label><span data-ng-bind="carts.goods.amount" class="text-muted"></span>件</label>
-                    <span>金额总计：</span>
-                        <label><span data-ng-bind="totalFee | number:2" class="text-muted"></span>元</label>
-                    <div class="pay_button">
-                        <form class="from-group" class="form-horizontal" data-ng-submit="create()" novalidate>
-                            <div class="form-group">
-                                <input type="hidden" data-ng-model="carts.length" name="carts.length" value="carts.length">
-                                <input type="hidden" name="carts.id" value="cart._id">
-                                <!--批量的json格式--> 
-                                <input type="hidden" name="carts.flow" value="xxx" />
-                                <!-- 所属流程--> 
-                                <input type="hidden" name="carts.isDefaultSelectCod" value="0" /> 
-                                <input type="hidden" name="carts.from" value="1" /> 
-                                <input type="hidden" name="carts.returnUrl" value="http://cart.1688.com/cart.htm" /> 
-                                <input name="carts._csrf_token" type="hidden" value="1dcb57b562cbc69b53bd0ba9232ecc59" />
-                            </div>
-                            <button class="btn btn-primary pull-right" type="submit">确认并结算</button>
-                        </form>
-                    </div>
-                    <div data-ng-show="error" class="text-danger">
-                        <strong data-ng-bind="error"></strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        var totalAmount;
-        var totalFee;
-        var sum=0;
-        for (var i=0 ; i<carts.length; i++){
-            sum += carts[i].amount;
-        }
+    <div class="list-group">
+    	<table class="table table-hover table-bordered">
+    		<thead>
+        		<tr>
+                    <th>日期</th>
+        			<th>商品详情</th>
+        			<th>应付(元)</th>
+                    <th>状态</th>
+                    <th>删除</th>
+        		</tr>
+    		</thead>
+    		<tbody data-ng-repeat="cart in carts">
+    			<tr>
+                    <td><a href="/#!/carts/{{cart._id}}"><span data-ng-bind="cart.name"></span><h6 data-ng-bind="cart.created | date:'medium'"></h6></a></td>
+    				<td>
+                        <table>
+                            <tr data-ng-repeat="item in cart.detail">
+                                <td>
+                                    <div class="fl">
+                                        <a href="/#!/goods/{{item.goods._id}}">
+                                            <img ng-src="{{item.goods.main_img}}" alt="" class="thumbnail" style="max-width:60px;">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <div class="detail">
+                                            <h5 data-ng-bind="item.goods.title"></h5>
+                                            <div>
+                                                <span>&yen;</span><span data-ng-bind="item.goods.price"></span>元；共<span data-ng-bind="item.amount"></span>件
+                                                <label class="for_free" ng-if="item.goods.for_free===true">赠</label>
+                                                <label class="free_try" ng-if="item.goods.free_try===true">试</label>
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- 删除购物篮具体商品 -->
+                                        <!-- <div class="col-xs-2">
+                                        <a href="/#!/carts_goods/delete" target="_blank">删除</a>
+                                        <input type="submit" class="btn btn-danger del" type="button" data-ng-click="delGoods();" name="delgoods" data-ng-model="delgoods" value="删除" id="{{item.goods._id}}"></div>
+                                        <button class="btn btn-danger del" type="button" data-ng-click="delGoods();" name="delgoods" id="{{item._id}}">删除</button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+    				<td><span data-ng-bind="cart.total"></span></td>
+                    <td><span ng-if="cart.order_status === true" class="text-muted">订单已提交</span></td>
+                    <td>
 
-    </script>
-    <h1>{{sum}}</h1>
+                        <button class="btn btn-danger del" type="button" data-ng-click="del();" name="cart" id="{{cart._id}}" ng-if="cart.order_status === false">删除</button>
+                    </td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
 </section>

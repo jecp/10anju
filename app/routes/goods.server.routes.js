@@ -7,12 +7,15 @@ module.exports = function(app) {
 	// Goods Routes
 	app.route('/goods')
 		.get(goods.list)
-		.post(users.requiresLogin, goods.create);
+		.post(users.requiresLogin, users.adminRequired, goods.create);
 
 	app.route('/goods/:goodId')
 		.get(goods.read)
-		.put(users.requiresLogin, goods.hasAuthorization, goods.update)
-		.delete(users.requiresLogin, goods.hasAuthorization, goods.delete);
+		.put(users.requiresLogin, users.adminRequired, goods.update)
+		.delete(users.requiresLogin, users.adminRequired, goods.delete);
+
+	app.route('/goods_like')
+		.post(users.requiresLogin, goods.like);
 
 	// Finish by binding the Good middleware
 	app.param('goodId', goods.goodByID);

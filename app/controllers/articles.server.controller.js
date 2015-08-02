@@ -84,6 +84,7 @@ exports.list = function(req, res) {
 	});
 };
 
+
 /**
  * Article middleware
  */

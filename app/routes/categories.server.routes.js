@@ -7,12 +7,12 @@ module.exports = function(app) {
 	// Categories Routes
 	app.route('/categories')
 		.get(categories.list)
-		.post(users.requiresLogin, categories.create);
+		.post(users.requiresLogin, users.adminRequired, categories.create);
 
 	app.route('/categories/:categoryId')
 		.get(categories.read)
-		.put(users.requiresLogin, categories.hasAuthorization, categories.update)
-		.delete(users.requiresLogin, categories.hasAuthorization, categories.delete);
+		.put(users.requiresLogin, categories.hasAuthorization, users.adminRequired, categories.update)
+		.delete(users.requiresLogin, categories.hasAuthorization, users.adminRequired, categories.delete);
 
 	// Finish by binding the Category middleware
 	app.param('categoryId', categories.categoryByID);

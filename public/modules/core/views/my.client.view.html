@@ -13,21 +13,20 @@
 			<ul>
 				<li>
 					订单
-					<ul>
-						<li data-ng-controller=""><a href="#">订单列表</a></li>
-						<li><a href="">当天订单</a></li>
+					<ul data-ng-controller="OrdersController" data-ng-init="find()">
+						<li ><a href="/#!/orders">订单列表</a></li>
+						<li><a href="/#!/orders?status=false">未付款订单<span class="badge" data-ng-bind="orders.length"></span></a></li>
 						<li></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
-		<div class="my_left col-md-12" data-ng-controller="CartsController" ng-init="find()">
+		<div class="my_left col-md-12">
 			<ul>
 				<li>
 					购物篮
 					<ul>
-						<li><a href="#">购物篮列表</a></li>
-						<li><a href="">当天购物篮</a></li>
+						<li><a href="/#!/carts">购物篮</a></li>
 						<li></li>
 					</ul>
 				</li>

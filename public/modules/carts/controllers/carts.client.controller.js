@@ -1,29 +1,31 @@
 'use strict';
 
 // Carts controller
-angular.module('carts').controller('CartsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Carts',
-	function($scope, $stateParams, $location, Authentication, Carts) {
+angular.module('carts').controller('CartsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Carts',
+	function($scope, $http, $stateParams, $location, Authentication, Carts) {
 		$scope.authentication = Authentication;
 
 		// Create new Cart
 		$scope.create = function() {
-			// Create new Cart object
+			// Create new Cart object			
 			var date = new Date();
 			var created_day = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+			var cartName = created_day + '-' + window.user.username + '-' + '的购物篮';
 			var cart = new Carts ({
-				name: this.good.name,
+				name: cartName,
 				number: Date.now(),
 				day: created_day,
-				goods:this.good._id,
-				price: this.good.price,
-				amount: this.good.amount,
-				spec: this.good.spec,
+				detail:{
+					goods:this.good._id,
+					amount: this.good.amount,
+					price: this.good.price,
+				},
 				total: this.good.price
 			});
 
 			// Clear form fields
 			$scope.name = '';
-			$scope.goods = '';
+			$scope.good = '';
 			$scope.number = '';
 			$scope.price = '';
 			$scope.amount = '';
@@ -32,10 +34,10 @@ angular.module('carts').controller('CartsController', ['$scope', '$stateParams',
 
 			// Redirect after save
 			cart.$save(function(response) {
-				$location.path('carts/' + response._id);
+				$location.path('carts' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
+			});	
 		};
 
 		// Remove existing Cart
@@ -69,16 +71,6 @@ angular.module('carts').controller('CartsController', ['$scope', '$stateParams',
 		// Find a list of Carts
 		$scope.find = function() {
 			$scope.carts = Carts.query();
-			// var i = 0;
-			// console.log(this.carts.);
-			// console.log(this.carts[1]);
-			// var totalFee;
-			// for (i; i < $scope.carts.length; i++){
-			// 	totalFee += $scope.carts[i].total;
-			// 	console.log(this.carts[i].total);
-			// }
-			// console.log(totalFee);
-			// $scope.totalFee = totalFee;
 		};
 
 		// Find existing Cart
@@ -91,6 +83,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$stateParams',
 		// Remove existing Cart
 		$scope.del = function(cart) {
 			var cart_ = this.cart;
+			var delgoods_ = this.delgoods;
 			if ( cart_ ) { 
 				cart_.$remove();
 
@@ -100,15 +93,39 @@ angular.module('carts').controller('CartsController', ['$scope', '$stateParams',
 					}
 				}
 			} else {
+				console.log(2);
 				$scope.cart_.$remove(function() {
 					$location.path('carts');
 				});
 			}
 		};
 
-		// My carts
-		$scope.myCarts = function(){
-			$scope.carts = Carts.myCarts({});
+		// Remove existing Cart.goods
+		$scope.delGoods = function(cart) {
+			var cart_good = this.item;
+			$scope.amount = this.item.amount;
+
+			$http.post('/carts_goods_delete', {cart:$scope.cart,goodId:cart_good.goods,total:cart_good.price*cart_good.amount}).success(function (response){
+				$scope.success = true;
+				$scope.cart = response;
+				$location.path('carts' + response._id);
+			}).error(function (response){
+				$scope.error = response.message;
+			});
+		};
+
+		// modify good.amount in cart
+		$scope.changeAmount = function (goodId){
+			var cart_good = this.item.goods;
+			$scope.amount = this.item.amount;
+			$scope.total += (cart_good.price*$scope.amount);
+
+			$http.post('/carts_goods', {cart:$scope.cart,cart_amount:$scope.amount,goodId:cart_good._id,total:$scope.total}).success(function (response){
+				$scope.success = true;
+				$location.path('carts' + response._id);
+			}).error(function (response){
+				$scope.error = response.message;
+			});
 		};
 	}
 ]);

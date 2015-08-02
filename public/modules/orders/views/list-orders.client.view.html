@@ -1,20 +1,57 @@
 <section data-ng-controller="OrdersController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Orders</h1>
-    </div>
+<!--     <div class="page-header">
+        <h1>订单列表</h1>
+    </div> -->
     <div class="list-group">
-        <a data-ng-repeat="order in orders" data-ng-href="#!/orders/{{order._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="order.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="order.user.username"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="order.name"></h4>
-            <span ng-class="text-muted" data-ng-bind="order.haschecked"></span>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!orders.$resolved || orders.length">
-    	No Orders yet, why don't you <a href="/#!/orders/create">create one</a>?
+        <!-- table begin -->
+        <div class="od_table">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>商品概要</th>
+                        <th>应付</th>
+                        <th>状态</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="order in orders">
+                    <tr>
+                        <td><a href="/#!/orders/{{order._id}}"><h5 data-ng-bind="order.name"></h5><h6 data-ng-bind="order.created | date:'medium'"></h6></a>
+                        <a href="/#!/ccenters/{{}}"><span data-ng-bind="order.user.ccenter.name"></span></a>
+                        </td>
+                        <td class="">
+                            <table>
+                                <tr data-ng-repeat="g in order.detail">
+                                <div>
+                                    <td>
+                                        <div class="fl">
+                                            <a href="/#!/goods/{{g.goods._id}}">
+                                                <img ng-src="{{g.goods.main_img}}" alt="" class="thumbnail" style="max-width:60px;">
+                                            </a>
+                                        </div>
+                                        <div class="">
+                                            <div class="detail">
+                                                <h5 data-ng-bind="g.goods.title"></h5>
+                                                <div>
+                                                    <span>&yen;</span><span data-ng-bind="g.goods.price"></span>
+                                                    <label class="for_free" ng-if="g.goods.for_free===true">赠</label>
+                                                    <label class="free_try" ng-if="g.goods.free_try===true">试</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                        
+                                </div>
+                                </tr> 
+                            </table>
+                        </td>
+                        <td><span data-ng-bind="order.total"></span></td>
+                        <td><span ng-if="order.status===false"><input type="button" ng-click="pay()" value="立即支付"></span><span ng-if="order.status===true">已成功支付</span></td>
+                        <td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="order" id="{{order._id}}">删除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Good = mongoose.model('Good'),
 	Category = mongoose.model('Category'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -72,7 +73,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var good = req.good ;
-
 	good = _.extend(good , req.body);
 
 	good.save(function(err) {
@@ -84,6 +84,50 @@ exports.update = function(req, res) {
 			res.jsonp(good);
 		}
 	});
+};
+
+/**
+ * Like a Good
+ */
+exports.like = function(req, res) {
+	var goodId = req.body._id;
+	if (req.user._id){
+		User.findOne({_id:req.user._id, goods_like:goodId}, function (err,user){
+			if (err) {console.log(err);} 
+			else if(user){
+				Good.findOneAndUpdate({_id:goodId},{$inc:{like:-1}}).exec(function (err,good){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						user.update({$pull:{goods_like:goodId}}).exec(function (err,user){
+							if (err){console.log(err);}
+							else {
+								res.send(good);
+							}
+						});
+					}
+				});				
+			}
+			else {
+				Good.findOneAndUpdate({_id:goodId},{$inc:{like:1}}).exec(function (err,good){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						User.findOneAndUpdate({_id:req.user._id},{$push:{goods_like:goodId}}).exec(function (err,user){
+							if (err){console.log(err);}
+							else {
+								res.send(good);
+							}
+						});
+					}
+				});				
+			}
+		});
+	}
 };
 
 /**

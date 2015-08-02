@@ -10,4 +10,15 @@ angular.module('goods').factory('Goods', ['$resource',
 			}
 		});
 	}
-]);
+])
+// .factory('Goods', ['$http',
+//  	function($http) {
+// 		return $http('goods_like', { goodId: '@_id'
+// 		}, {
+// 			update: {
+// 				method: 'POST'
+// 			}
+// 		});
+// 	}
+// ])
+;

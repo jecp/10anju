@@ -1,0 +1,65 @@
+<section data-ng-controller="CcentersController">
+    <div class="page-header">
+        <h1>社区资料录入页</h1>
+    </div>
+    <div class="col-md-12">
+        <form data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="name">社区名称</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="社区名称" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="province">省/自治区</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="province" id="province" class="form-control" placeholder="省/自治区" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="city">市</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="city" id="city" class="form-control" placeholder="市" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="district">区/县</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="district" id="district" class="form-control" placeholder="区/县" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="street">街道</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="street" id="street" class="form-control" placeholder="街道" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="detail">详细地址</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="detail" id="detail" class="form-control" placeholder="详细地址" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="lng">经度</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="lng" id="lng" class="form-control" placeholder="经度" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label" for="lat">纬度</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="lat" id="lat" class="form-control" placeholder="纬度" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

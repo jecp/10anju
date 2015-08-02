@@ -30,21 +30,18 @@ var CartSchema = new Schema({
 		default: Date.now
 	},
 	day: {type:String},
-	goods: {
-		type:Schema.ObjectId,
-		required: 'Please check again',
-		ref:'Good'
-	},
-	amount:{
-		type:Number,
-		default: 1
-	},
-	de:{
-		type:Number,
-
-	},
+	detail: [{
+		goods: {type:Schema.ObjectId,
+			ref:'Good'},
+		price: {type:Number},
+		amount:{type:Number,default: 1}
+	}],		
 	total:{
 		type:Number,
+	},
+	order_status: {
+		type: Boolean,
+		default: false
 	},
 	user: {
 		type: Schema.ObjectId,

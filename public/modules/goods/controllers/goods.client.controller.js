@@ -1,13 +1,12 @@
 'use strict';
 
 // Goods controller
-angular.module('goods').controller('GoodsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Goods', 
-	function($scope, $stateParams, $location, Authentication, Goods) {
+angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
+	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
 
 		// Create new Good
 		$scope.create = function() {
-			console.log(this);
 			// Create new Good object
 			var good = new Goods ({
 				name:this.name,
@@ -23,14 +22,14 @@ angular.module('goods').controller('GoodsController', ['$scope', '$stateParams',
 				delivery:this.delivery,
 				detail:this.detail,
 				main_img:this.main_img,
-				img:[this.img],
+				img:this.img.split(','),
 				stock:this.stock,
 				wiki:this.wiki,
-				suitable:this.suitable,
+				suitable:this.suitable.split(','),
 				sale:this.sale,
-				feature:this.feature,
+				feature:this.feature.split(','),				
 				nutrition:this.nutrition,
-				therapy:this.therapy,
+				therapy:this.therapy.split(','),
 				avoid: this.avoid,
 				recipes: this.recipes,
 				for_free: this.for_free,
@@ -101,6 +100,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$stateParams',
 		$scope.edit = function() {
 			var good = $scope.good;
 			console.log($scope.good);
+			console.log($scope.good.edit);
 
 			good.$update(function() {
 				$location.path('goods/' + good._id);
@@ -119,8 +119,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$stateParams',
 			$scope.goods = Goods.query({
 				category: $scope.category
 			});
-
-			console.log(this.id);
 		};
 
 		// Find existing Good
@@ -134,6 +132,19 @@ angular.module('goods').controller('GoodsController', ['$scope', '$stateParams',
 		$scope.listSubcat = function () {
 			$scope.goods = Goods.query({ 
 				subcat: $stateParams.subcat
+			});
+		};
+
+		// like
+		$scope.like = function (good) {
+			var _good = $scope.good;
+
+			$http.post('/goods_like', _good).success(function (response){
+				$scope.like += 1;
+				$scope.success = true;
+				$location.path('goods/' + _good._id);
+			}).error(function(response){
+				$scope.error = response.message;
 			});
 		};
 

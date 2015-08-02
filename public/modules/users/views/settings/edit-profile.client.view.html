@@ -8,13 +8,14 @@
 			<div>
 				<div class="mt10"></div>			
 				<div class="username">
+					<a href="" class="pull-right"><span>编辑资料</span></a>
 					<p data-ng-bind="user.username"></p>
 				</div>
-				<div class="user_profile_attr">
+				<div class="user_profile_attr" data-ng-controller="CcentersController" data-ng-init="findU()">
 					<div class="email">
 						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
-						<p><span class="glyphicon glyphicon-time">&nbsp;</span><span data-ng-bind="user.created | date"></span></p>
-						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="user.ccenter"></span></p>
+						<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
+						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter.length > 0"><a href="/#!/ccenters">入驻社区</a></span></p>
 					</div>
 				</div>
 				<div class="vcard_stars">
@@ -50,11 +51,11 @@
 							<div data-ng-include="'/modules/orders/views/list-orders.client.view.html'" ></div>
 						</div>
 					</tab>
-					<tab heading="收藏">
+<!-- 					<tab heading="收藏">
 						<div class="collections" class="" >
 							<div data-ng-include="'/modules/collections/views/list-collections.client.view.html'" ></div>
 						</div>
-					</tab>
+					</tab> -->
 				</tabset>
 				<!-- <ul id="myTab" class="nav nav-tabs">
 					<li class="active"><a href="/#articles" data-toggle="tab">文章</a></li>

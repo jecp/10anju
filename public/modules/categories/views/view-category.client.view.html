@@ -11,15 +11,60 @@
                 </div>
             </div>
             <div class="category_list">
-                <div data-ng-repeat="item in category.goods">
-                    <div class="thumbnail col-md-3">
-                        <a href="/#!/goods/{{item._id}}" class="">
-                            <img ng-src="{{item.main_img}}" alt="">
-                            <span data-ng-bind="item.title"></span>
-                        </a>
-                        <p>￥<span data-ng-bind="item.price"></span><span class="pull-right" data-ng-bind="item.delivery"></span></p>
+                <div class="good_list_all" >
+                  <li class="" role="listitem">
+                    <div data-ng-repeat="good in category.goods" class="grid-4 fl col-xs-6">
+                        <div class="">
+                          <div class="good_list_listitem">
+                            <label>
+                              <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
+                              <div class="good_list_thumbnail">
+                                <a href="/#!/goods/{{good._id}}">
+                                  <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                                </a>
+                              </div> 
+                              <div class="good_list_detail">
+                                <div>
+                                  <a href="/#!/goods/{{good._id}}">
+                                    <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                                  </a>
+                                    <div class="good_list_price">
+                                      <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
+                                      <label class="for_free" ng-if="good.for_free===true">赠</label>
+                                      <label class="free_try" ng-if="good.free_try===true">试</label>
+                                      <span class="pull-right" data-ng-bind="good.delivery"></span>
+                                      <input type="hidden" name="amount" data-ng-model="good.amount" value="1">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-md-6 col-xs-6 pull-left">
+                                      <div class="buy" data-ng-controller="OrdersController">
+                                        <div class="form-group pull-left">
+                                          <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
+                                        </div>
+                                        <div data-ng-show="error" class="text-danger">
+                                          <strong data-ng-bind="error"></strong>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6">
+                                      <div class="cart" data-ng-controller="CartsController">
+                                        <div class="form-group">
+                                          <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
+                                        </div>
+                                        <div data-ng-show="error" class="text-danger">
+                                          <strong data-ng-bind="error"></strong>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </li>                
                     </div>
-                </div>
             </div>
         </div>
     </div>    
