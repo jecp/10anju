@@ -2,8 +2,14 @@
 	<div class="col-md-12 mt20">
 		<div class="col-md-4 user_profile_left">
 			<div class="avatar">
-				<img ng-src="{{user.avatar}}" ng-if="user.avatar !== null" alt="" ng-mouseenter="item.popover= true" ng-mouseleave ="item.popover = false">
-				<img ng-src="http://gravatar.com/avatar/cfd8a518f61419ed239a2cc9bef7ddf1?s=256" ng-if="user.avatar === null" alt="">
+				<img ng-src="{{user.avatar}}" ng-if="user.avatar !== undefined">
+			</div>
+			<div ng-if="user.avatar === undefined" style="width:200px;height:200px;border-radius:30px 30px 30px 30px;background-color:#ccc;">
+				<div class="text-center">
+					<span style="font-size:65px;">面子呢*_^</span>
+					<div><a href="/#!/usercenter#modal">现在上传</a></div>
+				</div>
+				<div id="#modal" class="modal fade">111</div>
 			</div>
 			<div>
 				<div class="mt10"></div>			

@@ -18,6 +18,11 @@ exports.create = function(req, res) {
 	good.user = req.user;
 	var cate = req.body.category;
 	console.log(req.body);
+		
+	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
+	good.img = req.body.img ? req.body.img.split(',') : ',';
+	good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
+	good.feature = req.body.feature? req.body.therapy.split(',') : ',';
 
 	good.save(function (err, good){
 		if (err){
@@ -130,6 +135,20 @@ exports.like = function(req, res) {
 	}
 };
 
+// search goods
+exports.results = function (req,res){
+	var q = req.body.keyword;
+	var query = new RegExp('^' + q + '.*');
+	if(query){
+		Good.find({title:{ $all: [query]}},function (err,goods){
+			if (err){console.log(err);}
+			else {
+				res.send(goods);
+			}
+		});
+	}
+};
+
 /**
  * Delete an Good
  */
@@ -180,6 +199,7 @@ exports.list = function(req, res) {
  * Good middleware
  */
 exports.goodByID = function(req, res, next, id) {
+	console.log(req.query.keyword);
 	Good.update({_id:id},{$inc:{pv:1}},function(err,next){
 	  if(err){
 	  	console.log(err);

@@ -35,6 +35,18 @@ var ArticleSchema = new Schema({
 	},
 	subcat: {
 		type: String
+	},
+	pv:{
+		type:Number,
+		default:0
+	},
+	like:{
+		type:Number,
+		default:0
+	},
+	collect:{
+		type: Number,
+		default: 0
 	}
 });
 

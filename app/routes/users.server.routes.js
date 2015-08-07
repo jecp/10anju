@@ -23,6 +23,9 @@ module.exports = function(app) {
 	// Register in an ccenter
 	app.route('/users_ccenter/').post(users.register);
 
+	// User count
+	// app.route('/user_count').get(users.myCount);
+
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(users.signup);
 	app.route('/auth/signin').post(users.signin);

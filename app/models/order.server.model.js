@@ -20,6 +20,10 @@ var OrderSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	updated:{
+		type:Date,
+		default: Date.now
+	},
 	detail:[{
 		goods: {type:Schema.ObjectId,
 			ref:'Good'},
@@ -52,6 +56,12 @@ var OrderSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	bz: {
+		type:String
+	},
+	trade_no: {
+		type:String
 	}
 });
 

@@ -44,6 +44,14 @@ angular.module('users').config(['$stateProvider',
 		state('reset', {
 			url: '/password/reset/:token',
 			templateUrl: 'modules/users/views/password/reset-password.client.view.html'
+		})
+		.state('usercenter', {
+			url: '/usercenter',
+			templateUrl: 'modules/users/views/usercenter.client.view.html'
+		})
+		.state('upload_avatar',{
+			url: '/upload_avatar',
+			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
 		});
 	}
 ]);

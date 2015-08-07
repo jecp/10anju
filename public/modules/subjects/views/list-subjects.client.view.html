@@ -1,0 +1,28 @@
+<section data-ng-controller="SubjectsController" data-ng-init="find()">
+    <div class="row">
+        <table class="table-hover" >
+            <tbody data-ng-repeat="subject in subjects | filter:forum._id">
+                <tr>
+                    <td>
+                        <div style="margin:5px;">
+                            <div >
+                                <div >
+                                    <label for="" class="label label-default" data-ng-bind="subject.subcat"></label>&nbsp;<a data-ng-href="#!/subjects/{{subject._id}}"><span class="" data-ng-bind="subject.title | limitTo: 30"></span></a>
+                                </div>
+                                <div>
+                                    <small class="pull-right">
+                                        <span data-ng-bind="subject.user.username"></span>发表于&nbsp;<span data-ng-bind="subject.created | date:'mediumDate'"></span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px dashed #ccc;margin: 15px;padding-top:5px;">
+                            <span class="text-muted row" data-ng-bind="subject.content | limitTo:30"></span>
+                            <div class="text-right"><a href="/#!/subjects/{{subject._id}}">点击查看详情</a></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

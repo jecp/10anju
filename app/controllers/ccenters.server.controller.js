@@ -103,6 +103,12 @@ exports.findU = function(req, res) {
  * Ccenter middleware
  */
 exports.ccenterByID = function(req, res, next, id) { 
+	Ccenter.update({_id:id},{$inc:{pv:1}},function(err,next){
+	  if(err){
+	  	console.log(err);
+	    return next;
+	  }
+	});
 	Ccenter.findById(id).populate('user', 'displayName').exec(function(err, ccenter) {
 		if (err) return next(err);
 		if (! ccenter) return next(new Error('Failed to load Ccenter ' + id));

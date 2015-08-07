@@ -29,7 +29,21 @@ var CategorySchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	goods:[{type: ObjectId,ref: 'Good'}]
+	goods:[{
+		type: ObjectId,ref: 'Good'
+	}],
+	pv:{
+		type:Number,
+		default:0
+	},
+	like:{
+		type:Number,
+		default:0
+	},
+	collect:{
+		type:Schema.ObjectId,
+		ref:'Collection'
+	}
 });
 
 // var ObjectId = mongoose.Schema.Types.ObjectId

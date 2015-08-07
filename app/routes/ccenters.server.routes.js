@@ -7,11 +7,11 @@ module.exports = function(app) {
 	// Ccenters Routes
 	app.route('/ccenters')
 		.get(ccenters.list)
-		.post(users.requiresLogin, ccenters.create);
+		.post(users.requiresLogin,users.adminRequired, ccenters.create);
 
 	app.route('/ccenters/:ccenterId')
 		.get(ccenters.read)
-		.put(users.requiresLogin, users.adminRequired, ccenters.update)
+		.put(users.requiresLogin, users.adminRequired, users.adminRequired, ccenters.update)
 		.delete(users.requiresLogin, ccenters.hasAuthorization, users.adminRequired, ccenters.delete);
 
 	app.route('/ccenters_register')

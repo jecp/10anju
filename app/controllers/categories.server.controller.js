@@ -102,6 +102,12 @@ exports.list = function(req, res) {
  * Category middleware
  */
 exports.categoryByID = function(req, res, next, id) { 
+	Category.update({_id:id},{$inc:{pv:1}},function(err,next){
+	  if(err){
+	  	console.log(err);
+	    return next;
+	  }
+	});
 	Category.findById(id).populate('user', 'displayName').exec(function(err, category) {
 		if (err) return next(err);
 		if (! category) return next(new Error('Failed to load Category ' + id));

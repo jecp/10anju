@@ -1,0 +1,58 @@
+<section data-ng-controller="SubjectsController" data-ng-init="findOne()">
+	<div style="margin-top:25px;">
+		<div class="col-md-8 fl">
+			<div class="panel panel-default">
+				<div class="panel-heading text-right">详情</div>
+				<div class="panel-body row">
+					<div style="border-bottom:1px solid #ccc;">
+						<div class="" style="margin-top:-5px;margin:15px;">
+							<label class="label label-default" data-ng-bind="subject.subcat"></label>&nbsp;
+						<span class="h3" data-ng-bind="subject.title"></span>
+						
+						</div>
+					</div>
+					<div>
+						<div class="">
+							<div class="col-md-3 col-xs-3 fl" style="border-right:1px dashed #ccc;">
+								<div style="margin:15px;">
+									<a href="">
+										<img src="{{subject.user.avatar}}" alt="" style="max-width:48px;">
+									</a>
+									<div><p><i class="glyphicon glyphicon-user"></i>&nbsp;<a href=""><span data-ng-bind="subject.user.username"></span></a></p></div>
+									<p><i class="glyphicon glyphicon-time"></i>&nbsp;<span data-ng-bind="subject.user.created | date:'mediumDate'"></span></p>
+								</div>
+								<div class="">							
+								</div>
+							</div>
+							<div class="col-md-9 col-xs-9 fl">
+								<div style="margin:15px;">
+									<p ng-bind-html="subject.content"></p>
+								</div>
+								<div class="pull-right" ng-if="subject.updated === null" >创建于<span class="text-muted" data-ng-bind="subject.created | date:'medium'"></span></div>
+								<div class="pull-right" ng-if="subject.updated !== null">修改于<span class="text-muted" data-ng-bind="subject.updated | date:'medium'"></span></div>
+								<div class="row col-md-12 col-xs-12">
+									<accordion>
+										<accordion-group ng-show="subject.user._id === userObj.user._id" is-open="status.FirstOpen" is-disabled="status.isDisabled">
+											<accordion-heading>编辑</accordion-heading><div data-ng-include="'/modules/subjects/views/edit-subject.client.view.html'"></div>
+										</accordion-group>
+									</accordion>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer text-right">
+					<a href=""><i class="glyphicon glyphicon-eye-open"></i><span data-ng-bind="subject.pv"></span></a>&nbsp;
+					<a href="" data-ng-controller="CollectsController" ng-click="create()"><i class="glyphicon glyphicon-star"></i><span data-ng-bind="subject.collect"></span><span>关注</span></a>&nbsp;
+					<a href="" ng-click="like()"><i class="glyphicon glyphicon-thumbs-up"></i><span data-ng-bind="subject.like"></span><span>赞</span></a>
+				</div>			
+			</div>
+			<div data-ng-include="'/modules/comments/views/list-comments.client.view.html'"></div>
+			<div data-ng-include="'/modules/comments/views/create-comment.client.view.html'"></div>
+		</div>
+		<div class="col-md-4 fr">
+			<div data-ng-include="'/modules/subjects/views/my-subject-count.client.view.html'"></div>
+			<div data-ng-include="'/modules/forums/views/list-forums.client.view.html'"></div>
+		</div>
+	</div>
+</section>

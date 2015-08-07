@@ -1,4 +1,38 @@
-<section data-ng-controller="HomeController">
+<section data-ng-controller="SettingsController">
+	<div class="col-md-12 col-xs-12">
+		<div class="col-md-12 user_profile_left">
+			<div class="avatar" >
+				<img ng-if="user.avatar !== undefined" ng-src="{{user.avatar}}" alt="" ng-mouseenter="item.popover= true" ng-mouseleave ="item.popover = false">
+			</div>
+			<div ng-if="user.avatar === undefined" style="width:200px;height:200px;border-radius:30px 30px 30px 30px;background-color:#ccc;">
+				<div class="text-center">
+					<span style="font-size:65px;">面子呢*_^</span>
+					<div><a href="/#!/usercenter">现在上传</a></div>
+				</div>
+			</div>
+			<div>
+				<div class="mt10"></div>			
+				<div class="username">
+					<a href="/#!/settings/edit" class="pull-right"><span>编辑资料</span></a>
+					<p data-ng-bind="user.username"></p>
+				</div>
+				<div class="user_profile_attr" data-ng-controller="CcentersController" data-ng-init="findU()">
+					<div class="email">
+						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
+						<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
+						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter.length > 0"><a href="/#!/ccenters">入驻社区</a></span></p>
+					</div>
+				</div>
+				<div class="vcard_stars">
+					<div>
+						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.followers.length"></h4><span class="text-muted">粉丝</span></a>
+						<a  class="vcard_star" href="#"><h4>7</h4><span class="text-muted">圈子</span></a>
+						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.following.length"></h4><span class="text-muted">关注</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="my_count col-md-12">
 		<div class="my_count_sub">
 			<div>

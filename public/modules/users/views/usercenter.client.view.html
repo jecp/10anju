@@ -1,0 +1,33 @@
+<section data-ng-controller="SettingsController">
+	<div class="col-md-12 col-xs-12" style="margin-top:20px;">
+		<div class="col-md-4 col-xs-4">
+			<div ng-include="'modules/core/views/my.client.view.html'"></div>
+		</div>
+		<div class="col-md-8 col-xs-8">
+			<tabset>
+				<tab>
+					<tab-heading>
+						<span>我的美文</span>
+					</tab-heading>
+					<div data-ng-include="'/modules/articles/views/list-articles.client.view.html'" ></div>
+				</tab>
+				<tab>
+					<tab-heading>购物篮</tab-heading>
+					<div class="carts" class="" >
+						<div data-ng-include="'/modules/carts/views/list-carts.client.view.html'" ></div>
+					</div>
+				</tab>
+				<tab heading="订单">
+					<div class="orders" class="" >
+						<div data-ng-include="'/modules/orders/views/list-orders.client.view.html'" ></div>
+					</div>
+				</tab>
+				<tab heading="收藏">
+					<div class="collections" class="" >
+						<div data-ng-include="'/modules/collections/views/list-collections.client.view.html'" ></div>
+					</div>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+</section>

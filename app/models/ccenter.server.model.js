@@ -20,10 +20,14 @@ var CcenterSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	updated: {
+		type: Date,
+		default: Date.now
+	},
 	user: [{
 			type: Schema.ObjectId,
 			ref: 'User'
-		}],
+	}],
 	province:{type:String},
 	city:{type:String},
 	district:{type:String},
@@ -31,7 +35,6 @@ var CcenterSchema = new Schema({
 	detail:{type:String},
 	lng:{type:String},
 	lat:{type:String},
-	pv:{type:Number,default:0},
 	meta: {
 	  createAt: {
 	    type: Date,
@@ -41,6 +44,22 @@ var CcenterSchema = new Schema({
 	    type: Date,
 	    default: Date.now()
 	  }
+	},
+	pv:{
+		type:Number,
+		default:0
+	},
+	like:{
+		type:Number,
+		default:0
+	},
+	collect:{
+		type:Schema.ObjectId,
+		ref:'Collect'
+	},
+	forum: {
+		type:Schema.ObjectId,
+		ref:'Forum'
 	}
 });
 

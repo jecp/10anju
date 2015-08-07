@@ -1,0 +1,35 @@
+<section data-ng-controller="ForumsController">
+    <div class="page-header">
+        <h1>新的论坛</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">名称</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="名称" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subcat" class="control-label">分类</label>
+                    <div class="controls">
+                        <input type="text" name="subcat" data-ng-model="subcat" id="subcat" placeholder="分类" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="content">正文</label>
+                    <div class="controls">
+                        <textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="正文"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

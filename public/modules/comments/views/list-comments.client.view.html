@@ -1,0 +1,29 @@
+<section data-ng-controller="CommentsController" data-ng-init="find()">
+    <div class="panel panel-info" style="margin-top:50px;">
+        <div class="panel-heading">
+            <h5 class="text-right">留言</h5>
+        </div>
+        <div class="panel-body">
+            <div class="row" data-ng-repeat="comment in comments | filter: subject._id" style="border-bottom:1px solid #ccc;::last-child{border-bottom:none;}">
+                <div class="">
+                    <div class="col-md-3 col-xs-3 fl" style="border-right:1px dashed #ccc; }">
+                        <div style="margin:15px;">
+                            <a href="">
+                                <img ng-src="{{comment.user.avatar}}" alt="" style="max-width:36px;">
+                            </a>
+                            <div><p><i class="glyphicon glyphicon-user"></i>&nbsp;<a href=""><span data-ng-bind="comment.user.username"></span></a></p></div>
+                            <p><i class="glyphicon glyphicon-time"></i>&nbsp;<span data-ng-bind="comment.user.created | date:'mediumDate'"></span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-xs-9 fl">
+                        <div style="margin:15px;">
+                            <p ng-bind-html="comment.content"></p>
+                        </div>
+                        <div class="pull-right" ng-if="comment.updated === comment.created" >创建于<span class="text-muted" data-ng-bind="comment.created | date:'medium'"></span></div>
+                        <div class="pull-right" ng-if="comment.updated !== comment.updated">修改于<span class="text-muted" data-ng-bind="comment.updated | date:'medium'"></span></div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

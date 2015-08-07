@@ -34,7 +34,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 
 			// Redirect after save
 			cart.$save(function(response) {
-				$location.path('carts' + response._id);
+				$location.path('carts/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});	
@@ -103,12 +103,16 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 		// Remove existing Cart.goods
 		$scope.delGoods = function(cart) {
 			var cart_good = this.item;
-			$scope.amount = this.item.amount;
 
 			$http.post('/carts_goods_delete', {cart:$scope.cart,goodId:cart_good.goods,total:cart_good.price*cart_good.amount}).success(function (response){
 				$scope.success = true;
-				$scope.cart = response;
-				$location.path('carts' + response._id);
+				if (response === 'delete success'){
+					console.log('delete success');
+					$location.path('carts');
+				}else{
+					$scope.cart.detail.splice(cart_good,1);
+					$location.path('carts/' + response._id);
+				}
 			}).error(function (response){
 				$scope.error = response.message;
 			});
@@ -116,13 +120,15 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 
 		// modify good.amount in cart
 		$scope.changeAmount = function (goodId){
-			var cart_good = this.item.goods;
-			$scope.amount = this.item.amount;
-			$scope.total += (cart_good.price*$scope.amount);
+			var cart_good = this.item.goods,
+				_amount = this.item.amount,
+				_total;
+				_total = (cart_good.price*_amount);
 
-			$http.post('/carts_goods', {cart:$scope.cart,cart_amount:$scope.amount,goodId:cart_good._id,total:$scope.total}).success(function (response){
+			$http.post('/carts_goods', {cart:$scope.cart,cart_amount:_amount,goodId:cart_good._id,total:_total}).success(function (response){
 				$scope.success = true;
-				$location.path('carts' + response._id);
+				$scope.cart.total = response.total;
+				$location.path('carts/' + response._id);
 			}).error(function (response){
 				$scope.error = response.message;
 			});

@@ -1,0 +1,32 @@
+<section data-ng-controller="SubjectsController" ng-init="find()">
+	<table class="table table-hover" >
+	    <tbody data-ng-repeat="subject in subjects | filter:forum._id">
+	        <tr>
+	            <td>
+	                <div style="margin:5px;">
+	                    <div>
+	                        <div class="col-md-8 col-xs-8">
+	                            <label for="" class="label label-default" data-ng-bind="subject.subcat"></label>&nbsp;<a data-ng-href="#!/subjects/{{subject._id}}"><span class="" data-ng-bind="subject.title"></span></a>
+	                        </div>
+	                        <div class="col-md-4 col-xs-4">
+	                            <small class="pull-right">
+	                                <span data-ng-bind="subject.user.username"></span><span class="ft10">发表于</span><span data-ng-bind="subject.created | date:'mediumDate'"></span>
+	                            </small>
+	                        </div>
+	                    </div>
+	                    <div class="text-right">
+	                        <i class="glyphicon glyphicon-eye-open"></i><span data-ng-bind="subject.pv"></span>&nbsp;
+	                        <i class="glyphicon glyphicon-star"></i><span data-ng-bind="subject.collect"></span><span>关注</span>&nbsp;
+	                        <i class="glyphicon glyphicon-thumbs-up"></i><span data-ng-bind="subject.like"></span><span>赞</span>
+	                    </div>
+	                </div>
+	                <div style="border-top: 1px dashed #ccc;margin: 15px;padding-top:15px;">
+	                    <p class="text-muted" ng-bind-html="subject.content" class="subject_img">
+	                    </p>
+	                    <div class="text-right"><a href="/#!/subjects/{{subject._id}}">点击查看详情</a></div>
+	                </div>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+</section>

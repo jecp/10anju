@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/carts/:cartId')
 		.get(users.requiresLogin, carts.hasAuthorization, carts.read)
-		.put(users.requiresLogin, carts.hasAuthorization, users.adminRequired, carts.update)
+		.put(users.requiresLogin, carts.hasAuthorization, carts.update)
 		.delete(users.requiresLogin, carts.hasAuthorization, carts.delete);
 
 	app.route('/carts_goods')

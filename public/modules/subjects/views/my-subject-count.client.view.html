@@ -1,0 +1,17 @@
+<section data-ng-controller="SettingsController" ng-init="myCount()">
+	<div class="panel panel-info">
+		<div class="panel-heading text-right">
+			用户中心
+		</div>
+		<div class="panel-body">
+			<div style="margin-left:20px;">
+				<a class="my_count_num" href="/#!/usercenter" ><h4 data-ng-bind="user.subject.length"></h4><span class="text-muted">主题</span></a>
+				<a class="my_count_num" href="/#!/usercenter"><h4 data-ng-bind="user.comment.length"></h4><span class="text-muted">回复</span></a>
+				<a class="my_count_num" href="/#!/usercenter" data-ng-controller="CollectsController" ng-init="myCollect()"><h4 data-ng-bind="collect.subject.length"></h4><span class="text-muted">关注</span></a>
+			</div>
+		</div>
+		<div class="panel-footer text-center">
+			<a href="/#!/subjects/create">发表新的主题</a>
+		</div>
+	</div>
+</section>

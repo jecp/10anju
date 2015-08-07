@@ -1,7 +1,4 @@
 <section data-ng-controller="OrdersController" data-ng-init="find()">
-<!--     <div class="page-header">
-        <h1>订单列表</h1>
-    </div> -->
     <div class="list-group">
         <!-- table begin -->
         <div class="od_table">
@@ -47,7 +44,8 @@
                             </table>
                         </td>
                         <td><span data-ng-bind="order.total"></span></td>
-                        <td><span ng-if="order.status===false"><input type="button" ng-click="pay()" value="立即支付"></span><span ng-if="order.status===true">已成功支付</span></td>
+                        <td><button ng-if="order.status===false" class="btn btn-warning" type="button" data-ng-click="pay();" name="order" id="{{order._id}}">立即支付</button>
+                        <span ng-if="order.status===true">已成功支付</span></td>
                         <td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="order" id="{{order._id}}">删除</button></td>
                     </tr>
                 </tbody>

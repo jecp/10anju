@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/10anju-dev',
 	app: {
-		title: '10anju - Development Environment'
+		title: '食安居,今日订,次晨达,您随身的超市。'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

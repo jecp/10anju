@@ -12,12 +12,12 @@
 		</div>
 		<div class="od_header">
 			<div><div class="col-xs-3">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div></div>
-			<div><div class="col-xs-3">入驻社区：<span class="text-muted" data-ng-bind="order.user.ccenter.name"></span></div></div>
+			<div><div class="col-xs-3">社区编号：<span class="text-muted" data-ng-bind="order.user.ccenter"></span></div></div>
 			<div><div class="col-xs-3">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div></div>
-			<div><div class="col-xs-3">购买时间：<span class="text-muted" data-ng-bind="order.day"></span></div></div>
+			<div><div class="col-xs-3">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div></div>
 			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div></div>
 			<div><div class="col-xs-3">支付状态：<span class="text-muted" ng-if="order.status == false">未付款</span><span class="text-muted" ng-if="order.status == true">已付款</span></div></div>
-			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="{{order.user.ccenter.detail}}"></span></div></div>
+			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="order.user.ccenter.detail"></span><span data-ng-bind="order.user.roomNum"></span></div></div>
 		</div>
 		<div class="od_table">
 			<table class="table table-hover table-bordered">
@@ -64,7 +64,7 @@
 				<input type="hidden" id="uid" data-ng-model="uid" value={{window.user._id}}>
 				<input type="hidden" id="oid" data-ng-model="oid" value={{order._id}}>
 				<input type="hidden" id="total" data-ng-model="total" value={{order.total}}>
-				<div><input type="submit" class="btn btn-default" ng-click="pay()" value="确认提交"></div>
+				<div><a type="submit" class="btn btn-default" ng-click="pay()" target="_blank">确认提交</a></div>
 			</form>
 		</div>
 	</div>

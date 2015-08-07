@@ -35,19 +35,19 @@ exports.create = function(req, res) {
 					cart.save(function (err,cart){
 						if (err){console.log(err);}
 						else {
-							res.jsonp(cart);
+							res.send(cart);
 						}
 					});
 				} else {
 					cart.update({$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
-						res.jsonp(cart);
+						res.send(cart);
 					});
 				}
 			} else{
 				Cart.findOneAndUpdate({user:req.user,day:req.body.day,order_status:false},{$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
 					if(err){console.log(err);}
 					else if(cart){
-						res.jsonp(cart);
+						res.send(cart);
 					}
 					else {
 						var _cart = new Cart(req.body);
@@ -59,7 +59,7 @@ exports.create = function(req, res) {
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
-								res.jsonp(cart);
+								res.send(cart);
 							}
 						});
 					}
@@ -138,22 +138,31 @@ exports.delete = function(req, res) {
  * Delete an Cart.goods
  */
 exports.deleteGoods = function(req, res) {
+	var _total, goodObj;
 	Cart.findOne({_id:req.body.cart._id,'detail.goods':req.body.goodId._id},function (err,cart){
 
 		var i = cart.detail.length;
-		while(i--){
-			if (req.body.goodId._id.toString() === cart.detail[i].goods.toString()){
-				// cart.detail.slice(i,1);
-				cart.detail.pull(cart.detail[i]);
-				cart.total -= req.body.total;
+		if (i > 1){
+			while (i--){
+				if(req.body.goodId._id.toString() === cart.detail[i].goods.toString()){
+					goodObj = cart.detail[i];
+					_total = cart.detail[i].price * cart.detail[i].amount;
+				}
 			}
+			Cart.findOneAndUpdate({_id:req.body.cart._id},{$pull:{detail:goodObj},$inc:{total:-_total}},function (err,cart){
+				if(err){console.log(err);}
+				else {
+					res.send(cart);
+				}
+			});
+		} else {
+			Cart.remove({_id:req.body.cart._id},function (err){
+				if (err){console.log(err);}
+				else {
+					res.send('delete success');
+				}
+			});
 		}
-		cart.save(function (err,cart){
-			if (err) {console.log(err);}
-			else{
-				res.send(cart);
-			}
-		});		
 	});
 };
 

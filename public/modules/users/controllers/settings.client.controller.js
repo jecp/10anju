@@ -67,6 +67,17 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
+		// // Count of user Subjects
+		// $scope.myCount = function() {
+		// 	$http.get('/user_count').success(function(response) {
+		// 		// If successful show success message and clear form
+		// 		$scope.success = true;
+		// 		$scope.user = response;
+		// 	}).error(function(response) {
+		// 		$scope.error = response.message;
+		// 	});
+		// };
+
 		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;

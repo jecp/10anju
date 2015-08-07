@@ -1,6 +1,21 @@
 <section>
     <div class="row">
         <div class="col-md-3 pull-right"  data-ng-controller="CartsController" data-ng-init="find()">
+        <div style="margin-top:20px;" data-ng-controller="GoodsController">
+          <div class="">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="keyword" placeholder="搜搜看">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="search()">Go!</button>
+              </span>
+            </div>
+          </div>
+          <div ng-if="results" class="col-md-12">
+            <li data-ng-repeat="re in results">
+              <a href="/#!/goods/{{re._id}}"><span data-ng-bind="re.title"></span></a>
+            </li>
+          </div>
+        </div>
           <div class="page-header">
             <div class="panel panel-info">
               <div class="panel-heading">
@@ -76,7 +91,7 @@
                   <div class="goods_list_tip" data-ng-controller="CcentersController" data-ng-init="findU()">
                     <span class="fl">您好,<span class="gl_f40">{{authentication.user.username}}!</span></span>
                     <span class="fl"><span class="h5">&nbsp;截至目前，已更新<span class="gl_f40">{{goods.length}}</span>件商品,</span></span>
-                    <span class="fl"><span class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
+                    <span class="fl"><span ng-if="ccenter === null" class="h5">您还未入驻社区,<a href="/#!/ccenters">现在加入</a>!</span><span ng-if="ccenter !== null" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
                   </div>
                   <tab-heading>
                     <span>全部</span>

@@ -23,6 +23,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		.state('member-rights',{
 			url: '/member-rights',
 			templateUrl: 'modules/core/views/member-rights.client.view.html'
+		})
+		.state('results',{
+			url: '/results',
+			templateUrl: 'modules/core/views/results.client.view.html'
 		});
 	}
 ]);

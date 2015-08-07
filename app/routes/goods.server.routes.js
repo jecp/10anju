@@ -17,6 +17,9 @@ module.exports = function(app) {
 	app.route('/goods_like')
 		.post(users.requiresLogin, goods.like);
 
+
+	app.route('/search').post(goods.results);
+
 	// Finish by binding the Good middleware
 	app.param('goodId', goods.goodByID);
 };

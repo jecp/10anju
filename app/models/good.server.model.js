@@ -21,7 +21,8 @@ var GoodSchema = new Schema({
 		default: Date.now
 	},
 	updated: {
-		type: Date
+		type: Date,
+		default: Date.now
 	},
 	user: {
 		type: Schema.ObjectId,
@@ -94,42 +95,35 @@ var GoodSchema = new Schema({
 	stock:{
 		type:Number,
 		default: '',
-		required: '请填写商品库存/Please fill Good stock',
 		trim: true
 	},
 	wiki:{
 		type:String,
 		default: '',
-		required: '请填写商品百科/Please fill Good wiki',
 		trim: true
 	},
 	suitable:[{
 			type:String,
 			default: '',
-			required: '请填写商品适宜人群/Please fill Good suitable',
 			trim: true
 	}],
 	feature:[{
 			type:String,
 			default: '',
-			required: '请填写商品功效/Please fill Good feature',
 			trim: true
 		}],
 	nutrition:{
 		type:String,
 		default: '',
-		required: '请填写商品营养价值/Please fill Good nutrition',
 		trim: true
 	},
 	therapy:[{
 		type: String,
-		default:'',
-		required: '请填写商品适宜疾病/Please fill Good therapy'
+		default:''
 	}],
 	avoid:{
 		type:String,
 		default:'',
-		required:'请填写商品禁忌/Please fill Good avoid',
 		trim: true
 	},
 	storage_method: {
@@ -140,13 +134,11 @@ var GoodSchema = new Schema({
 	recipes:{
 		type:String,
 		default: '',
-		required: '请填写商品食用方法/Please fill Good recipes',
 		trim: true
 	},
 	collocation:[{
 		type:String,
 		default: '',
-		required: '请填写商品健康搭配/Please fill Good collocation',
 		trim: true
 	}],
 	for_free:{
@@ -170,8 +162,8 @@ var GoodSchema = new Schema({
 		default:0
 	},
 	collect:{
-		type:Schema.ObjectId,
-		ref:'Collection'
+		type: Number,
+		default: 0
 	}
 });
 

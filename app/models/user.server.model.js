@@ -65,8 +65,10 @@ var UserSchema = new Schema({
 	},
 	mobile: {
 		type: Number,
-		unique: '',
-		validate: [validateLocalStrategyProperty, '手机号已被注册存在'],
+		unique: true,
+		validate: [validateLocalStrategyProperty, '手机号已存在'],
+		min:[10000000000,'手机号格式不正确，请检查'],
+		max:[19999999999,'手机号格式不正确，请检查'],
 		required: '手机号不能为空',
 		trim: true
 	},
@@ -128,8 +130,38 @@ var UserSchema = new Schema({
 	}],
 	articles_like:[{
 		type:Schema.ObjectId,
-			ref:'Article'
-	}]
+		ref:'Article'
+	}],
+	subjects_like:[{
+		type:Schema.ObjectId,
+		ref:'Subject'
+	}],
+	subject:[{
+		type:Schema.ObjectId,
+		ref:'Subject'
+	}],
+	comment: [{
+		type:Schema.ObjectId,
+		ref:'comment'
+	}],
+	collect: {
+		type:Schema.ObjectId,
+		ref: 'Collect'
+	},
+	buyer_email:{
+		type: String
+	},
+	buyer_id:{
+		type:String
+	},
+	pay_total:{
+		type:Number,
+		default:0
+	},
+	pay_level:{
+		type: Number,
+		default:0
+	}
 });
 
 /**

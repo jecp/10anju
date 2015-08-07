@@ -22,14 +22,14 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				delivery:this.delivery,
 				detail:this.detail,
 				main_img:this.main_img,
-				img:this.img.split(','),
+				img:this.img,
 				stock:this.stock,
 				wiki:this.wiki,
-				suitable:this.suitable.split(','),
+				suitable:this.suitable,
 				sale:this.sale,
-				feature:this.feature.split(','),				
+				feature:this.feature,				
 				nutrition:this.nutrition,
-				therapy:this.therapy.split(','),
+				therapy:this.therapy,
 				avoid: this.avoid,
 				recipes: this.recipes,
 				for_free: this.for_free,
@@ -144,6 +144,18 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$scope.success = true;
 				$location.path('goods/' + _good._id);
 			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
+		// search function
+		$scope.search = function(keyword) {
+			$http.post('/search', {keyword:this.keyword}).success(function (response){
+				// $scope.success = true;
+				$scope.results = response;
+				console.log(response);
+				// $location.path('/results');
+			}).error(function (response){
 				$scope.error = response.message;
 			});
 		};

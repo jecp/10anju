@@ -55,7 +55,7 @@ exports.update = function(req, res) {
 exports.register = function(req, res) {
 	if (req.user) {
 		if (req.body.roomNum) {
-			User.findOne({_id:req.user._id,ccenter:req.body.ccenter._id},function(err, user) {
+			User.findOne({_id:req.user._id},function(err, user) {
 				if (err){console.log(err);}
 				else if(!user) {
 					User.findOneAndUpdate({_id:req.user._id},{ccenter:req.body.ccenter._id,roomNum:req.body.roomNum},function (err,user){
@@ -78,6 +78,23 @@ exports.register = function(req, res) {
 		}
 	}
 };
+
+/**
+ * Count of User Subjects
+ */
+// exports.myCount = function(req, res) {
+// 	console.log(req.user);
+
+// 	User.findOne({user:req.user}).populate('comment').populate('subject').populate('collect').exec(function (err, user) {
+// 		if (err) {
+// 			return res.status(400).send({
+// 				message: errorHandler.getErrorMessage(err)
+// 			});
+// 		} else {
+// 			res.jsonp(user);
+// 		}
+// 	});
+// };
 
 /**
  * Send User

@@ -88,6 +88,12 @@ exports.list = function(req, res) {
  * Message middleware
  */
 exports.messageByID = function(req, res, next, id) { 
+	Message.update({_id:id},{$inc:{pv:1}},function(err,next){
+	  if(err){
+	  	console.log(err);
+	    return next;
+	  }
+	});
 	Message.findById(id).populate('user', 'displayName').exec(function(err, message) {
 		if (err) return next(err);
 		if (! message) return next(new Error('Failed to load Message ' + id));

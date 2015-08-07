@@ -1,0 +1,23 @@
+<section data-ng-controller="SubjectsController" ng-init="find()">
+	<div class="">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item" data-ng-repeat="subject in subjects | filter:forum._id">
+						<a href=""><img ng-src="{{subject.user.avatar}}" alt="" style="max-width:26px;"></a>&nbsp;
+						<a href="/#!/subjects/subcat/{{subject.subcat}}"><label class="label label-default" data-ng-bind="subject.subcat"></label></a>
+						<span>&nbsp;</span>
+						<span data-ng-bind="subject.comment.length"></span>&nbsp;/
+						<span data-ng-bind="subject.pv"></span>
+						<span>&nbsp;</span>
+						<a href="" ><span data-ng-bind="subject.forum.name"></span></a>
+						&nbsp;<a href="/#!/subjects/{{subject._id}}"><span data-ng-bind="subject.title"></span></a>
+						<span class="text-muted text-right">发表于&nbsp;<span data-ng-bind="subject.created | date:'mediumDate'"></span></span>
+						<span class="pull-right" data-ng-bind="subject.comment.createdAt | limitTo:1"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+

@@ -89,6 +89,12 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
+	Article.update({_id:id},{$inc:{pv:1}},function(err,next){
+	  if(err){
+	  	console.log(err);
+	    return next;
+	  }
+	});
 	Article.findById(id).populate('user', 'displayName username').exec(function(err, article) {
 		if (err) return next(err);
 		if (!article) return next(new Error('Failed to load article ' + id));

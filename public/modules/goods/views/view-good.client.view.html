@@ -56,14 +56,10 @@
 											</p>
 										</div>
 										<div>
-											<p>
-												<span class="text-muted col-xs-4">规格</span>
-												<span class="col-xs-8" data-ng-bind="good.spec"><b>kg</b></span>
-											</p>
-											<span class="text-muted col-xs-4">净重</span>
-											<span class="col-xs-8" data-ng-bind="good.weight"></span>
-											<span class="weight-warning pull-right">
-											</span>
+											<div class="col-xs-4">
+												<span class="text-muted">净重</span>
+											</div>
+											<div class="col-xs-8"><span data-ng-bind="good.weight"></span>&nbsp;<span class="text-muted strong" data-ng-bind="good.spec"></span></div>
 										</div>
 										<div>
 											<span class="text-muted col-xs-4">储存方法</span>
@@ -102,7 +98,7 @@
 														<div>
 															<h6>
 																<span class="text-muted col-xs-5">促销价</span>
-																<span class="col-xs-7"><i>￥&nbsp;</i><em data-ng-bind="good.sale"></em></span>
+																<span class="col-xs-7"><i>&yen;&nbsp;</i><em data-ng-bind="good.sale"></em></span>
 															</h6>
 														</div>
 													</div>
@@ -141,7 +137,7 @@
 											<div class="mt10"></div>
 											<div class="good_detail_amount">
 												<div class="col-xs-4">
-													<span class="text-muted h7">累计售出:&nbsp;</span>
+													<span class="text-muted h7">售出:&nbsp;</span>
 													<a href="#">	
 														<span class="red" data-ng-bind="good.sold"></span>
 													</a>
@@ -153,7 +149,7 @@
 													</a>
 												</div> -->
 												<div class="col-xs-4">
-													<span class="h7 text-muted">展现:</span>
+													<span class="h7 text-muted">展现:&nbsp;</span>
 													<a href="">
 														<span class="red" data-ng-bind="good.pv"></span>
 													</a>
