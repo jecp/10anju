@@ -3,12 +3,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span class="h5 panel-title text-right" data-ng-bind="cat.name"></span>
-                <a href="/#!/categories/{{cat._id}}" class="pull-right">查看更多……</a>
             </div>
             <div class="panel-body" >
                 <div class="row good_list_all" >
                     <li class="" role="listitem">
-                        <div data-ng-repeat="good in cat.goods | limitTo:4" class="grid-4 fl col-xs-6">
+                        <div data-ng-repeat="good in cat.goods | limitTo:2" class="grid-4 fl col-xs-6">
                             <div class="">
                                 <div class="good_list_listitem">
                                     <label>
@@ -36,6 +35,9 @@
                         </div>
                     </li>                
                 </div>
+            </div>
+            <div class="panel-footer text-right">
+                <a href="/#!/categories/{{cat._id}}">查看更多……</a>
             </div>
         </div>
     </div>

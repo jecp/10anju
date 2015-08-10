@@ -39,6 +39,10 @@
 					<img data-ng-bind="authentication.user.avatar" ng-src="{{authentication.user.avatar}}" style="max-height:20px;"><b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
+					<li ng-if="authentication.user.username !== undefined">
+						<a href=""><span>欢迎您，</span><span data-ng-bind="authentication.user.username"></span>!</a>
+					</li>
+					<li class="divider"></li>
 					<li>
 						<a href="/#!/settings/profile">查看个人资料</a>
 					</li>
