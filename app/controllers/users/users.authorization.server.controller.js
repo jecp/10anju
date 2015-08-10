@@ -58,12 +58,10 @@ exports.hasAuthorization = function(roles) {
  */
 exports.adminRequired = function(req, res, next) {
 	var _this = req.user;
-	console.log('this :' + _this);
 
 	User.findOne({_id:_this._id,roles:'admin'},function (err,user){
 		if (err){console.log(err);}
 		else if(user){
-			console.log('admin user is:' + user);
 			return next();
 		}
 		else {

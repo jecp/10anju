@@ -9,7 +9,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 		$scope.create = function() {
 			// Create new Cart object			
 			var date = new Date();
-			var created_day = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+			var created_day = date.getFullYear().toString() + (date.getMonth() + 1).toString() + date.getDate().toString();
 			var cartName = created_day + '-' + window.user.username + '-' + '的购物篮';
 			var cart = new Carts ({
 				name: cartName,
@@ -107,7 +107,6 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			$http.post('/carts_goods_delete', {cart:$scope.cart,goodId:cart_good.goods,total:cart_good.price*cart_good.amount}).success(function (response){
 				$scope.success = true;
 				if (response === 'delete success'){
-					console.log('delete success');
 					$location.path('carts');
 				}else{
 					$scope.cart.detail.splice(cart_good,1);

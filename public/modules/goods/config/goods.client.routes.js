@@ -7,7 +7,7 @@ angular.module('goods').config(['$stateProvider',
 		$stateProvider.
 		state('listGoods', {
 			url: '/goods',
-			templateUrl: 'modules/goods/views/list-goods.client.view.html'
+			templateUrl: 'modules/goods/views/list-index-goods.client.view.html'
 		}).
 		state('listSubcat',{
 			url: '/goods/subcat/:subcat',

@@ -10,9 +10,8 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			// Create new Good object
 			var good = new Goods ({
 				name:this.name,
-				category:this.category,
+				cate:this.category,
 				subcat:this.subcat,
-				// article:[{type:Schema.ObjectId,ref:'Article'}],
 				title:this.title,
 				summary:this.summary,
 				spec:this.spec,
@@ -153,8 +152,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			$http.post('/search', {keyword:this.keyword}).success(function (response){
 				// $scope.success = true;
 				$scope.results = response;
-				console.log(response);
-				// $location.path('/results');
+				//$location.path('/results');
 			}).error(function (response){
 				$scope.error = response.message;
 			});

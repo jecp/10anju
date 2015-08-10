@@ -16,54 +16,84 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var good = new Good(req.body);
 	good.user = req.user;
-	var cate = req.body.category;
-	console.log(req.body);
-		
+	var cate = req.body.cate;
+
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
 	good.img = req.body.img ? req.body.img.split(',') : ',';
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
-	good.feature = req.body.feature? req.body.therapy.split(',') : ',';
+	good.feature = req.body.feature? req.body.feature.split(',') : ',';
 
-	good.save(function (err, good){
-		if (err){
-			console.log(err);
-		}
-		if (cate){
-			Category.findById(cate, function (err,category){
-				console.log(category);
-				category.goods.push(good._id);
-
-				category.save(function (err,category){
-					if (err) {
-						return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-					} else {
-						res.jsonp(good);
-					}
+	if(cate.length === 24){
+		good.category = cate;
+		good.save(function (err,good){
+			Category.findOneAndUpdate({_id:cate},{$push:{goods:good._id}},function (err,category){
+				if(err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(good);
+				}
+			});
+		});
+	} else{
+		Category.findOne({name:cate},function (err,category){
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
 				});
-			});
-		}
-		else {
-			var cateObj = new Category({
-				name: cate,
-				goods: [good._id]
-			});
-
-			cateObj.save(function (err,category){
+			} else if(category) {
 				good.category = category._id;
 				good.save(function (err,good){
+					if(err){
+						console.log(err);
+					} else {
+						category.update({$push:{goods:good._id}},function (err){
+							if(err){console.log(err);}
+							else{
+								res.jsonp(good);
+							}
+						});
+					}
+				});				
+			}else{
+				var cateObj = new Category({
+					name: cate,
+					user: req.user
+				});
+				cateObj.save(function (err,category){
 					if (err) {
 						return res.status(400).send({
 							message: errorHandler.getErrorMessage(err)
 						});
 					} else {
-						res.jsonp(good);
+						good = new Good(req.body);
+						good.user = req.user;
+						good.category = category._id;
+						good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
+						good.img = req.body.img ? req.body.img.split(',') : ',';
+						good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
+						good.feature = req.body.feature? req.body.feature.split(',') : ',';
+						
+						good.save(function (err,good){
+							if(err){
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)
+								});
+							} else {
+								category.update({$push:{goods:good._id}},function (err){
+									if(err){console.log(err);}
+									else{
+										res.jsonp(good);
+									}
+								});
+							}
+						});
 					}
 				});
-			});
-		}
-	});
+			}
+		});
+	}
 };
 
 /**
@@ -80,6 +110,10 @@ exports.update = function(req, res) {
 	var good = req.good ;
 	good = _.extend(good , req.body);
 
+	good.img = req.good.img ? req.good.img.toString().split(',') : '';
+	good.suitable = req.good.suitable ? req.good.suitable.toString().split(',') : '';
+	good.therapy = req.good.therapy ? req.good.therapy.toString().split(',') : ',';
+	good.feature = req.good.feature? req.good.feature.toString().split(',') : ',';
 	good.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -138,9 +172,9 @@ exports.like = function(req, res) {
 // search goods
 exports.results = function (req,res){
 	var q = req.body.keyword;
-	var query = new RegExp('^' + q + '.*');
+	var query = new RegExp(q);
 	if(query){
-		Good.find({title:{ $all: [query]}},function (err,goods){
+		Good.find({title:query},function (err,goods){
 			if (err){console.log(err);}
 			else {
 				res.send(goods);
@@ -199,7 +233,6 @@ exports.list = function(req, res) {
  * Good middleware
  */
 exports.goodByID = function(req, res, next, id) {
-	console.log(req.query.keyword);
 	Good.update({_id:id},{$inc:{pv:1}},function(err,next){
 	  if(err){
 	  	console.log(err);

@@ -44,7 +44,8 @@ var UserSchema = new Schema({
 	email: {
 		type: String,
 		trim: true,
-		default: '',
+		unique: true,
+		required: '邮箱不能为空',
 		validate: [validateLocalStrategyProperty, '请填写常用邮箱'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},

@@ -8,6 +8,7 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Create new Subject
 		$scope.create = function() {
 			// Create new Subject object
+			console.log(document.getElementById(forum1).value);
 			
 			var subject = new Subjects ({
 				name: this.name,

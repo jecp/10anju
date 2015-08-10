@@ -44,11 +44,11 @@ var AlipayConfig = {
 
 // 支付宝服务器通知的页面 要用 http://格式的完整路径，不允许加?id:123这类自定义参数
 // 必须保证其地址能够在互联网中访问的到
-    notify_url:'http://127.0.0.1:3300/paynotify',
+    notify_url:'http://www.havemay.cn/#!/paynotify',
 
 // 当前页面跳转后的页面 要用 http://格式的完整路径，不允许加?id:123这类自定义参数
 // 域名不能写成http://localhost/create_direct_pay_by_user_jsp_utf8/return_url.jsp ，否则会导致return_url执行无效
-    return_url:'http://127.0.0.1:3300/payreturn',
+    return_url:'http://www.havemay.cn/#!/payreturn',
 
 //      支付宝通知验证地址
 
@@ -110,7 +110,7 @@ var getMySign = function (params) {
     if(!params) return null;
     for(var key in params) {
         if((!params[key])|| key === 'sign' || key === 'sign_type'){
-            console.log('null:'+key);
+            // console.log('null:'+key);
             continue;
         }
         sPara.push([key,params[key]]);
@@ -146,8 +146,8 @@ var requestUrl=function(host,path,callback){
     };
 
     var req = https.request(options, function(res) {
-        console.log('statusCode: ', res.statusCode);
-        console.log('headers: ', res.headers);
+        // console.log('statusCode: ', res.statusCode);
+        // console.log('headers: ', res.headers);
 
         res.on('data', function(d) {
             callback(d);
@@ -173,15 +173,11 @@ exports.alipayto = function (req, res) {
     //必填参数//
 
     //请与贵网站订单系统中的唯一订单号匹配
-    console.log(req.body);
     var out_trade_no = req.body.order_detail._id;
     //订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。
     var subject = req.body.order_detail.name;
     //订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里
-    console.log(req.body.goodId);
-    console.log(req.body.goodId.length);
     var body = req.body.goodId[0].goods.title + '等' + req.body.goodId.length + '种商品';
-    console.log(req.body.order_detail.detail);
     //订单总金额，显示在支付宝收银台里的“应付总额”里
     var total_fee = req.body.order_detail.total;
 
@@ -232,6 +228,9 @@ exports.alipayto = function (req, res) {
     //royalty_parameters	= '111@126.com^0.01^分润备注一|222@126.com^0.01^分润备注二'
 
     //////////////////////////////////////////////////////////////////////////////////
+    Order.findOneAndUpdate({_id:out_trade_no},{bz:req.body.bz},function (err){
+        if (err){console.log(err);}
+    });
 
     //把请求参数打包成数组
     var sParaTemp = [];
@@ -331,12 +330,14 @@ exports.alipayto = function (req, res) {
     };
     //构造函数，生成请求URL
     var sURL = create_direct_pay_by_user(sParaTemp);
-    console.log(sURL);
+    var newUrl = 'https://' + AlipayConfig.ALIPAY_HOST + '/' + sURL;
+    res.send(newUrl);
+    //console.log(sURL);
     //向支付宝网关发出请求
 //    requestUrl(AlipayConfig.ALIPAY_HOST,show_url,function(data){
 //        console.log(data);
 //    });
-    res.redirect('https://'+AlipayConfig.ALIPAY_HOST+'/'+sURL);
+    //res.redirect('https://'+AlipayConfig.ALIPAY_HOST+'/'+sURL);
 };
 exports.paynotify=function(req,res){
     //http://127.0.0.1:3000/paynotify?trade_no=2008102203208746&out_trade_no=3618810634349901&discount=-5&payment_type=1&subject=iphone%E6%89%8B%E6%9C%BA&body=Hello&price=10.00&quantity=1&total_fee=10.00&trade_status=TRADE_FINISHED&refund_status=REFUND_SUCCESS&seller_email=chao.chenc1%40alipay.com&seller_id=2088002007018916&buyer_id=2088002007013600&buyer_email=13758698870&gmt_create=2008-10-22+20%3A49%3A31&is_total_fee_adjust=N&gmt_payment=2008-10-22+20%3A49%3A50&gmt_close=2008-10-22+20%3A49%3A46&gmt_refund=2008-10-29+19%3A38%3A25&use_coupon=N&notify_time=2009-08-12+11%3A08%3A32&notify_type=%E4%BA%A4%E6%98%93%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5%E9%80%9A%E7%9F%A5%28trade_status_sync%29&notify_id=70fec0c2730b27528665af4517c27b95&sign_type=DSA&sign=_p_w_l_h_j0b_gd_aejia7n_ko4_m%252Fu_w_jd3_nx_s_k_mxus9_hoxg_y_r_lunli_pmma29_t_q%253D%253D&extra_common_param=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E8%BF%99%E6%98%AF%E6%B5%8B%E8%AF%95%E5%95%86%E6%88%B7%E7%9A%84%E5%B9%BF%E5%91%8A%E3%80%82
@@ -344,7 +345,7 @@ exports.paynotify=function(req,res){
     var params=req.query;
 
 
-    console.log(req.query());
+    //console.log(req.query());
     var trade_no = req.query.trade_no;				//支付宝交易号
     var order_no = req.query.out_trade_no;	        //获取订单号
     var total_fee = req.query.total_fee;	        //获取总金额
@@ -374,12 +375,12 @@ exports.paynotify=function(req,res){
             	// User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,pay_total:_pay_total},function (err){
             	// 	if (err){console.log(err);}
             	// })
-				Order.findById(order_no,function (err,order){
-					if (err){console.log(err);}
-					else {
-						console.log(order);
-					}
-				});
+                Order.findOneAndUpdate({_id:req.query.out_trade_no},{status:true,checkout:true,trade_no:trade_no},function (err){
+                    if (err){console.log(err);}
+                });
+                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,$inc:{pay_total:total_fee}},function (err){
+                    if (err){console.log(err);}
+                });
 
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
@@ -393,11 +394,10 @@ exports.paynotify=function(req,res){
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-                _pay_total += total_fee;
                 Order.findOneAndUpdate({_id:req.query.out_trade_no},{status:true,checkout:true,trade_no:trade_no},function (err){
                 	if (err){console.log(err);}
                 });
-                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,pay_total:_pay_total},function (err){
+                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,$inc:{pay_total:total_fee}},function (err){
                 	if (err){console.log(err);}
                 });
                 //注意：
@@ -420,8 +420,6 @@ exports.payreturn=function(req,res){
     //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
     var params=req.query;
 
-
-    console.log(req.query());
     var trade_no = req.query.trade_no;				//支付宝交易号
     var order_no = req.query.out_trade_no;	        //获取订单号
     var total_fee = req.query.total_fee;	        //获取总金额
@@ -432,7 +430,6 @@ exports.payreturn=function(req,res){
     }
     var buyer_email = req.query.buyer_email;		//买家支付宝账号
     var trade_status = req.query.trade_status;		//交易状态
-    var _pay_total;
     //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 
     AlipayNotify.verity(params,function(result){
@@ -440,7 +437,6 @@ exports.payreturn=function(req,res){
         if(result){
             //////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
-            console.log('//请在这里加上商户的业务逻辑程序代码');
 
             //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 
@@ -448,11 +444,11 @@ exports.payreturn=function(req,res){
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-                Order.findById(order_no,function (err,order){
-                	if (err){console.log(err);}
-                	else {
-                		console.log(order);
-                	}
+                Order.findOneAndUpdate({_id:req.query.out_trade_no},{status:true,checkout:true,trade_no:trade_no},function (err){
+                    if (err){console.log(err);}
+                });
+                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,$inc:{pay_total:total_fee}},function (err){
+                    if (err){console.log(err);}
                 });
 
                 //注意：
@@ -463,11 +459,10 @@ exports.payreturn=function(req,res){
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-                _pay_total += total_fee;
                 Order.findOneAndUpdate({_id:req.query.out_trade_no},{status:true,checkout:true,trade_no:trade_no},function (err){
                 	if (err){console.log(err);}
                 });
-                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,pay_total:_pay_total},function (err){
+                User.findOneAndUpdate({_id:req.user._id},{buyer_email:buyer_email,$inc:{pay_total:total_fee}},function (err){
                 	if (err){console.log(err);}
                 });
 
@@ -477,11 +472,12 @@ exports.payreturn=function(req,res){
 
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
-            res.end('success');	//请不要修改或删除——
+            //res.end('success');	//请不要修改或删除——
+            res.redirect('/#!/orders/'+order_no);
 
             //////////////////////////////////////////////////////////////////////////////////////////
         } else{
-            res.end('fail');
+            res.redirect('/#!/orders/'+order_no);
         }
 
     });

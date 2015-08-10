@@ -102,9 +102,21 @@ exports.delete = function(req, res) {
  * List of Orders
  */
 exports.list = function(req, res) {
+	var userId = req.user._id;
+	console.log(req.user);
+	console.log(req.user.roles);
 	if (req.user){
-		var userId = req.user._id;
-		if (userId) {
+		if(_.contains(req.user.roles,'admin')){
+			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(orders);
+				}
+			});
+		}else{
 			Order.find({user:userId}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -119,10 +131,48 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Show buy_list of Orders
+ */
+exports.buy_list = function(req, res) {
+	var userId = req.user._id;
+	console.log(Date.now());
+	console.log(Date.now);
+	console.log(new Date().getDate());
+	if (req.user){
+		if(_.contains(req.user.roles,'admin')){
+			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					console.log(orders[0].created);
+					console.log((Date.now() - orders[0].created - 24 * 60 * 60 * 1000));
+					if (Date.now() - orders[0].created < 24 * 60 * 60 * 1000){
+						console.log('24小时内，当天订单');
+					}else{
+						console.log('历史订单');
+					}
+					var sum = _.reduce(orders,function (result,num){
+						
+						console.log(result);
+						console.log(num);
+						return result;
+					});
+					
+					console.log(_.flatten(orders,'total'));
+					res.jsonp(orders);
+				}
+			});
+		}
+	}
+};
+
+/**
  * Change the goods total in cart
  */
 exports.changeAmount = function(req, res) {
-	var goodId;
+	var _goodId;
 	Order.findOne({_id:req.body.order._id},function (err,order) {
 
 		var i = order.detail.length;
@@ -130,14 +180,14 @@ exports.changeAmount = function(req, res) {
 			if (req.body.goodId.toString() === order.detail[i].goods.toString()){
 				order.total += order.detail[i].price * (req.body.order_amount-order.detail[i].amount);
 				order.detail[i].amount = req.body.order_amount;
-				goodId = order.detail[i].goods._id;
+				_goodId = order.detail[i].goods._id;
 			}
 		}
 		order.updated = Date.now();
 		order.save(function (err,order){
 			if (err){console.log(err);}
 			else {
-				Good.update({_id:req.body.goodId},{$inc:{sold:req.body.order_amount-1}},function(err){
+				Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:req.body.order_amount-1}},function(err){
 					if (err){ console.log(err);}
 					else{
 						res.send(order);
@@ -145,7 +195,7 @@ exports.changeAmount = function(req, res) {
 				});
 			}
 		});
-		Good.findOneAndUpdate({_id:req.body.goods._id},{$inc:{sold:req.body.order_amount}},function (err){
+		Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:req.body.order_amount}},function (err){
 			if(err){console.log(err);}
 		});
 	});
@@ -157,35 +207,37 @@ exports.changeAmount = function(req, res) {
  */
 exports.deleteGoods = function(req, res) {
 	var _total, goodObj;
-	Order.findOne({_id:req.body.order._id,'detail.goods':req.body.goodId._id},function (err,order){
-
-		var i = order.detail.length;
-		if (i > 1){
-			while (i--){
-				if(req.body.goodId._id.toString() === order.detail[i].goods.toString()){
-					goodObj = order.detail[i];
-					_total = goodObj.price * goodObj.amount;
+	Order.findOne({_id:req.body.order._id,'detail._id':req.body.goodId._id},function (err,order){
+		if(err){console.log(err);}
+		else{
+			var i = order.detail.length;
+			if (i > 1){
+				while (i--){
+					if(req.body.goodId.goods._id.toString() === order.detail[i].goods.toString()){
+						goodObj = order.detail[i];
+						_total = goodObj.price * goodObj.amount;
+					}
 				}
+				Order.findOneAndUpdate({_id:req.body.order._id},{$pull:{detail:goodObj},$inc:{total:-_total},updated:Date.now()},function (err,order){
+					if(err){console.log(err);}
+					else {
+						res.send(order);
+					}
+				});
+				Good.findOneAndUpdate({_id:goodObj._id},{$inc:{sold:-goodObj.amount}},function (err){
+					if(err){console.log(err);}
+				});
+			} else {
+				Order.remove({_id:req.body.order._id},function (err){
+					if (err){console.log(err);}
+					else {
+						res.send('delete success');
+					}
+				});
+				Good.findOneAndUpdate({_id:req.body.goodId.goods._id},{$inc:{sold:-req.body.goodId.amount}},function (err){
+					if(err){console.log(err);}
+				});
 			}
-			Order.findOneAndUpdate({_id:req.body.order._id},{$pull:{detail:goodObj},$inc:{total:-_total},updated:Date.now()},function (err,order){
-				if(err){console.log(err);}
-				else {
-					res.send(order);
-				}
-			});
-			Good.findOneAndUpdate({_id:goodObj._id},{$inc:{sold:-1}},function (err){
-				if(err){console.log(err);}
-			});
-		} else {
-			Order.remove({_id:req.body.order._id},function (err){
-				if (err){console.log(err);}
-				else {
-					res.send('delete success');
-				}
-			});
-			Good.findOneAndUpdate({_id:req.body.goodId._id},{$inc:{sold:-1}},function (err){
-				if(err){console.log(err);}
-			});
 		}
 	});
 };

@@ -1,0 +1,13 @@
+<section>
+	<div class="input-group">
+	  <input type="text" class="form-control" data-ng-model="keyword" placeholder="搜搜看">
+	  <span class="input-group-btn">
+	    <button class="btn btn-default" type="button" ng-keydown="search()" ng-click="search()">Go!</button>
+	  </span>
+	</div>
+	<div ng-if="results" class="col-md-12" style="background:#FFF;margin-top:5px;">
+	  <li style="margin-top:5px;border-bottom:1px solid #C6E4F4;" data-ng-repeat="re in results">
+	    <a href="/#!/goods/{{re._id}}"><span data-ng-bind="re.title"></span></a>
+	  </li>
+	</div>
+</section>

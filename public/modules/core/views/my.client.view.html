@@ -35,10 +35,10 @@
 	</div>
 	<div class="my_count col-md-12">
 		<div class="my_count_sub">
-			<div>
+			<div data-ng-controller="OrdersController" ng-init="find()">
 				<a class="my_count_num" href="#"><h4>0</h4><span class="text-muted">余额</span></a>
-				<a class="my_count_num" href="#"><h4>7</h4><span class="text-muted">积分</span></a>
-				<a class="my_count_num" href="#"><h4>2</h4><span class="text-muted">订单</span></a>
+				<a class="my_count_num" href="#"><h4 data-ng-bind="user.pay_total"></h4><span class="text-muted">积分</span></a>
+				<a class="my_count_num" href="#"><h4 data-ng-bind="orders.length"></h4><span class="text-muted">订单</span></a>
 			</div>
 		</div>
 	</div>

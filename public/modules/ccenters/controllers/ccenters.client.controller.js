@@ -79,25 +79,16 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 
 		// Find User's Ccenter
 		$scope.findU = function() {
-			$http.post('/my_ccenter').success(function (response){
-				$scope.ccenter = response;
-			}).error(function (response){
-				$scope.error = response.message;
-			});
-		};
-
-		// User Register
-		$scope.register = function(ccenter) {
-			// Create new Ccenter object
-			var ccenterId = this.ccenter._id;
-			console.log(ccenterId);
-
-			ccenterId.$register(function (){
-				console.log('server ,now!');
-				$location.path('ccenters' + ccenterId);
-			},function(errorResponse){
-				$scope.error = errorResponse.data.message;
-			});
+			var userCcenter = Authentication.user.ccenter;
+			if (!userCcenter){
+				$scope.ccenter = undefined;
+			}else{
+				$http.post('/my_ccenter').success(function (response){
+					$scope.ccenter = response;
+				}).error(function (response){
+					$scope.error = response.message;
+				});
+			}
 		};
 	}
 ]);

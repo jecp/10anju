@@ -1,0 +1,10 @@
+<section data-ng-controller="GoodsController">
+	<div class="mt20"></div>
+	<div class="good_detail_top_nav">
+		<ol class="breadcrumb">
+			<li><a href="/#!/goods">首页</a></li>
+			<li><a href="/#!/categories">分类</a></li>
+		</ol>
+	</div>
+	<div ng-include="'modules/goods/views/list-goods.client.view.html'" scope="" onload="find()"></div>
+</section>

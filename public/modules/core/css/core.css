@@ -38,7 +38,7 @@ header, nav, article, section, aside, footer, figure {
 .my_count_num{float:left;width: 33.333%;font-size: 11px;text-transform: capitalize;}
 
 /* footer_content */
-.footer_content{margin-top:60px;background-color: rgba(0,0,0,0.1);}
+.footer_content{margin-top:60px;background-color: #F9F9F9;}
 
 /* protocal_head */
 .protocal_head{height: 40px;border-top: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;background-color: #fafafa;box-shadow: 1px 1px 2px #f7f7f7;}

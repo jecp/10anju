@@ -103,15 +103,15 @@ var GoodSchema = new Schema({
 		trim: true
 	},
 	suitable:[{
-			type:String,
-			default: '',
-			trim: true
+		type:String,
+		default: '',
+		trim: true
 	}],
 	feature:[{
-			type:String,
-			default: '',
-			trim: true
-		}],
+		type:String,
+		default: '',
+		trim: true
+	}],
 	nutrition:{
 		type:String,
 		default: '',
@@ -167,16 +167,16 @@ var GoodSchema = new Schema({
 	}
 });
 
-// var ObjectId = mongoose.Schema.Types.ObjectId
-GoodSchema.pre('save', function(next) {
-  if (this.isNew) {
-    this.create = this.update = Date.now;
-  }
-  else {
-    this.update = Date.now;
-  }
+// // var ObjectId = mongoose.Schema.Types.ObjectId
+// GoodSchema.pre('save', function(next) {
+//   if (this.isNew) {
+//     this.created = this.updated = Date.now;
+//   }
+//   else {
+//     this.updated = Date.now;
+//   }
 
-  next();
-});
+//   next();
+// });
 
 mongoose.model('Good', GoodSchema);

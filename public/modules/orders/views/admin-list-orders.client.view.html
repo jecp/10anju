@@ -1,0 +1,148 @@
+<section data-ng-controller="OrdersController" ng-init="find()">
+	<div ng-include="'modules/core/views/navbar.client.view.html'"></div>
+	<div class="col-md-12">
+		<tabset>
+			<tab>
+		    	<tab-heading>
+					<span>以订单查看</span>
+				</tab-heading>
+				<div>
+					<table class="table table-hover table-bordered">
+					    <thead>
+					        <tr>
+					            <th>日期</th>
+					            <th>商品概要</th>
+					            <th>应付</th>
+					            <th>状态</th>
+					            <th>删除</th>
+					        </tr>
+					    </thead>
+					    <tbody data-ng-repeat="order in orders">
+					        <tr>
+					            <td><a href="/#!/orders/{{order._id}}"><h5 data-ng-bind="order.name"></h5><h6 data-ng-bind="order.created | date:'medium'"></h6></a>
+					            <a href="/#!/ccenters/{{}}"><span data-ng-bind="order.user.ccenter.name"></span></a>
+					            </td>
+					            <td class="">
+					                <table>
+					                    <tr data-ng-repeat="g in order.detail">
+					                    <div>
+					                        <td>
+					                            <div class="fl">
+					                                <a href="/#!/goods/{{g.goods._id}}">
+					                                    <img ng-src="{{g.goods.main_img}}" alt="" class="thumbnail" style="max-width:60px;">
+					                                </a>
+					                            </div>
+					                            <div class="">
+					                                <div class="detail">
+					                                    <h5 data-ng-bind="g.goods.title"></h5>
+					                                    <div>
+					                                        <span>&yen;</span><span data-ng-bind="g.goods.price"></span>
+					                                        <label class="for_free" ng-if="g.goods.for_free===true">赠</label>
+					                                        <label class="free_try" ng-if="g.goods.free_try===true">试</label>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </td>
+					                    </div>
+					                    </tr> 
+					                </table>
+					            </td>
+					            <td><span data-ng-bind="order.total"></span></td>
+					            <td><button ng-if="order.status===false" class="btn btn-warning" type="button" data-ng-click="pay();" name="order" id="{{order._id}}">立即支付</button>
+					            <span ng-if="order.status===true">已成功支付</span></td>
+					            <td><button ng-if="order.status===false" class="btn btn-danger del" type="button" data-ng-click="del();" name="order" id="{{order._id}}">删除</button></td>
+					        </tr>
+					    </tbody>
+					</table>
+				</div>
+			</tab>
+			<tab ng-click="showBuyList()">
+		    	<tab-heading>
+					<span>以采购单查看</span>
+				</tab-heading>
+				<div>
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>分类</th>
+								<th>商品</th>
+								<th>数量</th>
+								<th>金额</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody data-ng-repeat="order in orders">
+							<tr data-ng-repeat="g in order.detail">
+								<td></td>
+								<td><span data-ng-bind="g.goods.subcat"></span></td>
+								<td><span data-ng-bind="g.goods.name"></span></td>
+								<td><span data-ng-bind="g.goods.sum"></span></td>
+								<td><span data-ng-bind="g.goods.sum"></span></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</tab>
+			<tab>
+		    	<tab-heading>
+					<span>以分货单查看</span>
+				</tab-heading>
+				<div>
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>分类</th>
+								<th>商品</th>
+								<th>数量</th>
+								<th>金额</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</tab>
+			<tab>
+		    	<tab-heading>
+					<span>以结算单查看</span>
+				</tab-heading>
+				<div>
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>分类</th>
+								<th>商品</th>
+								<th>数量</th>
+								<th>金额</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</tab>
+		</tabset>
+	</div>
+</section>

@@ -42,17 +42,17 @@ var CategorySchema = new Schema({
 	},
 	collect:{
 		type:Schema.ObjectId,
-		ref:'Collection'
+		ref:'Collect'
 	}
 });
 
 // var ObjectId = mongoose.Schema.Types.ObjectId
 CategorySchema.pre('save', function(next) {
   if (this.isNew) {
-    this.create = this.update = Date.now;
+    this.created = this.updated = Date.now;
   }
   else {
-    this.update = Date.now;
+    this.updated = Date.now;
   }
 
   next();

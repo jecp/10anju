@@ -5,17 +5,18 @@
     <div class="col-md-12">
         <form name="subjectForm" class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group" data-ng-controller="ForumsController" data-ng-init="find()">
+<!--                 <div class="form-group" data-ng-controller="ForumsController" data-ng-init="find()">
                     <div><a href="/#!/forums/create">新建论坛版块</a></div>
-                    <select ng-model="forum" ng-options="forum as forum.name for forum in forums">
-                        <option for="forum.id" value="">请选择版块</option>
+                    <select ng-model="selected" ng-options="forum.id as forum.name for forum in forums">
+                        <option value="">请选择版块</option>
                     </select>
-                    <h7>{{forum._id}}</h7>
-                </div>
+                    <h7>{{selected}}</h7>
+                </div> -->
                 <div class="form-group">
-                    <label class="control-label">论坛版块</label>
+                    <label class="control-label" data-ng-controller="ForumsController" data-ng-init="find()">论坛版块</label>{{forums}}
+                    <div>{{forums}}</div>
                     <div class="controls">
-                        <input type="text" data-ng-model="forum" id="forum" value={{forum._id}} class="form-control" required>
+                        <input type="text" data-ng-model="forum" id="forum" class="form-control" placeholder="{{forums}}" required>
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': subjectForm.title.$dirty && subjectForm.title.$invalid }">

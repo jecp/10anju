@@ -1,0 +1,15 @@
+<section data-ng-controller="CategoriesController" data-ng-init="find()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="good_detail_top_nav">
+                    <ol class="breadcrumb">
+                      <li><a href="/#!/goods">首页</a></li>
+                      <li><a href="/#!/categories">分类</a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="category_list" ng-include="'modules/categories/views/list-categories.client.view.html'" scope="" onload=""></div>
+        </div>
+    </div>
+</section>

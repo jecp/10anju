@@ -35,16 +35,6 @@ var CcenterSchema = new Schema({
 	detail:{type:String},
 	lng:{type:String},
 	lat:{type:String},
-	meta: {
-	  createAt: {
-	    type: Date,
-	    default: Date.now()
-	  },
-	  updateAt: {
-	    type: Date,
-	    default: Date.now()
-	  }
-	},
 	pv:{
 		type:Number,
 		default:0

@@ -43,11 +43,8 @@ var OrderSchema = new Schema({
 		default: false
 	},
 	pay_method:{
-		type: [{
-			type: String,
-			enum: ['check', 'wechat', 'alipay', 'pos']
-		}],
-		default: ['alipay']
+		type: String,
+		default: 'alipay'
 	},
 	status: {
 		type:Boolean,
@@ -61,6 +58,9 @@ var OrderSchema = new Schema({
 		type:String
 	},
 	trade_no: {
+		type:String
+	},
+	pos_no:{
 		type:String
 	}
 });

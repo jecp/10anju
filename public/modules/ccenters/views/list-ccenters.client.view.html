@@ -5,9 +5,9 @@
                 <thead>
                     <tr>
                         <th>省/市</th>
-                        <th>区/县</th>
-                        <th>街道、详细地址</th>
-                        <th>详细</th>
+                        <th>区/县/街道</th>
+                        <th>详细地址</th>
+                        <th>地图/坐标</th>
                         <th>小区名称</th>
                         <th>房间号</th>
                         <th>入驻</th>
@@ -18,7 +18,7 @@
                         <td><span data-ng-bind="ccenter.province"></span>/<span data-ng-bind="ccenter.city"></span></td>
                         <td><span data-ng-bind="ccenter.district"></span>/<span data-ng-bind="ccenter.street"></span></td>
                         <td><span data-ng-bind="ccenter.detail"></span></td>
-                        <td></td>
+                        <td><div>经度:<span data-ng-bind="ccenter.lat"></span>/纬度:<span data-ng-bind="ccenter.lng"></span></div></td>
                         <td><a href="/#!/ccenters/{{ccenter._id}}"><span data-ng-bind="ccenter.name"></span></a></td>
                         <td><input type="text" data-ng-model="ccenterDetails.roomNum"></td>
                         <td data-ng-controller="SettingsController"><button name="ccenterId" value="ccenter._id" ng-click="register()">入驻</button></td>

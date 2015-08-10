@@ -55,7 +55,7 @@ exports.update = function(req, res) {
 exports.register = function(req, res) {
 	if (req.user) {
 		if (req.body.roomNum) {
-			User.findOne({_id:req.user._id},function(err, user) {
+			User.findOne({_id:req.user._id,ccenter:req.body.ccenter._id},function(err, user) {
 				if (err){console.log(err);}
 				else if(!user) {
 					User.findOneAndUpdate({_id:req.user._id},{ccenter:req.body.ccenter._id,roomNum:req.body.roomNum},function (err,user){

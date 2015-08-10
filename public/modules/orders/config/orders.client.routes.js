@@ -20,6 +20,10 @@ angular.module('orders').config(['$stateProvider',
 		state('editOrder', {
 			url: '/orders/:orderId/edit',
 			templateUrl: 'modules/orders/views/edit-order.client.view.html'
+		}).
+		state('adminListOrders', {
+			url:'/orders/admin/list',
+			templateUrl: 'modules/orders/views/admin-list-orders.client.view.html'
 		});
 	}
 ]);

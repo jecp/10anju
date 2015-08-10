@@ -126,7 +126,23 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		// Find a list of Orders
 		$scope.find = function() {
-			$scope.orders = Orders.query();
+			if($location.url() === '/orders/admin/list'){
+				$scope.orders = Orders.query();
+			}else{
+				$scope.orders = Orders.query();
+			}
+		};
+
+		// Find a list of Orders
+		$scope.showBuyList = function() {
+			if($location.url() === '/orders/admin/list'){
+				$http.post('/order_buy_list').success(function (response){
+					$scope.order_list = response;
+					console.log(response);
+				}).error(function (response){
+					$scope.error = response.message;
+				});
+			}
 		};
 
 		// Find existing Order
@@ -201,7 +217,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 		$scope.delOrder = function(cart) {
 			var order_good = this.item;
 
-			$http.post('/orders_goods_delete', {order:$scope.order,goodId:order_good.goods,total:order_good.price*order_good.amount}).success(function (response){
+			$http.post('/orders_goods_delete', {order:$scope.order,goodId:order_good,total:order_good.price*order_good.amount}).success(function (response){
 				$scope.success = true;
 				if (response === 'delete success'){
 					$location.path('orders');
@@ -232,19 +248,13 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		// pay to alipay
 		$scope.pay = function(order){
-			var _odetail;
-			var _gdetail;
+			var _odetail = this.order;
+			var _gdetail = this.order.detail;
 
-			if ($scope.orders){
-				_odetail = this.order;
-				_gdetail = this.order.detail;
-
-			}else{
-				_odetail = this.order;
-				_gdetail = this.order.detail;
-			}
 			$http.post('/order_submit',{order_detail:_odetail,goodId:_gdetail,bz:$scope.bz}).success(function (response){
-				$scope.message = response;
+				//$scope.message = response;
+				console.log($location.absUrl(response));
+				window.open(response,'_blank');
 			}).error(function (response){
 				$scope.error = response.message;
 			});

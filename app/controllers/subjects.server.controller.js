@@ -17,11 +17,12 @@ exports.create = function(req, res) {
 	var subject = new Subject(req.body);
 	subject.user = req.user;
 	subject.updated = subject.created = Date.now();
-	console.log('body'+ req.body);
+	console.log('body'+ req.body.forum);
 
 	if (req.body.forum){
 		subject.save(function(err) {
 			if (err) {
+				console.log(err);
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});

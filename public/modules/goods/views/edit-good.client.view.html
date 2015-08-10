@@ -8,107 +8,158 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                <form class="" data-ng-submit="update()" novalidate>
                     <fieldset>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="category">商品分类</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.category._id" id="category" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="subcat">商品细类</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.subcat" id="subcat" class="form-control" placeholder="商品细类" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="name">商品名称</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.name" id="name" class="form-control" placeholder="商品名称" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="title">商品标题</label>
                             <div class="controls">
-                                <input type="text" data-ng-model="good.title" id="title" class="form-control" placeholder="商品标题" required>
+                                <input type="text" data-ng-model="good.title" id="title" class="form-control" placeholder="商品标题，限30字内" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="summary">商品简介</label>
                             <div class="controls">
                                 <textarea type="text" data-ng-model="good.summary" id="summary" class="form-control" placeholder="商品简介" required></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="spec">商品规格</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.spec" id="spec" class="form-control" placeholder="商品规格" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="price">价格</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.price" id="price" class="form-control" placeholder="价格" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="price">赠品</label>
+                            <div class="controls">
+                                <input type="checkbox" data-ng-model="good.for_free" id="for_free" class="form-control" ng-change="true" required>
+                            </div>
+                            <label class="control-label" for="price">免费试用</label>
+                            <div class="controls">
+                                <input type="checkbox" data-ng-model="good.free_try" id="free_try" class="form-control" ng-change="true" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="weight">净重</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.weight" id="weight" class="form-control" placeholder="净重" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="origin">产地</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.origin" id="origin" class="form-control" placeholder="产地" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="delivery">配送方式</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.delivery" id="delivery" class="form-control" placeholder="配送方式" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="main_img">主图</label>
                             <div class="controls">
-                                <input type="url" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="主图" required>
+                                <input type="text" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="主图" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="stock">库存</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.stock" id="stock" class="form-control" placeholder="库存" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="wiki">百科</label>
-                            <div class="controls">
-                                <textarea type="text" data-ng-model="good.wiki" id="wiki" class="form-control" placeholder="百科" required></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="detail">详细描述</label>
                             <div class="controls">
                                 <textarea type="text" data-ng-model="good.detail" id="detail" class="form-control" placeholder="详细描述" required></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="img">配图</label>
                             <div class="controls">
                                 <input type="text" data-ng-model="good.img" id="img" class="form-control" placeholder="配图" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="wiki">百科</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.wiki" id="wiki" class="form-control" placeholder="百科" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="suitable">适宜人群</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.suitable" id="suitable" class="form-control" placeholder="适宜人群" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="feature">功效</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.feature" id="feature" class="form-control" placeholder="功效" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="nutrition">营养价值</label>
                             <div class="controls">
-                                <textarea type="text" data-ng-model="good.nutrition" id="nutrition" class="form-control" placeholder="营养价值" required></textarea>
+                                <input type="text" data-ng-model="good.nutrition" id="nutrition" class="form-control" placeholder="营养价值" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="therapy">适宜疾病</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.therapy" id="therapy" class="form-control" placeholder="适宜疾病" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="avoid">食用禁忌</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.avoid" id="avoid" class="form-control" placeholder="食用禁忌" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="storage_method">存储方法</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="good.storage_method" id="storage_method" class="form-control" placeholder="存储方法" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="recipes">食用方法</label>
                             <div class="controls">
-                                <textarea type="text" data-ng-model="good.recipes" id="recipes" class="form-control" placeholder="食用方法" required></textarea>
+                                <input type="text" data-ng-model="good.recipes" id="recipes" class="form-control" placeholder="食用方法" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="collocation">健康搭配</label>
                             <div class="controls">
-                                <textarea type="text" data-ng-model="good.collocation" id="collocation" class="form-control" placeholder="健康搭配" required></textarea>
+                                <input type="text" data-ng-model="good.collocation" id="collocation" class="form-control" placeholder="健康搭配" required>
                             </div>
-                            <input type="hidden" data-ng-model="good.edit" id="good.edit" value=1>
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="更新" class="btn btn-default">
+                        <div class="form-group col-md-4">
+                            <input type="submit" class="btn btn-default">
                         </div>
                         <div data-ng-show="error" class="text-danger">
                             <strong data-ng-bind="error"></strong>

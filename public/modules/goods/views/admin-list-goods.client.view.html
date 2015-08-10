@@ -23,40 +23,13 @@
 							<td data-ng-bind="good.name"></td>
 							<td data-ng-bind="good.title"></td>
 							<td data-ng-bind="good.price"></td>
-							<td><a class="btn btn-primary" href="/#!/goods/{{good._id}}/edit">
-								<i class="glyphicon glyphicon-edit"></i>
-							</a></td>
+							<td><a class="btn btn-primary" href="/#!/goods/{{good._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
+							</td>
 							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="good" id="{{good._id}}">删除</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		  <!-- <div class="grid-4 col-xs-6">
-		      <div class="">
-		        <div class="good_list_listitem">
-		          <label>
-		            <div class="good_list_thumbnail">
-		              <a href="/#!/goods/{{good._id}}">
-		                <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
-		                <h6 data-ng-bind="good.title | limitTo:30"></h6>
-		              </a>
-		            </div> 
-		            <div class="good_list_price">
-		              <div> 
-		                <span>￥</span><span style="color:red;" data-ng-bind="good.price | number:2"></span><span class="pull-right" data-ng-bind="good.delivery"></span>
-		              </div>
-		            </div>
-		            <!-- <div class="row good_list_add">
-		              <p class="text-right">
-		                <span class="btn btn-primary btn-sm" role="button" ng-click="vm.addToCart(item)" title="加入购物车"><i
-		                    class="glyphicon glyphicon-shopping-cart"></i></span>
-		                <span class="btn btn-warning btn-sm" role="button" ng-click="vm.buy(item)" title="直接购买当前商品">立即购买</span>
-		              </p>
-		            </div> 
-		          </label>
-		        </div>
-		      </div>                    
-		  </div> -->
 		</div>
 	</div>
 </section>

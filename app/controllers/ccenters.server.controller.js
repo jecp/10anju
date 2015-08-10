@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var ccenter = new Ccenter(req.body);
-	ccenter.user = req.user;
 
 	ccenter.save(function(err) {
 		if (err) {
@@ -80,6 +79,7 @@ exports.list = function(req, res) {
 			});
 		} else {
 			res.jsonp(ccenters);
+			console.log(ccenters);
 		}
 	});
 };
@@ -94,7 +94,7 @@ exports.findU = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(ccenter);
+			res.send(ccenter);
 		}
 	});
 };

@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, orders.create);
 
 	app.route('/orders/:orderId')
-		.get(orders.read)
+		.get(users.requiresLogin, orders.read)
 		.put(users.requiresLogin, orders.hasAuthorization,  orders.update)
 		.delete(users.requiresLogin, orders.hasAuthorization, orders.delete);
 
@@ -26,6 +26,12 @@ module.exports = function(app) {
 
 	app.route('/payreturn')
 		.get(users.requiresLogin, alipay.payreturn);
+
+	app.route('/paynotify')
+		.get(users.requiresLogin, alipay.paynotify);
+
+	app.route('/order_buy_list')
+		.post(users.requiresLogin, users.adminRequired, orders.buy_list);
 
 	// Finish by binding the Order middleware
 	app.param('orderId', orders.orderByID);
