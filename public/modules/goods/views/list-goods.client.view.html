@@ -1,0 +1,131 @@
+<section>
+  <div data-ng-controller="CategoriesController" data-ng-init="find()">
+    <tabset>
+      <tab>
+        <div class="goods_list_tip" data-ng-controller="CcentersController" ng-init="findU()">
+          <span class="fl">您好,<span class="gl_f40">{{authentication.user.username}}!</span></span>
+          <span class="fl"><span class="h5">&nbsp;截至目前，已更新<span class="gl_f40">{{goods.length}}</span>件商品,</span></span>
+          <span class="fl"><span ng-if="ccenter === undefined" class="h5">您还未入驻社区,<a href="/#!/ccenters">现在加入</a>!</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
+        </div>
+        <tab-heading>
+          <span>全部</span>
+        </tab-heading>
+        <div >
+          <div class="good_list_all" >
+            <li class="" role="listitem">
+              <div data-ng-repeat="good in goods" class="grid-4 fl col-xs-6">
+                  <div class="">
+                    <div class="good_list_listitem">
+                      <label>
+                        <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
+                        <div class="good_list_thumbnail">
+                          <a href="/#!/goods/{{good._id}}">
+                            <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                          </a>
+                          <div class="good_list_detail">
+                            <div>
+                              <a href="/#!/goods/{{good._id}}">
+                                <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                              </a>
+                                <div class="good_list_price">
+                                  <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
+                                  <label class="for_free" ng-if="good.for_free===true">赠</label>
+                                  <label class="free_try" ng-if="good.free_try===true">试</label>
+                                  <span class="pull-right" data-ng-bind="good.delivery"></span>
+                                  <input type="hidden" name="amount" data-ng-model="good.amount" value="1">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-md-6 col-xs-6 pull-left">
+                                  <div class="buy" data-ng-controller="OrdersController">
+                                    <div class="form-group pull-left">
+                                      <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
+                                    </div>
+                                    <div data-ng-show="error" class="text-danger">
+                                      <strong data-ng-bind="error"></strong>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                  <div class="cart" data-ng-controller="CartsController">
+                                    <div class="form-group">
+                                      <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
+                                    </div>
+                                    <div data-ng-show="error" class="text-danger">
+                                      <strong data-ng-bind="error"></strong>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </li>                
+              </div>
+          </div>
+        </tab>
+      <tab data-ng-repeat="cat in categories">
+        <tab-heading>
+          <span data-ng-bind="cat.name"></span>
+        </tab-heading>
+        <div>
+          <div class="good_list_all">
+            <li data-ng-repeat="good in goods | filter:cat._id" class="" role="listitem">
+              <div class="col-md-3">
+                  <div class="good_list_listitem">
+                    <label>
+                      <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
+                      <div class="good_list_thumbnail">
+                        <a href="/#!/goods/{{good._id}}">
+                          <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
+                        </a>
+                        <div class="good_list_detail">
+                          <div>
+                            <a href="/#!/goods/{{good._id}}">
+                              <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                            </a>
+                              <div class="good_list_price">
+                                <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
+                                <a href="/#!/help#for_free"><span class="for_free" ng-if="good.for_free===true">赠</span></a>
+                                <a href="/#!/help#free_try"><label class="free_try" ng-if="good.free_try===true">试</label></a>
+                                <span class="pull-right" data-ng-bind="good.delivery"></span>
+                              </div>
+                              <div class="col-xs-12">
+                                  <div class="col-md-6 col-xs-6 pull-left">
+                                    <div class="buy" data-ng-controller="OrdersController">
+                                      <div class="form-group pull-left">
+                                        <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
+                                      </div>
+                                      <div data-ng-show="error" class="text-danger">
+                                        <strong data-ng-bind="error"></strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 col-xs-6">
+                                    <div class="cart" data-ng-controller="CartsController">
+                                      <div class="form-group">
+                                        <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
+                                      </div>
+                                      <div data-ng-show="error" class="text-danger">
+                                        <strong data-ng-bind="error"></strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
+                  </div>                  
+              </div>
+            </li>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
