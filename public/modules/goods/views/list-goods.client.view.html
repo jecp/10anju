@@ -1,6 +1,6 @@
-<section>
+<section data-ng-controller="OrdersController">
   <div data-ng-controller="CategoriesController" data-ng-init="find()">
-    <tabset>
+    <tabset >
       <tab>
         <div class="goods_list_tip" data-ng-controller="CcentersController" ng-init="findU()">
           <span class="fl">您好,<span class="gl_f40">{{authentication.user.username}}!</span></span>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="col-md-6 col-xs-6 pull-left">
-                                  <div class="buy" data-ng-controller="OrdersController">
+                                  <div class="buy" >
                                     <div class="form-group pull-left">
                                       <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
                                     </div>
@@ -47,7 +47,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6 col-xs-6">
-                                  <div class="cart" data-ng-controller="CartsController">
+                                  <div class="cart" >
                                     <div class="form-group">
                                       <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
                                     </div>
@@ -67,14 +67,14 @@
               </div>
           </div>
         </tab>
-      <tab data-ng-repeat="cat in categories">
+      <tab data-ng-repeat="cat in categories | orderBy:goods.length | filter:goods.length ">
         <tab-heading>
           <span data-ng-bind="cat.name"></span>
         </tab-heading>
         <div>
           <div class="good_list_all">
-            <li data-ng-repeat="good in goods | filter:cat._id" class="" role="listitem">
-              <div class="col-md-3">
+            <li class="" role="listitem">
+              <div data-ng-repeat="good in goods | filter:cat._id" class="grid-4 fl col-xs-6">
                   <div class="good_list_listitem">
                     <label>
                       <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
@@ -95,7 +95,7 @@
                               </div>
                               <div class="col-xs-12">
                                   <div class="col-md-6 col-xs-6 pull-left">
-                                    <div class="buy" data-ng-controller="OrdersController">
+                                    <div class="buy">
                                       <div class="form-group pull-left">
                                         <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
                                       </div>
@@ -105,7 +105,7 @@
                                     </div>
                                   </div>
                                   <div class="col-md-6 col-xs-6">
-                                    <div class="cart" data-ng-controller="CartsController">
+                                    <div class="cart">
                                       <div class="form-group">
                                         <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
                                       </div>

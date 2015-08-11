@@ -54,19 +54,17 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="od_footer">
+		<div class="od_footer form-group">
 			<div>商品数量：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total"></span></div>
-			<div>备注：<span data-ng-bind="order.bz"></span></div>
-			<div><span></span><input ng-if="order.status === false" class="col-md-12" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz"></div>
+			<div>
+				<label class="form-label">备注：<span data-ng-bind="order.bz"></span></label>
+				<span></span><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz">
+			</div>
+			
 		</div>
 		<div class="ft10"></div>
 		<div class="od_submit" ng-controller="OrdersController">
-			<form action="" class="" novalidate>
-				<input type="hidden" id="uid" data-ng-model="uid" value={{window.user._id}}>
-				<input type="hidden" id="oid" data-ng-model="oid" value={{order._id}}>
-				<input type="hidden" id="total" data-ng-model="total" value={{order.total}}>
-				<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()" target="_blank">确认提交</a></div>
-			</form>
+			<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()" target="_blank">确认提交</a></div>
 		</div>
 	</div>
 </section>

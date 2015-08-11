@@ -1,7 +1,7 @@
 <section data-ng-controller="CommentsController" data-ng-init="find()">
     <div class="panel panel-info" style="margin-top:50px;">
         <div class="panel-heading">
-            <h5 class="text-right">留言</h5>
+            <h5 class="text-right"><span class="glyphicon glyphicon-comment"></span>&nbsp;留言</h5>
         </div>
         <div class="panel-body">
             <div class="row" data-ng-repeat="comment in comments | filter: subject._id" style="border-bottom:1px solid #ccc;::last-child{border-bottom:none;}">

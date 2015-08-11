@@ -22,8 +22,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 		// Weather Api from web
 		$scope.TodayWeather = function(city){
 			$scope.weather = $http.get('http://m.weather.com.cn/atad/101280601.html').success(function (response){
-				console.log(response);
-				$scope.weather = response;
+				console.log(response.weather);
+				$scope.weather = response.weather;
 			}).error(function (response){
 				$scope.error = response;
 			});
