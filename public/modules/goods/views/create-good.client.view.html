@@ -1,73 +1,49 @@
 <section data-ng-controller="GoodsController">
     <div class="page-header">
-        <h1>新建商品</h1>
+        <h1>新建商品，标记为*的为必填项</h1>
     </div>
     <div class="row">
         <div class="col-md-8">
-            <form class="" data-ng-submit="create()" novalidate>
+            <form class="" novalidate>
                 <fieldset>
-<!--                     <div class="form-group col-md-4" data-ng-controller="CategoriesController" data-ng-init="find()">
-                        <div><a href="/#!/categories/create">新建分类</a></div>
-                        <label for="category" class="control-label">选择分类</label>
-                        <select ng-model="cat" ng-options="cat._id as cat.name for cat in categories">
-                            <option value="">请选择分类:</option>
-                        </select>
+                    <div class="form-group col-md-12" data-ng-controller="CategoriesController" data-ng-init="find()">
+                        <div>
+                            <label for="category" class="control-label">选择分类:</label>
+                            <select ng-model="cat" ng-options="cat._id as cat.name for cat in categories">
+                                <option value="">请选择分类:</option>
+                            </select>
+                        </div>
+                        <h7 class="text-muted">可直接填分类的ID:</h7>
                         <h7>{{cat}}</h7>
-                    </div> -->
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="category">商品分类</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="category" id="category" class="form-control" placeholder="商品分类，可直接输入汉字，如分类不存在则新建" required>
-                        </div>
                     </div>
-<!--                         <label for="" class="radio-inline" data-ng-repeat="cat in categories" >
-                            <input type="radio" data-ng-model="category" value="{{cat._id}}" id="category">{{cat.name}}
-                        </label>
-                        {{category}} -->
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="subcat">商品细类</label>
+                        <label class="control-label" for="cate">商品分类*</label>
                         <div class="controls">
-                            <input type="text" data-ng-model="subcat" id="subcat" class="form-control" placeholder="商品细类" required>
+                            <input type="text" data-ng-model="cate" id="cate" class="form-control" placeholder="商品分类，可直接输入汉字，如分类不存在则新建" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="name">商品名称</label>
+                        <label class="control-label" for="subcat">商品细类*</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="subcat" id="subcat" class="form-control" placeholder="商品细类，如叶菜类、根茎类" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="name">商品名称*</label>
                         <div class="controls">
                             <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="商品名称，例：手机" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="title">商品标题</label>
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="title">商品标题*</label>
                         <div class="controls">
                             <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="summary">商品简介</label>
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="summary">商品简介*</label>
                         <div class="controls">
                             <textarea type="text" data-ng-model="summary" id="summary" class="form-control" placeholder="商品简介" required></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="spec">商品规格</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="spec" id="spec" class="form-control" placeholder="商品规格，例g，个，包等" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="price">价格</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="price" id="price" class="form-control" placeholder="价格" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="price">赠品</label>
-                        <div class="controls">
-                            <input type="checkbox" data-ng-model="for_free" id="for_free" class="form-control" ng-change="true" required>
-                        </div>
-                        <label class="control-label" for="price">免费试用</label>
-                        <div class="controls">
-                            <input type="checkbox" data-ng-model="free_try" id="free_try" class="form-control" ng-change="true" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -77,33 +53,33 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
+                        <label class="control-label" for="spec">商品规格*</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="spec" id="spec" class="form-control" placeholder="商品规格，例g，个，包等" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="price">价格*</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="price" id="price" class="form-control" placeholder="价格，精确到小数点后2位" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label class="control-label" for="origin">产地</label>
                         <div class="controls">
                             <input type="text" data-ng-model="origin" id="origin" class="form-control" placeholder="产地" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="delivery">配送方式</label>
+                        <label class="control-label" for="delivery">配送方式*</label>
                         <div class="controls">
                             <input type="text" data-ng-model="delivery" id="delivery" class="form-control" placeholder="配送方式" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="main_img">主图</label>
+                        <label class="control-label" for="main_img">主图*</label>
                         <div class="controls">
                             <input type="text" data-ng-model="main_img" id="main_img" class="form-control" placeholder="主图" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="stock">库存</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="stock" id="stock" class="form-control" placeholder="库存" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="detail">详细描述</label>
-                        <div class="controls">
-                            <textarea type="text" data-ng-model="detail" id="detail" class="form-control" placeholder="详细描述" required></textarea>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -113,6 +89,36 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
+                        <label class="control-label" for="stock">库存*</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="stock" id="stock" class="form-control" placeholder="库存" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="storage_method">存储方法</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="storage_method" id="storage_method" class="form-control" placeholder="存储方法" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="detail">详细描述*</label>
+                        <div class="controls">
+                            <textarea type="text" data-ng-model="detail" id="detail" class="form-control" placeholder="详细描述" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="nutrition">营养价值</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="nutrition" id="nutrition" class="form-control" placeholder="营养价值" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="recipes">食用方法</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="recipes" id="recipes" class="form-control" placeholder="食用方法" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
                         <label class="control-label" for="wiki">百科</label>
                         <div class="controls">
                             <input type="text" data-ng-model="wiki" id="wiki" class="form-control" placeholder="百科" required>
@@ -131,12 +137,6 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="nutrition">营养价值</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="nutrition" id="nutrition" class="form-control" placeholder="营养价值" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label class="control-label" for="therapy">适宜疾病</label>
                         <div class="controls">
                             <input type="text" data-ng-model="therapy" id="therapy" class="form-control" placeholder="适宜疾病，请以英文半角状态的','进行分隔" required>
@@ -149,25 +149,25 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="storage_method">存储方法</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="storage_method" id="storage_method" class="form-control" placeholder="存储方法" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" for="recipes">食用方法</label>
-                        <div class="controls">
-                            <input type="text" data-ng-model="recipes" id="recipes" class="form-control" placeholder="食用方法" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label class="control-label" for="collocation">健康搭配</label>
                         <div class="controls">
                             <input type="text" data-ng-model="collocation" id="collocation" class="form-control" placeholder="健康搭配" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="submit" class="btn btn-default">
+                    <div class="form-group col-md-2">
+                        <label class="control-label" for="price">赠品</label>
+                        <div class="controls">
+                            <input type="checkbox" data-ng-model="for_free" id="for_free" class="form-control" ng-change="true" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="control-label" for="price">免费试用</label>
+                        <div class="controls">
+                            <input type="checkbox" data-ng-model="free_try" id="free_try" class="form-control" ng-change="true" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                    <button class="btn btn-primary btn-block" ng-click="create()" >新建商品</button>
                     </div>
                     <div data-ng-show="error" class="text-danger">
                         <strong data-ng-bind="error"></strong>

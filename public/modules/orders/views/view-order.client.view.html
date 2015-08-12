@@ -16,7 +16,7 @@
 			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="order.user.roomNum"></span></div></div>
 			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div></div>
 			<div><div class="col-xs-3">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div></div>
-			<div><div class="col-xs-3">支付方式：<span class="text-muted" ng-if="order.pay_method === alipay">支付宝</span><span class="text-muted" ng-if="order.pay_method === cash">现金</span><span class="text-muted" ng-if="order.pay_method === pos">pos刷卡</span></div></div>
+			<div><div class="col-xs-3">支付方式：<span class="text-muted" ng-if="order.pay_method === "alipay"">支付宝</span><span class="text-muted" ng-if="order.pay_method === cash">现金</span><span class="text-muted" ng-if="order.pay_method === pos">pos刷卡</span></div></div>
 			<div><div class="col-xs-12">支付编号：<span ng-if="order.trade_no !== undefined" class="text-muted" data-ng-bind="order.trade_no"></span><span ng-if="order.pos_no !== undefined" class="text-muted" data-ng-bind="order.pos_no"></span></div></div>
 			
 		</div>

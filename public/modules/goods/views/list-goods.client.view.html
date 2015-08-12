@@ -11,13 +11,12 @@
           <span>全部</span>
         </tab-heading>
         <div >
-          <div class="good_list_all" >
+          <div class="row good_list_all" >
             <li class="" role="listitem">
               <div data-ng-repeat="good in goods" class="grid-4 fl col-xs-6">
                   <div class="">
                     <div class="good_list_listitem">
                       <label>
-                        <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
                         <div class="good_list_thumbnail">
                           <a href="/#!/goods/{{good._id}}">
                             <img ng-src="{{good.main_img}}" class="good_list_img" alt="">
@@ -35,27 +34,23 @@
                                   <input type="hidden" name="amount" data-ng-model="good.amount" value="1">
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="col-md-6 col-xs-6 pull-left">
-                                  <div class="buy" >
-                                    <div class="form-group pull-left">
-                                      <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
-                                    </div>
-                                    <div data-ng-show="error" class="text-danger">
-                                      <strong data-ng-bind="error"></strong>
-                                    </div>
+                            <div class="row col-xs-12">
+                              <div class="col-md-6 col-xs-6 fl">
+                                <div class="buy" >
+                                    <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="购买" ng-click="buy()">
+                                  <div data-ng-show="error" class="text-danger">
+                                    <strong data-ng-bind="error"></strong>
                                   </div>
                                 </div>
-                                <div class="col-md-6 col-xs-6">
-                                  <div class="cart" >
-                                    <div class="form-group">
-                                      <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
-                                    </div>
-                                    <div data-ng-show="error" class="text-danger">
-                                      <strong data-ng-bind="error"></strong>
-                                    </div>
+                              </div>
+                              <div class="col-md-6 col-xs-6">
+                                <div class="cart" >
+                                  <a type="submit" class="btn btn-default" ng-click="create()">购物篮<i class="glyphicon glyphicon-shopping-cart"></i></a>
+                                  <div data-ng-show="error" class="text-danger">
+                                    <strong data-ng-bind="error"></strong>
                                   </div>
                                 </div>
+                              </div>
                               </div>
                             </div>
                         </div>
@@ -67,12 +62,12 @@
               </div>
           </div>
         </tab>
-      <tab data-ng-repeat="cat in categories | orderBy:goods.length | filter:goods.length ">
+      <tab data-ng-repeat="cat in categories | orderBy:goods.length">
         <tab-heading>
           <span data-ng-bind="cat.name"></span>
         </tab-heading>
         <div>
-          <div class="good_list_all">
+          <div class="row good_list_all">
             <li class="" role="listitem">
               <div data-ng-repeat="good in goods | filter:cat._id" class="grid-4 fl col-xs-6">
                   <div class="good_list_listitem">
@@ -93,7 +88,7 @@
                                 <a href="/#!/help#free_try"><label class="free_try" ng-if="good.free_try===true">试</label></a>
                                 <span class="pull-right" data-ng-bind="good.delivery"></span>
                               </div>
-                              <div class="col-xs-12">
+                              <div class="row col-xs-12">
                                   <div class="col-md-6 col-xs-6 pull-left">
                                     <div class="buy">
                                       <div class="form-group pull-left">
@@ -106,9 +101,7 @@
                                   </div>
                                   <div class="col-md-6 col-xs-6">
                                     <div class="cart">
-                                      <div class="form-group">
-                                        <input type="submit" class="btn btn-default" value="购物篮" ng-click="create()">
-                                      </div>
+                                      <a type="submit" class="btn btn-default" ng-click="create()">购物篮<i class="glyphicon glyphicon-shopping-cart"></i></a>
                                       <div data-ng-show="error" class="text-danger">
                                         <strong data-ng-bind="error"></strong>
                                       </div>

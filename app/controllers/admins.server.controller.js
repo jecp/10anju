@@ -32,6 +32,7 @@ exports.create = function(req, res) {
 exports.login = function(req, res) {
 	var aname = req.username;
 	var apwd = req.password;
+	console.log(req);
 	console.log('username:'+req.username+';password:'+req.password);
 
 	Admin.findOne({name:aname},function (err,admin){

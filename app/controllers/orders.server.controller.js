@@ -107,6 +107,7 @@ exports.list = function(req, res) {
 	console.log(req.user.roles);
 	if (req.user){
 		if(_.contains(req.user.roles,'admin')){
+			console.log(1);
 			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -117,6 +118,7 @@ exports.list = function(req, res) {
 				}
 			});
 		}else{
+			console.log(2);
 			Order.find({user:userId}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -140,12 +142,13 @@ exports.buy_list = function(req, res) {
 	console.log(new Date().getDate());
 	if (req.user){
 		if(_.contains(req.user.roles,'admin')){
-			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
+			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function (err, orders) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});
-				} else {
+				} else if(orders.length > 0){
+					console.log(orders);
 					console.log(orders[0].created);
 					console.log((Date.now() - orders[0].created - 24 * 60 * 60 * 1000));
 					if (Date.now() - orders[0].created < 24 * 60 * 60 * 1000){
@@ -153,15 +156,25 @@ exports.buy_list = function(req, res) {
 					}else{
 						console.log('历史订单');
 					}
-					var sum = _.reduce(orders,function (result,num){
-						
+
+					var feeArray = _.flatten(orders,'total');
+					console.log(feeArray);
+
+					var newOrderArray = _.uniq(orders,'detail');
+					console.log('newOrderArray is:'+ newOrderArray);
+
+					var sum = _.reduce(feeArray,function (result,num){
+
 						console.log(result);
 						console.log(num);
-						return result;
+						return result + num;
 					});
-					
-					console.log(_.flatten(orders,'total'));
+					console.log(sum);
+
 					res.jsonp(orders);
+				} else{
+					console.log(err);
+					res.send(err);
 				}
 			});
 		}

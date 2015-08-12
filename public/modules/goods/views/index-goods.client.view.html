@@ -14,7 +14,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="mt20" ng-include="'modules/core/views/today-todos.client.view.html'"></div>
+			<!-- <div class="mt20" ng-include="'modules/core/views/today-todos.client.view.html'"></div> -->
           <div data-ng-repeat="cart in carts | limitTo:1 | filter: {'order_status': 'false'}" class="panel panel-default" ng-if="carts.length > 0">
             <div class="panel-heading">
               <div class="panel-title">购物篮</div>
@@ -66,3 +66,4 @@
 		</div>
 	</div>
 </section>
+<!--  -->

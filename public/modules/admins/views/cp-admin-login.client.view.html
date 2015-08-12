@@ -1,23 +1,23 @@
 <section>
 <link rel="stylesheet" type="text/css" href="modules/admins/css/icons/icons.css" media="screen" />
     <div class="row" data-ng-controller="AdminsController">
-        <div id="mws-login" class="col-md-6">
+        <div id="login" class="col-md-6">
             <h1>食安居后台管理登录/Login</h1>
-            <div class="mws-login-lock"><img src="modules/admins/css/icons/24/locked-2.png" alt="" /></div>
-            <div id="mws-login-form">
-                <form class="mws-form" action="login" method="post">
-                    <div class="mws-form-row">
-                        <div class="mws-form-item large">
+            <div class="login-lock"><img src="modules/admins/css/icons/24/locked-2.png" alt="" /></div>
+            <div id="login-form">
+                <form>
+                    <div class="form-group">
+                        <div class="form-item large">
                             <input type="text" id="username" name="username" class="form-control" data-ng-model="username" placeholder="用户名">
                         </div>
                     </div>
-                    <div class="mws-form-row">
-                        <div class="mws-form-item large">
+                    <div class="form-group">
+                        <div class="form-item large">
                             <input type="password" id="password" name="password" class="form-control" data-ng-model="password" placeholder="密码，注意区分大小写">
                         </div>
                     </div>
-                    <div class="mws-form-row">
-                        <input type="submit" value="Login" class="mws-button green mws-login-button" ng-click="login()"/>
+                    <div class="form-group">
+                        <button class="button green login-button" ng-click="login()">登 录</button>
                     </div>
                 </form>
             </div>

@@ -10,7 +10,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			// Create new Good object
 			var good = new Goods ({
 				name:this.name,
-				cate:this.category,
+				cate:this.cate,
 				subcat:this.subcat,
 				title:this.title,
 				summary:this.summary,

@@ -23,7 +23,7 @@ exports.create = function(req, res) {
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
 	good.feature = req.body.feature? req.body.feature.split(',') : ',';
 
-	if(cate.length === 24){
+	if(cate && cate.length === 24){
 		good.category = cate;
 		good.save(function (err,good){
 			Category.findOneAndUpdate({_id:cate},{$push:{goods:good._id}},function (err,category){
@@ -74,7 +74,7 @@ exports.create = function(req, res) {
 						good.img = req.body.img ? req.body.img.split(',') : ',';
 						good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
 						good.feature = req.body.feature? req.body.feature.split(',') : ',';
-						
+
 						good.save(function (err,good){
 							if(err){
 								return res.status(400).send({

@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(admins.list)
 		.post(users.requiresLogin, admins.create);
 
+	app.route('/admins?isArray')
+		.post(admins.login);
+
 	app.route('/admins/:adminId')
 		.get(admins.read)
 		.put(users.requiresLogin, admins.hasAuthorization, admins.update)

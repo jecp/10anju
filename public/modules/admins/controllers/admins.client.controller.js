@@ -25,8 +25,12 @@ angular.module('admins').controller('AdminsController', ['$scope', '$stateParams
 
 		// Admin Login
 		$scope.login = function() {
-			console.log(this.username);
-			console.log(this.password);
+			$scope.admin = Admins.query({
+				method: 'POST',
+				params:{adminName: this.username,adminPwd: this.password},
+				isArray:true				
+			});
+			console.log($scope.admin);
 		};
 
 		// Remove existing Admin
