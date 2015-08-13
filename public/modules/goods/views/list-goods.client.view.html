@@ -24,7 +24,7 @@
                           <div class="good_list_detail">
                             <div>
                               <a href="/#!/goods/{{good._id}}">
-                                <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                                <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
                               </a>
                                 <div class="good_list_price">
                                   <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
@@ -43,7 +43,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-md-6 col-xs-6">
+                              <div class="col-md-6 col-xs-6" ng-controller="CartsController">
                                 <div class="cart" >
                                   <a type="submit" class="btn btn-default" ng-click="create()">购物篮<i class="glyphicon glyphicon-shopping-cart"></i></a>
                                   <div data-ng-show="error" class="text-danger">
@@ -80,7 +80,7 @@
                         <div class="good_list_detail">
                           <div>
                             <a href="/#!/goods/{{good._id}}">
-                              <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                              <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
                             </a>
                               <div class="good_list_price">
                                 <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>

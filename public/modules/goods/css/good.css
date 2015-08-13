@@ -57,6 +57,7 @@ padding:5px 0;
 .grid-4{width:25%;}
 .gl_detail{width:100%;color:#ccc;border-bottom: 1px solid #ccc;}
 .good_list_detail{padding: 5px;}
+.good_list_title{height:30px;overflow: hidden;}
 .good_list_add{margin-bottom: 5px;margin-top: 2px;}
 .good_list_buy{font-size:15px;padding:5px;background-color: #375D1E;color:#000;}
 .good_list_cart{padding:5px;background-color: #F0A851;color:#000;}

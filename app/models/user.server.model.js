@@ -54,11 +54,13 @@ var UserSchema = new Schema({
 		unique: 'testing error message',
 		validate: [validateLocalStrategyProperty, '用户名已存在'],
 		required: '用户名不能为空',
+		minLength:[4,'用户名长度太短，请检查'],
 		trim: true
 	},
 	password: {
 		type: String,
 		default: '',
+		minLength:[6,'密码长度不够，请检查'],
 		validate: [validateLocalStrategyPassword, '密码长度不够']
 	},
 	salt: {
@@ -68,10 +70,10 @@ var UserSchema = new Schema({
 		type: Number,
 		unique: true,
 		validate: [validateLocalStrategyProperty, '手机号已存在'],
-		min:[10000000000,'手机号格式不正确，请检查'],
-		max:[19999999999,'手机号格式不正确，请检查'],
+		minLength:[11,'手机号格式不正确，请检查'],
+		maxLength:[11,'手机号格式不正确，请检查'],
 		required: '手机号不能为空',
-		trim: true
+		trim:true
 	},
 	provider: {
 		type: String,
@@ -148,6 +150,10 @@ var UserSchema = new Schema({
 	collect: {
 		type:Schema.ObjectId,
 		ref: 'Collect'
+	},
+	visithistory:{
+		type:Schema.ObjectId,
+		ref: 'Visithistory'
 	},
 	buyer_email:{
 		type: String

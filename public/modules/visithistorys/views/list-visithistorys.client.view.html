@@ -1,0 +1,19 @@
+<section data-ng-controller="VisithistorysController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Visithistorys</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="visithistory in visithistorys" data-ng-href="#!/visithistorys/{{visithistory._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="visithistory.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="visithistory.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="visithistory.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!visithistorys.$resolved || visithistorys.length">
+    	No Visithistorys yet, why don't you <a href="/#!/visithistorys/create">create one</a>?
+    </div>
+</section>

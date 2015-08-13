@@ -7,7 +7,7 @@
             <div class="panel-body" >
                 <div class="row good_list_all" >
                     <li class="" role="listitem">
-                        <div data-ng-repeat="good in cat.goods | limitTo:2" class="grid-4 fl col-xs-6">
+                        <div data-ng-repeat="good in cat.goods | limitTo:4" class="grid-4 fl col-xs-6">
                             <div class="">
                                 <div class="good_list_listitem">
                                     <label>
@@ -19,7 +19,7 @@
                                         </div> 
                                         <div class="good_list_detail">
                                             <a href="/#!/goods/{{good._id}}">
-                                                <h5 data-ng-bind="good.title | limitTo:30"></h5>
+                                                <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
                                             </a>
                                             <div class="good_list_price">
                                                 <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>

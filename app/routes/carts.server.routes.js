@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Carts Routes
 	app.route('/carts')
-		.get(users.requiresLogin, carts.list)
+		.get(carts.list)
 		.post(users.requiresLogin, carts.create);
 
 	app.route('/carts/:cartId')
