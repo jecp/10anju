@@ -43,7 +43,7 @@
                                 </tr> 
                             </table>
                         </td>
-                        <td><span data-ng-bind="order.total"></span></td>
+                        <td><span data-ng-bind="order.total | number:2"></span></td>
                         <td><button ng-if="order.status===false" class="btn btn-warning" type="button" data-ng-click="pay();" name="order" id="{{order._id}}">立即支付</button>
                         <span ng-if="order.status===true">已成功支付</span></td>
                         <td><button ng-if="order.status===false" class="btn btn-danger del" type="button" data-ng-click="del();" name="order" id="{{order._id}}">删除</button></td>

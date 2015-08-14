@@ -55,7 +55,7 @@
 			</table>
 		</div>
 		<div class="od_footer form-group">
-			<div>商品数量：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total"></span></div>
+			<div>商品种类：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
 			<div>
 				<label class="form-label">备注：<span data-ng-bind="order.bz"></span></label>
 				<span></span><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz">

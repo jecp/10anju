@@ -42,7 +42,7 @@
                                 </tr>
                             </table>
                         </td>
-    				<td><span data-ng-bind="cart.total"></span></td>
+    				<td><span data-ng-bind="cart.total | number:2"></span></td>
                     <td><span ng-if="cart.order_status === true" class="text-muted">订单已提交</span></td>
                     <td>
 

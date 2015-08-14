@@ -55,7 +55,7 @@
 			</div>
 			<div class="row">
 				<div class="page-header"></div>
-				<div class="page-body">总计:&yen;<span data-ng-bind="cart.total"></span>
+				<div class="page-body">总计:&yen;<span data-ng-bind="cart.total | number:2">元</span>
 					<div class="fr" data-ng-controller="OrdersController">
 				        <form class="" data-ng-submit="submit()" novalidate>
 				            <fieldset>

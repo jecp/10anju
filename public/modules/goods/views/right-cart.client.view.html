@@ -31,7 +31,7 @@
       </li>
     </div>
     <div class="panel-footer" data-ng-controller="OrdersController">
-      总计:<span data-ng-bind="cart.detail.length"></span>种商品，合计&yen;<span data-ng-bind="cart.total">元。</span>
+      总计:<span data-ng-bind="cart.detail.length"></span>种商品，合计&yen;<span data-ng-bind="cart.total | number:2"></span>元。
       <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="付款" ng-click="submit()">
     </div>
   </div>
