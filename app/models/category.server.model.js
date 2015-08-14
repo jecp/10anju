@@ -17,6 +17,10 @@ var CategorySchema = new Schema({
 		required: 'Please fill Category name',
 		trim: true
 	},
+	subcat: [{
+		type:String,
+		unique: '子分类不可重复',
+	}],
 	created: {
 		type: Date,
 		default: Date.now

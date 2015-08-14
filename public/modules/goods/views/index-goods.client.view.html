@@ -1,4 +1,4 @@
-<section data-ng-controller="GoodsController">
+<section data-ng-controller="CartsController">
     <div class="row">
         <div class="col-md-3 pull-right">
 	        <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
@@ -15,56 +15,12 @@
 				</div>
 			</div>
 			<!-- <div class="mt20" ng-include="'modules/core/views/today-todos.client.view.html'"></div> -->
-          <div ng-if="authentication.user" data-ng-controller="CartsController" data-ng-init="find()">
-          	<div data-ng-repeat="cart in carts | limitTo:1 | filter: {'order_status': 'false'}" class="panel panel-default" ng-if="carts.length > 0">
-	            <div class="panel-heading">
-	              <div class="panel-title">购物篮</div>
-	            </div>
-	            <div class="">
-	              <li>
-	                <div class="container gl_detail" style="padding-right: 2px;padding-left: 2px;">
-	                  <table>
-	                    <tr data-ng-repeat="item in cart.detail">
-	                      <td>
-	                        <div><a href="/#!/goods/{{item.goods._id}}" class="right_subcat_list">
-	                        <img src="{{item.goods.main_img}}-260" alt="" class="good_detail_push" style="width:100%;">
-	                        <label ng-mouseover="expression"></label>
-	                        </a>
-	                        </div>
-	                      </td>
-	                      <td>
-	                        <div>
-	                          <a href="/#!/carts/{{cart._id}}">
-	                            <label for="" data-ng-bind="item.goods.title | limitTo:30" class="text-muted" style="font-size:4px;"></label><span>&yen;</span><span style="color:red;font-size: 10px;" data-ng-bind="item.goods.price | number:2"></span>
-	                          <label data-ng-bind="item.goods.delivery" class="badge badge-info" style="font-size:6px;background-color:green;"></label>                          
-	                          <label class="for_free" ng-if="item.goods.for_free===true">赠</label>
-	                          <label class="free_try" ng-if="item.goods.free_try===true">试</label>
-	                          </a>
-	                        </div>
-	                      </td>
-	                    </tr>
-	                  </table>
-	                </div>
-	              </li>
-	            </div>
-	            <div class="panel-footer" data-ng-controller="OrdersController">
-	              总计:<span data-ng-bind="cart.detail.length"></span>件商品，合计&yen;<span data-ng-bind="cart.total">元。</span>
-	              <input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-warning" value="付款" ng-click="submit()">
-	            </div>
-	          </div>
-          </div>
+			<div ng-include="'modules/goods/views/right-cart.client.view.html'"></div>
         </div>
-		<div class="col-md-9">
+		<div class="col-md-9" data-ng-controller="GoodsController">
 			<div class="mt20"></div>
-			<div class="mt20"></div>
-			<div class="good_detail_top_nav">
-				<ol class="breadcrumb">
-					<li><a href="/#!/goods">首页</a></li>
-					<li><a href="/#!/categories">分类</a></li>
-				</ol>
-			</div>
-			<div ng-include="'modules/goods/views/list-goods.client.view.html'" scope="" onload="find()"></div>
+			<div ng-include="'modules/core/views/navbar.client.view.html'"></div>
+			<div ng-include="'modules/goods/views/list-goods.client.view.html'" onload="find()"></div>
 		</div>
 	</div>
 </section>
-<!--  -->

@@ -1,39 +1,16 @@
-<section class="">
+<section>
     <div class="fl col-md-6 col-xs-6" data-ng-repeat="cat in categories | orderBy: goods.length">
         <div ng-if="cat.goods.length > 0" class="panel panel-default">
             <div class="panel-heading">
-                <span class="h5 panel-title text-right" data-ng-bind="cat.name"></span>
+                <a href="/#!/categories/{{cat._id}}"><span class="h5 panel-title text-right" data-ng-bind="cat.name"></span></a>
+                <a ng-repeat="item in cat.subcat | limitTo:5" href="/#!/goods/subcat/{{item}}"><span class="h6 text-success" data-ng-bind="item"></span>&nbsp;</a>
+                </li>
             </div>
-            <div class="panel-body" >
-                <div class="row good_list_all" >
-                    <li class="" role="listitem">
-                        <div data-ng-repeat="good in cat.goods | limitTo:4" class="grid-4 fl col-xs-6">
-                            <div class="">
-                                <div class="good_list_listitem">
-                                    <label>
-                                    <!-- <div class="mark"><span class="good_list_top m_ico"></span></div> -->
-                                        <div class="good_list_thumbnail">
-                                            <a href="/#!/goods/{{good._id}}">
-                                                <img src="{{good.main_img}}-260" class="good_list_img" alt="">
-                                            </a>
-                                        </div> 
-                                        <div class="good_list_detail">
-                                            <a href="/#!/goods/{{good._id}}">
-                                                <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
-                                            </a>
-                                            <div class="good_list_price">
-                                                <span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
-                                                <label class="for_free" ng-if="good.for_free===true">赠</label>
-                                                <label class="free_try" ng-if="good.free_try===true">试</label>
-                                                <span class="pull-right" data-ng-bind="good.delivery"></span>
-                                                <input type="hidden" name="amount" data-ng-model="good.amount" value="1">
-                                            </div>
-                                        </div>
-                                     </label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>                
+            <div class="panel-body">
+                <div class="row good_list_all">
+                  <div data-ng-repeat="good in cat.goods | limitTo:2" class="fl col-xs-6 col-md-6">
+                    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                  </div>
                 </div>
             </div>
             <div class="panel-footer text-right">

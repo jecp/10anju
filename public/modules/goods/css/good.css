@@ -52,7 +52,7 @@ padding:5px 0;
 }
 .good_list_all li{float:left;}
 .good_list_listitem{margin-top:22px;height:100%;border:1px solid #f4f4f4; margin-bottom: 6px;}
-.good_list_listitem :hover img{border: 1px solid #f69;}
+.good_list_listitem:hover {border: 1px solid #f69;}
 .good_list_listitem img{border: 1px solid #fff;height:100%;width:100%;overflow: hidden;}
 .grid-4{width:25%;}
 .gl_detail{width:100%;color:#ccc;border-bottom: 1px solid #ccc;}
@@ -62,7 +62,28 @@ padding:5px 0;
 .good_list_buy{font-size:15px;padding:5px;background-color: #375D1E;color:#000;}
 .good_list_cart{padding:5px;background-color: #F0A851;color:#000;}
 .good_list_img{max-width: 100%;overflow: hidden;}
-.good_list_price{margin-top: 2px;border-top: 1px dashed #ccc;}
+.good_list_price{width:95%;margin:0 auto;margin-top: 3px;border-top: 1px dashed #ccc;height:30px;}
+.buy_action{content:'';float:left;margin:0 auto;margin-top:5px;}
+.buy_button{
+    background-color: #F9AA34;
+    color:#FFF;
+    cursor: pointer;
+    line-height: 30px;
+    float: left;
+    text-align: center;
+    margin-right: 0px;
+    margin-top: 0px;
+    width: 80px;
+}
+.cart_button{
+    padding: 5px;
+    margin-right:-15px;
+    background-color:#F9AA34;
+    color:#fff;
+    text-align: center;
+    width:80px;
+}
+.btf{color:#FFF;}
 /* good_detail */
 .good_detail_up{margin-bottom: 20px;}
 /*.warp_good_detail_content{}*/

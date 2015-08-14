@@ -1,0 +1,31 @@
+<div class="good_list_listitem">
+	<label>
+		<div class="good_list_thumbnail">
+		    <a href="/#!/goods/{{good._id}}">
+		      <img src="{{good.main_img}}-260" class="good_list_img" alt="">
+		    </a>
+		</div>
+	    <div class="good_list_detail">
+	        <a href="/#!/goods/{{good._id}}">
+	          <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
+	        </a>
+			<div class="good_list_price">
+				<span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
+				<a href="/#!/help#for_free"><span class="for_free" ng-if="good.for_free===true">赠</span></a>
+				<a href="/#!/help#free_try"><label class="free_try" ng-if="good.free_try===true">试</label></a>
+				<span class="pull-right" data-ng-bind="good.delivery"></span>
+			</div>
+	        <div class="buy_action col-xs-12 row">
+	            <div class="col-md-6 col-xs-6 row buy_button" data-ng-controller="OrdersController">
+	            	<a class="btf" ng-click="buy()">购买</a>
+	            </div>
+	            <div class="col-md-6 col-xs-6 cart_button pull-right" data-ng-controller="CartsController">
+	                <a class="btf" ng-click="create()"><span>购物篮</span><em class="glyphicon glyphicon-shopping-cart"></em></a>
+	            </div>
+	            <div data-ng-show="error" class="text-danger">
+	                <strong data-ng-bind="error"></strong>
+	            </div>
+	        </div>
+	  	</div>
+	</label>
+</div>

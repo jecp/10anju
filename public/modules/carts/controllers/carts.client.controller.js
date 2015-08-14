@@ -7,7 +7,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 
 		// Create new Cart
 		$scope.create = function() {
-			// Create new Cart object			
+			// Create new Cart object
 			var date = new Date();
 			var created_day = date.getFullYear().toString() + (date.getMonth() + 1).toString() + date.getDate().toString();
 			var cartName = created_day + '-' + window.user.username + '-' + '的购物篮';

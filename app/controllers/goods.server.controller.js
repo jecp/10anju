@@ -26,13 +26,25 @@ exports.create = function(req, res) {
 	if(cate && cate.length === 24){
 		good.category = cate;
 		good.save(function (err,good){
-			Category.findOneAndUpdate({_id:cate},{$push:{goods:good._id}},function (err,category){
-				if(err) {
-					return res.status(400).send({
-						message: errorHandler.getErrorMessage(err)
+			Category.findOne({_id:cate,subcat:req.body.subcat},function (err,category){
+				if (err){console.log(err);}
+				else if(category){
+					category.update({$push:{good:good._id}}).exec(function (err){
+						if(err){console.log(err);}
+						else{
+							res.jsonp(good);
+						}
 					});
-				} else {
-					res.jsonp(good);
+				}else{
+					Category.findOneAndUpdate({_id:cate},{$push:{goods:good._id,subcat:good.subcat}},function (err,category){
+						if(err) {
+							return res.status(400).send({
+								message: errorHandler.getErrorMessage(err)
+							});
+						} else {
+							res.jsonp(good);
+						}
+					});
 				}
 			});
 		});
@@ -48,7 +60,7 @@ exports.create = function(req, res) {
 					if(err){
 						console.log(err);
 					} else {
-						category.update({$push:{goods:good._id}},function (err){
+						category.update({$push:{goods:good._id,subcat:good.subcat}},function (err){
 							if(err){console.log(err);}
 							else{
 								res.jsonp(good);
@@ -59,7 +71,8 @@ exports.create = function(req, res) {
 			}else{
 				var cateObj = new Category({
 					name: cate,
-					user: req.user
+					user: req.user,
+					subcat:req.body.subcat
 				});
 				cateObj.save(function (err,category){
 					if (err) {
