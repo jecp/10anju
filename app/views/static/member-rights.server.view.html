@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>{{title}}</title>
+	<meta name="keywords" content="{{keywords}}">
+	<meta name="description" content="{{description}}会员权益">
+	<style type="text/css">
+		nav {background-color: #ccc;}
+		.clearfix:after{
+			content: '';
+			display: block;
+			clear:both;
+		}
+		#banner{
+			background-color: transparent;
+			color: #fff;
+		}
+		ul{
+			margin:0;
+		}
+		nav ul {
+			list-style: none;
+			margin: 0;
+			float:right;
+		}
+		nav ul li, nav .logo{
+			display: inline-block;
+			line-height: 50px;
+			margin-right: 20px;
+		}
+		nav ul li a{
+			text-decoration: none;
+			display: inline-block;
+			height: inherit;
+			color: #fff;
+		}
+		.logo{
+			font-size:20px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			padding: 10px;
+		}
+		.logo a{
+			color: #fff;
+		}
+		#banner .inner{
+			max-width: 300px;
+			text-align: center;
+			margin:0 auto;
+			position: relative;
+			top:160px;
+		}
+		#banner .b1{
+			margin:0px;
+		}
+		button{
+			border:none;
+			background-color: rgba(0,0,0,0.5);
+			color:#eee;
+		}
+		#banner button{
+			padding:14px 40px;
+		}
+		#banner .inner .more{
+			margin-top: 280px;
+
+		}
+		.sub-heading
+		{
+			line-height: 30px;
+			margin:30px 0;
+		}
+		.green-section{
+			background-color: #089D80;
+			color:#fff;
+			text-align: center;
+			padding: 100px 0;
+		}
+		.green-section .hr{
+			color: #078494;
+			width:60%;
+		}
+		h2{
+			font-size: 30px;
+		}
+		h3{
+			font-size: 24px;
+		}
+		.hr{
+			width: 100%;
+			height: 2px;
+			margin:0 auto;
+		}
+		.icon-group{
+			margin-top: 20px;
+		}
+		.green-section .icon-group .icon{
+			display: inline-block;
+			background-color: #000;
+			width:80px;
+			height:80px;
+			transform:rotate(45deg);
+			margin:20px; 
+		}
+		.gray-section{
+			background-color:#28303A;
+			color:#fff;
+			margin:0 auto;
+		}
+		.gray-section .img-section{
+			width:45%;
+		}
+		.gray-section .text-section{
+			width:55%;
+		}
+		.img-section img{
+			width:100%;
+		}
+		.article-preview > div{
+			float:left;
+			font-size:0;
+		}
+		.article-preview:nth-child(odd){
+			background-color: rgba(255,255,255,0.05);
+		}
+		.article-preview:after {
+			content: '';
+			display: block;
+			clear:both;
+		}
+		.text-section{
+			position: relative;
+			text-align: center;
+			top:68px;
+			left:50px;
+		}
+		.text-section .*{
+			width:95%;
+		}
+		.text-section h2{
+			font-size:30px;
+		}
+		.text-section .sub-heading{
+			font-size:22px;
+
+		}
+		.text-section p{
+			font-size:18px;
+			letter-spacing: 1px;
+		}
+		.warpper{
+			max-width: 1080px;
+			margin:0 auto;
+		}
+		.purple-section{
+			padding: 80px;
+			background-color: #3F3965;
+			color: #fff;
+		}
+		.purple-section .heading-warpper{
+			text-align: center;
+		}
+		.purple-section .hr{
+			height:2px;
+			color: #3F3249;
+			width:60%;
+		}
+		.card-group {
+		}
+		.card{
+			float:left;
+			width:50%;
+			min-height: 300px;
+			border:1px solid #ccc;
+			-webkit-box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			box-sizing:border-box;
+			padding: 50px;
+			text-align: center;
+		}
+		.card p{
+			font-size: 18px;
+			letter-spacing: 1px;
+		}
+		.card:first-child{
+			background:rgba(0,0,0,0.04); 
+		}
+		.card:nth-child(1){
+			background:rgba(0,0,0,0.08); 
+		}
+		.card:nth-child(2){
+			background:rgba(0,0,0,0.12); 
+		}
+		.card:nth-child(3){
+			background:rgba(0,0,0,0.16); 
+		}
+		.card:nth-child(4){
+			background:rgba(0,0,0,0.20); 
+		}
+		footer {
+			background: #333;
+			color:#fff;
+			min-height: 200px;
+			text-align: center;
+			padding:50px;
+		}
+		ul.share-group{
+			display: block;
+			width:1080px;
+			margin: 0 auto;
+		}
+		.share-group li{
+			display: inline-block;
+			padding: 10px;
+		}
+		.copy{
+			padding-bottom: 20px;
+		}
+		.main-warpper{
+			background: #444 url('https://img.alicdn.com/tps/TB1pfG4IFXXXXc6XXXXXXXXXXXX.jpg');
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+		}
+		header{
+			background-color: rgba(0,0,0,0.3);
+		}
+	</style>
+	<link rel="stylesheet" href="//cdn.bootcss.com/normalize/3.0.3/normalize.css" />
+</head>
+<body>
+	<section>
+		<div class="main-warpper">
+			<header>
+				<nav style="background-color: transparent;height:50px;">
+					<div class="logo"><a href="">杂谈</a></div>
+					<ul>
+						<li><a href="" class="active">首页</a></li>
+						<li><a href="">3</a></li>
+						<li><a href="">2</a></li>
+						<li><a href="">3</a></li>
+						<li></li>
+					</ul>
+				</nav>
+				<div id="banner">
+					<div class="inner">
+						<h1>小穿</h1>
+						<p class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores ab reprehenderit libero laborum.</p>
+						<button>了解我</button>
+						<div class="more">
+							更多
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="content" style="margin-top:0px;">
+				<section class="green-section">
+					<div class="warpper">
+						<div>
+							<h2>标题</h2>
+							<div class="hr"></div>
+							<p class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						</div>
+						<div class="icon-group">
+							<span class="icon">item</span>
+							<span class="icon">item</span>
+							<span class="icon">item</span>
+						</div>
+					</div>
+				</section>
+				<section class="gray-section">
+					<div class="article-preview">
+						<div class="img-section">
+							<img src="http://www.mxwj365.com/upload/productdetayue/2013-11-04/650c7347-fcf8-46de-80bf-2bc48b8bd708.jpg" alt="">
+						</div>
+						<div class="text-section">
+							<h2>标题〜〜〜〜</h2>
+							<div class="sub-heading">fu biao ti~~~</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit odit eaque, quasi cum aliquam vitae voluptates, illum sit nobis dicta veniam hic dolorum blanditiis, rerum. Ab amet officiis voluptates impedit.</p>
+						</div>
+					</div>
+					<div class="article-preview">
+						<div class="text-section">
+							<h2>标题〜〜〜〜</h2>
+							div.
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit odit eaque, quasi cum aliquam vitae voluptates, illum sit nobis dicta veniam hic dolorum blanditiis, rerum. Ab amet officiis voluptates impedit.</p>
+						</div>
+						<div class="img-section">
+							<img src="http://www.mxwj365.com/upload/productdetayue/2013-11-04/650c7347-fcf8-46de-80bf-2bc48b8bd708.jpg" alt="">
+						</div>
+					</div>
+					<div class="article-preview">
+						<div class="img-section">
+							<img src="http://www.mxwj365.com/upload/productdetayue/2013-11-04/650c7347-fcf8-46de-80bf-2bc48b8bd708.jpg" alt="">
+						</div>
+						<div class="text-section">
+							<h2>标题〜〜〜〜</h2>
+							div.
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit odit eaque, quasi cum aliquam vitae voluptates, illum sit nobis dicta veniam hic dolorum blanditiis, rerum. Ab amet officiis voluptates impedit.</p>
+						</div>
+					</div>
+				</section>
+				<section class="purple-section">
+					<div class="heading-warpper">
+						<h2>标题</h2>
+						<div class="hr"></div>
+						<div class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti beatae, odit nesciunt illum sint tempore distinctio doloribus inventore incidunt repellat expedita, repellendus reprehenderit optio sunt sit nemo modi consequuntur culpa?</div>
+					</div>
+					<div class="card-group clearfix">
+						<div class="card">
+							<h2>标题</h2>
+							<h3 class="hr"></h3>
+							<div class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti beatae, odit nesciunt illum sint tempore distinctio doloribus inventore incidunt repellat expedita, repellendus reprehenderit optio sunt sit nemo modi consequuntur culpa?</div>
+						</div>
+						<div class="card">
+							<h2>标题</h2>
+							<h3 class="hr"></h3>
+							<div class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti beatae, odit nesciunt illum sint tempore distinctio doloribus inventore incidunt repellat expedita, repellendus reprehenderit optio sunt sit nemo modi consequuntur culpa?</div>
+						</div>
+						<div class="card">
+							<h2>标题</h2>
+							<h3 class="hr"></h3>
+							<div class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti beatae, odit nesciunt illum sint tempore distinctio doloribus inventore incidunt repellat expedita, repellendus reprehenderit optio sunt sit nemo modi consequuntur culpa?</div>
+						</div>
+						<div class="card">
+							<h2>标题</h2>
+							<h3 class="hr"></h3>
+							<div class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti beatae, odit nesciunt illum sint tempore distinctio doloribus inventore incidunt repellat expedita, repellendus reprehenderit optio sunt sit nemo modi consequuntur culpa?</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<footer>
+				<ul class="share-group">
+					<li>item</li>
+					<li>item</li>
+					<li>item</li>
+					<li>item</li>
+					<li>item</li>
+				</ul>
+				<div class="copy">
+					@一家
+				</div>
+			</footer>
+		</div>
+	</section>
+</body>
+</html>
