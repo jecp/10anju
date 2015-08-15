@@ -85,6 +85,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Forum
+ */
+exports.modify = function(req, res) {
+	var forumObj = req.body;
+	Forum.findOneAndUpdate({_id:forumObj._id},{subcat:forumObj.subcat,name:forumObj.name,title:forumObj.title,price:forumObj.price},function (err,forum) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(forum);
+		}
+	});
+};
+
+/**
  * Forum middleware
  */
 exports.forumByID = function(req, res, next, id) { 

@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, forums.hasAuthorization, users.adminRequired, forums.update)
 		.delete(users.requiresLogin, forums.hasAuthorization, users.adminRequired, forums.delete);
 
+	app.route('/forums/admin/list')
+		.get(users.requiresLogin, users.adminRequired, forums.list)
+		.post(users.requiresLogin, users.adminRequired, forums.modify);
+
 	// Finish by binding the Forum middleware
 	app.param('forumId', forums.forumByID);
 };

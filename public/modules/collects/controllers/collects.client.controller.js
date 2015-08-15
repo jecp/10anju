@@ -59,6 +59,15 @@ angular.module('collects').controller('CollectsController', ['$scope', '$http', 
 			$scope.collects = Collects.query();
 		};
 
+		// Admin list of Collects
+		$scope.list = function() {
+			$http.get('/collects/admin/list').success(function (response){
+				$scope.collects = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find User Collect
 		$scope.myCollect = function() {
 			var _collectId = $scope.user.collect;

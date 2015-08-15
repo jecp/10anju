@@ -24,6 +24,10 @@ angular.module('articles').config(['$stateProvider',
 		state('listArticles', {
 			url: '/articles',
 			templateUrl: 'modules/articles/views/list-articles.client.view.html'
+		}).
+		state('adminListArticles', {
+			url: '/articles/admin/list',
+			templateUrl: 'modules/articles/views/admin-list-articles.client.view.html'
 		});
 	}
 ]);

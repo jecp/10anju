@@ -20,6 +20,10 @@ angular.module('collects').config(['$stateProvider',
 		state('editCollect', {
 			url: '/collects/:collectId/edit',
 			templateUrl: 'modules/collects/views/edit-collect.client.view.html'
+		}).
+		state('adminListCollects', {
+			url: '/collects/admin/list',
+			templateUrl: 'modules/collects/views/admin-list-collects.client.view.html'
 		});
 	}
 ]);

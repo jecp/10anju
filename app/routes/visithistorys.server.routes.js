@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, visithistorys.hasAuthorization, visithistorys.update)
 		.delete(users.requiresLogin, visithistorys.hasAuthorization, visithistorys.delete);
 
+	app.route('/visithistorys/admin/list')
+		.get(users.requiresLogin, users.adminRequired, visithistorys.list)
+		.post(users.requiresLogin, users.adminRequired, visithistorys.modify);
+
 	// Finish by binding the Visithistory middleware
 	app.param('visithistoryId', visithistorys.visithistoryByID);
 };

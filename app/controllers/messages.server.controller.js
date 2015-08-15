@@ -85,6 +85,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Message
+ */
+exports.modify = function(req, res) {
+	var messageObj = req.body;
+	Message.findOneAndUpdate({_id:messageObj._id},{subcat:messageObj.subcat,name:messageObj.name,title:messageObj.title,price:messageObj.price},function (err,message) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(message);
+		}
+	});
+};
+
+/**
  * Message middleware
  */
 exports.messageByID = function(req, res, next, id) { 

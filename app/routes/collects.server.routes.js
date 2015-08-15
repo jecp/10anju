@@ -16,6 +16,10 @@ module.exports = function(app) {
 
 	app.route('/mycollect')
 		.post(collects.mycollect);
+
+	app.route('/collects/admin/list')
+		.get(users.requiresLogin, users.adminRequired, collects.list)
+		.post(users.requiresLogin, users.adminRequired, collects.modify);
 		
 	// Finish by binding the Collect middleware
 	app.param('collectId', collects.collectByID);

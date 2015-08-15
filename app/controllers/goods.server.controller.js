@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	Good = mongoose.model('Good'),
 	Category = mongoose.model('Category'),
 	User = mongoose.model('User'),
+	Visithistory = mongoose.model('Visithistory'),
 	_ = require('lodash');
 
 /**
@@ -243,6 +244,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Good
+ */
+exports.modify = function(req, res) {
+	var goodObj = req.body;
+	Good.findOneAndUpdate({_id:goodObj._id},{subcat:goodObj.subcat,name:goodObj.name,title:goodObj.title,price:goodObj.price},function (err,good) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(good);
+		}
+	});
+};
+
+/**
  * Good middleware
  */
 exports.goodByID = function(req, res, next, id) {
@@ -252,7 +270,8 @@ exports.goodByID = function(req, res, next, id) {
 	    return next;
 	  }
 	});
-	Good.findById(id).populate('user', 'displayName').populate('category','name').exec(function(err, good) {
+
+	Good.findById(id).populate('user', 'displayName').populate('category','name').exec(function (err, good) {
 		if (err) return next(err);
 		if (! good) return next(new Error('Failed to load Good ' + id));
 		req.good = good ;

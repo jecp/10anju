@@ -20,6 +20,10 @@ module.exports = function(app) {
 	app.route('/carts_goods_delete')
 		.post(users.requiresLogin, carts.deleteGoods);
 
+	app.route('/carts/admin/list')
+		.get(users.requiresLogin, users.adminRequired, carts.list)
+		.post(users.requiresLogin, users.adminRequired, carts.modify);
+
 	// Finish by binding the Cart middleware
 	app.param('cartId', carts.cartByID);
 };

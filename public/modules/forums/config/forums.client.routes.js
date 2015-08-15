@@ -20,6 +20,10 @@ angular.module('forums').config(['$stateProvider',
 		state('editForum', {
 			url: '/forums/:forumId/edit',
 			templateUrl: 'modules/forums/views/edit-forum.client.view.html'
+		}).
+		state('adminListForums', {
+			url: '/forums/admin/list',
+			templateUrl: 'modules/forums/views/admin-list-forums.client.view.html'
 		});
 	}
 ]);

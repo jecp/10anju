@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, categories.hasAuthorization, users.adminRequired, categories.update)
 		.delete(users.requiresLogin, categories.hasAuthorization, users.adminRequired, categories.delete);
 
+	app.route('/categories/admin/list')
+		.get(users.requiresLogin, users.adminRequired, categories.list)
+		.post(users.requiresLogin, users.adminRequired, categories.modify);
+
 	// Finish by binding the Category middleware
 	app.param('categoryId', categories.categoryByID);
 };

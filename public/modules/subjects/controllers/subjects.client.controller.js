@@ -8,7 +8,6 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Create new Subject
 		$scope.create = function() {
 			// Create new Subject object
-			console.log(document.getElementById(forum1).value);
 			
 			var subject = new Subjects ({
 				name: this.name,
@@ -65,6 +64,24 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Find a list of Subjects
 		$scope.find = function() {
 			$scope.subjects = Subjects.query();
+		};
+
+		// Admin list of Subjects
+		$scope.list = function() {
+			$http.get('/subjects/admin/list').success(function (response){
+				$scope.subjects = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Subject From admin list
+		$scope.modify = function() {
+			$http.post('/subjects/admin/list', this.subject).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Subject

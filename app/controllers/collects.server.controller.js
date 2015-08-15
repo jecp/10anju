@@ -301,6 +301,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Collect
+ */
+exports.modify = function(req, res) {
+	var collectObj = req.body;
+	Collect.findOneAndUpdate({_id:collectObj._id},{subcat:collectObj.subcat,name:collectObj.name,title:collectObj.title,price:collectObj.price},function (err,collect) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(collect);
+		}
+	});
+};
+
+/**
  *  My Collects
  */
 exports.mycollect = function (req,res){

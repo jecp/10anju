@@ -98,9 +98,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Edit list Good
 		$scope.edit = function() {
 			var good = $scope.good;
-			console.log($scope.good);
-			console.log($scope.good.edit);
-
 			good.$update(function() {
 				$location.path('goods/' + good._id);
 			}, function (errorResponse){
@@ -111,6 +108,24 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Find a list of Goods
 		$scope.find = function() {
 			$scope.goods = Goods.query();
+		};
+
+		// Admin list of Goods
+		$scope.list = function() {
+			$http.get('/goods/admin/list').success(function (response){
+				$scope.goods = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Good From admin list
+		$scope.modify = function() {
+			$http.post('/goods/admin/list', this.good).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find a list of Goods
@@ -177,4 +192,3 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		};
 	}
 ]);
-

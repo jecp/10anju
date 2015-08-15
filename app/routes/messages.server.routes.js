@@ -14,6 +14,10 @@ module.exports = function(app) {
 		// .put(users.requiresLogin, messages.hasAuthorization, messages.update)
 		.delete(users.requiresLogin, messages.hasAuthorization, messages.delete);
 
+	app.route('/messages/admin/list')
+		.get(users.requiresLogin, users.adminRequired, messages.list)
+		.post(users.requiresLogin, users.adminRequired, messages.modify);
+
 	// Finish by binding the Message middleware
 	app.param('messageId', messages.messageByID);
 };

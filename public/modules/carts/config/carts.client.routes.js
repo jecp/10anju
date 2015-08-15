@@ -24,6 +24,10 @@ angular.module('carts').config(['$stateProvider',
 		state('myCart', {
 			url: '/my/cart',
 			templateUrl: 'modules/carts/views/my-cart.client.view.html'
+		}).
+		state('adminListCarts', {
+			url: '/carts/admin/list',
+			templateUrl: 'modules/carts/views/admin-list-carts.client.view.html'
 		});
 	}
 ]);

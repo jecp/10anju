@@ -145,6 +145,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Subject
+ */
+exports.modify = function(req, res) {
+	var subjectObj = req.body;
+	Subject.findOneAndUpdate({_id:subjectObj._id},{subcat:subjectObj.subcat,name:subjectObj.name,title:subjectObj.title,price:subjectObj.price},function (err,subject) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(subject);
+		}
+	});
+};
+
+/**
  * Subject middleware
  */
 exports.subjectByID = function(req, res, next, id) { 

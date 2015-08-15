@@ -1,8 +1,8 @@
 'use strict';
 
 // Messages controller
-angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages',
-	function($scope, $stateParams, $location, Authentication, Messages) {
+angular.module('messages').controller('MessagesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Messages',
+	function($scope, $http, $stateParams, $location, Authentication, Messages) {
 		$scope.authentication = Authentication;
 
 		// Create new Message
@@ -54,6 +54,24 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
 		// Find a list of Messages
 		$scope.find = function() {
 			$scope.messages = Messages.query();
+		};
+
+		// Admin list of Messages
+		$scope.list = function() {
+			$http.get('/messages/admin/list').success(function (response){
+				$scope.messages = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Message From admin list
+		$scope.modify = function() {
+			$http.post('/messages/admin/list', this.message).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Message

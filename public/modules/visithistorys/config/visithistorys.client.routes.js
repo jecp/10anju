@@ -20,6 +20,10 @@ angular.module('visithistorys').config(['$stateProvider',
 		state('editVisithistory', {
 			url: '/visithistorys/:visithistoryId/edit',
 			templateUrl: 'modules/visithistorys/views/edit-visithistory.client.view.html'
+		}).
+		state('adminListVisithistorys', {
+			url: '/visithistorys/admin/list',
+			templateUrl: 'modules/visithistorys/views/admin-list-visithistorys.client.view.html'
 		});
 	}
 ]);

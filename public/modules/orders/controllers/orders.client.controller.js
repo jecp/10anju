@@ -133,6 +133,24 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			}
 		};
 
+		// Admin list of Orders
+		$scope.list = function() {
+			$http.get('/orders/admin/list').success(function (response){
+				$scope.orders = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Order From admin list
+		$scope.modify = function() {
+			$http.post('/orders/admin/list', this.order).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find a list of Orders
 		$scope.showBuyList = function() {
 			if($location.url() === '/orders/admin/list'){

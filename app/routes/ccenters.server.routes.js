@@ -20,6 +20,10 @@ module.exports = function(app) {
 	app.route('/my_ccenter')
 		.post(users.requiresLogin, ccenters.findU);
 
+	app.route('/ccenters/admin/list')
+		.get(users.requiresLogin, users.adminRequired, ccenters.list)
+		.post(users.requiresLogin, users.adminRequired, ccenters.modify);
+
 	// Finish by binding the Ccenter middleware
 	app.param('ccenterId', ccenters.ccenterByID);
 };

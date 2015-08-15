@@ -20,6 +20,10 @@ angular.module('ccenters').config(['$stateProvider',
 		state('editCcenter', {
 			url: '/ccenters/:ccenterId/edit',
 			templateUrl: 'modules/ccenters/views/edit-ccenter.client.view.html'
+		}).
+		state('adminListCcenters', {
+			url: '/ccenters/admin/list',
+			templateUrl: 'modules/ccenters/views/admin-list-ccenters.client.view.html'
 		});
 	}
 ]);

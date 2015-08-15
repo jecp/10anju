@@ -85,6 +85,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Visithistory
+ */
+exports.modify = function(req, res) {
+	var visithistoryObj = req.body;
+	Visithistory.findOneAndUpdate({_id:visithistoryObj._id},{subcat:visithistoryObj.subcat,name:visithistoryObj.name,title:visithistoryObj.title,price:visithistoryObj.price},function (err,visithistory) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(visithistory);
+		}
+	});
+};
+
+/**
  * Visithistory middleware
  */
 exports.visithistoryByID = function(req, res, next, id) { 

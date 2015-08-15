@@ -84,6 +84,23 @@ exports.list = function(req, res) {
 	});
 };
 
+/**
+ * Modify a Article
+ */
+exports.modify = function(req, res) {
+	var articleObj = req.body;
+	Article.findOneAndUpdate({_id:articleObj._id},{subcat:articleObj.subcat,name:articleObj.name,title:articleObj.title,price:articleObj.price},function (err,article) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(article);
+		}
+	});
+};
+
 
 /**
  * Article middleware

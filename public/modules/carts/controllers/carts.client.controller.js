@@ -73,6 +73,15 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			$scope.carts = Carts.query();
 		};
 
+		// Admin list of Carts
+		$scope.list = function() {
+			$http.get('/carts/admin/list').success(function (response){
+				$scope.carts = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Cart
 		$scope.findOne = function() {
 			$scope.cart = Carts.get({ 

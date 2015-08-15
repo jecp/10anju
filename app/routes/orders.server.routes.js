@@ -15,6 +15,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, orders.hasAuthorization,  orders.update)
 		.delete(users.requiresLogin, orders.hasAuthorization, orders.delete);
 
+	app.route('/orders/admin/list')
+		.get(users.requiresLogin, users.adminRequired, orders.list)
+		.post(users.requiresLogin, users.adminRequired, orders.modify);
+
 	app.route('/orders_goods')
 		.post(users.requiresLogin, orders.changeAmount);
 

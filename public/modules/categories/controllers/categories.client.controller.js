@@ -1,8 +1,8 @@
 'use strict';
 
 // Categories controller
-angular.module('categories').controller('CategoriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Categories',
-	function($scope, $stateParams, $location, Authentication, Categories) {
+angular.module('categories').controller('CategoriesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Categories',
+	function($scope, $http, $stateParams, $location, Authentication, Categories) {
 		$scope.authentication = Authentication;
 
 		// Create new Category
@@ -61,6 +61,15 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$sta
 				});
 			}			
 			$scope.categories = Categories.query();
+		};
+
+		// Admin list of Categories
+		$scope.list = function() {
+			$http.get('/categories/admin/list').success(function (response){
+				$scope.categories = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Category

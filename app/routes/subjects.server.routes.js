@@ -17,6 +17,10 @@ module.exports = function(app) {
 	app.route('/subjects_like')
 		.post(users.requiresLogin, subjects.like);
 
+	app.route('/subjects/admin/list')
+		.get(users.requiresLogin, users.adminRequired, subjects.list)
+		.post(users.requiresLogin, users.adminRequired, subjects.modify);
+
 	// Finish by binding the Subject middleware
 	app.param('subjectId', subjects.subjectByID);
 };

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Articles',
+	function($scope, $http, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
@@ -49,6 +49,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 
 		$scope.find = function() {
 			$scope.articles = Articles.query();
+		};
+
+		// Admin list of Goods
+		$scope.list = function() {
+			$http.get('/articles/admin/list').success(function (response){
+				$scope.articles = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		$scope.findOne = function() {

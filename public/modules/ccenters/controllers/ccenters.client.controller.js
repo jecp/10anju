@@ -70,6 +70,15 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 			$scope.ccenters = Ccenters.query();
 		};
 
+		// Admin list of Ccenters
+		$scope.list = function() {
+			$http.get('/ccenters/admin/list').success(function (response){
+				$scope.ccenters = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Ccenter
 		$scope.findOne = function() {
 			$scope.ccenter = Ccenters.get({ 

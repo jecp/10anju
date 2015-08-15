@@ -17,6 +17,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, admins.hasAuthorization, admins.update)
 		.delete(users.requiresLogin, admins.hasAuthorization, admins.delete);
 
+	app.route('/admins/admin/list')
+		.get(users.requiresLogin, users.adminRequired, admins.list)
+		.post(users.requiresLogin, users.adminRequired, admins.modify);
+
 	// Finish by binding the Admin middleware
 	app.param('adminId', admins.adminByID);
 };

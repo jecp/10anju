@@ -103,6 +103,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Admin
+ */
+exports.modify = function(req, res) {
+	var adminObj = req.body;
+	Admin.findOneAndUpdate({_id:adminObj._id},{subcat:adminObj.subcat,name:adminObj.name,title:adminObj.title,price:adminObj.price},function (err,admin) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(admin);
+		}
+	});
+};
+
+/**
  * Admin middleware
  */
 exports.adminByID = function(req, res, next, id) { 

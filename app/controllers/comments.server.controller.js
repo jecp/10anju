@@ -95,6 +95,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Comment
+ */
+exports.modify = function(req, res) {
+	var commentObj = req.body;
+	Comment.findOneAndUpdate({_id:commentObj._id},{subcat:commentObj.subcat,name:commentObj.name,title:commentObj.title,price:commentObj.price},function (err,comment) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(comment);
+		}
+	});
+};
+
+/**
  * Comment middleware
  */
 exports.commentByID = function(req, res, next, id) { 

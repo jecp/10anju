@@ -17,6 +17,9 @@ module.exports = function(app) {
 	app.route('/goods_like')
 		.post(users.requiresLogin, goods.like);
 
+	app.route('/goods/admin/list')
+		.get(users.requiresLogin, users.adminRequired, goods.list)
+		.post(users.requiresLogin, users.adminRequired, goods.modify);
 
 	app.route('/search').post(goods.results);
 

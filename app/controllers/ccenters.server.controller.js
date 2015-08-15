@@ -85,6 +85,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Ccenter
+ */
+exports.modify = function(req, res) {
+	var ccenterObj = req.body;
+	Ccenter.findOneAndUpdate({_id:ccenterObj._id},{subcat:ccenterObj.subcat,name:ccenterObj.name,title:ccenterObj.title,price:ccenterObj.price},function (err,ccenter) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(ccenter);
+		}
+	});
+};
+
+/**
  * List of Ccenters
  */
 exports.findU = function(req, res) {

@@ -20,6 +20,10 @@ angular.module('messages').config(['$stateProvider',
 		state('editMessage', {
 			url: '/messages/:messageId/edit',
 			templateUrl: 'modules/messages/views/edit-message.client.view.html'
+		}).
+		state('adminListMessages', {
+			url: '/messages/admin/list',
+			templateUrl: 'modules/messages/views/admin-list-messages.client.view.html'
 		});
 	}
 ]);

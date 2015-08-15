@@ -20,6 +20,10 @@ angular.module('comments').config(['$stateProvider',
 		state('editComment', {
 			url: '/comments/:commentId/edit',
 			templateUrl: 'modules/comments/views/edit-comment.client.view.html'
+		}).
+		state('adminListComments', {
+			url: '/comments/admin/list',
+			templateUrl: 'modules/comments/views/admin-list-comments.client.view.html'
 		});
 	}
 ]);

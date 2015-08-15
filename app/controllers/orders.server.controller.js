@@ -103,11 +103,8 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 	var userId = req.user._id;
-	console.log(req.user);
-	console.log(req.user.roles);
 	if (req.user){
 		if(_.contains(req.user.roles,'admin')){
-			console.log(1);
 			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -118,7 +115,6 @@ exports.list = function(req, res) {
 				}
 			});
 		}else{
-			console.log(2);
 			Order.find({user:userId}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -130,6 +126,23 @@ exports.list = function(req, res) {
 			});
 		}
 	}
+};
+
+/**
+ * Modify a Order
+ */
+exports.modify = function(req, res) {
+	var orderObj = req.body;
+	Order.findOneAndUpdate({_id:orderObj._id},{subcat:orderObj.subcat,name:orderObj.name,title:orderObj.title,price:orderObj.price},function (err,order) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(order);
+		}
+	});
 };
 
 /**

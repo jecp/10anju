@@ -1,8 +1,8 @@
 'use strict';
 
 // Forums controller
-angular.module('forums').controller('ForumsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Forums',
-	function($scope, $stateParams, $location, Authentication, Forums) {
+angular.module('forums').controller('ForumsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Forums',
+	function($scope, $http, $stateParams, $location, Authentication, Forums) {
 		$scope.authentication = Authentication;
 
 		// Create new Forum
@@ -59,6 +59,24 @@ angular.module('forums').controller('ForumsController', ['$scope', '$stateParams
 		// Find a list of Forums
 		$scope.find = function() {
 			$scope.forums = Forums.query();
+		};
+
+		// Admin list of Forums
+		$scope.list = function() {
+			$http.get('/forums/admin/list').success(function (response){
+				$scope.forums = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Forum From admin list
+		$scope.modify = function() {
+			$http.post('/forums/admin/list', this.forum).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Forum

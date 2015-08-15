@@ -1,8 +1,8 @@
 'use strict';
 
 // Comments controller
-angular.module('comments').controller('CommentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Comments',
-	function($scope, $stateParams, $location, Authentication, Comments) {
+angular.module('comments').controller('CommentsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments',
+	function($scope, $http, $stateParams, $location, Authentication, Comments) {
 		$scope.authentication = Authentication;
 
 		// Create new Comment
@@ -56,6 +56,15 @@ angular.module('comments').controller('CommentsController', ['$scope', '$statePa
 		// Find a list of Comments
 		$scope.find = function() {
 			$scope.comments = Comments.query();
+		};
+
+		// Admin list of Comments
+		$scope.list = function() {
+			$http.get('/comments/admin/list').success(function (response){
+				$scope.comments = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Comment

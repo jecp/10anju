@@ -25,7 +25,7 @@ angular.module('goods').config(['$stateProvider',
 			url: '/goods/:goodId/edit',
 			templateUrl: 'modules/goods/views/edit-good.client.view.html'
 		}).
-		state('adminList',{
+		state('adminListGoods',{
 			url: '/goods/admin/list',
 			templateUrl: 'modules/goods/views/admin-list-goods.client.view.html'
 		});

@@ -1,8 +1,8 @@
 'use strict';
 
 // Admins controller
-angular.module('admins').controller('AdminsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Admins',
-	function($scope, $stateParams, $location, Authentication, Admins) {
+angular.module('admins').controller('AdminsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Admins',
+	function($scope, $http, $stateParams, $location, Authentication, Admins) {
 		$scope.authentication = Authentication;
 
 		// Create new Admin
@@ -64,6 +64,15 @@ angular.module('admins').controller('AdminsController', ['$scope', '$stateParams
 		// Find a list of Admins
 		$scope.find = function() {
 			$scope.admins = Admins.query();
+		};
+
+		// Admin list of Admins
+		$scope.list = function() {
+			$http.get('/admins/admin/list').success(function (response){
+				$scope.admins = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Admin

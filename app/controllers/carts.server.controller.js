@@ -188,6 +188,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Cart
+ */
+exports.modify = function(req, res) {
+	var cartObj = req.body;
+	Cart.findOneAndUpdate({_id:cartObj._id},{subcat:cartObj.subcat,name:cartObj.name,title:cartObj.title,price:cartObj.price},function (err,cart) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(cart);
+		}
+	});
+};
+
+/**
  * Cart middleware
  */
 exports.cartByID = function(req, res, next, id) { 

@@ -20,6 +20,10 @@ angular.module('subjects').config(['$stateProvider',
 		state('editSubject', {
 			url: '/subjects/:subjectId/edit',
 			templateUrl: 'modules/subjects/views/edit-subject.client.view.html'
+		}).
+		state('adminListSubjects', {
+			url: '/subjects/admin/list',
+			templateUrl: 'modules/subjects/views/admin-list-subjects.client.view.html'
 		});
 	}
 ]);

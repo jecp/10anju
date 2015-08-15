@@ -1,8 +1,8 @@
 'use strict';
 
 // Visithistorys controller
-angular.module('visithistorys').controller('VisithistorysController', ['$scope', '$stateParams', '$location', 'Authentication', 'Visithistorys',
-	function($scope, $stateParams, $location, Authentication, Visithistorys) {
+angular.module('visithistorys').controller('VisithistorysController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Visithistorys',
+	function($scope, $http, $stateParams, $location, Authentication, Visithistorys) {
 		$scope.authentication = Authentication;
 
 		// Create new Visithistory
@@ -54,6 +54,24 @@ angular.module('visithistorys').controller('VisithistorysController', ['$scope',
 		// Find a list of Visithistorys
 		$scope.find = function() {
 			$scope.visithistorys = Visithistorys.query();
+		};
+
+		// Admin list of Visithistorys
+		$scope.list = function() {
+			$http.get('/visithistorys/admin/list').success(function (response){
+				$scope.visithistorys = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+		
+		// Update Visithistory From admin list
+		$scope.modify = function() {
+			$http.post('/visithistorys/admin/list', this.visithistory).success(function (response){
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Visithistory

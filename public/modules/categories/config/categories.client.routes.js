@@ -20,6 +20,10 @@ angular.module('categories').config(['$stateProvider',
 		state('editCategory', {
 			url: '/categories/:categoryId/edit',
 			templateUrl: 'modules/categories/views/edit-category.client.view.html'
+		}).
+		state('adminListCategories', {
+			url: '/categories/admin/list',
+			templateUrl: 'modules/categories/views/admin-list-categories.client.view.html'
 		});
 	}
 ]);

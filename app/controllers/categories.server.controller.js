@@ -99,6 +99,23 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Modify a Category
+ */
+exports.modify = function(req, res) {
+	var categoryObj = req.body;
+	Category.findOneAndUpdate({_id:categoryObj._id},{subcat:categoryObj.subcat,name:categoryObj.name,title:categoryObj.title,price:categoryObj.price},function (err,category) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(category);
+		}
+	});
+};
+
+/**
  * Category middleware
  */
 exports.categoryByID = function(req, res, next, id) { 
