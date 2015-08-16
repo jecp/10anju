@@ -12,8 +12,10 @@ var mongoose = require('mongoose'),
  * Create a Porder
  */
 exports.create = function(req, res) {
+	console.log(req.body.goods);
 	var porder = new Porder(req.body);
 	porder.user = req.user;
+	porder.goods = req.body.goods;
 
 	porder.save(function(err) {
 		if (err) {
@@ -88,7 +90,7 @@ exports.list = function(req, res) {
  * Porder middleware
  */
 exports.porderByID = function(req, res, next, id) { 
-	Porder.findById(id).populate('user', 'displayName').exec(function(err, porder) {
+	Porder.findById(id).populate('user', 'username mobile roomNum buyer_email').exec(function(err, porder) {
 		if (err) return next(err);
 		if (! porder) return next(new Error('Failed to load Porder ' + id));
 		req.porder = porder ;

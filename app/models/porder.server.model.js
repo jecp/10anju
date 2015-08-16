@@ -20,6 +20,26 @@ var PorderSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	updated: {
+		type: Date,
+		default: Date.now
+	},
+	goods:[{
+		name:{type:String},
+		spec:{type:String},
+		price:{type:Number},
+		amount:{type:Number}
+	}],
+	total:{
+		type:Number
+	},
+	bz:{
+		type:String
+	},
+	status:{
+		type:Boolean,
+		default: false
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

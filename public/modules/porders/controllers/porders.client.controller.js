@@ -8,8 +8,12 @@ angular.module('porders').controller('PordersController', ['$scope', '$statePara
 		// Create new Porder
 		$scope.create = function() {
 			// Create new Porder object
+			var total = this.goods.price * this.goods.amount;
 			var porder = new Porders ({
-				name: this.name
+				name: this.name,
+				goods:this.goods,
+				total:total,
+				bz:this.bz
 			});
 
 			// Redirect after save

@@ -3,21 +3,21 @@
 	<div class="order_detail">
 		<div class="od_top">
 			<div class="odt_title col-md-8">
-				<h3 data-ng-bind="order.name"></h3>
-				<span class="label label-default" data-ng-bind="order.status"></span>
+				<h3 data-ng-bind="porder.name"></h3>
+				<span class="label label-default" data-ng-bind="porder.status"></span>
 			</div>
 		</div>
 		<div class="od_header" data-ng-controller="CcentersController" ng-init="findU()">
-			<div><div class="col-xs-3">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div></div>
-			<div><div class="col-xs-3">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div></div>
-			<div><div class="col-xs-6">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div></div>
+			<div><div class="col-xs-3">姓名：<span class="text-muted" data-ng-bind="porder.user.username"></span></div></div>
+			<div><div class="col-xs-3">联系方式：<span class="text-muted" data-ng-bind="porder.user.mobile"></span></div></div>
+			<div><div class="col-xs-6">购买时间：<span class="text-muted" data-ng-bind="porder.created | date:'medium'"></span></div></div>
 			<div><div class="col-xs-3">社区名称：<span class="text-muted" data-ng-bind="ccenter.name"></span></div></div>
 			<div><div class="col-xs-3">社区地址：<span class="text-muted" data-ng-bind="ccenter.province"></span>/<span class="text-muted" data-ng-bind="ccenter.city"></span></div></div>
-			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="order.user.roomNum"></span></div></div>
-			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div></div>
-			<div><div class="col-xs-3">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div></div>
-			<div><div class="col-xs-3">支付方式：<span class="text-muted" ng-if="order.pay_method === "alipay"">支付宝</span><span class="text-muted" ng-if="order.pay_method === cash">现金</span><span class="text-muted" ng-if="order.pay_method === pos">pos刷卡</span></div></div>
-			<div><div class="col-xs-12">支付编号：<span ng-if="order.trade_no !== undefined" class="text-muted" data-ng-bind="order.trade_no"></span><span ng-if="order.pos_no !== undefined" class="text-muted" data-ng-bind="order.pos_no"></span></div></div>
+			<div><div class="col-xs-6">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="porder.user.roomNum"></span></div></div>
+			<div><div class="col-xs-3">订单编号：<span class="text-muted" data-ng-bind="porder._id"></span></div></div>
+			<div><div class="col-xs-3">支付状态：<span class="text-muted" ng-if="porder.status === false">未付款</span><span class="text-muted" ng-if="porder.status === true">已付款</span></div></div>
+			<div><div class="col-xs-3">支付方式：<span class="text-muted" ng-if="porder.pay_method === "alipay"">支付宝</span><span class="text-muted" ng-if="porder.pay_method === cash">现金</span><span class="text-muted" ng-if="porder.pay_method === pos">pos刷卡</span></div></div>
+			<div><div class="col-xs-12">支付编号：<span ng-if="porder.trade_no !== undefined" class="text-muted" data-ng-bind="porder.trade_no"></span><span ng-if="porder.pos_no !== undefined" class="text-muted" data-ng-bind="porder.pos_no"></span></div></div>
 			
 		</div>
 		<div class="od_table">
@@ -27,14 +27,13 @@
 		    			<!-- <th>id</th> -->
 		    			<th>图片</th>
 		    			<th>商品名称</th>
-		    			<th>数量</th>
+		    			<th>规格/数量</th>
 		    			<th>单价</th>
-		                <th>赠品/试用品</th>
 		    			<th>实付</th>
 		    			<th>删除</th>
 		    		</tr>
 				</thead>
-				<tbody data-ng-repeat="item in order.detail">
+				<tbody data-ng-repeat="item in porder.goods">
 					<tr>
 						<!-- <td><span></span></td> -->
 						<td class="col-md-3 col-xs-3">
@@ -42,29 +41,27 @@
 		                        <img ng-src="{{item.goods.main_img}}" alt="" class="thumbnail" style="max-width:60px;">
 		                    </a>
 						</td>
-						<td><span data-ng-bind="item.goods.title"></span></td>
-						<td><input type="text" data-ng-model="item.amount">
-							<button ng-if="order.status === false" type="btn btn-primary" ng-click="changeAmount()" >更新</button></td>
+						<td><span data-ng-bind="item.name"></span></td>
+						<td><span data-ng-bind="item.spec"></span><input type="text" data-ng-model="item.amount">
+							<button ng-if="porder.status !== false" type="btn btn-primary" ng-click="changeAmount()" >更新</button></td>
 						<td><span data-ng-bind="item.price"></span></td>
-		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
 						<td><span data-ng-bind="item.amount*item.price"></span></td>
 						<td><button ng-if="order.status === false" class="btn btn-danger del" type="button" data-ng-click="delOrder();" id="{{item._id}}">删除</button></td>
-						<!-- 怎么样保证total收集到的数据实时呢？ -->
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="od_footer form-group">
-			<div>商品种类：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
+			<div>商品种类：<span data-ng-bind="porder.goods.length"></span>实付金额：<span data-ng-bind="porder.total | number:2"></span>元</div>
 			<div>
-				<label class="form-label">备注：<span data-ng-bind="order.bz"></span></label>
-				<span></span><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz">
+				<label class="form-label">备注：<span data-ng-bind="porder.bz"></span></label>
+				<span></span><input ng-if="porder.status !== false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz">
 			</div>
-			
+			<div ng-if="porder.status === false"><span class="label label-warning">您的专享订单正在审核中……</span></div>
 		</div>
 		<div class="ft10"></div>
 		<div class="od_submit" ng-controller="OrdersController">
-			<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()" target="_blank">确认提交</a></div>
+			<div ng-if="porder.status !== false" ><a type="submit" class="btn btn-default" ng-click="pay()" target="_blank">确认提交</a></div>
 		</div>
 	</div>
 </section>
