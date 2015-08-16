@@ -19,6 +19,7 @@ exports.create = function(req, res) {
 	var order = new Order(req.body);
 	var order_detail = new Array();
 	var _detail;
+	console.log(req.body);
 
 	if (req.body.detail){// If come from cart, change to order
 		for (var i =0; i < req.body.detail.length; i++){

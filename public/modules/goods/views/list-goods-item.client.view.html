@@ -10,7 +10,7 @@
 	          <h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
 	        </a>
 			<div class="good_list_price">
-				<span>&yen;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
+				<span style="color:#888;font-size: 12px;">&yen;&nbsp;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
 				<a href="/#!/help#for_free"><span class="for_free" ng-if="good.for_free===true">赠</span></a>
 				<a href="/#!/help#free_try"><label class="free_try" ng-if="good.free_try===true">试</label></a>
 				<span class="pull-right" data-ng-bind="good.delivery"></span>

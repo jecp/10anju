@@ -10,20 +10,34 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			// Create new Order object
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
-			console.log(window.user.username);
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
 			
-			var goodsObj = new Array();
-			for (var i=0; i < this.carts.length; i++){
-				goodsObj.push(this.carts[i]);
-				console.log(goodsObj);
+			console.log($location.url());
+
+			if ($location.url() === '/orders/create'){
+				var order = new Orders ({
+					name:this.name,
+					goods:this.goods,
+					spec:this.goods.spec,
+					price:this.goods.price,
+					amount:this.goods.amount,
+					total:this.total
+				});
+			} else {
+
+				var goodsObj = new Array();
+				for (var i=0; i < this.carts.length; i++){
+					goodsObj.push(this.carts[i]);
+					console.log(goodsObj);
+				}
+				var order = new Orders ({
+					name: orderName,
+					total: this.carts.length,
+					checkout: this.carts.checkout,
+					goods:goodsObj
+				});
 			}
-			var order = new Orders ({
-				name: orderName,
-				total: this.carts.length,
-				checkout: this.carts.checkout,
-				goods:goodsObj
-			});
+			
 
 			// Redirect after save
 			order.$save(function(response) {
