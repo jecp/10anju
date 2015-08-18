@@ -8,6 +8,7 @@
 						<div class="" style="margin-top:-5px;margin:15px;">
 							<label class="label label-default" data-ng-bind="subject.subcat"></label>&nbsp;
 						<span class="h3" data-ng-bind="subject.title"></span>
+						<a href="/#!/subjects/edit/{{subject._id}}" class="btn btn-primary" ng-if="subject.user._id === userObj.user._id">编辑</a>
 						
 						</div>
 					</div>
@@ -30,10 +31,10 @@
 								</div>
 								<div class="pull-right" ng-if="subject.updated === null" >创建于<span class="text-muted" data-ng-bind="subject.created | date:'medium'"></span></div>
 								<div class="pull-right" ng-if="subject.updated !== null">修改于<span class="text-muted" data-ng-bind="subject.updated | date:'medium'"></span></div>
-								<div class="row col-md-12 col-xs-12">
+								<div class="row col-md-12 col-xs-12" ng-if="subject.user._id === userObj.user._id">
 									<accordion>
-										<accordion-group ng-show="subject.user._id === userObj.user._id" is-open="status.FirstOpen" is-disabled="status.isDisabled">
-											<accordion-heading>编辑</accordion-heading><div data-ng-include="'/modules/subjects/views/edit-subject.client.view.html'"></div>
+										<accordion-group is-open="status.FirstOpen" is-disabled="status.isDisabled">
+											<accordion-heading>快捷编辑</accordion-heading><div data-ng-include="'/modules/subjects/views/edit-subject.client.view.html'"></div>
 										</accordion-group>
 									</accordion>
 								</div>

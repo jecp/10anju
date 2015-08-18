@@ -11,7 +11,7 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 			var comment = new Comments ({
 				title: this.title,
 				subject: this.subject._id,
-				content: this.content
+				content: $(".editormd-preview-container").html()
 			});
 
 			// Redirect after save
@@ -56,6 +56,15 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 		// Find a list of Comments
 		$scope.find = function() {
 			$scope.comments = Comments.query();
+		};
+
+		// User count of Comments
+		$scope.userCount = function() {
+			$http.get('/comments/userCount').success(function (response){
+				$scope.userCommentsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Admin list of Comments

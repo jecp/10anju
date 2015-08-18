@@ -24,6 +24,10 @@ angular.module('subjects').config(['$stateProvider',
 		state('adminListSubjects', {
 			url: '/subjects/admin/list',
 			templateUrl: 'modules/subjects/views/admin-list-subjects.client.view.html'
+		}).
+		state('fullEditSubjects', {
+			url: '/subjects/edit/:subjectId',
+			templateUrl: 'modules/subjects/views/fulledit-subject.client.view.html'
 		});
 	}
 ]);

@@ -38,6 +38,8 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var article = req.article;
+	console.log(req.body);
+	console.log(req.body._content);
 
 	article = _.extend(article, req.body);
 
@@ -48,6 +50,26 @@ exports.update = function(req, res) {
 			});
 		} else {
 			res.json(article);
+		}
+	});
+};
+
+/**
+ * Fulledit a Article
+ */
+exports.fulledit = function(req, res) {
+	var _updated = Date.now(),
+		_subcat = req.body.article.subcat,
+		_title = req.body.article.title,
+		_content = req.body._content;
+
+	Article.findOneAndUpdate({_id:req.body.article._id},{updated:_updated,subcat:_subcat,title:_title,content:_content},function (err,article){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.send(article);
 		}
 	});
 };

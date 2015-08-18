@@ -17,25 +17,52 @@ exports.create = function(req, res) {
 	var subject = new Subject(req.body);
 	subject.user = req.user;
 	subject.updated = subject.created = Date.now();
-	console.log('body'+ req.body.forum);
+	var f = req.body.f;
+	console.log(f);
 
-	if (req.body.forum){
-		subject.save(function(err) {
+	if (f && f.length === 24){
+		subject.forum = f;
+
+		subject.save(function (err,subject) {
 			if (err) {
-				console.log(err);
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
 				res.jsonp(subject);
-				User.findOneAndUpdate({_id:req.user._id},{$push:{subject:subject._id}},function (err){
-					if (err) {console.log(err);} 
-				});
 				Forum.findOneAndUpdate({_id:req.body.forum},{$inc:{pv:1},$push:{subject:subject._id}},function (err){
 					if (err) {console.log(err);} 
 				});
 			}
 		});		
+	} else{
+		Forum.findOne({name:f},function (err,forum){
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else if(forum) {
+				subject = new Subject(req.body);
+				subject.forum = forum._id;
+				subject.user = req.user;
+				subject.save(function (err,subject) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						res.jsonp(subject);
+						forum.update({$inc:{pv:1},$push:{subject:subject._id}},function (err){
+							if (err) {console.log(err);} 
+						});
+					}
+				});
+			} else {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage('对不起，您没有权限新建论坛版块！')
+				});
+			}
+		})
 	}
 };
 
@@ -65,6 +92,25 @@ exports.update = function(req, res) {
 	});
 };
 
+/**
+ * Fulledit a Subject
+ */
+exports.fulledit = function(req, res) {
+	var _updated = Date.now(),
+		_subcat = req.body.subject.subcat,
+		_title = req.body.subject.title,
+		_content = req.body._content;
+
+	Subject.findOneAndUpdate({_id:req.body.subject._id},{updated:_updated,subcat:_subcat,title:_title,content:_content},function (err,subject){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.send(subject);
+		}
+	});
+};
 
 /**
  * Like a Subject
@@ -110,7 +156,21 @@ exports.like = function(req, res) {
 	}
 };
 
+/**
+ * count of User Subjects
+ */
+exports.userCount = function (req,res){
 
+	Subject.count({user:req.user._id}, function (err,count){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(count);
+		}
+	})
+};
 
 /**
  * Delete an Subject

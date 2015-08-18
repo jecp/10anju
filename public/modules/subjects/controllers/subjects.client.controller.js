@@ -8,13 +8,14 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Create new Subject
 		$scope.create = function() {
 			// Create new Subject object
-			
+			var _content = $(".editormd-preview-container").html();
+
 			var subject = new Subjects ({
 				name: this.name,
-				forum: this.forum,
+				f: this.forum,
 				title: this.title,
 				subcat: this.subcat,
-				content: this.content
+				content: _content
 			});
 
 			// Redirect after save
@@ -59,7 +60,20 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-		};		
+		};
+
+		// Fulledit existing Subject
+		$scope.fulledit = function() {
+			var subject = $scope.subject;
+			var _content = $(".editormd-preview-container").html()
+
+			$http.post('/subjects/fulledit', {subject,_content}).success(function (response){
+				$location.path('subjects/' + response._id);
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};	
+
 
 		// Find a list of Subjects
 		$scope.find = function() {
@@ -74,7 +88,16 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 				$scope.error = response.message;
 			});
 		};
-		
+
+		// User count of Subjects
+		$scope.userCount = function() {
+			$http.get('/subjects/userCount').success(function (response){
+				$scope.userSubjectsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Update Subject From admin list
 		$scope.modify = function() {
 			$http.post('/subjects/admin/list', this.subject).success(function (response){

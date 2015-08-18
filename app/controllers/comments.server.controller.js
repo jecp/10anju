@@ -95,6 +95,22 @@ exports.list = function(req, res) {
 };
 
 /**
+ *  count of User comments 
+ */
+exports.userCount = function (req,res){
+
+	Comment.count({user:req.user._id}, function (err,count){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(count);
+		}
+	})
+};
+
+/**
  * Modify a Comment
  */
 exports.modify = function(req, res) {

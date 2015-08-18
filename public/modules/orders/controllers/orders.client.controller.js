@@ -8,6 +8,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 		// Create new Order
 		$scope.create = function() {
 			// Create new Order object
+			var order;
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
@@ -15,7 +16,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			console.log($location.url());
 
 			if ($location.url() === '/orders/create'){
-				var order = new Orders ({
+				order = new Orders ({
 					name:this.name,
 					goods:this.goods,
 					spec:this.goods.spec,
@@ -30,7 +31,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 					goodsObj.push(this.carts[i]);
 					console.log(goodsObj);
 				}
-				var order = new Orders ({
+				order = new Orders ({
 					name: orderName,
 					total: this.carts.length,
 					checkout: this.carts.checkout,

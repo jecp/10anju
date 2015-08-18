@@ -29,3 +29,13 @@ exports.about = function(req, res) {
 		request: req
 	});
 };
+
+/**
+ * Module dependencies.
+ */
+exports.textarea = function(req, res) {
+	res.render('static/textarea', {
+		user: req.user || null,
+		request: req
+	});
+};

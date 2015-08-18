@@ -1,35 +1,55 @@
+<link rel="stylesheet" href="lib/editor.md/examples/css/style.css" />
+<link rel="stylesheet" href="lib/editor.md/css/editormd.css" />
+<script src="lib/editor.md/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width   : "100%",
+            height  : 480,
+            syncScrolling : "single",
+            path    : "../lib/editor.md/"
+        });                        
+    });
+</script>
+
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1>Edit Article</h1>
-	</div>
-	<div class="col-md-12">
-		<form name="articleForm" class="form-horizontal" data-ng-submit="update(articleForm.$valid)" novalidate>
-			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid}">
-					<label class="control-label" for="title">Title</label>
-					<div class="controls">
-						<input name="title" type="text" data-ng-model="article.title" id="title" class="form-control" placeholder="Title" required>
-					</div>
-					<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
-						<p ng-show="articleForm.title.$error.required" class="text-danger">Title is required</p>
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.content.$invalid}">
-					<label class="control-label" for="content">Content</label>
-					<div class="controls">
-						<textarea name="content" data-ng-model="article.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
-					</div>
-					<div ng-show="submitted && articleForm.content.$invalid" class="help-block">
-						<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Update" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+	<div class="col-md-12 col-xs-12 mt20">
+		<div class="col-md-8 col-xs-8">
+			<div class="page-header">
+				<h1>Edit Article</h1>
+			</div>
+			<div class="col-md-12">
+				<form name="articleForm" class="form-horizontal" novalidate>
+					<fieldset>
+						<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid}">
+							<div class="controls">
+								<input name="title" type="text" data-ng-model="article.title" id="title" class="form-control" placeholder="Title" required>
+							</div>
+							<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+								<p ng-show="articleForm.title.$error.required" class="text-danger">Title is required</p>
+							</div>
+						</div>
+						<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.content.$invalid}">
+							<div class="controls" id="test-editormd">
+								<textarea name="content" data-ng-model="article.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+							</div>
+							<div ng-show="submitted && articleForm.content.$invalid" class="help-block">
+								<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Update" class="btn btn-default" ng-click="fulledit()">
+						</div>
+						<div data-ng-show="error" class="text-danger">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-4 col-xs-4">
+			<div ng-bind-html="article.content"></div>
+		</div>
 	</div>
 </section>

@@ -21,6 +21,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, users.adminRequired, articles.list)
 		.post(users.requiresLogin, users.adminRequired, articles.modify);
 
+	app.route('/articles/fulledit')
+		.post(users.requiresLogin, articles.fulledit);
+
 	// Finish by binding the article middleware
 	app.param('articleId', articles.articleByID);
 };
