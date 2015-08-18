@@ -1,4 +1,4 @@
-<section data-ng-controller="GoodsController" data-ng-init="findOne()" ng-show="good">
+<section data-ng-controller="GoodsController" data-ng-init="findOne()">
 	<div class="row">
 		<div class="col-md-9">
 			<!-- 分类导航及标题 -->
@@ -30,11 +30,11 @@
 								<div class="good_detail_sharezone">
 									<!-- <div class="col-xs-12">分享到</div> -->
 									<div class="col-xs-6">
-										<a id="J_AddFavorite" href="javascript:;" data-aldurl="/#!/goods/like/:good._id" class="favorite"><i></i><span>收藏商品</span></a>
+										<a id="J_AddFavorite" href="javascript:;" data-aldurl="/#!/goods/like/:good._id" class="favorite"><i class="glyphicon glyphicon-star"></i><span>收藏商品</span></a>
 									</div>
 									<div class="col-xs-6">
 										<a href="/#!/goods_like/{{good._id}}" ng-click="like()">
-											<span class="glyphicon glyphicon-star">关注<span data-ng-bind="good.like" class="text-muted"></span></span>
+											<span class="glyphicon glyphicon-eye-open">关注<span data-ng-bind="good.like" class="text-muted"></span></span>
 										</a>
 									</div>
 								</div>
@@ -165,7 +165,7 @@
 			<!-- header end -->
 			<div class="good_detail_nav_content">
 				<div class="detail_attr">
-					<dl>
+					<dl ng-if="good.suitable">
 						<dt>适宜人群</dt>
 						<dd><span data-ng-repeat="item in good.suitable">
 								<a href="#">
@@ -174,7 +174,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl>
+					<dl ng-if="good.feature">
 						<dt>功效</dt>
 						<dd><span data-ng-repeat="item in good.feature">
 								<a href="#">
@@ -183,7 +183,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl>
+					<dl ng-if="good.therapy">
 						<dt>适用疾病</dt>
 						<dd><span data-ng-repeat="item in good.therapy">
 								<a href="#">
@@ -192,7 +192,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl>
+					<dl ng-if="good.avoid">
 						<dt>禁忌</dt>
 						<dd><span>
 								<a href="#">
@@ -219,19 +219,19 @@
 								<p class="good_detail_text_14px" ng-bind-html="good.nutrition"></p>
 							</div>
 						</tab>
-						<tab>
+						<tab ng-if="good.recipes">
 							<tab-heading class="panel-heading">家常菜谱</tab-heading>
 							<div class="good_detail_shiyongfangfa">
 								<p class="good_detail_text_14px" ng-bind-html="good.recipes"></p>
 							</div>
 						</tab>
-						<tab>
+						<tab ng-if="good.collection">
 							<tab-heading class="panel-heading">健康搭配</tab-heading>
 							<div class="good_detail_collection">
 								<p class="good_detail_text_14px" ng-bind-html="good.collection"></p>
 							</div>
 						</tab>
-						<tab>
+						<tab ng-if="good.wiki">
 							<tab-heading class="panel-heading">小百科</tab-heading>
 							<div class="good_detail_wiki">
 								<p class="good_detail_text_14px" ng-bind-html="good.wiki"></p>
@@ -295,18 +295,18 @@
 				<ul class="breadcrumb text-right">精彩推荐<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 				<!-- accordion begin -->
 				<accordion close-others="oneAtATime">
-					<accordion-group ng-show="good.wiki !== null" is-open="status.FirstOpen" is-disabled="status.isDisabled">
+					<accordion-group ng-if="good.wiki !== null" is-open="status.FirstOpen" is-disabled="status.isDisabled">
 						<accordion-heading>小百科</accordion-heading>{{good.wiki}}
 					</accordion-group>
-					<accordion-group ng-show="good.suitable.length > 0" is-open="status.open">
+					<accordion-group ng-if="good.suitable.length > 0" is-open="status.open">
 						<accordion-heading>适宜人群
 						</accordion-heading><a href="" data-ng-repeat="item in good.suitable"><label for=""><span>&nbsp;{{item}}&nbsp;</span></label></a>
 					</accordion-group>
-					<accordion-group ng-show="good.therapy.length > 0" is-open="status.open">
+					<accordion-group ng-if="good.therapy.length > 0" is-open="status.open">
 						<accordion-heading>适用疾病
 						</accordion-heading><a href="" data-ng-repeat="item in good.therapy"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
 					</accordion-group>
-					<accordion-group ng-show="good.feature.length > 0" is-open="status.close">
+					<accordion-group ng-if="good.feature.length > 0" is-open="status.close">
 						<accordion-heading>功效
 						</accordion-heading><a href="" data-ng-repeat="item in good.feature"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
 					</accordion-group>
@@ -319,7 +319,7 @@
 					<div class="good_subcat_list" data-ng-init="listSubcat()">
 						<li data-ng-repeat="item in goods | filter:good.subcat">
 							<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
-								<img src="{{item.main_img}}-260" alt="" class="thumbnail good_detail_push">
+								<img src="{{item.main_img}}-260" alt="" class="thumbnail">
 								<label for="" data-ng-bind="item.title" class="h5"></label>
 							</a>
 						</li>

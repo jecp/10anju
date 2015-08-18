@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Cart = mongoose.model('Cart'),
+	Category = mongoose.model('Category'),
 	Good = mongoose.model('Good'),
 	_ = require('lodash');
 /**
@@ -174,7 +175,7 @@ exports.list = function(req, res) {
 		var userId = req.user._id;
 
 		if (userId) {
-			Cart.find({user:userId}).sort('-created').populate('detail.goods', 'main_img price spec weight origin delivery sale title for_free free_try').exec(function(err, carts) {
+			Cart.find({user:userId}).sort('-created').populate('detail.goods', 'category subcat main_img price spec weight origin delivery sale name title for_free free_try sold pv').exec(function(err, carts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
