@@ -285,7 +285,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			var _gdetail = this.order.detail;
 
 			$http.post('/order_submit',{order_detail:_odetail,goodId:_gdetail,bz:$scope.bz}).success(function (response){
-				window.href(response,'_blank');
+				window.href(response);
 			}).error(function (response){
 				$scope.error = response.message;
 			});
