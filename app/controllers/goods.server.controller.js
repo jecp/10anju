@@ -20,9 +20,9 @@ exports.create = function(req, res) {
 	var cate = req.body.cate;
 
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
-	good.img = req.body.img ? req.body.img.split(',') : ',';
-	good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
-	good.feature = req.body.feature? req.body.feature.split(',') : ',';
+	good.img = req.body.img ? req.body.img.split(',') : '';
+	good.therapy = req.body.therapy ? req.body.therapy.split(',') : '';
+	good.feature = req.body.feature? req.body.feature.split(',') : '';
 
 	if(cate && cate.length === 24){
 		good.category = cate;
