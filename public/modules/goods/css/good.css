@@ -71,12 +71,13 @@ padding:5px 0;
     line-height: 30px;
     float: left;
     text-align: center;
-    margin-right: 8px;
+    margin-right: 0;
     margin-top: 0;
     width: 50%;
 }
 .cart_button{
-    padding: 5px;
+    padding: 1px;
+    line-height: 30px;
     margin-right:-15px;
     background-color:#F9AA34;
     color:#fff;
