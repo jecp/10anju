@@ -79,7 +79,6 @@ exports.list = function(req, res) {
 			});
 		} else {
 			res.jsonp(ccenters);
-			console.log(ccenters);
 		}
 	});
 };

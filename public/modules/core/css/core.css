@@ -20,15 +20,14 @@
 .mt20{margin-top:20px; }
 
 a{text-decoration:none; }
-a:hover {
-	color:#FF538C;text-decoration: none;
-}
+a:hover {color:#FF538C;text-decoration: none;}
 
 /* help center css */
 header, nav, article, section, aside, footer, figure {
 	display:block
 }
-
+.hc_left{text-align: left;line-height:25px;}
+.hc_center{padding-top: 25px;padding-left: 30px;}
 /* my_left */
 .my_left{background-color: #fbfbfb;margin-top:35px;}
 
@@ -43,7 +42,5 @@ header, nav, article, section, aside, footer, figure {
 
 /* protocal_head */
 .protocal_head{height: 40px;border-top: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;background-color: #fafafa;box-shadow: 1px 1px 2px #f7f7f7;}
-
 .errorMessage{margin:0 auto;height:400px;width:60%;margin:200px;}
-
 .od_header{padding-top: 15px;content: '';}
