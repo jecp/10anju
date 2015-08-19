@@ -30,12 +30,3 @@ exports.about = function(req, res) {
 	});
 };
 
-/**
- * Module dependencies.
- */
-exports.textarea = function(req, res) {
-	res.render('static/textarea', {
-		user: req.user || null,
-		request: req
-	});
-};

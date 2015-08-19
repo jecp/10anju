@@ -6,5 +6,4 @@ module.exports = function(app) {
 	app.route('/').get(core.index);
 	app.route('/member-rights').get(core.member_rights);
 	app.route('/about').get(core.about);
-	app.route('/textarea').get(core.textarea);
 };
