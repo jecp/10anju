@@ -1,19 +1,55 @@
 <section data-ng-controller="PordersController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Porders</h1>
-    </div>
     <div class="list-group">
-        <a data-ng-repeat="porder in porders" data-ng-href="#!/porders/{{porder._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="porder.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="porder.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="porder.name"></h4>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!porders.$resolved || porders.length">
-    	No Porders yet, why don't you <a href="/#!/porders/create">create one</a>?
+        <!-- table begin -->
+        <div class="od_table">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>商品概要</th>
+                        <th>应付</th>
+                        <th>状态</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="porder in porders">
+                    <tr>
+                        <td><a href="/#!/porders/{{porder._id}}"><h5 data-ng-bind="porder.name"></h5><h6 data-ng-bind="porder.created | date:'medium'"></h6></a>
+                        <a href="/#!/ccenters/{{}}"><span data-ng-bind="porder.user.ccenter.name"></span></a>
+                        </td>
+                        <td class="">
+                            <table>
+                                <tr data-ng-repeat="g in porder.detail">
+                                <div>
+                                    <td>
+                                        <div class="fl">
+                                            <a href="/#!/goods/{{g.goods._id}}">
+                                                <img ng-src="{{g.goods.main_img}}-64" alt="" class="thumbnail">
+                                            </a>
+                                        </div>
+                                        <div class="">
+                                            <div class="detail">
+                                                <h5 data-ng-bind="g.goods.title"></h5>
+                                                <div>
+                                                    <span>&yen;</span><span data-ng-bind="g.goods.price"></span>
+                                                    <label class="for_free" ng-if="g.goods.for_free===true">赠</label>
+                                                    <label class="free_try" ng-if="g.goods.free_try===true">试</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                        
+                                </div>
+                                </tr> 
+                            </table>
+                        </td>
+                        <td><span data-ng-bind="porder.total | number:2"></span></td>
+                        <td><button ng-if="porder.status===false" class="btn btn-warning" type="button" data-ng-click="pay();" name="porder" id="{{porder._id}}">立即支付</button>
+                        <span ng-if="porder.status===true">已成功支付</span></td>
+                        <td><button ng-if="porder.status===false" class="btn btn-danger del" type="button" data-ng-click="del();" name="porder" id="{{porder._id}}">删除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

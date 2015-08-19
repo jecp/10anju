@@ -20,6 +20,10 @@ angular.module('porders').config(['$stateProvider',
 		state('editPorder', {
 			url: '/porders/:porderId/edit',
 			templateUrl: 'modules/porders/views/edit-porder.client.view.html'
+		}).
+		state('adminListPorders', {
+			url:'/porders/admin/list',
+			templateUrl: 'modules/porders/views/admin-list-porders.client.view.html'
 		});
 	}
 ]);

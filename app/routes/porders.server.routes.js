@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, porders.hasAuthorization, porders.update)
 		.delete(users.requiresLogin, porders.hasAuthorization, porders.delete);
 
+	app.route('/porders/admin/list')
+		.get(users.requiresLogin, users.adminRequired, porders.list)
+		.post(users.requiresLogin, users.adminRequired, porders.modify);
+
 	// Finish by binding the Porder middleware
 	app.param('porderId', porders.porderByID);
 };

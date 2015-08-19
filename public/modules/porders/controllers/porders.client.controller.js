@@ -1,8 +1,8 @@
 'use strict';
 
 // Porders controller
-angular.module('porders').controller('PordersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Porders',
-	function($scope, $stateParams, $location, Authentication, Porders) {
+angular.module('porders').controller('PordersController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Porders',
+	function($scope, $http, $stateParams, $location, Authentication, Porders) {
 		$scope.authentication = Authentication;
 
 		// Create new Porder
@@ -58,6 +58,15 @@ angular.module('porders').controller('PordersController', ['$scope', '$statePara
 		// Find a list of Porders
 		$scope.find = function() {
 			$scope.porders = Porders.query();
+		};
+
+		// Admin list of Porders
+		$scope.list = function() {
+			$http.get('/porders/admin/list').success(function (response){
+				$scope.porders = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
 		};
 
 		// Find existing Porder

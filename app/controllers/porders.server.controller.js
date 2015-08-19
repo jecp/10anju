@@ -87,6 +87,52 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Porders
+ */
+exports.list = function(req, res) {
+	var userId = req.user._id;
+	if (req.user){
+		if(_.contains(req.user.roles,'admin')){
+			Porder.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, porders) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(porders);
+				}
+			});
+		}else{
+			Porder.find({user:userId}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function(err, porders) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(porders);
+				}
+			});
+		}
+	}
+};
+
+/**
+ * Modify a Porder
+ */
+exports.modify = function(req, res) {
+	var porderObj = req.body;
+	Porder.findOneAndUpdate({_id:porderObj._id},{subcat:porderObj.subcat,name:porderObj.name,title:porderObj.title,price:porderObj.price},function (err,porder) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(porder);
+		}
+	});
+};
+
+/**
  * Porder middleware
  */
 exports.porderByID = function(req, res, next, id) { 

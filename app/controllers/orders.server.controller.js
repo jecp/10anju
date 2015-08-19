@@ -10,7 +10,6 @@ var mongoose = require('mongoose'),
 	Good = mongoose.model('Good'),
 	Ccenter = mongoose.model('Ccenter'),
 	_ = require('lodash');
-	// alipay = require('./alipay/alipay.config');
 
 /**
  * Create a Order
@@ -19,7 +18,6 @@ exports.create = function(req, res) {
 	var order = new Order(req.body);
 	var order_detail = new Array();
 	var _detail;
-	console.log(req.body);
 
 	if (req.body.detail){// If come from cart, change to order
 		for (var i =0; i < req.body.detail.length; i++){
@@ -136,7 +134,6 @@ exports.modify = function(req, res) {
 	var orderObj = req.body;
 	Order.findOneAndUpdate({_id:orderObj._id},{subcat:orderObj.subcat,name:orderObj.name,title:orderObj.title,price:orderObj.price},function (err,order) {
 		if (err) {
-			console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
