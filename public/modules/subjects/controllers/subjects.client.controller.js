@@ -8,7 +8,7 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Create new Subject
 		$scope.create = function() {
 			// Create new Subject object
-			var _content = $(".editormd-preview-container").html();
+			var _content = $('.editormd-preview-container').html();
 
 			var subject = new Subjects ({
 				name: this.name,
@@ -55,7 +55,6 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 
 			subject.$update(function (response) {
 				$scope.subject = response;
-				alert('更新成功');
 				$location.path('subjects');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -64,10 +63,9 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 
 		// Fulledit existing Subject
 		$scope.fulledit = function() {
-			var subject = $scope.subject;
-			var _content = $(".editormd-preview-container").html()
+			var _content = $('.editormd-preview-container').html();
 
-			$http.post('/subjects/fulledit', {subject,_content}).success(function (response){
+			$http.post('/subjects/fulledit', {subject:$scope.subject,content:_content}).success(function (response){
 				$location.path('subjects/' + response._id);
 			}).error(function(response){
 				$scope.error = response.message;

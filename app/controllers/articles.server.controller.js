@@ -14,6 +14,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var article = new Article(req.body);
 	article.user = req.user;
+	article.tags = req.body.tags ? req.body.tags.split(',') : '';
 
 	article.save(function(err) {
 		if (err) {
@@ -38,9 +39,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var article = req.article;
-	console.log(req.body);
-	console.log(req.body._content);
-
 	article = _.extend(article, req.body);
 
 	article.save(function(err) {
@@ -57,14 +55,18 @@ exports.update = function(req, res) {
 /**
  * Fulledit a Article
  */
-exports.fulledit = function(req, res) {
+exports.fulledit = function(req, res) {	
+	console.log(req.body.article.tags.toString());
+	console.log(req.body);
 	var _updated = Date.now(),
 		_subcat = req.body.article.subcat,
 		_title = req.body.article.title,
-		_content = req.body._content;
+		_content = req.body.content,
+		_tags = req.body.article.tags ? req.body.article.tags.toString().split(',') : '';
 
-	Article.findOneAndUpdate({_id:req.body.article._id},{updated:_updated,subcat:_subcat,title:_title,content:_content},function (err,article){
+	Article.findOneAndUpdate({_id:req.body.article._id},{updated:_updated,subcat:_subcat,title:_title,content:_content,tags:_tags},function (err,article){
 		if (err) {
+			console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});

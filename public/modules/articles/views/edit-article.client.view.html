@@ -22,8 +22,21 @@
 			<div class="col-md-12">
 				<form name="articleForm" class="form-horizontal" novalidate>
 					<fieldset>
+						<div class="form-group col-md-6">
+						    <label for="subcat" class="control-label col-xs-4 col-md-4">分类:</label>
+						    <div class="controls col-xs-8 col-md-8">
+						        <input disabled="disabled" type="text" name="subcat" data-ng-model="article.subcat" id="subcat" placeholder="分类" class="form-control" required>
+						    </div>
+						</div>
+						<div class="form-group col-md-6">
+						    <label for="tags" class="control-label col-xs-4 col-md-4">标签:</label>
+						    <div class="controls col-xs-8 col-md-8">
+						        <input type="text" name="tags" data-ng-model="article.tags" id="tags" placeholder="标签，如超过一个，请以,分隔" class="form-control" required>
+						    </div>
+						</div>
 						<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid}">
-							<div class="controls">
+							<label for="title" class="control-label col-xs-2 col-md-2">标签:</label>
+							<div class="controls col-xs-10 col-md-10">
 								<input name="title" type="text" data-ng-model="article.title" id="title" class="form-control" placeholder="Title" required>
 							</div>
 							<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
@@ -39,7 +52,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Update" class="btn btn-default" ng-click="fulledit()">
+							<input type="submit" value="更新" class="btn btn-default" ng-click="fulledit()">
 						</div>
 						<div data-ng-show="error" class="text-danger">
 							<strong data-ng-bind="error"></strong>

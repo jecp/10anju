@@ -107,7 +107,7 @@ exports.userCount = function (req,res){
 		} else {
 			res.jsonp(count);
 		}
-	})
+	});
 };
 
 /**

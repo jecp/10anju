@@ -16,7 +16,7 @@
           </div>             
         </div>
       </tab>
-      <tab data-ng-repeat="cat in categories | orderBy:'goods.length'">
+      <tab data-ng-repeat="cat in categories | orderBy:'-goods.length'">
         <tab-heading>
           <span data-ng-bind="cat.name"></span>
         </tab-heading>

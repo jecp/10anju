@@ -71,9 +71,9 @@ padding:5px 0;
     line-height: 30px;
     float: left;
     text-align: center;
-    margin-right: 0px;
-    margin-top: 0px;
-    width: 80px;
+    margin-right: 8px;
+    margin-top: 0;
+    width: 50%;
 }
 .cart_button{
     padding: 5px;
@@ -81,7 +81,7 @@ padding:5px 0;
     background-color:#F9AA34;
     color:#fff;
     text-align: center;
-    width:80px;
+    width:50%;
 }
 .btf{color:#FFF;}
 /* good_detail */

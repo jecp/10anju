@@ -62,7 +62,7 @@ exports.create = function(req, res) {
 					message: errorHandler.getErrorMessage('对不起，您没有权限新建论坛版块！')
 				});
 			}
-		})
+		});
 	}
 };
 
@@ -99,7 +99,7 @@ exports.fulledit = function(req, res) {
 	var _updated = Date.now(),
 		_subcat = req.body.subject.subcat,
 		_title = req.body.subject.title,
-		_content = req.body._content;
+		_content = req.body.content;
 
 	Subject.findOneAndUpdate({_id:req.body.subject._id},{updated:_updated,subcat:_subcat,title:_title,content:_content},function (err,subject){
 		if (err) {
@@ -169,7 +169,7 @@ exports.userCount = function (req,res){
 		} else {
 			res.jsonp(count);
 		}
-	})
+	});
 };
 
 /**

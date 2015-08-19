@@ -5,7 +5,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
-			var _content = $(".editormd-preview-container").html();
+			var _content = $('.editormd-preview-container').html();
 			var article = new Articles({
 				title: this.title,
 				subcat: this.subcat,
@@ -40,7 +40,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 
 		$scope.update = function() {
 			var article = $scope.article;
-			var _content = $(".editormd-preview-container").html();
+			var _content = $('.editormd-preview-container').html();
 
 			article.$update(function() {
 				$location.path('articles/' + article._id);
@@ -51,10 +51,10 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 
 		// Fulledit existing Article
 		$scope.fulledit = function() {
-			var article = $scope.article;
-			var _content = $(".editormd-preview-container").html()
+			var article = this.article;
+			var _content = $('.editormd-preview-container').html();
 
-			$http.post('/articles/fulledit', {article,_content}).success(function (response){
+			$http.post('/articles/fulledit', {article:article,content:_content}).success(function (response){
 				$location.path('articles/' + response._id);
 			}).error(function(response){
 				$scope.error = response.message;

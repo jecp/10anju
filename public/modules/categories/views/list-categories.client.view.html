@@ -1,5 +1,5 @@
 <section>
-    <div class="fl col-md-6 col-xs-6" data-ng-repeat="cat in categories | orderBy: 'goods.length'">
+    <div class="fl col-md-6 col-xs-6" data-ng-repeat="cat in categories | orderBy: '-goods.length'">
         <div ng-if="cat.goods.length > 0" class="panel panel-default">
             <div class="panel-heading">
                 <a href="/#!/categories/{{cat._id}}"><span class="h5 panel-title text-right" data-ng-bind="cat.name"></span></a>

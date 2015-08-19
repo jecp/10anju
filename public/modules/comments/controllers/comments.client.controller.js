@@ -11,7 +11,7 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 			var comment = new Comments ({
 				title: this.title,
 				subject: this.subject._id,
-				content: $(".editormd-preview-container").html()
+				content: $('.editormd-preview-container').html()
 			});
 
 			// Redirect after save

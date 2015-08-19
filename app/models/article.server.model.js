@@ -36,6 +36,9 @@ var ArticleSchema = new Schema({
 	subcat: {
 		type: String
 	},
+	tags:[{
+		type:String
+	}],
 	pv:{
 		type:Number,
 		default:0
