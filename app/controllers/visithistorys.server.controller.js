@@ -132,6 +132,8 @@ exports.vh_log = function(req, res, next) {
 	var logObj = new Visithistory(req.headers),
 		areaObj;
 
+	console.log('=========nginx=======\n'+req.headers['x-forwarded-for'])
+
 	logObj.user = (req.user!=='undefined') ? req.user : '';
 	logObj.sessionID = req.sessionID;
 	logObj.originalUrl = req.originalUrl;
