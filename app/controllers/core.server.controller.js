@@ -4,6 +4,15 @@
  * Module dependencies.
  */
 exports.index = function(req, res) {
+
+	//console.log(req);
+	console.log(req.connection.remoteAddress);
+	var ip = req.headers['x-forwarded-for'] || 
+		req.connection.remoteAddress || 
+	    req.socket.remoteAddress ||
+	    req.connection.socket.remoteAddress;
+	console.log(ip);
+
 	res.render('index', {
 		user: req.user || null,
 		request: req

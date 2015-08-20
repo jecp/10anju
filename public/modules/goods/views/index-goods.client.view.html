@@ -1,5 +1,5 @@
 <section data-ng-controller="CartsController">
-    <div class="row">
+    <div class="row" data-ng-controller="VisithistorysController" ng-init="vs_log()">
         <div class="col-md-3 pull-right">
 	        <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
 			<div class="mt20">

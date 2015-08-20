@@ -4,6 +4,9 @@
 angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
 	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
+		// $http.post('http://ip.taobao.com/service/getIpInfo2.php').success(function (err,res,body){
+		// 	console.log(body);
+		// });
 
 		// Create new Good
 		$scope.create = function() {
