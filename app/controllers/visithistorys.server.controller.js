@@ -74,7 +74,7 @@ exports.delete = function(req, res) {
  * List of Visithistorys
  */
 exports.list = function(req, res) { 
-	Visithistory.find().sort('-created').populate('user', 'userame avatar').exec(function(err, visithistorys) {
+	Visithistory.find().sort('-created').limit(50).populate('user', 'userame avatar').exec(function(err, visithistorys) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -131,21 +131,19 @@ exports.vh_log = function(req, res, next) {
 
 	var logObj = new Visithistory(req.headers),
 		areaObj;
-	console.log(req.headers['x-forwarded-for'])
-	console.log('=========nginx=======\n'+req.headers['x-forwarded-for'])
-
+	
 	logObj.user = (req.user!=='undefined') ? req.user : '';
 	logObj.sessionID = req.sessionID;
 	logObj.originalUrl = req.originalUrl;
 	logObj.method = req.method;
 	logObj.res_locals_url = req.res.locals.url;
 	logObj.https = req.headers.https;
-	var ip = req.headers['x-forwarded-for'] || 
+	var ip = (req.headers['x-forwarded-for'].split(',')[0]) || 
 		req.connection.remoteAddress || 
 	    req.socket.remoteAddress ||
 	    req.connection.socket.remoteAddress;
-	console.log(logObj.remoteAddress);
 	logObj.remoteAddress = ip;
+
 	logObj.user_agent = req.headers['user-agent'];
 	logObj.customOs = req.headers['user-agent'].split(') ')[0]+')';
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
