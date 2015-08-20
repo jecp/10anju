@@ -1,22 +1,23 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var forums = require('../../app/controllers/forums.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller'),
+		forums = require('../../app/controllers/forums.server.controller');
 
 	// Forums Routes
 	app.route('/forums')
-		.get(forums.list)
-		.post(users.requiresLogin, users.adminRequired, forums.create);
+		.get(visithistory.vh_log, forums.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, forums.create);
 
 	app.route('/forums/:forumId')
-		.get(forums.read)
-		.put(users.requiresLogin, forums.hasAuthorization, users.adminRequired, forums.update)
-		.delete(users.requiresLogin, forums.hasAuthorization, users.adminRequired, forums.delete);
+		.get(visithistory.vh_log, forums.read)
+		.put(users.requiresLogin, visithistory.vh_log, forums.hasAuthorization, users.adminRequired, forums.update)
+		.delete(users.requiresLogin, visithistory.vh_log, forums.hasAuthorization, users.adminRequired, forums.delete);
 
 	app.route('/forums/admin/list')
-		.get(users.requiresLogin, users.adminRequired, forums.list)
-		.post(users.requiresLogin, users.adminRequired, forums.modify);
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, forums.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, forums.modify);
 
 	// Finish by binding the Forum middleware
 	app.param('forumId', forums.forumByID);

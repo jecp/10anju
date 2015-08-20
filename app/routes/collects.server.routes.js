@@ -1,25 +1,26 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var collects = require('../../app/controllers/collects.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller'),
+		collects = require('../../app/controllers/collects.server.controller');
 
 	// Collects Routes
 	app.route('/collects')
-		.get(collects.list)
-		.post(users.requiresLogin, collects.create);
+		.get(visithistory.vh_log, collects.list)
+		.post(users.requiresLogin, visithistory.vh_log, collects.create);
 
 	app.route('/collects/:collectId')
-		.get(collects.read)
-		.put(users.requiresLogin, collects.hasAuthorization, collects.update)
-		.delete(users.requiresLogin, collects.hasAuthorization, collects.delete);
+		.get(visithistory.vh_log, collects.read)
+		.put(users.requiresLogin, visithistory.vh_log, collects.hasAuthorization, collects.update)
+		.delete(users.requiresLogin, visithistory.vh_log, collects.hasAuthorization, collects.delete);
 
 	app.route('/mycollect')
-		.post(collects.mycollect);
+		.post(visithistory.vh_log, collects.mycollect);
 
 	app.route('/collects/admin/list')
-		.get(users.requiresLogin, users.adminRequired, collects.list)
-		.post(users.requiresLogin, users.adminRequired, collects.modify);
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, collects.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, collects.modify);
 		
 	// Finish by binding the Collect middleware
 	app.param('collectId', collects.collectByID);

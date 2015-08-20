@@ -7,29 +7,30 @@ var passport = require('passport');
 
 module.exports = function(app) {
 	// User Routes
-	var users = require('../../app/controllers/users.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller');
 
 	// Setting up the users profile api
-	app.route('/users/me').get(users.me);
-	app.route('/users').put(users.update);
-	app.route('/users/accounts').delete(users.removeOAuthProvider);
+	app.route('/users/me').get(visithistory.vh_log, users.me);
+	app.route('/users').put(visithistory.vh_log, users.update);
+	app.route('/users/accounts').delete(visithistory.vh_log, users.removeOAuthProvider);
 
 	// Setting up the users password api
-	app.route('/users/password').post(users.changePassword);
-	app.route('/auth/forgot').post(users.forgot);
-	app.route('/auth/reset/:token').get(users.validateResetToken);
-	app.route('/auth/reset/:token').post(users.reset);
+	app.route('/users/password').post(visithistory.vh_log, users.changePassword);
+	app.route('/auth/forgot').post(visithistory.vh_log, users.forgot);
+	app.route('/auth/reset/:token').get(visithistory.vh_log, users.validateResetToken);
+	app.route('/auth/reset/:token').post(visithistory.vh_log, users.reset);
 
 	// Register in an ccenter
-	app.route('/users_ccenter/').post(users.register);
+	app.route('/users_ccenter/').post(visithistory.vh_log, users.register);
 
 	// User count
 	// app.route('/user_count').get(users.myCount);
 
 	// Setting up the users authentication api
-	app.route('/auth/signup').post(users.signup);
-	app.route('/auth/signin').post(users.signin);
-	app.route('/auth/signout').get(users.signout);
+	app.route('/auth/signup').post(visithistory.vh_log, users.signup);
+	app.route('/auth/signin').post(visithistory.vh_log, users.signin);
+	app.route('/auth/signout').get(visithistory.vh_log, users.signout);
 
 	// Setting the facebook oauth routes
 	app.route('/auth/facebook').get(passport.authenticate('facebook', {

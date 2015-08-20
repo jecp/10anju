@@ -1,28 +1,29 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var ccenters = require('../../app/controllers/ccenters.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller'),
+		ccenters = require('../../app/controllers/ccenters.server.controller');
 
 	// Ccenters Routes
 	app.route('/ccenters')
-		.get(ccenters.list)
-		.post(users.requiresLogin,users.adminRequired, ccenters.create);
+		.get(visithistory.vh_log, ccenters.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, ccenters.create);
 
 	app.route('/ccenters/:ccenterId')
-		.get(ccenters.read)
-		.put(users.requiresLogin, users.adminRequired, users.adminRequired, ccenters.update)
-		.delete(users.requiresLogin, ccenters.hasAuthorization, users.adminRequired, ccenters.delete);
+		.get(visithistory.vh_log, ccenters.read)
+		.put(users.requiresLogin, visithistory.vh_log, users.adminRequired, users.adminRequired, ccenters.update)
+		.delete(users.requiresLogin, visithistory.vh_log, ccenters.hasAuthorization, users.adminRequired, ccenters.delete);
 
 	app.route('/ccenters_register')
-		.put(users.requiresLogin, ccenters.update);
+		.put(users.requiresLogin, visithistory.vh_log, ccenters.update);
 
 	app.route('/my_ccenter')
-		.post(users.requiresLogin, ccenters.findU);
+		.post(users.requiresLogin, visithistory.vh_log, ccenters.findU);
 
 	app.route('/ccenters/admin/list')
-		.get(users.requiresLogin, users.adminRequired, ccenters.list)
-		.post(users.requiresLogin, users.adminRequired, ccenters.modify);
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, ccenters.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, ccenters.modify);
 
 	// Finish by binding the Ccenter middleware
 	app.param('ccenterId', ccenters.ccenterByID);

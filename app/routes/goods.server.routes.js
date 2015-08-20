@@ -1,27 +1,28 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var goods = require('../../app/controllers/goods.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller'),
+		goods = require('../../app/controllers/goods.server.controller');
 
 	// Goods Routes
 	app.route('/goods')
-		.get(goods.list)
-		.post(users.requiresLogin, users.adminRequired, goods.create);
+		.get(visithistory.vh_log, goods.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.create);
 
 	app.route('/goods/:goodId')
-		.get(goods.read)
-		.put(users.requiresLogin, users.adminRequired, goods.update)
-		.delete(users.requiresLogin, users.adminRequired, goods.delete);
+		.get(visithistory.vh_log, goods.read)
+		.put(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.update)
+		.delete(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.delete);
 
 	app.route('/goods_like')
-		.post(users.requiresLogin, goods.like);
+		.post(users.requiresLogin, visithistory.vh_log, goods.like);
 
 	app.route('/goods/admin/list')
-		.get(users.requiresLogin, users.adminRequired, goods.list)
-		.post(users.requiresLogin, users.adminRequired, goods.modify);
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.modify);
 
-	app.route('/search').post(goods.results);
+	app.route('/search').post(visithistory.vh_log, goods.results);
 
 	// Finish by binding the Good middleware
 	app.param('goodId', goods.goodByID);

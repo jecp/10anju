@@ -10,12 +10,6 @@ var mongoose = require('mongoose'),
  * Visithistory Schema
  */
 var VisithistorySchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Visithistory name',
-		trim: true
-	},
 	created: {
 		type: Date,
 		default: Date.now
@@ -28,34 +22,68 @@ var VisithistorySchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	curl: [{
-		url:{
-			type:String
-		},created:{
-			type:Date,
-			default:Date.now
-		},updated:{
-			type:Date,
-			default:Date.now
-		}
-	}],
-	lurl:{
+	sessionID:{
 		type:String
 	},
-	turl:{
+	originalUrl: {
 		type:String
 	},
-	customIp: {
+	method:{
+		type:String
+	},
+	res_locals_url:{
+		type:String
+	},
+	https:{
+		type:String
+	},
+	remoteAddress: {
+		type:String
+	},
+	user_agent: {
 		type:String
 	},
 	customOs: {
 		type:String
 	},
-	customBower:{
+	customBrowser:{
+		type:String
+	},
+	customCountry: {
+		type:String
+	},
+	customCountry_id: {
 		type:String
 	},
 	customArea: {
 		type:String
+	},
+	customArea_id: {
+		type:Number
+	},
+	customRegion: {
+		type:String
+	},
+	customRegion_id: {
+		type:Number
+	},
+	customCity: {
+		type:String
+	},
+	customCity_id: {
+		type:Number
+	},
+	customLanguage: {
+		type:String
+	},
+	customIsp: {
+		type:String
+	},
+	customIsp_id: {
+		type:Number
+	},
+	readtime:{
+		type:Number
 	}
 });
 

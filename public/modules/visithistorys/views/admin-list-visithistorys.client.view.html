@@ -6,31 +6,36 @@
 				<table class="table table-hover table-bordered table-response">
 					<thead>
 						<tr>
-							<th>分类</th>
-							<th>细类</th>
-							<th>商品图片</th>
-							<th>商品名称</th>
-							<th>商品标题</th>
-							<th>商品价格</th>
-							<th>销量</th>
-							<th>浏览量</th>
-							<th>编辑</th>
-							<th>删除</th>
+							<th>用户信息</th>
+							<th>客户端IP</th>
+							<th>操作系统</th>
+							<th>浏览器</th>
+							<th>语言</th>
+							<th>国家</th>
+							<th>地区</th>
+							<th>省</th>
+							<th>市</th>
+							<th>运营商</th>
+							<th>https</th>
+							<th>method</th>
+							<th>访问时间</th>
 						</tr>
 					</thead>
-					<tbody data-ng-repeat="visithistory in visithistorys" >
+					<tbody data-ng-repeat="v in visithistorys" >
 						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
-							<td><a href="/#!/categories/{{visithistory.category._id}}"><span data-ng-bind="visithistory.category.name"></span></a></td>
-							<td><input type="text" data-ng-model="visithistory.subcat" id="subcat" class="form-control" placeholder="商品细类，如叶菜类、根茎类" required></td>
-							<td><a href="/#!/visithistorys/{{visithistory._id}}"><img src="{{visithistory.main_img}}" style="max-width:80px;"></a></td>
-							<td><input type="text" data-ng-model="visithistory.name" id="name" class="form-control" placeholder="商品名称，例：手机" required></td>
-							<td><input type="text" data-ng-model="visithistory.title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
-							<td><input type="text" data-ng-model="visithistory.price" id="price" class="form-control" placeholder="价格，精确到小数点后2位" required></td>
-							<td data-ng-bind="visithistory.sold"></td>
-							<td data-ng-bind="visithistory.pv"></td>
-							<td><a class="btn btn-primary" ng-click="modify()"><i class="glyphicon glyphicon-edit"></i></a>
-							</td>
-							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="visithistory" id="{{visithistory._id}}">删除</button></td>
+							<td><a ng-if="v.user" href="/#!/users/{{v.user._id}}"><img src="{{v.user.avatar}}" style="width:45px;" alt=""><span data-ng-bind="v.user.username"></span></a><span ng-if="v.user === null" data-ng-bind="v.sessionID"></span></td>
+							<td><span data-ng-bind="v.remoteAddress"></span></td>
+							<td><span data-ng-bind="v.customOs"></span></td>
+							<td><span data-ng-bind="v.customBrowser"></span></td>
+							<td><span data-ng-bind="v.customLanguage"></span></td>
+							<td><span data-ng-bind="v.customCountry"></span></td>
+							<td><span data-ng-bind="v.customArea"></span></td>
+							<td><span data-ng-bind="v.customRegion"></span></td>
+							<td><span data-ng-bind="v.customCity"></span></td>
+							<td><span data-ng-bind="v.customIsp"></span></td>
+							<td><span data-ng-bind="v.https"></span></td>
+							<td><span data-ng-bind="v.method"></span></td>
+							<td data-ng-bind="v.created"></td>
 						</tr>
 					</tbody>
 				</table>

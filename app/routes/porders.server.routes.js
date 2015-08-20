@@ -1,22 +1,23 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var porders = require('../../app/controllers/porders.server.controller');
+	var users = require('../../app/controllers/users.server.controller'),
+		visithistory = require('../../app/controllers/visithistorys.server.controller'),
+		porders = require('../../app/controllers/porders.server.controller');
 
 	// Porders Routes
 	app.route('/porders')
-		.get(porders.list)
-		.post(users.requiresLogin, porders.create);
+		.get(visithistory.vh_log, porders.list)
+		.post(users.requiresLogin, visithistory.vh_log, porders.create);
 
 	app.route('/porders/:porderId')
-		.get(porders.read)
-		.put(users.requiresLogin, porders.hasAuthorization, porders.update)
-		.delete(users.requiresLogin, porders.hasAuthorization, porders.delete);
+		.get(visithistory.vh_log, porders.read)
+		.put(users.requiresLogin, visithistory.vh_log, porders.hasAuthorization, porders.update)
+		.delete(users.requiresLogin, visithistory.vh_log, porders.hasAuthorization, porders.delete);
 
 	app.route('/porders/admin/list')
-		.get(users.requiresLogin, users.adminRequired, porders.list)
-		.post(users.requiresLogin, users.adminRequired, porders.modify);
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, porders.list)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, porders.modify);
 
 	// Finish by binding the Porder middleware
 	app.param('porderId', porders.porderByID);

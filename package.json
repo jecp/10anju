@@ -41,6 +41,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.2",
     "qiniu": "^6.1.8",
+    "request": "^2.61.0",
     "swig": "~1.4.1"
   },
   "devDependencies": {
