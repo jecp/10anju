@@ -131,7 +131,7 @@ exports.vh_log = function(req, res, next) {
 
 	var logObj = new Visithistory(req.headers),
 		areaObj;
-
+	console.log(req.headers['x-forwarded-for'])
 	console.log('=========nginx=======\n'+req.headers['x-forwarded-for'])
 
 	logObj.user = (req.user!=='undefined') ? req.user : '';
@@ -140,7 +140,11 @@ exports.vh_log = function(req, res, next) {
 	logObj.method = req.method;
 	logObj.res_locals_url = req.res.locals.url;
 	logObj.https = req.headers.https;
-	logObj.remoteAddress = req._remoteAddress;
+	logObj.remoteAddress = req.headers['x-forwarded-for'] || 
+		req.connection.remoteAddress || 
+	    req.socket.remoteAddress ||
+	    req.connection.socket.remoteAddress;
+	console.log(ip);
 	logObj.user_agent = req.headers['user-agent'];
 	logObj.customOs = req.headers['user-agent'].split(') ')[0]+')';
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
