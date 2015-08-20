@@ -140,16 +140,17 @@ exports.vh_log = function(req, res, next) {
 	logObj.method = req.method;
 	logObj.res_locals_url = req.res.locals.url;
 	logObj.https = req.headers.https;
-	logObj.remoteAddress = req.headers['x-forwarded-for'] || 
+	var ip = req.headers['x-forwarded-for'] || 
 		req.connection.remoteAddress || 
 	    req.socket.remoteAddress ||
 	    req.connection.socket.remoteAddress;
-	console.log(ip);
+	console.log(logObj.remoteAddress);
+	logObj.remoteAddress = ip;
 	logObj.user_agent = req.headers['user-agent'];
 	logObj.customOs = req.headers['user-agent'].split(') ')[0]+')';
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
-	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+req._remoteAddress,gzip:true},function (err,res,body){
+	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
 		
 		areaObj = JSON.parse(body);
 		if (err){console.log(err);}
