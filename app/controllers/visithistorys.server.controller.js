@@ -73,8 +73,8 @@ exports.delete = function(req, res) {
 /**
  * List of Visithistorys
  */
-exports.list = function(req, res) { 
-	Visithistory.find().sort('-created').limit(50).populate('user', 'userame avatar').exec(function(err, visithistorys) {
+exports.list = function(req, res) {
+	Visithistory.find().sort('-created').limit(1000).populate('user', 'userame avatar').exec(function(err, visithistorys) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -138,7 +138,7 @@ exports.vh_log = function(req, res, next) {
 	logObj.method = req.method;
 	logObj.res_locals_url = req.res.locals.url;
 	logObj.https = req.headers.https;
-	var ip = (req.headers['x-forwarded-for'].split(',')[0]) || 
+	var ip = (req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : undefined) || 
 		req.connection.remoteAddress || 
 	    req.socket.remoteAddress ||
 	    req.connection.socket.remoteAddress;

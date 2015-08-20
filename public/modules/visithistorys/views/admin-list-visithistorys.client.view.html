@@ -43,5 +43,15 @@
 				</table>
 			</div>
 		</div>
+		<div>
+			<ul class="pager">
+				<li ng-if="page !== 0" class="previous">
+					<a class="prepage" title="上一页" href="/#!/visithistorys/admin/list?p={{page-1}}" ng-click="list()">&larr;上一页</a>
+				</li>
+				<li ng-if="page !== 0 " class="next">
+					<a id="next" class="nextpage" title="下一页" href="/#!/visithistorys/admin/list?p={{page+1}}" ng-click="list()"> &rarr;下一页</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </section>

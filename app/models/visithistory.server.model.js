@@ -59,19 +59,19 @@ var VisithistorySchema = new Schema({
 		type:String
 	},
 	customArea_id: {
-		type:Number
+		type:String
 	},
 	customRegion: {
 		type:String
 	},
 	customRegion_id: {
-		type:Number
+		type:String
 	},
 	customCity: {
 		type:String
 	},
 	customCity_id: {
-		type:Number
+		type:String
 	},
 	customLanguage: {
 		type:String
@@ -80,7 +80,7 @@ var VisithistorySchema = new Schema({
 		type:String
 	},
 	customIsp_id: {
-		type:Number
+		type:String
 	},
 	readtime:{
 		type:Number
