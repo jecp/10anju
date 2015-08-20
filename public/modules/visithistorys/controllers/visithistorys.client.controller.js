@@ -58,12 +58,9 @@ angular.module('visithistorys').controller('VisithistorysController', ['$scope',
 
 		// Admin list of Visithistorys
 		$scope.list = function(req,res) {
-			console.log(this.next);
-			var p = $location.search().p ? parseInt($location.search().p) : 0;
-			console.log(p);
 			$http.get('/visithistorys/admin/list').success(function (response){
 				$scope.visithistorys = response;
-				$scope.page = parseInt(response.length/5);
+				// $scope.page = parseInt(response.length/5);
 			}).error(function(response){
 				$scope.error = response.message;
 			});
