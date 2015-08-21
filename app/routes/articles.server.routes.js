@@ -29,6 +29,9 @@ module.exports = function(app) {
 	app.route('/articles/fulledit')
 		.post(users.requiresLogin, visithistory.vh_log, articles.fulledit);
 
+	app.route('/articles_like')
+		.post(users.requiresLogin, visithistory.vh_log, articles.like);
+
 	// Finish by binding the article middleware
 	app.param('articleId', articles.articleByID);
 };

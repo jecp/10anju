@@ -88,5 +88,17 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 				articleId: $stateParams.articleId
 			});
 		};
+
+		// like
+		$scope.like = function (article) {
+			var _article = $scope.article;
+			$http.post('/articles_like', _article).success(function (response){
+				$scope.like += 1;
+				$scope.success = true;
+				$location.path('articles');
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
 	}
 ]);

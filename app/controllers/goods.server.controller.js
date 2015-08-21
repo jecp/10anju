@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	Good = mongoose.model('Good'),
 	Category = mongoose.model('Category'),
 	User = mongoose.model('User'),
+	Collect = mongoose.model('Collect'),
 	Visithistory = mongoose.model('Visithistory'),
 	_ = require('lodash');
 
@@ -145,16 +146,16 @@ exports.update = function(req, res) {
 exports.like = function(req, res) {
 	var goodId = req.body._id;
 	if (req.user._id){
-		User.findOne({_id:req.user._id, goods_like:goodId}, function (err,user){
+		Collect.findOne({user:req.user._id,good:goodId}, function (err,collect){
 			if (err) {console.log(err);} 
-			else if(user){
+			else if(collect){
 				Good.findOneAndUpdate({_id:goodId},{$inc:{like:-1}}).exec(function (err,good){
 					if (err) {
 						return res.status(400).send({
 							message: errorHandler.getErrorMessage(err)
 						});
 					} else {
-						user.update({$pull:{goods_like:goodId}}).exec(function (err,user){
+						collect.update({$pull:{good:goodId}}).exec(function (err,collect){
 							if (err){console.log(err);}
 							else {
 								res.send(good);
@@ -170,7 +171,51 @@ exports.like = function(req, res) {
 							message: errorHandler.getErrorMessage(err)
 						});
 					} else {
-						User.findOneAndUpdate({_id:req.user._id},{$push:{goods_like:goodId}}).exec(function (err,user){
+						Collect.findOneAndUpdate({user:req.user._id},{$push:{good:goodId}}).exec(function (err,collect){
+							if (err){console.log(err);}
+							else {
+								res.send(good);
+							}
+						});
+					}
+				});				
+			}
+		});
+	}
+};
+
+/**
+ * Like a Good
+ */
+exports.collect = function(req, res) {
+	var goodId = req.body._id;
+	if (req.user._id){
+		Collect.findOne({user:req.user._id, good:goodId}, function (err,collect){
+			if (err) {console.log(err);} 
+			else if(collect){
+				Good.findOneAndUpdate({_id:goodId},{$inc:{collect:-1}}).exec(function (err,good){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						collect.update({$pull:{good:goodId}}).exec(function (err,collect){
+							if (err){console.log(err);}
+							else {
+								res.send(good);
+							}
+						});
+					}
+				});				
+			}
+			else {
+				Good.findOneAndUpdate({_id:goodId},{$inc:{collect:1}}).exec(function (err,good){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						Collect.findOneAndUpdate({user:req.user._id},{$push:{good:goodId}}).exec(function (err,collect){
 							if (err){console.log(err);}
 							else {
 								res.send(good);

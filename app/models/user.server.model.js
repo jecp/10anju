@@ -88,6 +88,9 @@ var UserSchema = new Schema({
 		}],
 		default: ['user']
 	},
+	status: {
+		type:Number
+	},
 	updated: {
 		type: Date,
 		default: Date.now
@@ -127,18 +130,6 @@ var UserSchema = new Schema({
 		type:Schema.ObjectId,
 		ref:'User'
 	}],
-	goods_like:[{
-		type:Schema.ObjectId,
-			ref:'Good'
-	}],
-	articles_like:[{
-		type:Schema.ObjectId,
-		ref:'Article'
-	}],
-	subjects_like:[{
-		type:Schema.ObjectId,
-		ref:'Subject'
-	}],
 	subject:[{
 		type:Schema.ObjectId,
 		ref:'Subject'
@@ -150,6 +141,10 @@ var UserSchema = new Schema({
 	collect: {
 		type:Schema.ObjectId,
 		ref: 'Collect'
+	},
+	like: {
+		type:Schema.ObjectId,
+		ref: 'Like'
 	},
 	visithistory:{
 		type:Schema.ObjectId,

@@ -27,15 +27,15 @@ var CollectSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'Ccenter'
 	}],
-	subject: [{
+	subjects: [{
 		type: Schema.ObjectId,
 		ref: 'Subject'
 	}],
-	article: [{
+	articles: [{
 		type: Schema.ObjectId,
 		ref: 'Article'
 	}],
-	good: [{
+	goods: [{
 		type: Schema.ObjectId,
 		ref: 'Good'
 	}],

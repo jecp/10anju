@@ -15,232 +15,143 @@ var mongoose = require('mongoose'),
 /**
  * Create a Collect
  */
-exports.create = function(req, res) {
-	if(req.body){
-		if (req.body.articleObj){
-			Collect.findOne({user:req.user._id,article:req.body.articleObj._id}).exec(function (err,collect){
+exports.create = function (req,res) {
+
+	var obj = req.body.obj,
+		value = req.body.value,
+		userId = req.user._id;
+		
+	if (obj === 'goods'){
+		Collect.findOne({user:userId,goods:value},function (err,collect){
 			if(err){console.log(err);}
 			else if(collect){
-				Collect.findOneAndUpdate({_id:collect._id},{$pull:{article:req.body.articleObj._id}},function (err,cb){
+				Collect.findOneAndUpdate({_id:collect._id},{$pull:{goods:value}},function (err){
 					if(err){console.log(err);}
-					else {
-						res.send(collect);
-						Article.findOneAndUpdate({_id:req.body.articleObj._id},{$inc:{collect:-1}},function (err){
+				});
+				Good.findOneAndUpdate({_id:value},{$inc:{collect:-1}},function (err,good){
+					if(err){console.log(err);}
+					return res.send(good);
+				});
+			}
+			else{
+				Collect.findOne({user:userId},function (err,collect){
+					if(err){console.log(err);}
+					else if(collect){
+						Collect.findOneAndUpdate({_id:collect._id},{$push:{goods:value}},function (err){
 							if(err){console.log(err);}
+						});
+						Good.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,good){
+							if(err){console.log(err);}
+							return res.send(good);
 						});
 					}
-				});
-			}else {
-				Collect.findOne({user:req.user._id}).exec(function (err,collect){
-					if(err){console.log(err);}
-
-					else if(collect){
-						Collect.findOneAndUpdate({_id:collect._id},{$push:{article:req.body.articleObj._id}},function (err,cb){
-							if(err){console.log(err);}
-							else {
-								res.send(collect);
-								Article.findOneAndUpdate({_id:req.body.articleObj._id},{$inc:{collect:1}},function (err){
-									if(err){console.log(err);}
-								});
-							}
-						});
-					} else {
+					else{
 						var _collect = new Collect(req.body);
 						_collect.user = req.user;
-						_collect.article = req.body.articleObj._id;
-
-						_collect.save(function (err,collect) {
-							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								User.findOneAndUpdate({_id:req.user._id},{collect:collect._id},function (err){
-									if (err) {console.log(err);} 
-								});
-								Article.findOneAndUpdate({_id:req.body.articleObj._id},{$inc:{collect:1}},function (err){
-									if(err){console.log(err);}
-								});
-								res.send(collect);
-							}
+						_collect.goods = value;
+						_collect.save(function (err,collect){
+							if(err){console.log(err);}
+							User.findOneAndUpdate({_id:userId},{collect:collect._id},function (err){
+								if (err) {console.log(err);} 
+							});							
+							Good.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,good){
+								if(err){console.log(err);}
+								return res.send(good);
+							});				
 						});
 					}
 				});
 			}
 		});
-		} else if (req.body.goodObj){
-			Collect.findOne({user:req.user._id,good:req.body.goodObj._id}).exec(function (err,collect){
-				if(err){console.log(err);}
-
-				else if(collect){
-					Collect.findOneAndUpdate({_id:collect._id},{$pull:{good:req.body.goodObj._id}},function (err,cb){
-						if(err){console.log(err);}
-						else {
-							res.send(collect);
-							Good.findOneAndUpdate({_id:req.body.goodObj._id},{$inc:{collect:-1}},function (err){
+	}
+	else if (obj === 'subjects'){
+		Collect.findOne({user:userId,subjects:value},function (err,collect){
+			if(err){console.log(err);}
+			else if(collect){
+				Collect.findOneAndUpdate({_id:collect._id},{$pull:{subjects:value}},function (err){
+					if(err){console.log(err);}
+				});
+				Subject.findOneAndUpdate({_id:value},{$inc:{collect:-1}},function (err,subject){
+					if(err){console.log(err);}
+					return res.send(subject);
+				});
+			}
+			else{
+				Collect.findOne({user:userId},function (err,collect){
+					if(err){console.log(err);}
+					else if(collect){
+						Collect.findOneAndUpdate({_id:collect._id},{$push:{subjects:value}},function (err){
+							if(err){console.log(err);}
+						});
+						Subject.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,subject){
+							if(err){console.log(err);}
+							return res.send(subject);
+						});
+					}
+					else{
+						var _collect = new Collect(req.body);
+						_collect.user = req.user;
+						_collect.subjects = value;
+						_collect.save(function (err,collect){
+							if(err){console.log(err);}
+							else{
+								User.findOneAndUpdate({_id:userId},{collect:collect._id},function (err,user){
+									if (err) {console.log(err);}
+								});							
+								Subject.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,subject){
+									if(err){console.log(err);}
+									return res.send(subject);
+								});	
+							}										
+						});
+					}
+				});
+			}
+		});
+	}else {
+		Collect.findOne({user:userId,articles:value},function (err,collect){
+			if(err){console.log(err);}
+			else if(collect){
+				Collect.findOneAndUpdate({_id:collect._id},{$pull:{articles:value}},function (err){
+					if(err){console.log(err);}
+				});
+				Article.findOneAndUpdate({_id:value},{$inc:{collect:-1}},function (err,article){
+					if(err){console.log(err);}
+					return res.send(article);
+				});
+			}
+			else{
+				Collect.findOne({user:userId},function (err,collect){
+					if(err){console.log(err);}
+					else if(collect){
+						Collect.findOneAndUpdate({_id:collect._id},{$push:{articles:value}},function (err){
+							if(err){console.log(err);}
+						});
+						Article.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,article){
+							if(err){console.log(err);}
+							return res.send(article);
+						});
+					}
+					else{
+						var _collect = new Collect(req.body);
+						_collect.user = req.user;
+						_collect.articles = value;
+						_collect.save(function (err,collect){
+							if(err){console.log(err);}
+							User.findOneAndUpdate({_id:userId},{collect:collect._id},function (err){
+								if (err) {console.log(err);} 
+							});							
+							Article.findOneAndUpdate({_id:value},{$inc:{collect:1}},function (err,article){
 								if(err){console.log(err);}
-							});
-						}
-					});
-				}else {
-					Collect.findOne({user:req.user._id}).exec(function (err,collect){
-						if(err){console.log(err);}
-
-						else if(collect){
-							Collect.findOneAndUpdate({_id:collect._id},{$push:{good:req.body.goodObj._id}},function (err,cb){
-								if(err){console.log(err);}
-								else {
-									res.send(collect);
-									Good.findOneAndUpdate({_id:req.body.goodObj._id},{$inc:{collect:1}},function (err){
-										if(err){console.log(err);}
-									});
-								}
-							});
-						} else {
-							var _collect = new Collect(req.body);
-							_collect.user = req.user;
-							_collect.good = req.body.goodObj._id;
-
-							_collect.save(function (err,collect) {
-								if (err) {
-									return res.status(400).send({
-										message: errorHandler.getErrorMessage(err)
-									});
-								} else {
-									User.findOneAndUpdate({_id:req.user._id},{collect:collect._id},function (err){
-										if (err) {console.log(err);} 
-									});
-									Good.findOneAndUpdate({_id:req.body.goodObj._id},{$inc:{collect:1}},function (err){
-										if(err){console.log(err);}
-									});
-									res.send(collect);
-								}
-							});
-						}
-					});
-				}
-			});
-		} else if (req.body.subjectObj){
-			Collect.findOne({user:req.user._id,subject:req.body.subjectObj._id}).exec(function (err,collect){
-				if(err){console.log(err);}
-
-				else if(collect){
-					Collect.findOneAndUpdate({_id:collect._id},{$pull:{subject:req.body.subjectObj._id}},function (err,cb){
-						if(err){console.log(err);}
-						else {
-							res.send(collect);
-							Subject.findOneAndUpdate({_id:req.body.subjectObj._id},{$inc:{collect:-1}},function (err){
-								if(err){console.log(err);}
-							});
-						}
-					});
-				}else {
-					Collect.findOne({user:req.user._id}).exec(function (err,collect){
-						if(err){console.log(err);}
-
-						else if(collect){
-							Collect.findOneAndUpdate({_id:collect._id},{$push:{subject:req.body.subjectObj._id}},function (err,cb){
-								if(err){console.log(err);}
-								else {
-									res.send(collect);
-									Subject.findOneAndUpdate({_id:req.body.subjectObj._id},{$inc:{collect:1}},function (err){
-										if(err){console.log(err);}
-									});
-								}
-							});
-						} else {
-							var _collect = new Collect(req.body);
-							_collect.user = req.user;
-							_collect.subject = req.body.subjectObj._id;
-
-							_collect.save(function (err,collect) {
-								if (err) {
-									return res.status(400).send({
-										message: errorHandler.getErrorMessage(err)
-									});
-								} else {
-									User.findOneAndUpdate({_id:req.user._id},{collect:collect._id},function (err){
-										if (err) {console.log(err);} 
-									});
-									Subject.findOneAndUpdate({_id:req.body.subjectObj._id},{$inc:{collect:1}},function (err){
-										if(err){console.log(err);}
-									});
-									res.send(collect);
-								}
-							});
-						}
-					});
-				}
-			});
-		}
+								return res.send(article);
+							});				
+						});
+					}
+				});
+			}
+		});
 	}
 };
-
-		// var x,y,z;
-		// if (req.body.articleObj){
-		// 	x = 'article';
-		// 	y = req.body.articleObj._id;
-		// 	z = 'Article';
-		// } else if (req.body.goodObj){
-		// 	x = 'good';
-		// 	y = req.body.goodObj._id;
-		// 	z = 'Good';
-		// } else if (req.body.subjectObj){
-		// 	x = 'subject';
-		// 	y = req.body.subjectObj._id;
-		// 	z = Subject;
-		// }
-
-		// Collect.findOne({user:req.user._id,x:y._id}).exec(function (err,collect){
-		// 	if(err){console.log(err);}
-
-		// 	else if(collect){
-		// 		console.log(collect);
-		// 		Collect.findOneAndUpdate({_id:collect._id},{$pull:{x:y._id}},function (err,cb){
-		// 			if(err){console.log(err);}
-		// 			else {
-		// 				res.send(collect);
-		// 				z.findOneAndUpdate({_id:y._id},{$inc:{collect:-1}},function (err){
-		// 					if(err){console.log(err);}
-		// 				});
-		// 			}
-		// 		});
-		// 	}else {
-		// 		var _collect = new Collect(req.body);
-		// 		_collect.user = req.user;
-		// 		console.log(x);
-		// 		console.log(y);
-		// 		console.log(_collect.x);
-		// 		// console.log(_collect.x.push(y));
-
-		// 		// _collect.x.push = _collect.x.push(y);
-				
-
-		// 		_collect.save(function (err,collect) {
-		// 			if (err) {
-		// 				return res.status(400).send({
-		// 					message: errorHandler.getErrorMessage(err)
-		// 				});
-		// 			} else {
-		// 				User.findOneAndUpdate({_id:req.user._id},{collect:collect._id},function (err,collect){
-		// 					if (err) {console.log(err);} 
-		// 				});
-		// 				z.findOneAndUpdate({_id:y},{$inc:{collect:1}},function (err){
-		// 					if(err){console.log(err);}
-		// 				});
-		// 				console.log(collect);
-		// 			}
-		// 			Collect.findOneAndUpdate({_id:collect._id},{$push:{x:y}},function (err,doc){
-		// 				if(err){console.log(err);}
-		// 				else {
-		// 					console.log('x:'+x+',y:'+y);
-		// 					console.log(doc);
-		// 					res.send(doc);
-		// 				}
-		// 			});
-		// 		});
-		// 	}
-		// });
 
 /**
  * Show the current Collect
@@ -321,7 +232,7 @@ exports.modify = function(req, res) {
  *  My Collects
  */
 exports.mycollect = function (req,res){
-	Collect.findOne({_id:req.body.collect},function (err,collect) {
+	Collect.findOne({_id:req.body.collect}).populate('good','title main_img like pv sold collect subcat created price summary detail').populate('subject', 'title subcat forum comments content created pv like collect').populate('forum','name').exec(function (err,collect) {
 		if (err){console.log(err);}
 		else {
 			res.send(collect);
@@ -333,7 +244,7 @@ exports.mycollect = function (req,res){
  * Collect middleware
  */
 exports.collectByID = function(req, res, next, id) { 
-	Collect.findById(id).populate('user', 'displayName').exec(function(err, collect) {
+	Collect.findById(id).populate('user', 'username avatar').populate('subject', 'title subcat forum comments user').exec(function(err, collect) {
 		if (err) return next(err);
 		if (! collect) return next(new Error('Failed to load Collect ' + id));
 		req.collect = collect ;

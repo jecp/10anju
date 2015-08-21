@@ -118,6 +118,15 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$scope.error = response.message;
 			});
 		};
+
+		// Count of Goods
+		$scope.Count = function() {
+			$http.get('/goods/count').success(function (response){
+				$scope.goodsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
 		
 		// Update Good From admin list
 		$scope.modify = function() {
@@ -149,18 +158,18 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			});
 		};
 
-		// like
-		$scope.like = function (good) {
-			var _good = $scope.good;
+		// // like
+		// $scope.like = function (good) {
+		// 	var _good = $scope.good;
 
-			$http.post('/goods_like', _good).success(function (response){
-				$scope.like += 1;
-				$scope.success = true;
-				$location.path('goods/' + _good._id);
-			}).error(function(response){
-				$scope.error = response.message;
-			});
-		};
+		// 	$http.post('/goods_like', _good).success(function (response){
+		// 		$scope.like += 1;
+		// 		$scope.success = true;
+		// 		$location.path('goods/' + _good._id);
+		// 	}).error(function(response){
+		// 		$scope.error = response.message;
+		// 	});
+		// };
 
 		// search function
 		$scope.search = function(keyword) {

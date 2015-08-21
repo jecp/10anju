@@ -133,5 +133,18 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 				$scope.error = response.message;
 			});
 		};
+
+		// Collect
+		$scope.collect = function (subject) {
+			var _subject = $scope.subject;
+
+			$http.post('/subjects_collect', _subject).success(function (response){
+				$scope.collect += 1;
+				$scope.success = true;
+				$location.path('subjects/' + _subject._id);
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
 	}
 ]);

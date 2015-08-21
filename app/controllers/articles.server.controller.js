@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Article = mongoose.model('Article'),
+	Like = mongoose.model('Like'),
 	_ = require('lodash');
 
 /**
@@ -140,6 +141,93 @@ exports.modify = function(req, res) {
 	});
 };
 
+/**
+ * Like a Article
+ */
+exports.like = function(req, res) {
+	var articleId = req.body._id;
+	if (req.user._id){
+		Like.findOne({user:req.user._id,article:articleId}, function (err,like){
+			if (err) {console.log(err);} 
+			else if(like){
+				Article.findOneAndUpdate({_id:articleId},{$inc:{like:-1}}).exec(function (err,article){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						like.update({$pull:{article:articleId}}).exec(function (err,like){
+							if (err){console.log(err);}
+							else {
+								res.send(article);
+							}
+						});
+					}
+				});				
+			}
+			else {
+				Article.findOneAndUpdate({_id:articleId},{$inc:{like:1}}).exec(function (err,article){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						Like.findOneAndUpdate({user:req.user._id},{$push:{article:articleId}}).exec(function (err,like){
+							if (err){console.log(err);}
+							else {
+								res.send(article);
+							}
+						});
+					}
+				});				
+			}
+		});
+	}
+};
+
+/**
+ * Like a Article
+ */
+exports.like = function(req, res) {
+	var articleId = req.body._id;
+	if (req.user._id){
+		Like.findOne({user:req.user._id, article:articleId}, function (err,like){
+			if (err) {console.log(err);} 
+			else if(like){
+				Article.findOneAndUpdate({_id:articleId},{$inc:{like:-1}}).exec(function (err,article){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						like.update({$pull:{article:articleId}}).exec(function (err,like){
+							if (err){console.log(err);}
+							else {
+								res.send(article);
+							}
+						});
+					}
+				});				
+			}
+			else {
+				Article.findOneAndUpdate({_id:articleId},{$inc:{collect:1}}).exec(function (err,article){
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						Like.findOneAndUpdate({user:req.user._id},{$push:{article:articleId}}).exec(function (err,collect){
+							if (err){console.log(err);}
+							else {
+								res.send(article);
+							}
+						});
+					}
+				});				
+			}
+		});
+	}
+};
 
 /**
  * Article middleware

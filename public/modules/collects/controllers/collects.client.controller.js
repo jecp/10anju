@@ -8,17 +8,15 @@ angular.module('collects').controller('CollectsController', ['$scope', '$http', 
 		// Create new Collect
 		$scope.create = function() {
 			// Create new Collect object
+			var obj = $location.url().split('/')[1];
+			var value = $location.url().split('/')[2];
 			var collect = new Collects ({
-				subjectObj: this.subject,
-				goodObj: this.good,
-				articleObj: this.article
+				obj ,value
 			});
 
 			// Redirect after save
 			collect.$save(function(response) {
-				$scope.subject.like += 1;
-				$location.path('/forums');
-
+				$location.path(obj);
 				// Clear form fields
 				$scope.name = '';
 			}, function(errorResponse) {

@@ -8,7 +8,7 @@ module.exports = function(app) {
 	// Goods Routes
 	app.route('/goods/count')
 		.get(visithistory.vh_log, goods.count);
-		
+
 	app.route('/goods')
 		.get(visithistory.vh_log, goods.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.create);

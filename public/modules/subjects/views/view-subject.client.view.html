@@ -44,8 +44,8 @@
 				</div>
 				<div class="panel-footer text-right">
 					<a href=""><i class="glyphicon glyphicon-eye-open"></i><span data-ng-bind="subject.pv"></span></a>&nbsp;
-					<a href="" data-ng-controller="CollectsController" ng-click="create()"><i class="glyphicon glyphicon-star"></i><span data-ng-bind="subject.collect"></span><span>关注</span></a>&nbsp;
-					<a href="" ng-click="like()"><i class="glyphicon glyphicon-thumbs-up"></i><span data-ng-bind="subject.like"></span><span>赞</span></a>
+					<a href="" data-ng-controller="CollectsController" ng-click="create()"><i class="glyphicon glyphicon-star"></i><span data-ng-bind="subject.collect"></span><span>收藏</span></a>&nbsp;
+					<a href="" data-ng-controller="LikesController" ng-click="create()"><i class="glyphicon glyphicon-thumbs-up"></i><span data-ng-bind="subject.like"></span><span>赞</span></a>
 				</div>			
 			</div>
 			<div data-ng-include="'/modules/comments/views/list-comments.client.view.html'"></div>

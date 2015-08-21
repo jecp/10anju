@@ -28,9 +28,6 @@ exports.create = function(req, res) {
 				Subject.findOneAndUpdate({_id:req.body.subject},{$inc:{pv:1},$push:{comment:comment._id}},function (err){
 					if (err) {console.log(err);} 
 				});
-				User.findOneAndUpdate({_id:req.user._id},{$push:{comment:comment._id}},function (err){
-					if (err) {console.log(err);} 
-				});
 			}
 		});
 	}

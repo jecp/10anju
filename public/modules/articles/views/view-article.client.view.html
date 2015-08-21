@@ -2,7 +2,10 @@
 	<div class="col-md-12 col-xs-12 mt20">
 		<div class="col-md-9">
 			<div class="page-header">
-				<p ng-bind-html="article.title"></p>
+				<div class="h3" data-ng-bind="article.title"></div>
+				<div class="text-right">
+					<a><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="article.pv"></span></a>&nbsp;<a data-ng-controller="CollectsController" ng-click="create()"><span class="glyphicon glyphicon-star">收藏</span><span data-ng-bind="article.collect"></span></a>&nbsp;<a data-ng-controller="LikesController" ng-click="create()"><span class="glyphicon glyphicon-thumbs-up">赞</span><span data-ng-bind="article.like"></span></a>
+				</div>
 			</div>
 			<div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
 				<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
@@ -21,6 +24,7 @@
 				</em>
 			</small>
 			<p class="lead" ng-bind-html="article.content"></p>
+			<div ng-if="authentication.user.username !== undefined" ng-include="'modules/comments/views/create-comment.client.view.html'"></div>
 		</div>
 		<div class="col-md-3" data-ng-controller="GoodsController">
 			<div class="article_right_goods">

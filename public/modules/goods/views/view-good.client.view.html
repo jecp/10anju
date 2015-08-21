@@ -29,12 +29,12 @@
 								</div>
 								<div class="good_detail_sharezone">
 									<!-- <div class="col-xs-12">分享到</div> -->
-									<div class="col-xs-6">
-										<a id="J_AddFavorite" href="javascript:;" data-aldurl="/#!/goods/like/:good._id" class="favorite"><i class="glyphicon glyphicon-star"></i><span>收藏商品</span></a>
+									<div class="col-xs-6" data-ng-controller="CollectsController">
+										<a ng-click="create()"><i class="glyphicon glyphicon-star"></i><span>收藏<span data-ng-bind="good.collect"></span></span></a>
 									</div>
-									<div class="col-xs-6">
-										<a href="/#!/goods_like/{{good._id}}" ng-click="like()">
-											<span class="glyphicon glyphicon-eye-open">关注<span data-ng-bind="good.like" class="text-muted"></span></span>
+									<div class="col-xs-6" data-ng-controller="LikesController">
+										<a ng-click="create()">
+											<span class="glyphicon glyphicon-thumbs-up">赞<span data-ng-bind="good.like" class="text-muted"></span></span>
 										</a>
 									</div>
 								</div>
