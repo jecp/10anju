@@ -149,12 +149,11 @@ exports.vh_log = function(req, res, next) {
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
 	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
-		
 		areaObj = JSON.parse(body);
 		if (err){console.log(err);}
 		else if(areaObj.code === 1){
 			return;
-		} 
+		}
 		logObj.customCountry = areaObj.data.country;
 		logObj.customCountry_id = areaObj.data.country_id;
 		logObj.customArea = areaObj.data.area;
@@ -166,7 +165,7 @@ exports.vh_log = function(req, res, next) {
 		logObj.customIsp = areaObj.data.isp;
 		logObj.customIsp_id = areaObj.data.isp_id;
 
-		if (req.user && req.user !== 'undefined'){
+		if (req.user && req.user !== undefined){
 			Visithistory.findOne({user:req.user._id,originalUrl:req.originalUrl},function (err,visithistory){
 				if (err) {console.log(err);} 
 				else if (visithistory){
