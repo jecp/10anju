@@ -74,6 +74,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 			});
 		};
 
+		// Count of Articles
+		$scope.Count = function() {
+			$http.get('/articles/count').success(function (response){
+				$scope.articlesCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		$scope.findOne = function() {
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId

@@ -79,6 +79,15 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 			});
 		};
 
+		// Count of Ccenters
+		$scope.Count = function() {
+			$http.get('/ccenters/count').success(function (response){
+				$scope.ccentersCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Ccenter
 		$scope.findOne = function() {
 			$scope.ccenter = Ccenters.get({ 

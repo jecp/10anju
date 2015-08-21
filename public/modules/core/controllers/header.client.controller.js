@@ -17,10 +17,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 			$scope.isCollapsed = false;
 		});
 
-		// Home.doRequest(){
-		// 	console.log(333);
-		// };
-
 		// Weather Api from web
 		$scope.TodayWeather = function(city){
 			$scope.weather = $http.get('http://m.weather.com.cn/atad/101280601.html').success(function (response){

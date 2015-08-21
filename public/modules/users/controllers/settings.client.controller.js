@@ -55,6 +55,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			}
 		};
 
+		// Count of Users
+		$scope.Count = function() {
+			$http.get('/users/count').success(function (response){
+				$scope.usersCount = response.usersCount;
+				$scope.fusersCount = response.fusersCount;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Register in a ccenter
 		$scope.register = function(ccenter){
 			$http.post('/users_ccenter', {roomNum:$scope.ccenterDetails.roomNum,ccenter:this.ccenter}).success(function(response) {

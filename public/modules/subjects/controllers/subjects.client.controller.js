@@ -87,6 +87,15 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 			});
 		};
 
+		// Count of Subjects
+		$scope.Count = function() {
+			$http.get('/subjects/count').success(function (response){
+				$scope.subjectsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// User count of Subjects
 		$scope.userCount = function() {
 			$http.get('/subjects/userCount').success(function (response){

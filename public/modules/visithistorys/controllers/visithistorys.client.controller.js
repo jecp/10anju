@@ -65,6 +65,15 @@ angular.module('visithistorys').controller('VisithistorysController', ['$scope',
 				$scope.error = response.message;
 			});
 		};
+
+		// Count of Visithistorys
+		$scope.Count = function() {
+			$http.get('/visithistorys/count').success(function (response){
+				$scope.visithistorysCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
 		
 		// Update Visithistory From admin list
 		$scope.modify = function() {

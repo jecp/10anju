@@ -24,10 +24,10 @@
 					</thead>
 					<tbody data-ng-repeat="v in visithistorys" >
 						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
-							<td><a ng-if="v.user" href="/#!/users/{{v.user._id}}"><img src="{{v.user.avatar}}" style="width:45px;" alt=""><span data-ng-bind="v.user.username"></span></a><span ng-if="v.user === null" data-ng-bind="v.sessionID"></span></td>
+							<td><a ng-if="v.user" href="/#!/users/{{v.user._id}}"><img src="{{v.user.avatar}}" style="width:45px;" alt=""><span data-ng-bind="v.user.username"></span></a><span class="h7" ng-if="v.user === null" data-ng-bind="v.sessionID"></span></td>
 							<td><span data-ng-bind="v.remoteAddress"></span></td>
-							<td><span data-ng-bind="v.customOs"></span></td>
-							<td><span data-ng-bind="v.customBrowser"></span></td>
+							<td><span class="h7" data-ng-bind="v.customOs"></span></td>
+							<td><span class="h7" data-ng-bind="v.customBrowser"></span></td>
 							<td><span data-ng-bind="v.customLanguage"></span></td>
 							<td><span data-ng-bind="v.customCountry"></span></td>
 							<td><span data-ng-bind="v.customArea"></span></td>
@@ -36,8 +36,8 @@
 							<td><span data-ng-bind="v.customIsp"></span></td>
 							<td><span data-ng-bind="v.https"></span></td>
 							<td><span data-ng-bind="v.method"></span></td>
-							<td><span data-ng-bind="v.originalUrl"></span></td>
-							<td data-ng-bind="v.created"></td>
+							<td><span class="h7" data-ng-bind="v.originalUrl"></span></td>
+							<td data-ng-bind="v.created | date:'medium'"></td>
 						</tr>
 					</tbody>
 				</table>
