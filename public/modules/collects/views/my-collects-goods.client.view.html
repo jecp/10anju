@@ -1,0 +1,23 @@
+		<div class="row col-md-12 col-xs-12" ng-if="collect.goods.length > 0">
+			<div class="row good_list_all">
+			  <div data-ng-repeat="good in collect.goods" class="col-md-4 fl col-xs-4">
+			    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+			  </div>
+			</div>
+			<!-- <div class="table table-borderdd table-hover" data-ng-repeat="item in collect.goods">
+				<div><a href="/#!/goods/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
+				<div class="col-md-3 col-xs-3 border">
+					<div>
+						<a href="/#!/goods/{{item._id}}"><img src="{{item.main_img}}-260" alt=""></a>
+					</div>
+					<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
+					<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
+					<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
+					<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
+				</div>
+				<div class="col-md-9 col-xs-9 ">
+					<p ng-bind-html="item.detail"></p>
+					<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
+				</div>
+			</div> -->
+		</div>

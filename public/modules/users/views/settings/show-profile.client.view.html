@@ -31,14 +31,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="row mt20 col-md-12 col-xs-12" ng-include="'modules/subjects/views/my-subject-count.client.view.html'"></div>
 		</div>
 		<!-- add -->
 		<div class="col-md-8 pull-right">
 			<div class="breadcrumb"><strong>Tips:</strong><span>在这里可以上传头像，查看/修改个人资料</span>
 			</div>
 			<!-- tabs begin -->
-			<div class="">
+			<div data-ng-controller="CollectsController" ng-init="myCollect()">
 				<tabset>
 					<tab>
 						<tab-heading>
@@ -57,9 +56,19 @@
 							<div data-ng-include="'/modules/orders/views/list-orders.client.view.html'" ></div>
 						</div>
 					</tab>
-					<tab heading="收藏">
+					<tab heading="收藏宝贝">
+						<div class="collections">
+							<div data-ng-include="'/modules/collects/views/my-collects-goods.client.view.html'" ></div>
+						</div>
+					</tab>
+					<tab heading="关注主题">
 						<div class="collections" class="" >
 							<div data-ng-include="'/modules/collects/views/my-collects.client.view.html'" ></div>
+						</div>
+					</tab>
+					<tab heading="关注文章">
+						<div class="collections">
+							<div data-ng-include="'/modules/collects/views/my-collects-articles.client.view.html'" ></div>
 						</div>
 					</tab>
 				</tabset>

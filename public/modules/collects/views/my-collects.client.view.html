@@ -1,59 +1,35 @@
-<section data-ng-controller="CollectsController" ng-init="myCollect()">
+<section>
 	<div class="col-md-12 col-xs-12">
-		{{collect}}
-		<div class="mc_subject col-md-12 col-xs-12" ng-if="collect.subject.length > 0">
-			<div class="table table-borderdd table-hover" data-ng-repeat="item in collect.subject">
-				<div><a href="/#!/subjects/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
-				<div class="col-md-3 col-xs-3 border">
-					<div>
-						<a href="/#!/users/"><img src="item.user.avatar" alt=""></a>
+		<div class="col-md-12 col-xs-12" ng-if="collect.subjects.length > 0">
+			<ul class="list-group">
+				<li class="list-group-item" data-ng-repeat="subject in collect.subjects">
+					<a href=""><img ng-src="{{subject.user.avatar}}" alt="" style="max-width:26px;"></a>&nbsp;
+					<a href="/#!/subjects/subcat/{{subject.subcat}}"><label class="label label-default" data-ng-bind="subject.subcat"></label></a>
+					<span>&nbsp;</span>
+					<span data-ng-bind="subject.comment.length"></span>&nbsp;/
+					<span data-ng-bind="subject.pv"></span>
+					<span>&nbsp;</span>
+					<a href="" ><span data-ng-bind="subject.forum.name"></span></a>
+					&nbsp;<a href="/#!/subjects/{{subject._id}}"><span data-ng-bind="subject.title"></span></a>
+					<span class="text-muted text-right">发表于&nbsp;<span data-ng-bind="subject.created | date:'mediumDate'"></span></span>
+					<span class="pull-right" data-ng-bind="subject.comment.createdAt | limitTo:1"></span>
+					<!-- <div><a href="/#!/subjects/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
+					<div class="col-md-3 col-xs-3 border">
+						<div>
+							<a href="/#!/users/"><img src="item.user.avatar" alt=""></a>
+						</div>
+						<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
+						<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
+						<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
+						<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
 					</div>
-					<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
-					<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
-					<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
-					<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
-				</div>
-				<div class="col-md-9 col-xs-9 ">
-					<p ng-bind-html="item.content"></p>
-					<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
-				</div>
-			</div>	
+					<div class="col-md-9 col-xs-9 ">
+						<p ng-bind-html="item.content"></p>
+						<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
+					</div> -->
+				</li>
+			</ul>	
 		</div>
-		<div ng-if="collect.good.length > 0">
-			<div class="table table-borderdd table-hover" data-ng-repeat="item in collect.good">
-				<div><a href="/#!/goods/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
-				<div class="col-md-3 col-xs-3 border">
-					<div>
-						<a href="/#!/goods/{{item._id}}"><img src="{{item.main_img}}-260" alt=""></a>
-					</div>
-					<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
-					<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
-					<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
-					<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
-				</div>
-				<div class="col-md-9 col-xs-9 ">
-					<p ng-bind-html="item.detail"></p>
-					<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
-				</div>
-			</div>
-		</div>
-		<div ng-if="collect.article.length > 0">
-			<div class="table table-borderdd table-hover" data-ng-repeat="item in collect.good">
-				<div><a href="/#!/goods/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
-				<div class="col-md-3 col-xs-3 border">
-					<div>
-						<a href="/#!/goods/{{item._id}}"><img src="{{item.main_img}}-260" alt=""></a>
-					</div>
-					<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
-					<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
-					<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
-					<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
-				</div>
-				<div class="col-md-9 col-xs-9 ">
-					<p ng-bind-html="item.detail"></p>
-					<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
-				</div>
-			</div>
-		</div>
+
 	</div>
 </section>

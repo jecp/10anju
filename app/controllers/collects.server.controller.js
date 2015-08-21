@@ -232,7 +232,7 @@ exports.modify = function(req, res) {
  *  My Collects
  */
 exports.mycollect = function (req,res){
-	Collect.findOne({_id:req.body.collect}).populate('good','title main_img like pv sold collect subcat created price summary detail').populate('subject', 'title subcat forum comments content created pv like collect').populate('forum','name').exec(function (err,collect) {
+	Collect.findOne({_id:req.body.collect}).populate('goods','title main_img like pv sold collect subcat created price summary detail').populate('subjects', 'title subcat forum comment content created pv like collect user').populate('articles','title pv like collect content user subcat').exec(function (err,collect) {
 		if (err){console.log(err);}
 		else {
 			res.send(collect);

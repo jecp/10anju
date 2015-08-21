@@ -1,0 +1,30 @@
+		<div ng-if="collect.articles.length > 0">
+			<div class="table table-borderdd table-hover" data-ng-repeat="article in collect.articles">
+				<a data-ng-href="#!/articles/{{article._id}}" class="">
+					<div class="text-right article_content">
+						<h3 class="list-group-item-heading" data-ng-bind="article.title"></h3>
+						<span class="small list-group-item-text">
+							<span class="text-muted" data-ng-bind="article.user.username"></span>&nbsp;发表于
+							<span data-ng-bind="article.created | date:'yyyy-MM-dd hh:mm:ss'"></span>
+						</span>
+					</div>
+					<div class="article_content_top">
+						<p class="list-group-item-text" ng-bind-html="article.content | limitTo:200"></p><span class="text-muted">仅显示简介，详情请点击查看</span>
+					</div>
+				</a>
+				<!-- <div><a href="/#!/articles/{{item._id}}"><h3 data-ng-bind="item.title"></h3></a></div>
+				<div class="col-md-3 col-xs-3 border">
+					<div>
+						<a href="/#!/articles/{{item._id}}"><img src="{{item.main_img}}-260" alt=""></a>
+					</div>
+					<div ng-if="item.forum.name"><span>版块:</span><span data-ng-bind="item.forum.name"></span></div>
+					<div><span>分类:&nbsp;</span><span data-ng-bind="item.subcat"></span></div>
+					<div ng-if="item.comments"><span>回复数:</span><span data-ng-bind="item.comments.length"></span></div>
+					<div><span class="glyphicon glyphicon-eye-open"></span><span data-ng-bind="item.pv"></span>&nbsp;<span class="glyphicon glyphicon-star"></span><span data-ng-bind="item.like"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span><span data-ng-bind="item.collect"></span></div>
+				</div>
+				<div class="col-md-9 col-xs-9 ">
+					<p ng-bind-html="item.detail"></p>
+					<div class="text-right"><span>发表时间:&nbsp;</span><span data-ng-bind="item.created | date:'medium'"></span></div>
+				</div> -->
+			</div>
+		</div>
