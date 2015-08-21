@@ -189,6 +189,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Carts
+ */
+exports.count = function(req, res) {
+	Cart.count().exec(function(err, carts) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(carts);
+		}
+	});
+};
+
+/**
  * Modify a Cart
  */
 exports.modify = function(req, res) {

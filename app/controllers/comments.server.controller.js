@@ -95,6 +95,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Comments
+ */
+exports.count = function(req, res) {
+	Comment.count().exec(function(err, comments) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(comments);
+		}
+	});
+};
+
+/**
  *  count of User comments 
  */
 exports.userCount = function (req,res){

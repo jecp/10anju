@@ -69,6 +69,15 @@ angular.module('porders').controller('PordersController', ['$scope', '$http', '$
 			});
 		};
 
+		// Count of Porders
+		$scope.Count = function() {
+			$http.get('/porders/count').success(function (response){
+				$scope.pordersCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Porder
 		$scope.findOne = function() {
 			$scope.porder = Porders.get({ 

@@ -87,6 +87,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Porders
+ */
+exports.count = function(req, res) {
+	Porder.count().exec(function(err, porders) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(porders);
+		}
+	});
+};
+
+/**
  * List of Porders
  */
 exports.list = function(req, res) {

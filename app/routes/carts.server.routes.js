@@ -6,6 +6,9 @@ module.exports = function(app) {
 		carts = require('../../app/controllers/carts.server.controller');
 
 	// Carts Routes
+	app.route('/carts/count')
+		.get(visithistory.vh_log, carts.count);
+
 	app.route('/carts')
 		.get(visithistory.vh_log, carts.list)
 		.post(users.requiresLogin, visithistory.vh_log, carts.create);

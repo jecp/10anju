@@ -6,8 +6,11 @@ module.exports = function(app) {
 		goods = require('../../app/controllers/goods.server.controller');
 
 	// Goods Routes
+	app.route('/goods/count')
+		.get(visithistory.vh_log, goods.count);
+		
 	app.route('/goods')
-		.get(goods.list)
+		.get(visithistory.vh_log, goods.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.create);
 
 	app.route('/goods/:goodId')

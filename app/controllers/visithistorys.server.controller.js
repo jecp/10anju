@@ -86,6 +86,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Visithistorys
+ */
+exports.count = function(req, res) {
+	Visithistory.count().exec(function(err, visithistorys) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(visithistorys);
+		}
+	});
+};
+
+/**
  * Modify a Visithistory
  */
 exports.modify = function(req, res) {
@@ -148,46 +163,53 @@ exports.vh_log = function(req, res, next) {
 	logObj.customOs = req.headers['user-agent'].split(') ')[0]+')';
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
-	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
-		areaObj = JSON.parse(body);
-		if (err){console.log(err);}
-		else if(areaObj.code === 1){
-			return;
-		}
-		logObj.customCountry = areaObj.data.country;
-		logObj.customCountry_id = areaObj.data.country_id;
-		logObj.customArea = areaObj.data.area;
-		logObj.customArea_id = areaObj.data.area_id;
-		logObj.customRegion = areaObj.data.region;
-		logObj.customRegion_id = areaObj.data.region_id;
-		logObj.customCity = areaObj.data.city;
-		logObj.customCity_id = areaObj.data.city_id;
-		logObj.customIsp = areaObj.data.isp;
-		logObj.customIsp_id = areaObj.data.isp_id;
 
-		if (req.user && req.user !== undefined){
-			Visithistory.findOne({user:req.user._id,originalUrl:req.originalUrl},function (err,visithistory){
-				if (err) {console.log(err);} 
-				else if (visithistory){
-					return;
-				}else{
-					logObj.save(function (err,visithistory) {
-						if (err) {console.log(err);}
-					});
-				}
-			});
-		} else{
-			Visithistory.findOne({sessionID:req.sessionID,originalUrl:req.originalUrl},function (err,visithistory){
-				if (err) {console.log(err);} 
-				else if (visithistory){
-					return;
-				} else{
-					logObj.save(function (err,visithistory) {
-						if (err) {console.log(err);}
-					});
-				}
-			});
-		}
+	if (req.user && req.user !== undefined){
+		Visithistory.findOne({user:req.user._id,originalUrl:req.originalUrl},function (err,visithistory,next){
+			if (err) {console.log(err);} 
+			else if (visithistory){
+				return;
+			}else{
+				next;
+			}
+		});
+	} else{
+		Visithistory.findOne({sessionID:req.sessionID,originalUrl:req.originalUrl},function (err,visithistory,next){
+			if (err) {console.log(err);} 
+			else if (visithistory){
+				return;
+			} else{
+				next;
+			}
+		});
+	}
+
+	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
+		if (err){console.log(err);}
+		else if(body){
+			if(_.startsWith(body,'<')) {
+				return;
+			}
+			else{
+				areaObj = JSON.parse(body);
+				if (areaObj.code === 1){return;}
+
+				logObj.customCountry = areaObj.data.country;
+				logObj.customCountry_id = areaObj.data.country_id;
+				logObj.customArea = areaObj.data.area;
+				logObj.customArea_id = areaObj.data.area_id;
+				logObj.customRegion = areaObj.data.region;
+				logObj.customRegion_id = areaObj.data.region_id;
+				logObj.customCity = areaObj.data.city;
+				logObj.customCity_id = areaObj.data.city_id;
+				logObj.customIsp = areaObj.data.isp;
+				logObj.customIsp_id = areaObj.data.isp_id;
+
+				logObj.save(function (err,visithistory) {
+					if (err) {console.log(err);}
+				});	
+			}
+		} 
 	});
 
 	next();

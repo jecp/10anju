@@ -128,6 +128,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Orders
+ */
+exports.count = function(req, res) {
+	Order.count().exec(function(err, orders) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(orders);
+		}
+	});
+};
+
+/**
  * Modify a Order
  */
 exports.modify = function(req, res) {

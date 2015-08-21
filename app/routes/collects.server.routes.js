@@ -21,7 +21,7 @@ module.exports = function(app) {
 	app.route('/collects/admin/list')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, collects.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, collects.modify);
-		
+
 	// Finish by binding the Collect middleware
 	app.param('collectId', collects.collectByID);
 };

@@ -84,6 +84,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Ccenters
+ */
+exports.count = function(req, res) {
+	Ccenter.count().exec(function(err, ccenters) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(ccenters);
+		}
+	});
+};
+
+/**
  * Modify a Ccenter
  */
 exports.modify = function(req, res) {

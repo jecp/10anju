@@ -25,7 +25,8 @@ module.exports = function(app) {
 	app.route('/users_ccenter/').post(visithistory.vh_log, users.register);
 
 	// User count
-	// app.route('/user_count').get(users.myCount);
+	app.route('/users/count')
+		.get(visithistory.vh_log, users.count);;
 
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(visithistory.vh_log, users.signup);

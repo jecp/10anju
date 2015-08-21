@@ -82,6 +82,15 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			});
 		};
 
+		// Count of Carts
+		$scope.Count = function() {
+			$scope.cartsCount = $http.get('/carts/count').success(function (response){
+				$scope.cartsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Cart
 		$scope.findOne = function() {
 			$scope.cart = Carts.get({ 

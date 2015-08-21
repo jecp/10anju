@@ -205,6 +205,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * Count of Subjects
+ */
+exports.count = function(req, res) {
+	Subject.count().exec(function(err, subjects) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(subjects);
+		}
+	});
+};
+
+/**
  * Modify a Subject
  */
 exports.modify = function(req, res) {

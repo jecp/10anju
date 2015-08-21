@@ -76,6 +76,15 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 			});
 		};
 
+		// Count of Comments
+		$scope.Count = function() {
+			$http.get('/comments/count').success(function (response){
+				$scope.commentsCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Comment
 		$scope.findOne = function() {
 			$scope.comment = Comments.get({ 

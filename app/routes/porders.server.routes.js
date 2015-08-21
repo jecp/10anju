@@ -6,6 +6,9 @@ module.exports = function(app) {
 		porders = require('../../app/controllers/porders.server.controller');
 
 	// Porders Routes
+	app.route('/porders/count')
+		.get(visithistory.vh_log, porders.count);
+
 	app.route('/porders')
 		.get(visithistory.vh_log, porders.list)
 		.post(users.requiresLogin, visithistory.vh_log, porders.create);

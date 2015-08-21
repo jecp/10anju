@@ -10,6 +10,9 @@ module.exports = function(app) {
 		articles = require('../../app/controllers/articles.server.controller');
 
 	// Article Routes
+	app.route('/articles/count')
+		.get(visithistory.vh_log, articles.count);
+
 	app.route('/articles')
 		.get(visithistory.vh_log, articles.list)
 		.post(users.requiresLogin, visithistory.vh_log, articles.create);

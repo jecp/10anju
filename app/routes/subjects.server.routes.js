@@ -9,6 +9,9 @@ module.exports = function(app) {
 	app.route('/subjects/userCount')
 		.get(users.requiresLogin, visithistory.vh_log, subjects.userCount);
 
+	app.route('/subjects/count')
+		.get(visithistory.vh_log, subjects.count);
+
 	app.route('/subjects')
 		.get(visithistory.vh_log, subjects.list)
 		.post(users.requiresLogin, visithistory.vh_log, subjects.create);

@@ -157,6 +157,15 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			});
 		};
 		
+		// Count of Orders
+		$scope.Count = function() {
+			$http.get('/orders/count').success(function (response){
+				$scope.ordersCount = response;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Update Order From admin list
 		$scope.modify = function() {
 			$http.post('/orders/admin/list', this.order).success(function (response){

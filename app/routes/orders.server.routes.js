@@ -7,6 +7,9 @@ module.exports = function(app) {
 		alipay = require('../../app/controllers/alipay.server.controller');
 
 	// Orders Routes
+	app.route('/orders/count')
+		.get(visithistory.vh_log, orders.count);
+		
 	app.route('/orders')
 		.get(users.requiresLogin, visithistory.vh_log, orders.list)
 		.post(users.requiresLogin, visithistory.vh_log, orders.create);

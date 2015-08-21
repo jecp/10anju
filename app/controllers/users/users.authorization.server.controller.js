@@ -22,6 +22,21 @@ exports.userByID = function(req, res, next, id) {
 };
 
 /**
+ * Count of Users
+ */
+exports.count = function(req, res) {
+	User.count().exec(function(err, users) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(users);
+		}
+	});
+};
+
+/**
  * Require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {

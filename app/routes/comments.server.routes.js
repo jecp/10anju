@@ -9,6 +9,9 @@ module.exports = function(app) {
 	app.route('/comments/userCount')
 		.get(users.requiresLogin, visithistory.vh_log, comments.userCount);
 
+	app.route('/comments/count')
+		.get(visithistory.vh_log, comments.count);
+
 	app.route('/comments')
 		.get(comments.list)
 		.post(users.requiresLogin, visithistory.vh_log, comments.create);

@@ -5,6 +5,9 @@ module.exports = function(app) {
 	var visithistorys = require('../../app/controllers/visithistorys.server.controller');
 
 	// Visithistorys Routes
+	app.route('/visithistorys/count')
+		.get(visithistorys.vh_log, visithistorys.count);
+
 	app.route('/visithistorys')
 		.get(visithistorys.list)
 		.post(users.requiresLogin, visithistorys.create);

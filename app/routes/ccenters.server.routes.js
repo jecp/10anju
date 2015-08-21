@@ -6,6 +6,9 @@ module.exports = function(app) {
 		ccenters = require('../../app/controllers/ccenters.server.controller');
 
 	// Ccenters Routes
+	app.route('/ccenters/count')
+		.get(visithistory.vh_log, ccenters.count);
+
 	app.route('/ccenters')
 		.get(visithistory.vh_log, ccenters.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, ccenters.create);
