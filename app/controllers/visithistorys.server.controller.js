@@ -169,8 +169,6 @@ exports.vh_log = function(req, res, next) {
 			if (err) {console.log(err);} 
 			else if (visithistory){
 				return;
-			}else{
-				next
 			}
 		});
 	} else{
@@ -178,9 +176,7 @@ exports.vh_log = function(req, res, next) {
 			if (err) {console.log(err);} 
 			else if (visithistory){
 				return;
-			} else{
-				next
-			}
+			} 
 		});
 	}
 
