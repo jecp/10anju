@@ -5,7 +5,10 @@
  */
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+	Collect = mongoose.model('Collect'),
+	Good = mongoose.model('Good'),
+	Ccenter = mongoose.model('Ccenter');
 
 /**
  * User middleware
@@ -13,11 +16,22 @@ var _ = require('lodash'),
 exports.userByID = function(req, res, next, id) {
 	User.findOne({
 		_id: id
-	}).populate('collect','good article subject').populate('ccenter').exec(function(err, user) {
+	}).populate('collect','goods articles subjects').populate('ccenter').exec(function(err, user) {
 		if (err) return next(err);
 		if (!user) return next(new Error('Failed to load User ' + id));
 		req.profile = user;
 		next();
+	});
+};
+
+/**
+ * Show the current user
+ */
+exports.read = function(req, res) {
+	var userId = req.query.userId;
+	User.findOne({_id:userId}).populate('collect','goods articles subjects').populate('ccenter','name').exec(function (err,user){
+		if (err) {console.log(err);}
+		return res.json(user);
 	});
 };
 

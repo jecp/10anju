@@ -25,7 +25,7 @@ exports.update = function(req, res) {
 		// Merge existing user
 		user = _.extend(user, req.body);
 		user.updated = Date.now();
-		user.displayName = user.firstName + ' ' + user.lastName;
+		// user.displayName = user.firstName + ' ' + user.lastName;
 
 		user.save(function(err) {
 			if (err) {
@@ -78,23 +78,6 @@ exports.register = function(req, res) {
 		}
 	}
 };
-
-/**
- * Count of User Subjects
- */
-// exports.myCount = function(req, res) {
-// 	console.log(req.user);
-
-// 	User.findOne({user:req.user}).populate('comment').populate('subject').populate('collect').exec(function (err, user) {
-// 		if (err) {
-// 			return res.status(400).send({
-// 				message: errorHandler.getErrorMessage(err)
-// 			});
-// 		} else {
-// 			res.jsonp(user);
-// 		}
-// 	});
-// };
 
 /**
  * Send User

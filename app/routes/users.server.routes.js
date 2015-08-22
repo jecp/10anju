@@ -12,7 +12,9 @@ module.exports = function(app) {
 
 	// Setting up the users profile api
 	app.route('/users/me').get(visithistory.vh_log, users.me);
-	app.route('/users').put(visithistory.vh_log, users.update);
+	app.route('/users')
+		.put(visithistory.vh_log, users.update)
+		.get(visithistory.vh_log, users.read);;
 	app.route('/users/accounts').delete(visithistory.vh_log, users.removeOAuthProvider);
 
 	// Setting up the users password api
@@ -26,7 +28,7 @@ module.exports = function(app) {
 
 	// User count
 	app.route('/users/count')
-		.get(visithistory.vh_log, users.count);;
+		.get(visithistory.vh_log, users.count);
 
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(visithistory.vh_log, users.signup);

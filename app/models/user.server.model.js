@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function(property) {
-	return ((this.provider !== 'local' && !this.updated) || property.length);
+	return ((this.provider !== 'local' && !this.updated) || property.length || undefined);
 };
 
 /**
@@ -129,14 +129,6 @@ var UserSchema = new Schema({
 	following:[{
 		type:Schema.ObjectId,
 		ref:'User'
-	}],
-	subject:[{
-		type:Schema.ObjectId,
-		ref:'Subject'
-	}],
-	comment: [{
-		type:Schema.ObjectId,
-		ref:'comment'
 	}],
 	collect: {
 		type:Schema.ObjectId,

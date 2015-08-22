@@ -72,21 +72,6 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Porders
- */
-exports.list = function(req, res) { 
-	Porder.find().sort('-created').populate('user', 'displayName').exec(function(err, porders) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(porders);
-		}
-	});
-};
-
-/**
  * Count of Porders
  */
 exports.count = function(req, res) {

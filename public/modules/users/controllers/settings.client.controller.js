@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$stateParams', '$location', 'Users', 'Authentication',
+	function($scope, $http, $stateParams, $location, Users, Authentication) {
 		$scope.user = Authentication.user;
 
 		// If user is not signed in then redirect back home
@@ -79,15 +79,15 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Change user profile
 		$scope.changeUserProfile = function() {
-				$scope.success = $scope.error = null;
-				var user = new Users($scope.userProfile);
+			$scope.success = $scope.error = null;
+			var user = new Users($scope.userProfile);
 
-				user.$update(function(response) {
-					$scope.success = true;
-					Authentication.user = response;
-				}, function(response) {
-					$scope.error = response.data.message;
-				});
+			user.$update(function(response) {
+				$scope.success = true;
+				Authentication.user = response;
+			}, function(response) {
+				$scope.error = response.data.message;
+			});
 		};
 
 		// Change user password
@@ -99,6 +99,13 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.passwordDetails = null;
 			}).error(function(response) {
 				$scope.error = response.message;
+			});
+		};
+
+		// Find existing User
+		$scope.findOne = function() {
+			$scope.user = Users.get({ 
+				userId: $stateParams.userId
 			});
 		};
 	}

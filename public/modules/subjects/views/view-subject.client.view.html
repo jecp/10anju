@@ -16,10 +16,10 @@
 						<div class="">
 							<div class="col-md-3 col-xs-3 fl" style="border-right:1px dashed #ccc;">
 								<div style="margin:15px;">
-									<a href="">
+									<a href="/#!/users/{{subject.user._id}}">
 										<img src="{{subject.user.avatar}}" alt="" style="max-width:48px;">
 									</a>
-									<div><p><i class="glyphicon glyphicon-user"></i>&nbsp;<a href=""><span data-ng-bind="subject.user.username"></span></a></p></div>
+									<div><p><i class="glyphicon glyphicon-user"></i>&nbsp;<a href="/#!/users/{{subject.user._id}}"><span data-ng-bind="subject.user.username"></span></a></p></div>
 									<p><i class="glyphicon glyphicon-time"></i>&nbsp;<span data-ng-bind="subject.user.created | date:'mediumDate'"></span></p>
 								</div>
 								<div class="">							

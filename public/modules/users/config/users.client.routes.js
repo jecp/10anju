@@ -49,6 +49,10 @@ angular.module('users').config(['$stateProvider',
 			url: '/usercenter',
 			templateUrl: 'modules/users/views/usercenter.client.view.html'
 		})
+		.state('viewUser', {
+			url: '/users/:userId',
+			templateUrl: 'modules/users/views/usercenter.client.view.html'
+		})
 		.state('upload_avatar',{
 			url: '/upload_avatar',
 			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'

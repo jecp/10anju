@@ -31,27 +31,33 @@
 		<!-- add -->
 		<div class="col-md-8 pull-right">
 			<div class="breadcrumb"><strong>Tips:</strong><span>在这里可以上传头像，查看/修改个人资料</span></div>
-			<form class="form-horizontal" autocomplete="off" novalidate>
-				<fieldset>
-					<div class="form-group">
-						<label for="" >头像</label>
-						<input type="text" data-ng-model="userProfile.avatar" id="avatar" class="form-control" placeholder="头像地址">
-					</div>
-					<div class="form-group">
-						<label for="email">邮箱</label>
-						<input type="email" id="email" name="email" class="form-control" data-ng-model="userProfile.email" placeholder="邮箱">
-					</div>
-					<div class="text-center form-group">
-						<button type="submit" ng-click="changeUserProfile()" class="btn btn-block btn-primary">保存</button>
-					</div>
-					<div data-ng-show="success" class="text-center text-success">
-						<strong>密码修改成功！</strong>
-					</div>
-					<div data-ng-show="error" class="text-center text-danger">
-						<strong data-ng-bind="error"></strong>
-					</div>
-				</fieldset>
-			</form>
+			<div class="col-md-12 col-xs-12">
+				<form class="form-horizontal" autocomplete="off" novalidate>
+					<fieldset>
+						<div class="form-group">
+							<label class="controls-label col-xs-2 col-md-2" for="avatar">头像:</label>
+							<div class="col-md-10 col-xs-10"><input type="text" data-ng-model="userProfile.avatar" id="avatar" class="form-control" placeholder="头像地址"></div>
+						</div>
+						<div class="form-group">
+							<label class="controls-label col-xs-2 col-md-2" for="email">邮箱:</label>
+							<div class="col-md-10 col-xs-10"><input type="email" id="email" name="email" class="form-control" data-ng-model="userProfile.email" placeholder="邮箱"></div>
+						</div>
+						<div class="form-group">
+							<label class="controls-label col-xs-2 col-md-2" for="displayName">昵称:</label>
+							<div class="col-md-10 col-xs-10"><input type="displayName" id="displayName" name="displayName" class="form-control" data-ng-model="userProfile.displayName" placeholder="昵称"></div>
+						</div>
+						<div class="text-center form-group">
+							<button type="submit" ng-click="changeUserProfile()" class="btn btn-block btn-primary">保存</button>
+						</div>
+						<div data-ng-show="success" class="text-center text-success">
+							<strong>修改成功！</strong>
+						</div>
+						<div data-ng-show="error" class="text-center text-danger">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</fieldset>
+				</form>
+			</div>
 		</div>
 	</div>
 </section>
