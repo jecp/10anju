@@ -170,7 +170,7 @@ exports.vh_log = function(req, res, next) {
 			else if (visithistory){
 				return;
 			}else{
-				next();
+				next
 			}
 		});
 	} else{
@@ -179,7 +179,7 @@ exports.vh_log = function(req, res, next) {
 			else if (visithistory){
 				return;
 			} else{
-				next();
+				next
 			}
 		});
 	}
