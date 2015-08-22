@@ -119,6 +119,16 @@ exports.read = function(req, res) {
 };
 
 /**
+ * Edit the good
+ */
+exports.edit = function (req,res){
+	Good.findOne({_id:req.query.goodId},function (err,good){
+		if(err){console.log(err);}
+		res.send(good);
+	})	
+};
+
+/**
  * Update a Good
  */
 exports.update = function(req, res) {

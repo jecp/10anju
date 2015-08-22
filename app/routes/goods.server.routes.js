@@ -13,6 +13,9 @@ module.exports = function(app) {
 		.get(visithistory.vh_log, goods.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.create);
 
+	app.route('/goods/edit')
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.edit);
+
 	app.route('/goods/:goodId')
 		.get(visithistory.vh_log, goods.read)
 		.put(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.update)

@@ -17,10 +17,6 @@ angular.module('carts').config(['$stateProvider',
 			url: '/carts/:cartId',
 			templateUrl: 'modules/carts/views/view-cart.client.view.html'
 		}).
-		state('editCart', {
-			url: '/carts/:cartId/edit',
-			templateUrl: 'modules/carts/views/edit-cart.client.view.html'
-		}).
 		state('myCart', {
 			url: '/my/cart',
 			templateUrl: 'modules/carts/views/my-cart.client.view.html'

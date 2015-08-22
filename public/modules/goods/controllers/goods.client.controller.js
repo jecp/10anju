@@ -97,11 +97,11 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Edit list Good
 		$scope.edit = function() {
-			var good = $scope.good;
-			good.$update(function() {
-				$location.path('goods/' + good._id);
-			}, function (errorResponse){
-				$scope.error = errorResponse.data.message;
+			$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
+				$scope.good = response;
+			}).error(function(response){				
+				$scope.error = response.message;
+				$location.path('goods');
 			});
 		};
 
@@ -157,19 +157,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				subcat: $stateParams.subcat
 			});
 		};
-
-		// // like
-		// $scope.like = function (good) {
-		// 	var _good = $scope.good;
-
-		// 	$http.post('/goods_like', _good).success(function (response){
-		// 		$scope.like += 1;
-		// 		$scope.success = true;
-		// 		$location.path('goods/' + _good._id);
-		// 	}).error(function(response){
-		// 		$scope.error = response.message;
-		// 	});
-		// };
 
 		// search function
 		$scope.search = function(keyword) {
