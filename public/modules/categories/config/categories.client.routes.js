@@ -17,10 +17,6 @@ angular.module('categories').config(['$stateProvider',
 			url: '/categories/:categoryId',
 			templateUrl: 'modules/categories/views/view-category.client.view.html'
 		}).
-		state('editCategory', {
-			url: '/categories/:categoryId/edit',
-			templateUrl: 'modules/categories/views/edit-category.client.view.html'
-		}).
 		state('adminListCategories', {
 			url: '/categories/admin/list',
 			templateUrl: 'modules/categories/views/admin-list-categories.client.view.html'

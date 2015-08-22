@@ -13,10 +13,6 @@ angular.module('likes').config(['$stateProvider',
 			url: '/likes/create',
 			templateUrl: 'modules/likes/views/create-like.client.view.html'
 		}).
-		state('viewLike', {
-			url: '/likes/:likeId',
-			templateUrl: 'modules/likes/views/view-like.client.view.html'
-		}).
 		state('editLike', {
 			url: '/likes/:likeId/edit',
 			templateUrl: 'modules/likes/views/edit-like.client.view.html'

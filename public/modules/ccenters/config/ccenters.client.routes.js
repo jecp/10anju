@@ -17,10 +17,6 @@ angular.module('ccenters').config(['$stateProvider',
 			url: '/ccenters/:ccenterId',
 			templateUrl: 'modules/ccenters/views/view-ccenter.client.view.html'
 		}).
-		state('editCcenter', {
-			url: '/ccenters/:ccenterId/edit',
-			templateUrl: 'modules/ccenters/views/edit-ccenter.client.view.html'
-		}).
 		state('adminListCcenters', {
 			url: '/ccenters/admin/list',
 			templateUrl: 'modules/ccenters/views/admin-list-ccenters.client.view.html'

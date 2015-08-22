@@ -17,10 +17,6 @@ angular.module('visithistorys').config(['$stateProvider',
 			url: '/visithistorys/:visithistoryId',
 			templateUrl: 'modules/visithistorys/views/view-visithistory.client.view.html'
 		}).
-		state('editVisithistory', {
-			url: '/visithistorys/:visithistoryId/edit',
-			templateUrl: 'modules/visithistorys/views/edit-visithistory.client.view.html'
-		}).
 		state('adminListVisithistorys', {
 			url: '/visithistorys/admin/list',
 			templateUrl: 'modules/visithistorys/views/admin-list-visithistorys.client.view.html'
