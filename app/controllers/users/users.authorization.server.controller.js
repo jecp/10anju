@@ -40,10 +40,7 @@ exports.read = function(req, res) {
  */
 exports.count = function(req, res) {
 	User.count().exec(function(err, users) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+		if (err) {console.log(err);
 		} else {
 			res.json(users);
 		}
