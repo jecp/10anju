@@ -30,7 +30,6 @@ var GoodSchema = new Schema({
 	},
 	category:{type:Schema.ObjectId,ref:'Category'},
 	subcat:{type:String,default:'',trim: true},
-	article:[{type:Schema.ObjectId,ref:'Article'}],
 	title:{
 		type:String,
 		default: '',
@@ -45,7 +44,7 @@ var GoodSchema = new Schema({
 	},
 	spec:{
 		type:String,
-		default: '',
+		default: 'g',
 		required: '请填写商品规格',///Please fill Good spec
 		trim: true
 	},
@@ -70,19 +69,16 @@ var GoodSchema = new Schema({
 	origin:{
 		type:String,
 		default: '',
-		required: '请填写商品产地/Please fill Good origin',
 		trim: true
 	},
 	delivery:{
 		type:String,
-		default: '',
-		required: '请填写商品配送方式/Please fill Good delivery',
+		default: '小区直配',
 		trim: true
 	},
 	detail:{
 		type:String,
 		default: '',
-		required: '请填写商品详情/Please fill Good detail',
 		trim: true
 	},
 	main_img:{
@@ -136,11 +132,6 @@ var GoodSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	collocation:[{
-		type:String,
-		default: '',
-		trim: true
-	}],
 	for_free:{
 		type:Boolean,
 		default: false
@@ -167,16 +158,16 @@ var GoodSchema = new Schema({
 	}
 });
 
-// // var ObjectId = mongoose.Schema.Types.ObjectId
-// GoodSchema.pre('save', function(next) {
-//   if (this.isNew) {
-//     this.created = this.updated = Date.now;
-//   }
-//   else {
-//     this.updated = Date.now;
-//   }
+// var ObjectId = mongoose.Schema.Types.ObjectId
+GoodSchema.pre('save', function(next) {
+  if (this.isNew) {
+    this.created = this.updated = Date.now;
+  }
+  else {
+    this.updated = Date.now;
+  }
 
-//   next();
-// });
+  next();
+});
 
 mongoose.model('Good', GoodSchema);

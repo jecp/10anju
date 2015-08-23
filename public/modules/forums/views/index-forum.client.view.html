@@ -4,7 +4,7 @@
 			<img src="http://cdn.fds.api.xiaomi.com/b2c-bbs-cms/2015/0803/20150803030654725.png" alt="">
 		</div> -->
 		<div class="" style="margin-top:15px;">
-			<div class="col-md-8 col-xs-8">			
+			<div class="col-md-8 col-xs-12">			
 				<div class="panel panel-default" data-ng-repeat="forum in forums">
 					<div class="panel-heading">
 						<a href="/#!/forums/{{forum._id}}"><span class="h3" data-ng-bind="forum.name"></span><span class="pull-right" data-ng-bind="forum.content"></span></a>
@@ -19,7 +19,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4 col-xs-4">
+			<div class="col-md-4 col-xs-12">
 				<div data-ng-include="'/modules/subjects/views/my-subject-count.client.view.html'"></div>
 				<div>
 					<div class="panel panel-default">

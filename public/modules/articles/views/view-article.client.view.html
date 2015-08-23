@@ -1,6 +1,6 @@
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
 	<div class="col-md-12 col-xs-12 mt20">
-		<div class="col-md-9">
+		<div class="col-md-9 col-xs-12">
 			<div class="page-header">
 				<div class="h3" data-ng-bind="article.title"></div>
 				<div class="text-right">
@@ -26,7 +26,7 @@
 			<p class="lead" ng-bind-html="article.content"></p>
 			<div ng-if="authentication.user.username !== undefined" ng-include="'modules/comments/views/create-comment.client.view.html'"></div>
 		</div>
-		<div class="col-md-3" data-ng-controller="GoodsController">
+		<div class="col-md-3 col-xs-12" data-ng-controller="GoodsController">
 			<div class="article_right_goods">
 				<div class="good_detail_samecat">
 					<ul class="breadcrumb text-right">同类精选<span class="glyphicon glyphicon-thumbs-up"></span></ul>

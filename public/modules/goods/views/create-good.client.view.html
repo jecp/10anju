@@ -3,7 +3,7 @@
         <h1>新建商品，标记为*的为必填项</h1>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 col-xs-12">
             <form class="" novalidate>
                 <fieldset>
                     <div class="form-group col-md-12" data-ng-controller="CategoriesController" data-ng-init="find()">
@@ -40,9 +40,6 @@
                             <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required>
                         </div>
                     </div>
-                    <div id="editormd">
-                        <textarea style="display:none;">### Hello Editor.md !</textarea>
-                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label" for="summary">商品简介*</label>
                         <div class="controls">
@@ -50,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="weight">净重</label>
+                        <label class="control-label" for="weight">净重*</label>
                         <div class="controls">
                             <input type="text" data-ng-model="weight" id="weight" class="form-control" placeholder="净重" required>
                         </div>
@@ -74,9 +71,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="delivery">配送方式*</label>
+                        <label class="control-label" for="delivery">配送方式</label>
                         <div class="controls">
-                            <input type="text" data-ng-model="delivery" id="delivery" class="form-control" placeholder="配送方式" required>
+                            <input type="text" data-ng-model="delivery" id="delivery" class="form-control" placeholder="配送方式，默认为小区直配" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -92,7 +89,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" for="stock">库存*</label>
+                        <label class="control-label" for="stock">库存</label>
                         <div class="controls">
                             <input type="text" data-ng-model="stock" id="stock" class="form-control" placeholder="库存" required>
                         </div>
@@ -104,7 +101,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label" for="detail">详细描述*</label>
+                        <label class="control-label" for="detail">详细描述</label>
                         <div class="controls">
                             <textarea type="text" data-ng-model="detail" id="detail" class="form-control" placeholder="详细描述" required></textarea>
                         </div>
@@ -178,7 +175,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="col-md-4 realtime_show">
+        <div class="col-md-4 col-xs-12 realtime_show">
             <div><p ng-bind-html="category"></p></div>
             <div><p data-ng-bind="catId"></p></div>
             <div><p ng-bind-html="subcat"></p></div>

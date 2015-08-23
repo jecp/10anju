@@ -26,7 +26,11 @@ module.exports = function(app) {
 
 	app.route('/goods/admin/list')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.list)
-		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.modify);
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.modify)
+		.delete(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.delete);
+
+	app.route('/goods/admin/delete')
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.del);
 
 	app.route('/search').post(visithistory.vh_log, goods.results);
 

@@ -78,8 +78,16 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 					}
 				}
 			} else {
-				$scope.good.$remove(function() {
-					$location.path('goods');
+				var goodObj = this.good;
+				$http.post('/goods/admin/delete',goodObj).success(function (response){
+					for (var i in $scope.goods) {
+						if ($scope.goods [i] === goodObj) {
+							$scope.goods.splice(i, 1);
+						}
+					}
+					$scope.success = true;
+				}).error(function (response){
+					$scope.error = response.message;
 				});
 			}
 		};
@@ -131,6 +139,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Update Good From admin list
 		$scope.modify = function() {
 			$http.post('/goods/admin/list', this.good).success(function (response){
+				$location.path('goods/'+response._id);
 				$scope.success = true;
 			}).error(function(response){
 				$scope.error = response.message;
@@ -170,21 +179,17 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		};
 
 		// Remove existing Good
-		$scope.del = function(good) {
-			var good_ = this.good;
-			if ( good_ ) { 
-				good_.$remove();
-
-				for (var i in $scope.goods) {
-					if ($scope.goods [i] === good_) {
-						$scope.goods.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.good_.$remove(function() {
-					$location.path('goods');
-				});
-			}
-		};
+		// $scope.del = function() {
+		// 	$http.get('/goods/admin/delete',{this.good._id}).success(function (response){
+		// 		for (var i in $scope.goods) {
+		// 			if ($scope.goods [i] === this.good) {
+		// 				$scope.goods.splice(i, 1);
+		// 			}
+		// 		}
+		// 		$scope.success = true;
+		// 	}).error(function (response){
+		// 		$scope.error = response.message;
+		// 	});
+		// };
 	}
 ]);

@@ -65,6 +65,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 			$scope.articles = Articles.query();
 		};
 
+		$scope.findNotice = function() {
+			$scope.articles = Articles.query({
+				subcat : '公告'
+			});
+		};
+
 		// Admin list of Goods
 		$scope.list = function() {
 			$http.get('/articles/admin/list').success(function (response){

@@ -165,7 +165,7 @@
 			<!-- header end -->
 			<div class="good_detail_nav_content">
 				<div class="detail_attr">
-					<dl ng-if="good.suitable">
+					<dl ng-if="good.suitable.length > 1">
 						<dt>适宜人群</dt>
 						<dd><span data-ng-repeat="item in good.suitable">
 								<a href="#">
@@ -174,7 +174,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl ng-if="good.feature">
+					<dl ng-if="good.feature.length > 1">
 						<dt>功效</dt>
 						<dd><span data-ng-repeat="item in good.feature">
 								<a href="#">
@@ -183,7 +183,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl ng-if="good.therapy">
+					<dl ng-if="good.therapy.length > 1">
 						<dt>适用疾病</dt>
 						<dd><span data-ng-repeat="item in good.therapy">
 								<a href="#">
@@ -192,7 +192,7 @@
 							</span>
 						</dd>
 					</dl>
-					<dl ng-if="good.avoid">
+					<dl ng-if="good.avoid !== ''">
 						<dt>禁忌</dt>
 						<dd><span>
 								<a href="#">
@@ -295,20 +295,20 @@
 				<ul class="breadcrumb text-right">精彩推荐<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 				<!-- accordion begin -->
 				<accordion close-others="oneAtATime">
-					<accordion-group ng-if="good.wiki !== null" is-open="status.FirstOpen" is-disabled="status.isDisabled">
-						<accordion-heading>小百科</accordion-heading>{{good.wiki}}
+					<accordion-group ng-if="good.wiki !== undefined" is-open="status.FirstOpen" is-disabled="status.isDisabled">
+						<accordion-heading>小百科</accordion-heading><span data-ng-bind="good.wiki"></span>
 					</accordion-group>
-					<accordion-group ng-if="good.suitable.length > 0" is-open="status.open">
+					<accordion-group ng-if="good.suitable.length > 1" is-open="status.open">
 						<accordion-heading>适宜人群
-						</accordion-heading><a href="" data-ng-repeat="item in good.suitable"><label for=""><span>&nbsp;{{item}}&nbsp;</span></label></a>
+						</accordion-heading><a href="" data-ng-repeat="item in good.suitable"><label for=""><span data-ng-bind="item"></span>&nbsp;</label></a>
 					</accordion-group>
-					<accordion-group ng-if="good.therapy.length > 0" is-open="status.open">
+					<accordion-group ng-if="good.therapy.length > 1" is-open="status.open">
 						<accordion-heading>适用疾病
-						</accordion-heading><a href="" data-ng-repeat="item in good.therapy"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
+						</accordion-heading><a href="" data-ng-repeat="item in good.therapy"><label for="" ><span data-ng-bind="item"></span>&nbsp;</label></a>
 					</accordion-group>
-					<accordion-group ng-if="good.feature.length > 0" is-open="status.close">
+					<accordion-group ng-if="good.feature.length > 1" is-open="status.close">
 						<accordion-heading>功效
-						</accordion-heading><a href="" data-ng-repeat="item in good.feature"><label for="" ><span >&nbsp;{{item}}&nbsp;</span></label></a>
+						</accordion-heading><a href="" data-ng-repeat="item in good.feature"><label for="" ><span data-ng-bind="item"></span>&nbsp;</label></a>
 					</accordion-group>
 				</accordion>
 				<!-- accordion end -->

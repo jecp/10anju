@@ -270,13 +270,27 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Del an Good
+ */
+exports.del = function(req, res) {
+	Good.findOneAndRemove({_id:req.body._id},function (err,cb) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+		res.send(cb);
+	});
+};
+
+/**
  * List of Goods
  */
 exports.list = function(req, res) {
 	var subcat = req.query.subcat;
 
 	if(subcat){
-		Good.find({'subcat':subcat}).populate('user', 'username').populate('category', 'name').sort('-updated').exec(function (err,goods){
+		Good.find({'subcat':subcat}).sort('-updated').exec(function (err,goods){
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
@@ -286,7 +300,7 @@ exports.list = function(req, res) {
 			}
 		});
 	} else {
-		Good.find().sort('-created').populate('user', 'username').populate('category', 'name').exec(function(err, goods) {
+		Good.find().sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
@@ -317,16 +331,18 @@ exports.count = function(req, res) {
  * Modify a Good
  */
 exports.modify = function(req, res) {
-	var goodObj = req.body;
-	Good.findOneAndUpdate({_id:goodObj._id},{subcat:goodObj.subcat,name:goodObj.name,title:goodObj.title,price:goodObj.price},function (err,good) {
-		if (err) {
-			console.log(err);
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(good);
-		}
+	Good.findOne({_id:req.body._id},function (err,good){
+		if(err){console.log(err);}
+		var goodObj = _.extend(good , req.body);
+		goodObj.user = req.user._id;
+		goodObj.img = req.body.img ? req.body.img.toString().split(',') : '';
+		goodObj.suitable = req.body.suitable ? req.body.suitable.toString().split(',') : '';
+		goodObj.therapy = req.body.therapy ? req.body.therapy.toString().split(',') : '';
+		goodObj.feature = req.body.feature? req.body.feature.toString().split(',') : '';
+		goodObj.save(function (err,good){
+			if(err){console.log(err);}
+			res.send(good);
+		});	
 	});
 };
 
