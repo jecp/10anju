@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div style="border-top: 1px dashed #ccc;margin: 15px;padding-top:5px;">
-                            <span class="text-muted row" data-ng-bind="subject.content | limitTo:30"></span>
+                            <span class="text-muted row" ng-bind-html="subject.content"></span>
                             <div class="text-right"><a href="/#!/subjects/{{subject._id}}">点击查看详情</a></div>
                         </div>
                     </td>

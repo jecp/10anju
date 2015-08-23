@@ -137,7 +137,8 @@ exports.edit = function (req,res){
 exports.update = function(req, res) {
 	var good = req.good ;
 	good = _.extend(good , req.body);
-	good.detail = markdown.toHTML(req.body.markdown);
+	good.detail = markdown.toHTML(req.good.markdown);
+	console.log(req.body+'\n'+req.good+'\n');
 	good.markdown = req.body.detail;
 
 	good.img = req.good.img ? req.good.img.toString().split(',') : '';
@@ -339,6 +340,8 @@ exports.modify = function(req, res) {
 	Good.findOne({_id:req.body._id},function (err,good){
 		if(err){console.log(err);}
 		var goodObj = _.extend(good , req.body);
+		good.detail = markdown.toHTML(req.body.markdown);
+
 		goodObj.user = req.user._id;
 		goodObj.img = req.body.img ? req.body.img.toString().split(',') : '';
 		goodObj.suitable = req.body.suitable ? req.body.suitable.toString().split(',') : '';
