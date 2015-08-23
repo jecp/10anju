@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 	Forum = mongoose.model('Forum'),
 	User = mongoose.model('User'),
 	_ = require('lodash'),
-	markdown = require("markdown").markdown;
+	markdown = require('markdown').markdown;
 
 /**
  * Create a Subject

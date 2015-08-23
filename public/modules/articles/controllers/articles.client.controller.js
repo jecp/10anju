@@ -12,8 +12,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 			});
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
-				$rootScope.title = response.title;
-
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

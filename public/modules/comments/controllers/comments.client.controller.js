@@ -69,7 +69,7 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 				obj:obj,
 				value:value
 			});
-		}
+		};
 
 		// User count of Comments
 		$scope.userCount = function() {

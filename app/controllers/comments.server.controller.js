@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 	Article = mongoose.model('Article'),
 	User = mongoose.model('User'),
 	_ = require('lodash'),
-	markdown = require("markdown").markdown;
+	markdown = require('markdown').markdown;
 
 /**
  * Create a Comment

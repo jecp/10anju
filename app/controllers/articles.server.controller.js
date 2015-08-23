@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 	Article = mongoose.model('Article'),
 	Like = mongoose.model('Like'),
 	_ = require('lodash'),
-	markdown = require("markdown").markdown;
+	markdown = require('markdown').markdown;
 
 /**
  * Create a article

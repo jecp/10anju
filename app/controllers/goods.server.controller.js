@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
 	Collect = mongoose.model('Collect'),
 	Visithistory = mongoose.model('Visithistory'),
 	_ = require('lodash'),
-	markdown = require("markdown").markdown;
+	markdown = require('markdown').markdown;
 
 /**
  * Create a Good
@@ -128,7 +128,7 @@ exports.edit = function (req,res){
 	Good.findOne({_id:req.query.goodId},function (err,good){
 		if(err){console.log(err);}
 		res.send(good);
-	})	
+	});
 };
 
 /**
