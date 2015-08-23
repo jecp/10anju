@@ -24,6 +24,7 @@
 				</em>
 			</small>
 			<p class="lead" ng-bind-html="article.content"></p>
+			<div data-ng-controller="CommentsController" ng-include="'modules/comments/views/list-comments.client.view.html'" onload="findByObj()"></div>
 			<div ng-if="authentication.user.username !== undefined" ng-include="'modules/comments/views/create-comment.client.view.html'"></div>
 		</div>
 		<div class="col-md-3 col-xs-12" data-ng-controller="GoodsController">

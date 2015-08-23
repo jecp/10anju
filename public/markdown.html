@@ -1,0 +1,31 @@
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple example - Editor.md examples</title>
+    </head>
+        <textarea name="content" data-provide="markdown" rows="10" placeholder="这里输入内容,支持Markdown语法.">></textarea>
+        <style type="text/css" scoped="scoped">
+            @import "dist/stylesheets/thinker-md.user.css";
+            @import "dist/stylesheets/thinker-md.vendor.css";
+            @import "dist/emoji/nature.css";
+            @import "dist/emoji/object.css";
+            @import "dist/emoji/people.css";
+            @import "dist/emoji/place.css";
+            @import "dist/emoji/Sysmbols.css";
+            @import "dist/emoji/twemoji.css";
+        </style>
+        <script src="lib/editor.md/examples/js/jquery.min.js" type="text/javascript"></script>
+        <script src="http://thinkermd.oschina.mopaas.com/dist/javascripts/thinker-md.vendor.min.js"></script>
+        <script>
+            $("textarea[data-provide='markdown']").markdown({
+                language: 'zh',
+                fullscreen: {
+                    enable: true
+                },
+                autofocus:true,
+                hideable:false,
+                resize: 'vertical',
+                localStorage: 'md',
+                imgurl: '/cors/upload/ajaxUpload',
+                base64url: '/cors/upload/base64Upload'
+            });
+        </script>

@@ -1,18 +1,18 @@
 <section data-ng-controller="CategoriesController" data-ng-init="findOne()">
     <div class="row col-md-12">
-        <div class="col-md-9">
+        <div class="col-md-9 col-xs-12">
             <div class="mt20"></div>
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
             <div class="goods_list_tip clearfix">
               <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in category.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
             </div>
             <div class="row good_list_all">
-                <div data-ng-repeat="good in category.goods" class="fl col-xs-3 col-md-3">
+                <div data-ng-repeat="good in category.goods" class="fl col-xs-6 col-md-3">
                     <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-12">
             <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
                 <div class="mt20">
                   <div class="panel panel-info">

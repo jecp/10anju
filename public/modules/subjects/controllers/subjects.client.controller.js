@@ -8,14 +8,12 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Create new Subject
 		$scope.create = function() {
 			// Create new Subject object
-			var _content = $('.editormd-preview-container').html();
-
 			var subject = new Subjects ({
 				name: this.name,
 				f: this.forum,
 				title: this.title,
 				subcat: this.subcat,
-				content: _content
+				content: this.content
 			});
 
 			// Redirect after save
@@ -60,18 +58,6 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
-		// Fulledit existing Subject
-		$scope.fulledit = function() {
-			var _content = $('.editormd-preview-container').html();
-
-			$http.post('/subjects/fulledit', {subject:$scope.subject,content:_content}).success(function (response){
-				$location.path('subjects/' + response._id);
-			}).error(function(response){
-				$scope.error = response.message;
-			});
-		};	
-
 
 		// Find a list of Subjects
 		$scope.find = function() {

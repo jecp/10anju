@@ -29,6 +29,9 @@ var ArticleSchema = new Schema({
 		default: '',
 		trim: true
 	},
+	markdown:{
+		type:String
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

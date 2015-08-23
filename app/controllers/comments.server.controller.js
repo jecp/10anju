@@ -7,17 +7,23 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Comment = mongoose.model('Comment'),
 	Subject = mongoose.model('Subject'),
+	Article = mongoose.model('Article'),
 	User = mongoose.model('User'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	markdown = require("markdown").markdown;
 
 /**
  * Create a Comment
  */
 exports.create = function(req, res) {
+	var obj = req.body.obj;
+
 	var comment = new Comment(req.body);
 	comment.user = req.user;
+	comment.content = markdown.toHTML(req.body.content);
 
-	if(req.body.subject){
+	if (obj === 'articles'){
+		comment.articles = req.body.value;
 		comment.save(function (err,comment) {
 			if (err) {
 				return res.status(400).send({
@@ -25,7 +31,18 @@ exports.create = function(req, res) {
 				});
 			} else {
 				res.send(comment);
-				Subject.findOneAndUpdate({_id:req.body.subject},{$inc:{pv:1},$push:{comment:comment._id}},function (err){
+			}
+		});
+	} else if(obj === 'subjects'){
+		comment.subjects = req.body.value;
+		comment.save(function (err,comment) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.send(comment);
+				Subject.findOneAndUpdate({_id:req.body.value},{$inc:{pv:1},$push:{comment:comment._id}},function (err){
 					if (err) {console.log(err);} 
 				});
 			}
@@ -79,16 +96,29 @@ exports.delete = function(req, res) {
 /**
  * List of Comments
  */
-exports.list = function(req, res) { 
-	Comment.find().sort('created').populate('user', 'username avatar created').exec(function(err, comments) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(comments);
-		}
-	});
+exports.list = function(req, res) {
+	var obj = req.query.obj;
+	if (obj === 'articles'){
+		Comment.find({articles:req.query.value}).sort('created').populate('user', 'username avatar created').exec(function(err, comments) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(comments);
+			}
+		});
+	}else if(obj === 'subjects'){
+		Comment.find({subjects:req.query.value}).sort('created').populate('user', 'username avatar created').exec(function(err, comments) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(comments);
+			}
+		});
+	}
 };
 
 /**

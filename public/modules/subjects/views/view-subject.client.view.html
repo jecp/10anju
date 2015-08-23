@@ -8,7 +8,7 @@
 						<div class="" style="margin-top:-5px;margin:15px;">
 							<label class="label label-default" data-ng-bind="subject.subcat"></label>&nbsp;
 						<span class="h3" data-ng-bind="subject.title"></span>
-						<a href="/#!/subjects/edit/{{subject._id}}" class="btn btn-primary" ng-if="subject.user._id === userObj.user._id">编辑</a>
+						<a href="/#!/subjects/{{subject._id}}/edit" class="btn btn-primary" ng-if="subject.user._id === userObj.user._id">编辑</a>
 						
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 					<a href="" data-ng-controller="LikesController" ng-click="create()"><i class="glyphicon glyphicon-thumbs-up"></i><span data-ng-bind="subject.like"></span><span>赞</span></a>
 				</div>			
 			</div>
-			<div data-ng-include="'/modules/comments/views/list-comments.client.view.html'"></div>
+			<div data-ng-include="'/modules/comments/views/list-comments.client.view.html'" data-ng-controller="CommentsController" onload="findByObj()"></div>
 			<div data-ng-include="'/modules/comments/views/create-comment.client.view.html'"></div>
 		</div>
 		<div class="col-md-4 fr">

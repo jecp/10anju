@@ -43,6 +43,9 @@ var SubjectSchema = new Schema({
 	content: {
 		type: String
 	},
+	markdown:{
+		type:String
+	},
 	status:{
 		type: Boolean
 	},

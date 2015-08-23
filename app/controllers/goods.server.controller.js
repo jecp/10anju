@@ -10,7 +10,8 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	Collect = mongoose.model('Collect'),
 	Visithistory = mongoose.model('Visithistory'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	markdown = require("markdown").markdown;
 
 /**
  * Create a Good
@@ -19,6 +20,8 @@ exports.create = function(req, res) {
 	var good = new Good(req.body);
 	good.user = req.user;
 	var cate = req.body.cate;
+	good.detail = markdown.toHTML(req.body.detail);
+	good.markdown = req.body.detail;
 
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
 	good.img = req.body.img ? req.body.img.split(',') : '';
@@ -134,6 +137,8 @@ exports.edit = function (req,res){
 exports.update = function(req, res) {
 	var good = req.good ;
 	good = _.extend(good , req.body);
+	good.detail = markdown.toHTML(req.body.markdown);
+	good.markdown = req.body.detail;
 
 	good.img = req.good.img ? req.good.img.toString().split(',') : '';
 	good.suitable = req.good.suitable ? req.good.suitable.toString().split(',') : '';

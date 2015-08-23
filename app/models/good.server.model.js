@@ -81,6 +81,9 @@ var GoodSchema = new Schema({
 		default: '',
 		trim: true
 	},
+	markdown: {
+		type:String
+	},
 	main_img:{
 		type:String,
 		default: '',

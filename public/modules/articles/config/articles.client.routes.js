@@ -28,10 +28,6 @@ angular.module('articles').config(['$stateProvider',
 		state('adminListArticles', {
 			url: '/articles/admin/list',
 			templateUrl: 'modules/articles/views/admin-list-articles.client.view.html'
-		}).
-		state('fulleditArticle', {
-			url: '/articles/edit/:articleId',
-			templateUrl: 'modules/articles/views/fulledit-article.client.view.html'
 		});
 	}
 ]);

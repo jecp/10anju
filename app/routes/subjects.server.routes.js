@@ -24,9 +24,6 @@ module.exports = function(app) {
 	app.route('/subjects_like')
 		.post(users.requiresLogin, visithistory.vh_log, subjects.like);
 
-	app.route('/subjects/fulledit')
-		.post(users.requiresLogin, visithistory.vh_log, subjects.fulledit);
-
 	app.route('/subjects/admin/list')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.modify);

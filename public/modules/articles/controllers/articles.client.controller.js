@@ -5,18 +5,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
-			var _content = $('.editormd-preview-container').html();
 			var article = new Articles({
 				title: this.title,
 				subcat: this.subcat,
-				content: _content
+				content:this.content
 			});
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
+				$rootScope.title = response.title;
 
-				$scope.title = '';
-				$scope.subcat = '';
-				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -40,24 +37,11 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 
 		$scope.update = function() {
 			var article = $scope.article;
-			var _content = $('.editormd-preview-container').html();
 
 			article.$update(function() {
 				$location.path('articles/' + article._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
-		};
-
-		// Fulledit existing Article
-		$scope.fulledit = function() {
-			var article = this.article;
-			var _content = $('.editormd-preview-container').html();
-
-			$http.post('/articles/fulledit', {article:article,content:_content}).success(function (response){
-				$location.path('articles/' + response._id);
-			}).error(function(response){
-				$scope.error = response.message;
 			});
 		};	
 

@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Message = mongoose.model('Message'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	markdown = require("markdown").markdown;
 
 /**
  * Create a Message
@@ -14,6 +15,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var message = new Message(req.body);
 	message.user = req.user;
+	message.content = markdown.toHTML(req.body.content);
 
 	message.save(function(err) {
 		if (err) {

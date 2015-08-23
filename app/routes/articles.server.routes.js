@@ -26,9 +26,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, articles.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, articles.modify);
 
-	app.route('/articles/fulledit')
-		.post(users.requiresLogin, visithistory.vh_log, articles.fulledit);
-
 	app.route('/articles_like')
 		.post(users.requiresLogin, visithistory.vh_log, articles.like);
 

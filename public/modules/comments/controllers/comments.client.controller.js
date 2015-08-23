@@ -8,16 +8,19 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 		// Create new Comment
 		$scope.create = function() {
 			// Create new Comment object
+			var obj = $location.url().split('/')[1];
+			var value = $location.url().split('/')[2];
+
 			var comment = new Comments ({
 				title: this.title,
-				subject: this.subject._id,
-				content: $('.editormd-preview-container').html()
+				obj: obj,
+				value:value,
+				content: this.content
 			});
 
 			// Redirect after save
 			comment.$save(function(response) {
-				$location.path('subjects'+response._id);
-
+				$location.path(obj);
 				// Clear form fields
 				$scope.title = '';
 			}, function(errorResponse) {
@@ -57,6 +60,16 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 		$scope.find = function() {
 			$scope.comments = Comments.query();
 		};
+
+		// Find the comments from an article or subject
+		$scope.findByObj = function() {
+			var obj = $location.url().split('/')[1];
+			var value = $location.url().split('/')[2];
+			$scope.comments = Comments.query({
+				obj:obj,
+				value:value
+			});
+		}
 
 		// User count of Comments
 		$scope.userCount = function() {

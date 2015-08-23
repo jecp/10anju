@@ -14,6 +14,9 @@ var CommentSchema = new Schema({
 		type: String,
 		required: 'Please fill content',
 	},
+	markdown:{
+		type:String
+	},
 	created: {
 		type: Date,
 		default: Date.now
@@ -26,15 +29,19 @@ var CommentSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	user_to:{
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	ccenter: {
 		type: Schema.ObjectId,
 		ref: 'Ccenter'
 	},
-	article: {
+	articles: {
 		type: Schema.ObjectId,
 		ref: 'Article'
 	},
-	good: {
+	goods: {
 		type: Schema.ObjectId,
 		ref: 'Good'
 	},
@@ -42,7 +49,11 @@ var CommentSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'Forum'
 	},
-	subject:{
+	subjects:{
+		type: Schema.ObjectId,
+		ref: 'Subject'
+	},
+	comment_from:{
 		type: Schema.ObjectId,
 		ref: 'Subject'
 	},

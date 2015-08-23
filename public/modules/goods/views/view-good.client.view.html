@@ -1,6 +1,6 @@
 <section data-ng-controller="GoodsController" data-ng-init="findOne()">
 	<div class="row">
-		<div class="col-md-9">
+		<div class="col-md-9 xol-xs-12">
 			<!-- 分类导航及标题 -->
 			<div class="page-header ">
 				<div class="good_detail_top_nav">
@@ -290,7 +290,7 @@
 		    </div>
 		</div>
 		<!-- 右侧相关栏 -->
-		<div class="good_detail_push col-md-3 pull-right" >
+		<div class="good_detail_push col-md-3 col-xs-12 pull-right" >
 			<div class="row good_detail_wikizone">
 				<ul class="breadcrumb text-right">精彩推荐<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 				<!-- accordion begin -->
@@ -319,7 +319,7 @@
 					<div class="good_subcat_list" data-ng-init="listSubcat()">
 						<li data-ng-repeat="item in goods | filter:good.subcat">
 							<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
-								<img src="{{item.main_img}}-260" alt="" class="thumbnail">
+								<img ng-src="{{item.main_img}}-260" alt="" class="thumbnail">
 								<label for="" data-ng-bind="item.title" class="h5"></label>
 							</a>
 						</li>

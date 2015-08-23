@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
 	Subject = mongoose.model('Subject'),
 	Forum = mongoose.model('Forum'),
 	User = mongoose.model('User'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	markdown = require("markdown").markdown;
 
 /**
  * Create a Subject
@@ -18,7 +19,8 @@ exports.create = function(req, res) {
 	subject.user = req.user;
 	subject.updated = subject.created = Date.now();
 	var f = req.body.f;
-	console.log(f);
+	subject.content = markdown.toHTML(req.body.content);
+	subject.markdown = req.body.content;
 
 	if (f && f.length === 24){
 		subject.forum = f;
@@ -77,37 +79,17 @@ exports.read = function(req, res) {
  * Update a Subject
  */
 exports.update = function(req, res) {
-	var subject = req.subject,
-		_updated = Date.now(),
-		_content = req.body.content;
+	var subject = req.subject;
+	subject = _.extend(subject, req.body);
+	subject.content = markdown.toHTML(req.body.markdown);
 
-	Subject.findOneAndUpdate({_id:req.subject._id},{updated:_updated,content:_content},function (err,subject){
+	subject.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.send(subject);
-		}
-	});
-};
-
-/**
- * Fulledit a Subject
- */
-exports.fulledit = function(req, res) {
-	var _updated = Date.now(),
-		_subcat = req.body.subject.subcat,
-		_title = req.body.subject.title,
-		_content = req.body.content;
-
-	Subject.findOneAndUpdate({_id:req.body.subject._id},{updated:_updated,subcat:_subcat,title:_title,content:_content},function (err,subject){
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.send(subject);
+			res.json(subject);
 		}
 	});
 };

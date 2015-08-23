@@ -1,10 +1,34 @@
+<style type="text/css" scoped="scoped">
+    @import "dist/stylesheets/thinker-md.user.css";
+    @import "dist/stylesheets/thinker-md.vendor.css";
+    @import "dist/emoji/nature.css";
+    @import "dist/emoji/object.css";
+    @import "dist/emoji/people.css";
+    @import "dist/emoji/place.css";
+    @import "dist/emoji/Sysmbols.css";
+    @import "dist/emoji/twemoji.css";
+</style>
+<script src="dist/javascripts/thinker-md.vendor.min.js"></script>
+<script>
+    $("textarea[data-provide='markdown']").markdown({
+        language: 'zh',
+        fullscreen: {
+            enable: true
+        },
+        resize: 'vertical',
+        localStorage: '10anju_md',
+        imgurl: '/cors/upload/ajaxUpload',
+        base64url: '/cors/upload/base64Upload'
+    });
+</script>
+
 <section data-ng-controller="SubjectsController" data-ng-init="findOne()">
-    <div class="col-md-12">
+    <div class="col-md-9 col-xs-12 mt20">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
                     <div class="controls">
-                        <textarea type="text" data-ng-model="subject.content" id="content" class="form-control" placeholder="内容" required></textarea>
+                        <textarea type="text" data-ng-model="subject.markdown" id="content" class="form-control" data-provide="markdown" rows="10" placeholder="这里输入内容,支持Markdown语法." required></textarea>
                     </div>
                 </div>
                 <div class="form-group">
