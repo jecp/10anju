@@ -1,9 +1,9 @@
-<section class="row" data-ng-controller="CartsController">
+<section data-ng-controller="CartsController">
     <div class="row">
 		<div class="col-md-9 col-xs-12" data-ng-controller="GoodsController">
 			<div class="mt20"></div>
 			<div ng-include="'modules/core/views/navbar.client.view.html'"></div>
-			<div ng-include="'modules/goods/views/list-goods.client.view.html'" onload="find()"></div>
+			<div ng-include="'modules/goods/views/list-goods.client.view.html'"></div>
 		</div>
         <div class="col-md-3 col-xs-12 pull-right">
 	        <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>

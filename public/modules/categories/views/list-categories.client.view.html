@@ -1,5 +1,5 @@
 <section>
-    <div class="fl col-md-6 col-xs-12" data-ng-repeat="cat in categories | orderBy: '-goods.length'">
+    <div class="fl col-md-12 col-xs-12" data-ng-repeat="cat in categories | orderBy: '-goods.length'">
         <div ng-if="cat.goods.length > 0" class="panel panel-default">
             <div class="panel-heading">
                 <a href="/#!/categories/{{cat._id}}"><span class="h5 panel-title text-right" data-ng-bind="cat.name"></span></a>
@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 <div class="row good_list_all">
-                  <div data-ng-repeat="good in cat.goods | limitTo:2" class="fl col-xs-6 col-md-6">
+                  <div data-ng-repeat="good in cat.goods | limitTo:4" class="fl col-xs-6 col-md-3">
                     <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 <section>
-	<div class="col-md-12 col-xs-12">
-		<div class="col-md-12 col-xs-12" ng-if="collect.subjects.length > 0">
+	<div class="mt20">
+		<div ng-if="collect.subjects.length > 0">
 			<ul class="list-group">
 				<li class="list-group-item" data-ng-repeat="subject in collect.subjects">
 					<a href=""><img ng-src="{{subject.user.avatar}}" alt="" style="max-width:26px;"></a>&nbsp;
@@ -30,6 +30,5 @@
 				</li>
 			</ul>	
 		</div>
-
 	</div>
 </section>

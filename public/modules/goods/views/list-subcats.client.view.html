@@ -1,6 +1,6 @@
 <section data-ng-controller="GoodsController" data-ng-init="listSubcat()">
-    <div class="row col-md-12">
-        <div class="col-md-9">
+    <div class="row">
+        <div class="col-md-9 col-xs-12">
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
             <div class="row good_list_all">
                 <div data-ng-repeat="good in goods" class="grid-4 fl col-xs-6">
@@ -8,7 +8,7 @@
                 </div>            
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-12">
             <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
                 <div class="mt20">
                   <div class="panel panel-info">

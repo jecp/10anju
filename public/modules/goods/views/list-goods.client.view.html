@@ -1,11 +1,9 @@
-<section>
+<section data-ng-controller="GoodsController" data-ng-init="find()">
   <div data-ng-controller="CategoriesController" data-ng-init="find()">
     <tabset >
       <tab>
-        <div class="col-md-12 col-xs-12 goods_list_tip">
-          <span class="fl">您好,<span ng-if="authentication.user.username !== undefined" data-ng-controller="CcentersController" ng-init="findU()" class="gl_f40">{{authentication.user.username}}!</span><span ng-if="authentication.user.username === undefined" class="gl_f40"><a href="/#!/signup">注册</a>/<a href="/#!/signin">登录</a>!</span></span>
-          <span class="fl"><span class="h5">&nbsp;截至目前，已更新<span class="gl_f40">{{goods.length}}</span>件商品,</span></span>
-          <span class="fl"><span ng-if="ccenter === undefined" class="h5">您还未入驻社区,<a href="/#!/ccenters">现在加入</a>!</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
+        <div class="col-md-12 col-xs-12 goods_list_tip" data-ng-controller="CcentersController" ng-init="findU()">
+          <span class="fl">您好,<span ng-if="authentication.user.username !== undefined" class="gl_f40">{{authentication.user.username}}</span><span ng-if="authentication.user.username === undefined" class="gl_f40"><a href="/#!/signup">注册</a>/<a href="/#!/signin">登录</a>！&nbsp;</span></span><span class="fl"><span class="h5">截至目前，已更新<span class="gl_f40">{{goods.length}}</span>件商品。&nbsp;</span></span><span class="fl"><span ng-if="ccenter === undefined" class="h5">您还未入驻社区,<a href="/#!/ccenters">现在加入</a>！</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
         </div>
         <tab-heading>
           <span>全部</span>

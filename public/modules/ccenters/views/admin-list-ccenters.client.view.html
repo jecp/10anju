@@ -1,9 +1,9 @@
-<section>
-	<div data-ng-controller="CcentersController" data-ng-init="list()">
+<section data-ng-controller="CcentersController" data-ng-init="list()">
+	<div class="mt20">
 		<div ng-if="error" class="errorMessage"><span class="glyphicon glyphicon-error"></span><span class="label label-danger" data-ng-bind="error"></span></div>
-		<div class="" role="listitem" ng-if="ccenters">
-			<div class="row">
-				<table class="table table-hover table-bordered table-response">
+		<div ng-if="ccenters">
+			<div>
+				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th>分类</th>

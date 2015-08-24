@@ -22,7 +22,7 @@ module.exports = function(app) {
 		.put(users.requiresLogin, visithistory.vh_log, ccenters.update);
 
 	app.route('/my_ccenter')
-		.post(users.requiresLogin, visithistory.vh_log, ccenters.findU);
+		.get(users.requiresLogin, visithistory.vh_log, ccenters.findU);
 
 	app.route('/ccenters/admin/list')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, ccenters.list)

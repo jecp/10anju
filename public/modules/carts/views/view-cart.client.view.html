@@ -1,6 +1,6 @@
 <section data-ng-controller="CartsController" data-ng-init="findOne()">
-	<div class="row">
-		<div class="col-md-10">
+	<div class="mt20">
+		<div class="col-md-10 col-xs-12">
 			<div class="page-header">
 				<div class="title">
 					<h1>我的购物篮<span class="small pull-right" data-ng-bind="cart.number | date:'medium' "></span></h1>
@@ -9,7 +9,7 @@
 			<!-- 购物篮begin -->
 			<div class="cart_view_list">
 				<div class="cart_view_list_header">
-					<div class="row">
+					<div class="row table-responsive">
 						<table class="table table-hover table-response">
 							<thead>
 								<tr>
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div>
 				<div class="page-header"></div>
 				<div class="page-body">总计:&yen;<span data-ng-bind="cart.total | number:2">元</span>
 					<div class="fr" data-ng-controller="OrdersController">

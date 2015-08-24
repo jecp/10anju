@@ -1,9 +1,9 @@
-<section>
-	<div data-ng-controller="GoodsController" data-ng-init="list()">
+<section data-ng-controller="GoodsController" data-ng-init="list()">
+	<div class="mt20">
 		<div ng-if="error" class="errorMessage"><span class="glyphicon glyphicon-error"></span><span class="label label-danger" data-ng-bind="error"></span></div>
-		<div class="" role="listitem" ng-if="goods">
-			<div class="row">
-				<table class="table table-hover table-bordered table-response">
+		<div ng-if="goods">
+			<div>
+				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th>细类/商品名称</th>
@@ -21,7 +21,7 @@
 					<tbody data-ng-repeat="good in goods" >
 						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
 							<td><div><input type="text" data-ng-model="good.subcat" id="subcat" class="form-control" placeholder="商品细类，如叶菜类、根茎类" required></div><div><input type="text" data-ng-model="good.name" id="name" class="form-control" placeholder="商品名称，例：手机" required></div></td>
-							<td><a href="/#!/goods/{{good._id}}"><img src="{{good.main_img}}-64"></a><div><input type="text" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="商品图片网址" required></div></td>
+							<td><a href="/#!/goods/{{good._id}}"><img ng-src="{{good.main_img}}-64"></a><div><input type="text" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="商品图片网址" required></div></td>
 							<td><input type="text" data-ng-model="good.title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
 							<td><input type="text" data-ng-model="good.price" id="price" class="form-control" placeholder="价格，精确到小数点后2位" required><input type="text" data-ng-model="good.weight" id="weight" class="form-control" placeholder="净重，仅能用数字" required><input type="text" data-ng-model="good.spec" id="spec" class="form-control" placeholder="规格，例g ml" required></td>
 							<td><input type="text" data-ng-model="good.summary" id="summary" class="form-control" placeholder="简介" required></td>

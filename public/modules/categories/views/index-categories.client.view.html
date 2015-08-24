@@ -1,15 +1,32 @@
 <section data-ng-controller="CategoriesController" data-ng-init="find()">
-    <div class="row mt20">
-        <div class="col-md-12">
-            <div class="">
-                <div class="good_detail_top_nav">
-                    <ol class="breadcrumb">
-                      <li><a href="/#!/goods">首页</a></li>
-                      <li><a href="/#!/categories">分类</a></li>
-                    </ol>
-                </div>
+    <div class="mt20 row">
+        <div class="col-md-9 col-xs-12">
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href="/#!/">首页</a></li>
+                    <li><a href="/#!/categories">分类</a></li>
+                    <li><a href="/#!/porders/create">私人订制</a></li>
+                </ol>
             </div>
             <div class="row category_list" ng-include="'modules/categories/views/list-categories.client.view.html'"></div>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <div ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
+            <div class="mt20">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;公告</div>
+                    </div>
+                    <div class="panel-body">
+                        <div data-ng-controller="ArticlesController" data-ng-init="findNotice()">
+                            <a href="/#!/articles/{{notice._id}}" data-ng-repeat="notice in articles | limitTo:5"><p class="h5" data-ng-bind="notice.title"></p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-include="'modules/goods/views/right-cart.client.view.html'"></div>
+            <div ng-include="'modules/core/views/personal-order.client.view.html'"></div>
+            <div class="mt20" ng-include="'modules/core/views/today-todos.client.view.html'"></div>
         </div>
     </div>
 </section>

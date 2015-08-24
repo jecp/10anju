@@ -101,7 +101,7 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 			if (!userCcenter){
 				$scope.ccenter = undefined;
 			}else{
-				$http.post('/my_ccenter').success(function (response){
+				$http.get('/my_ccenter').success(function (response){
 					$scope.ccenter = response;
 				}).error(function (response){
 					$scope.error = response.message;

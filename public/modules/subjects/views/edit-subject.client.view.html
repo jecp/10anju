@@ -23,21 +23,27 @@
 </script>
 
 <section data-ng-controller="SubjectsController" data-ng-init="findOne()">
-    <div class="col-md-9 col-xs-12 mt20">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <div class="controls">
-                        <textarea type="text" data-ng-model="subject.markdown" id="content" class="form-control" data-provide="markdown" rows="10" placeholder="这里输入内容,支持Markdown语法." required></textarea>
+    <div class="mt20">
+        <div class="col-md-9 col-xs-12">
+            <div><span class="h3" data-ng-bind="subject.title"></span></div>
+            <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="controls">
+                            <textarea type="text" data-ng-model="subject.markdown" id="content" class="form-control" data-provide="markdown" rows="10" placeholder="这里输入内容,支持Markdown语法." required></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="更新" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
-    </div>
+                    <div class="form-group">
+                        <input type="submit" value="更新" class="btn btn-default">
+                    </div>
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <div><p ng-bind-html="subject.content"></p></div>
+        </div>
+    </div>    
 </section>

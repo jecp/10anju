@@ -1,6 +1,6 @@
 <section data-ng-controller="SubjectsController" data-ng-init="findOne()">
-	<div style="margin-top:25px;">
-		<div class="col-md-8 fl">
+	<div class="mt20 row">
+		<div class="col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-heading text-right">详情</div>
 				<div class="panel-body row">
@@ -21,8 +21,6 @@
 									</a>
 									<div><p><i class="glyphicon glyphicon-user"></i>&nbsp;<a href="/#!/users/{{subject.user._id}}"><span data-ng-bind="subject.user.username"></span></a></p></div>
 									<p><i class="glyphicon glyphicon-time"></i>&nbsp;<span data-ng-bind="subject.user.created | date:'mediumDate'"></span></p>
-								</div>
-								<div class="">							
 								</div>
 							</div>
 							<div class="col-md-9 col-xs-9 fl">
@@ -51,7 +49,7 @@
 			<div data-ng-include="'/modules/comments/views/list-comments.client.view.html'" data-ng-controller="CommentsController" onload="findByObj()"></div>
 			<div data-ng-include="'/modules/comments/views/create-comment.client.view.html'"></div>
 		</div>
-		<div class="col-md-4 fr">
+		<div class="col-md-4">
 			<div data-ng-include="'/modules/subjects/views/my-subject-count.client.view.html'"></div>
 			<div data-ng-include="'/modules/forums/views/list-forums.client.view.html'"></div>
 		</div>
