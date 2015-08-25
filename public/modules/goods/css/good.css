@@ -84,12 +84,12 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;}
 .good_list_thumbnail img{border: 1px solid #fff;height:100%;width:100%;overflow: hidden;}
 .gl_detail{width:100%;color:#ccc;border-bottom: 1px solid #ccc;}
 .good_list_detail{clear:both;padding: 5px;}
-.good_list_title{height:30px;overflow: hidden;}
+.good_list_title{height: 42px;overflow: hidden;display: block;}
 .good_list_add{margin-bottom: 5px;margin-top: 2px;}
 .good_list_buy{font-size:15px;padding:5px;background-color: #375D1E;color:#000;}
 .good_list_cart{padding:5px;background-color: #F0A851;color:#000;}
 .good_list_img{max-width: 100%;overflow: hidden;}
-.good_list_price{width:95%;margin:0 auto;margin-top: 3px;border-top: 1px dashed #ccc;height:30px;}
+.good_list_price{display:block;overflow:hidden;width:95%;margin:0 auto;margin-top: 3px;border-top: 1px dashed #ccc;height:30px;}
 .buy_action{content:'';float:left;margin:0 auto;margin-top:5px;}
 .buy_button{
     background-color: #F9AA34;
