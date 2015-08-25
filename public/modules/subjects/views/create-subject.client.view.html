@@ -30,17 +30,16 @@
         <div class="col-md-12">
             <form name="subjectForm" class="form-horizontal" data-ng-submit="create()" novalidate>
                 <fieldset>
-                    <div class="form-group col-md-6" data-ng-controller="ForumsController" data-ng-init="find()">
+                    <div class="form-group col-md-6 col-xs-12" data-ng-controller="ForumsController" data-ng-init="find()">
+                        <label for="forums" class="control-label">版块:</label>
                         <select ng-model="forum" ng-options="forum._id as forum.name for forum in forums">
-                            <option value="">请选择分类:</option>
+                            <option value="">请选择版块:</option>
                         </select>
-                        <span class="forum">{{forum}}</span>
+                        <span style="display:none;" class="forum">{{forum}}</span>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="subcat" class="control-label col-xs-4 col-md-4">分类:</label>
-                        <div class="controls col-xs-8 col-md-8">
-                            <input type="text" name="subcat" data-ng-model="subcat" id="subcat" placeholder="分类" class="form-control" required>
-                        </div>
+                    <div class="form-group col-md-6 col-xs-12">
+                        <label for="subcat" class="control-label">分类:</label>
+                        <input type="text" name="subcat" data-ng-model="subcat" id="subcat" placeholder="分类" class="form-control" required>
                     </div>
                     <div class="form-group col-md-12" ng-class="{ 'has-error': subjectForm.title.$dirty && subjectForm.title.$invalid }">
                         <div class="col-md-2 col-xs-2"><label class="control-label" for="title">标题:</label></div>

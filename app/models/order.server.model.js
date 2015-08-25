@@ -55,7 +55,8 @@ var OrderSchema = new Schema({
 		ref: 'User'
 	},
 	bz: {
-		type:String
+		type:String,
+		default:''
 	},
 	trade_no: {
 		type:String

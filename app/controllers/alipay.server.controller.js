@@ -211,7 +211,7 @@ exports.alipayto = function (req, res) {
     //默认买家支付宝账号
     var buyer_email = '';
     //商品展示地址，要用http:// 格式的完整路径，不允许加?id=123这类自定义参数
-    var show_url = 'http://www.havemay.cn/#!/orders'+req.body.order_detail._id;
+    var show_url = 'http://www.havemay.cn/#!/goods/'+req.body.order_detail._id;
 
     //扩展功能参数——分润(若要使用，请按照注释要求的格式赋值)//
 
@@ -219,6 +219,7 @@ exports.alipayto = function (req, res) {
     var royalty_type = '';
     //提成信息集
     var royalty_parameters = '';
+    var _bz = req.body.bz ? req.body.bz : '';
     //注意：
     //与需要结合商户网站自身情况动态获取每笔交易的各分润收款账号、各分润金额、各分润说明。最多只能设置10条
     //各分润金额的总和须小于等于total_fee
@@ -228,7 +229,7 @@ exports.alipayto = function (req, res) {
     //royalty_parameters	= '111@126.com^0.01^分润备注一|222@126.com^0.01^分润备注二'
 
     //////////////////////////////////////////////////////////////////////////////////
-    Order.findOneAndUpdate({_id:out_trade_no},{bz:req.body.bz},function (err){
+    Order.findOneAndUpdate({_id:out_trade_no},{bz:_bz},function (err){
         if (err){console.log(err);}
     });
 
@@ -331,12 +332,14 @@ exports.alipayto = function (req, res) {
     //构造函数，生成请求URL
     var sURL = create_direct_pay_by_user(sParaTemp);
     var newUrl = 'https://' + AlipayConfig.ALIPAY_HOST + '/' + sURL;
-    res.send(newUrl);
+    //res.send(newUrl);
+    //
     //console.log(sURL);
     //向支付宝网关发出请求
-//    requestUrl(AlipayConfig.ALIPAY_HOST,show_url,function(data){
-//        console.log(data);
-//    });
+   // requestUrl(AlipayConfig.ALIPAY_HOST,show_url,function(data){
+   //     console.log(data);
+   // });
+   res.send(newUrl);
     //res.redirect('https://'+AlipayConfig.ALIPAY_HOST+'/'+sURL);
 };
 exports.paynotify=function(req,res){

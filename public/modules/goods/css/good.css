@@ -36,10 +36,10 @@ padding:5px 0;
     top: -1px;
 }
 .good_list_listitem{content:'';margin-top:22px;height:100%;border:1px solid #f4f4f4; background: #ffffff;margin-bottom: 6px;
--webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
--moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset; 
--o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;}
+-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset; 
+-o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;}
 
 .gl_lt{
   position:relative;       

@@ -10,7 +10,6 @@ angular.module('porders').controller('PordersController', ['$scope', '$http', '$
 			// Create new Porder object
 			var total = this.goods.price * this.goods.amount;
 			var porder = new Porders ({
-				name: this.name,
 				goods:this.goods,
 				total:total,
 				bz:this.bz
