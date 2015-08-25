@@ -2,7 +2,7 @@
 	<div class="col-md-12 col-xs-12">
 		<div class="col-md-12 user_profile_left">
 			<div class="avatar" >
-				<img ng-if="user.avatar !== undefined" ng-src="{{user.avatar}}" alt="" ng-mouseenter="item.popover= true" ng-mouseleave ="item.popover = false">
+				<img ng-if="user.avatar !== undefined" ng-src="{{user.avatar}}">
 			</div>
 			<div ng-if="user.avatar === undefined" style="width:200px;height:200px;border-radius:30px 30px 30px 30px;background-color:#ccc;">
 				<div class="text-center">
