@@ -11,9 +11,11 @@
 			</a>
 		</div>
 		<div class="good_list_detail">
-			<a class="good_list_title" href="/#!/goods/{{good._id}}">
-				<h5 data-ng-bind="good.title | limitTo:30"></h5>
-	        </a>
+			<div class="good_list_title">
+				<a href="/#!/goods/{{good._id}}">
+					<h5 data-ng-bind="good.title | limitTo:30"></h5>
+	        	</a>
+			</div>
 			<div class="good_list_price">
 				<span style="color:#888;font-size: 12px;">&yen;&nbsp;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>
 				<span class="pull-right" ng-if="good.spec === 'g'"><em class="per" data-ng-bind="good.price/good.weight*500 | number:2"></em><span class="text-muted">元/500g</span></span>
