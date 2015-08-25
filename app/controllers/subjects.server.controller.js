@@ -19,7 +19,7 @@ exports.create = function(req, res) {
 	subject.user = req.user;
 	subject.updated = subject.created = Date.now();
 	var f = req.body.f;
-	subject.content = markdown.toHTML(req.body.content);
+	subject.content = markdown.toHTML(req.body.content) || '';
 	subject.markdown = req.body.content;
 
 	if (f && f.length === 24){

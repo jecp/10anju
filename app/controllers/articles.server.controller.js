@@ -17,7 +17,7 @@ exports.create = function(req, res) {
 	var article = new Article(req.body);
 	article.user = req.user;
 	article.tags = req.body.tags ? req.body.tags.split(',') : '';
-	article.content = markdown.toHTML(req.body.content);
+	article.content = markdown.toHTML(req.body.content) || '';
 	article.markdown = req.body.content;
 
 	article.save(function(err) {

@@ -20,7 +20,7 @@ exports.create = function(req, res) {
 
 	var comment = new Comment(req.body);
 	comment.user = req.user;
-	comment.content = markdown.toHTML(req.body.content);
+	comment.content = markdown.toHTML(req.body.content) || '';
 
 	if (obj === 'articles'){
 		comment.articles = req.body.value;

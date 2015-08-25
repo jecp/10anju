@@ -20,7 +20,7 @@ exports.create = function(req, res) {
 	var good = new Good(req.body);
 	good.user = req.user;
 	var cate = req.body.cate;
-	good.detail = markdown.toHTML(req.body.detail);
+	good.detail = markdown.toHTML(req.body.detail) || '';
 	good.markdown = req.body.detail;
 
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
@@ -138,7 +138,6 @@ exports.update = function(req, res) {
 	var good = req.good ;
 	good = _.extend(good , req.body);
 	good.detail = markdown.toHTML(req.good.markdown);
-	console.log(req.body+'\n'+req.good+'\n');
 	good.markdown = req.body.detail;
 
 	good.img = req.good.img ? req.good.img.toString().split(',') : '';
