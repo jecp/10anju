@@ -27,7 +27,7 @@ padding:5px 0;
 .fl{float: left;}
 .free_try{font: bold 14px/30px "黑体";background-color: green;color:white;border-radius:10px 10px 10px 10px;}
 /* good_list */
-.goods_list_tip{padding:6px;height: 30px;background-color:#fff1dc;border: 1px solid #ffe3b8;}
+.goods_list_tip{display:block;padding:6px;height: 30px;background-color:#fff1dc;border: 1px solid #ffe3b8;}
 .gl_f40{color:#f40;}
 .mark {
     width: 220px;
@@ -84,7 +84,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;}
 .good_list_thumbnail img{border: 1px solid #fff;height:100%;width:100%;overflow: hidden;}
 .gl_detail{width:100%;color:#ccc;border-bottom: 1px solid #ccc;}
 .good_list_detail{clear:both;padding: 5px;}
-.good_list_title{height: 42px;overflow: hidden;display: block;}
+.good_list_title{height: 45px;overflow: hidden;display: block;}
 .good_list_add{margin-bottom: 5px;margin-top: 2px;}
 .good_list_buy{font-size:15px;padding:5px;background-color: #375D1E;color:#000;}
 .good_list_cart{padding:5px;background-color: #F0A851;color:#000;}
