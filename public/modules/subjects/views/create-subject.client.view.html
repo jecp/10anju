@@ -30,19 +30,11 @@
         <div class="col-md-12">
             <form name="subjectForm" class="form-horizontal" data-ng-submit="create()" novalidate>
                 <fieldset>
-                    <div class="form-group" data-ng-controller="ForumsController" data-ng-init="find()">
-                        <label for="category" class="control-label col-xs-2 col-md-2">选择分类:</label>
+                    <div class="form-group col-md-6" data-ng-controller="ForumsController" data-ng-init="find()">
                         <select ng-model="forum" ng-options="forum._id as forum.name for forum in forums">
                             <option value="">请选择分类:</option>
                         </select>
-                        <h7 class="text-muted">可直接填分类的ID:</h7>
-                        <h7>{{forum}}</h7>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label col-xs-4 col-md-4" data-ng-controller="ForumsController" data-ng-init="find()">论坛版块:</label>
-                        <div class="controls col-xs-8 col-md-8">
-                            <input type="text" data-ng-model="forum" id="forum" class="form-control" placeholder="可填论坛名称，也可填上面查询到的ID" required>
-                        </div>
+                        <span class="forum">{{forum}}</span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="subcat" class="control-label col-xs-4 col-md-4">分类:</label>

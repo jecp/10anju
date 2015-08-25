@@ -20,15 +20,15 @@ exports.create = function(req, res) {
 	var good = new Good(req.body);
 	good.user = req.user;
 	var cate = req.body.cate;
-	good.detail = markdown.toHTML(req.body.detail) || '';
+	good.detail = req.body.detail ? markdown.toHTML(req.body.detail) : '';
 	good.markdown = req.body.detail;
-
+	
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
 	good.img = req.body.img ? req.body.img.split(',') : '';
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : '';
 	good.feature = req.body.feature? req.body.feature.split(',') : '';
 
-	if(cate && cate.length === 24){
+	if(cate){
 		good.category = cate;
 		good.save(function (err,good){
 			Category.findOne({_id:cate,subcat:req.body.subcat},function (err,category){
@@ -53,65 +53,7 @@ exports.create = function(req, res) {
 				}
 			});
 		});
-	} else{
-		Category.findOne({name:cate},function (err,category){
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else if(category) {
-				good.category = category._id;
-				good.save(function (err,good){
-					if(err){
-						console.log(err);
-					} else {
-						category.update({$push:{goods:good._id,subcat:good.subcat}},function (err){
-							if(err){console.log(err);}
-							else{
-								res.jsonp(good);
-							}
-						});
-					}
-				});				
-			}else{
-				var cateObj = new Category({
-					name: cate,
-					user: req.user,
-					subcat:req.body.subcat
-				});
-				cateObj.save(function (err,category){
-					if (err) {
-						return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-					} else {
-						good = new Good(req.body);
-						good.user = req.user;
-						good.category = category._id;
-						good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
-						good.img = req.body.img ? req.body.img.split(',') : ',';
-						good.therapy = req.body.therapy ? req.body.therapy.split(',') : ',';
-						good.feature = req.body.feature? req.body.feature.split(',') : ',';
-
-						good.save(function (err,good){
-							if(err){
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								category.update({$push:{goods:good._id}},function (err){
-									if(err){console.log(err);}
-									else{
-										res.jsonp(good);
-									}
-								});
-							}
-						});
-					}
-				});
-			}
-		});
-	}
+	} 
 };
 
 /**

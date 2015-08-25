@@ -3,9 +3,9 @@
 module.exports = {
 	db: 'mongodb://localhost/10anju-dev',
 	app: {
-		title: '茗语e+,今日订,次晨达,茗语华苑的便民超市。',
-		keywords:'o2o,center,foods,fruit,fresh',
-		description: 'havemay.cn,havemay.com,黑莓科技'
+    	title: '食安居--茗语e家,今日订,次晨达,茗语华苑的便民超市。',
+   		keywords:'o2o,同城,生鲜电商,食安居,茗语华苑,茗语e家,互联网+,产地直供,深圳,观澜,安居房',
+   		description: '食安居--茗语e家,今日订,次晨达,茗语华苑的便民超市。'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

@@ -19,10 +19,10 @@ exports.create = function(req, res) {
 	subject.user = req.user;
 	subject.updated = subject.created = Date.now();
 	var f = req.body.f;
-	subject.content = markdown.toHTML(req.body.content) || '';
+	subject.content = markdown.toHTML(req.body.content);
 	subject.markdown = req.body.content;
 
-	if (f && f.length === 24){
+	if (f){
 		subject.forum = f;
 
 		subject.save(function (err,subject) {
@@ -37,34 +37,6 @@ exports.create = function(req, res) {
 				});
 			}
 		});		
-	} else{
-		Forum.findOne({name:f},function (err,forum){
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else if(forum) {
-				subject = new Subject(req.body);
-				subject.forum = forum._id;
-				subject.user = req.user;
-				subject.save(function (err,subject) {
-					if (err) {
-						return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-					} else {
-						res.jsonp(subject);
-						forum.update({$inc:{pv:1},$push:{subject:subject._id}},function (err){
-							if (err) {console.log(err);} 
-						});
-					}
-				});
-			} else {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage('对不起，您没有权限新建论坛版块！')
-				});
-			}
-		});
 	}
 };
 

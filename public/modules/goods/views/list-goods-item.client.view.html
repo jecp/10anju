@@ -11,8 +11,8 @@
 			</a>
 		</div>
 		<div class="good_list_detail">
-			<a href="/#!/goods/{{good._id}}">
-				<h5 class="good_list_title" data-ng-bind="good.title | limitTo:30"></h5>
+			<a class="good_list_title" href="/#!/goods/{{good._id}}">
+				<h5 data-ng-bind="good.title | limitTo:30"></h5>
 	        </a>
 			<div class="good_list_price">
 				<span style="color:#888;font-size: 12px;">&yen;&nbsp;</span><span style="color:red;font-size: 16px;" data-ng-bind="good.price | number:2"></span>

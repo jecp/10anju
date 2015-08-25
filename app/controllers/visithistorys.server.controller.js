@@ -74,7 +74,7 @@ exports.delete = function(req, res) {
  * List of Visithistorys
  */
 exports.list = function(req, res) {
-	Visithistory.find().sort('-created').limit(1000).populate('user', 'userame avatar').exec(function(err, visithistorys) {
+	Visithistory.find().sort('-created').limit(100).populate('user', 'userame avatar').exec(function(err, visithistorys) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

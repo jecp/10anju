@@ -10,7 +10,7 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 			// Create new Subject object
 			var subject = new Subjects ({
 				name: this.name,
-				f: this.forum,
+				f: $('.forum').html(),
 				title: this.title,
 				subcat: this.subcat,
 				content: this.content

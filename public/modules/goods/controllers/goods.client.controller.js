@@ -7,10 +7,11 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Create new Good
 		$scope.create = function() {
-			// Create new Good object
+			// Create new Good object			
+			var _main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
 			var good = new Goods ({
 				name:this.name,
-				cate:this.cate,
+				cate:$('.cat').html(),
 				subcat:this.subcat,
 				title:this.title,
 				summary:this.summary,
@@ -20,7 +21,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				origin:this.origin,
 				delivery:this.delivery,
 				detail:this.detail,
-				main_img:this.main_img,
+				main_img:_main_img,
 				img:this.img,
 				stock:this.stock,
 				wiki:this.wiki,
@@ -34,6 +35,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				for_free: this.for_free,
 				free_try: this.free_try
 			});
+
 
 			// Redirect after save
 			good.$save(function(response) {
