@@ -25,9 +25,13 @@
 <section data-ng-controller="SubjectsController" data-ng-init="findOne()">
     <div class="mt20">
         <div class="col-md-9 col-xs-12">
-            <div><span class="h3" data-ng-bind="subject.title"></span></div>
             <form class="form-horizontal" data-ng-submit="update()" novalidate>
                 <fieldset>
+                    <div class="form-group">
+                        <div class="controls">
+                            <input type="text" data-ng-model="subject.title" id="title" class="form-control" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="controls">
                             <textarea type="text" data-ng-model="subject.markdown" id="content" class="form-control" data-provide="markdown" rows="10" placeholder="这里输入内容,支持Markdown语法." required></textarea>
