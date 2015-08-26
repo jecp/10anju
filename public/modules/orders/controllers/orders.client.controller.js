@@ -12,20 +12,20 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
+			var price = (this.good.for_free || this.good.free_try) ? 0 : this.good.price;
+			console.log(price);
+			var total = this.good.amount*price;
 			
-			console.log($location.url());
-
 			if ($location.url() === '/orders/create'){
 				order = new Orders ({
 					name:this.name,
 					goods:this.goods,
 					spec:this.goods.spec,
-					price:this.goods.price,
+					price:price,
 					amount:this.goods.amount,
-					total:this.total
+					total:total
 				});
 			} else {
-
 				var goodsObj = new Array();
 				for (var i=0; i < this.carts.length; i++){
 					goodsObj.push(this.carts[i]);
@@ -81,27 +81,25 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 		};
 
 		$scope.buy = function() {
-
 			//Create new Order object
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
+			var price = (this.good.for_free || this.good.free_try) ? 0 : this.good.price;
 
 			var order = new Orders ({
 				name: orderName,
 				number: Date.now(),
 				day: created_day,
 				goods:this.good._id,
-				price: this.good.price,
+				price: price,
 				amount: 1,
-				spec: this.good.spec,
-				total: this.good.price
+				total: price
 			});
 
 			// Redirect after save
 			order.$save(function(response) {
 				$location.path('orders/' + response._id);
-
 				// Clear form fields
 				$scope.name = '';
 				$scope.total = '';

@@ -15,16 +15,24 @@ var mongoose = require('mongoose'),
  * Create a Order
  */
 exports.create = function(req, res) {
-	var order = new Order(req.body);
-	order.user = req.user;
-	
+	var order = new Order(req.body);	
 	console.log(req.body);
 
 	if (req.body.detail){
-		Order.findOne({user:req.user,status:false,'detail.goods':req.body.goods},function (err,order){
+		Order.findOne({user:req.user,status:false},function (err,order){
 			if(err){console.log(err);}
 			else if(order){
-				console.log(order);
+				console.log(req.body.detail);
+				var a = _.extend(order.detail,req.body.detail);
+				console.log(a);
+				order.detail = a;
+				order.save(function (err,order){
+					if(err){console.log(err);}
+					else {
+						console.log(order);
+						res.send(order);
+					}
+				});
 			}
 			else{
 				console.log(2);
@@ -69,14 +77,18 @@ exports.create = function(req, res) {
 						Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
 							if (err){ console.log(err);}
 						});
-						order.update({$push:{detail:{goods:req.body.goods,amount:req.body.amount,price:req.body.price}},$inc:{total:req.body.price,total_amount:req.body.amount}},function (err,order){
-							console.log(order);
-							res.send(order);
+						Order.findOneAndUpdate({_id:order._id},{$push:{detail:{goods:req.body.goods,amount:req.body.amount,price:req.body.price}},$inc:{total:req.body.price,total_amount:req.body.amount}},function (err,order){
+							if(err){console.log(err);}
+							else{
+								console.log(order);
+								res.send(order);
+							}
 						});
 					}
 					else {
 						console.log(2);
 						var order = new Order(req.body);
+						order.user = req.user;
 						order.detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.price});
 						order.total = req.body.total;
 						order.total_amount = req.body.amount;
@@ -85,8 +97,10 @@ exports.create = function(req, res) {
 						});
 						order.save(function (err,order){
 							if(err){console.log(err);}
-							console.log(order);
-							res.send(order);
+							else{
+								console.log(order);
+								res.send(order);
+							}
 						});
 					}
 				});
