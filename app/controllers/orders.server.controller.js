@@ -16,42 +16,124 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var order = new Order(req.body);
-	var order_detail = new Array();
-	var _detail;
-
-	if (req.body.detail){// If come from cart, change to order
-		for (var i =0; i < req.body.detail.length; i++){
-			_detail = req.body.detail[i];
-			order_detail.push({goods:_detail.goods._id,amount:_detail.amount,price:_detail.price});
-		}
-		Good.update({_id:_detail.goods._id},{$inc:{sold:1}},function(err){
-			if (err){ console.log(err);}
-		});
-
-		// change cart status to true
-		Cart.update({_id:req.body.cart},{order_status:true},function(err){
-			if (err){console.log(err);}
-		});
-	} else {
-		Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
-			if (err){ console.log(err);}
-		});	
-		order_detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.total});
-	}
-	// save order
-	order.detail = order_detail;
 	order.user = req.user;
+	
+	console.log(req.body);
 
-	order.save(function (err,order) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.send(order);
-		}
-	});
+	if (req.body.detail){
+		Order.findOne({user:req.user,status:false,'detail.goods':req.body.goods},function (err,order){
+			if(err){console.log(err);}
+			else if(order){
+				console.log(order);
+			}
+			else{
+				console.log(2);
+
+			}
+		});
+	}else{
+		Order.findOne({user:req.user,status:false,'detail.goods':req.body.goods},function (err,order){
+			if(err){console.log(err);}
+			else if(order){
+				console.log(1);
+				var i = order.detail.length;
+				while(i--){
+					if (req.body.goods.toString() === order.detail[i].goods.toString()){
+						order.detail[i].amount += 1;
+						order.total += order.detail[i].amount*order.detail[i].price;
+					}
+				}
+				if (i){
+					total_amount = _.sum(order.detail,'amount');
+					console.log(total_amount);	
+					Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
+						if (err){ console.log(err);}
+					});
+					order.save(function (err,order){
+						if (err){console.log(err);}
+						else {
+							console.log(order);
+							res.send(order);
+						}
+					});
+				}
+			}
+			else{
+				Order.findOne({user:req.user,status:false},function (err,order){
+					console.log(order);
+
+					if(err){console.log(err);}
+
+					else if(order){
+						console.log(1);
+						Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
+							if (err){ console.log(err);}
+						});
+						order.update({$push:{detail:{goods:req.body.goods,amount:req.body.amount,price:req.body.price}},$inc:{total:req.body.price,total_amount:req.body.amount}},function (err,order){
+							console.log(order);
+							res.send(order);
+						});
+					}
+					else {
+						console.log(2);
+						var order = new Order(req.body);
+						order.detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.price});
+						order.total = req.body.total;
+						order.total_amount = req.body.amount;
+						Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
+							if (err){ console.log(err);}
+						});
+						order.save(function (err,order){
+							if(err){console.log(err);}
+							console.log(order);
+							res.send(order);
+						});
+					}
+				});
+			}
+		});
+	}
 };
+	// }
+
+	// if (req.body.detail){// If come from cart, change to order
+	// 	for (var i =0; i < req.body.detail.length; i++){
+	// 		_detail = req.body.detail[i];
+	// 		order_detail.push({goods:_detail.goods._id,amount:_detail.amount,price:_detail.price});
+	// 	}
+	// 	// order.detail = _.extend(order.detail,req.body.detail);
+	// 	// console.log( _.extend(order.detail,req.body.detail));
+
+	// 	Good.update({_id:_detail.goods._id},{$inc:{sold:1}},function(err){
+	// 		if (err){ console.log(err);}
+	// 	});
+
+	// 	// change cart status to true
+	// 	Cart.update({_id:req.body.cart},{order_status:true},function(err){
+	// 		if (err){console.log(err);}
+	// 	});
+	// } else {
+	// 	Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
+	// 		if (err){ console.log(err);}
+	// 	});	
+	// 	order_detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.total});
+	// }
+	// // save order
+	// order.detail = order_detail;
+	// order.user = req.user;
+
+	// order.save(function (err,order) {
+	// 	if (err) {
+	// 		return res.status(400).send({
+	// 			message: errorHandler.getErrorMessage(err)
+	// 		});
+	// 	} else {
+	// 		var _sum = _.sum(order.detail,'amount')
+	// 		console.log(_sum);
+	// 		res.send(order);
+	// 	}
+	// });
+// };
 
 /**
  * Show the current Order

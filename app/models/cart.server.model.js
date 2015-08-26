@@ -39,6 +39,9 @@ var CartSchema = new Schema({
 	total:{
 		type:Number,
 	},
+	total_amount:{
+		type:Number
+	},
 	order_status: {
 		type: Boolean,
 		default: false

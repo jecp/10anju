@@ -38,6 +38,9 @@ var OrderSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	total_amount:{
+		type:Number
+	},
 	checkout:{
 		type: Boolean,
 		default: false

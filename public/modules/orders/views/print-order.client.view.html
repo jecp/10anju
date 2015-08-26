@@ -1,0 +1,198 @@
+  <div data-ng-controller="OrdersController" ng-init="findOne()" class="w952" id="doc"> 
+   <div id="content" data-ng-controller="CcentersController" ng-init="findU()"> 
+    <!--title 部分说明  start--> 
+    <div class="mod-title-info"> 
+     <a class="btn btn-print" href="#" title="打印">打&nbsp;印</a> 
+    </div> 
+    <!--title 部分说明  end--> 
+    <div class="mod-print-page"> 
+     <h2>订单详情单<span class="sub-tit">--&nbsp;<span data-ng-bind="order._id" ></span></span></h2> 
+     <!--买家信息 start--> 
+     <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />买家信息</h3> 
+     <table class="cell-info-box buyer" cellpadding="0" cellspacing="0"> 
+      <colgroup>
+       <col class="col-title" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-con" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-title" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-con2" />
+      </colgroup> 
+      <tbody> 
+       <tr> 
+        <td class="title">
+         <div class="td-ct">
+          买家
+         </div></td> 
+        <td>
+         <div class="td-ct">
+          <span class="buyer-name wpr"> </span>
+         </div></td> 
+        <td class="title">
+         <div class="td-ct">
+          买家会员名
+         </div></td> 
+        <td> 
+         <div class="td-ct"> 
+          <span class="saler-name wpr" data-ng-bind="order.user.username"></span> 
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td class="title">
+         <div class="td-ct">
+          收货地址
+         </div></td> 
+        <td colspan="3"> 
+         <div class="td-ct"> 
+          <span class="addr wpr"> 段波, 13926515211, 广东省 深圳市 宝安区 观澜黎光工业路茗语华苑7栋401 (518000) </span> 
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td class="title">
+         <div class="td-ct">
+          手机号码
+         </div></td> 
+        <td>
+         <div class="td-ct">
+          <span class="mobile wpr" data-ng-bind="order.user.mobile"></span>
+         </div></td> 
+        <td class="title">
+         <div class="td-ct">
+          电话号码
+         </div></td> 
+        <td>
+         <div class="td-ct">
+          <span class="tel wpr"></span>
+         </div></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     <!--买家信息 end--> 
+     <!--订单信息 start--> 
+     <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />订单信息</h3> 
+     <ul class="cell-order-info"> 
+      <li> <strong>交易订单号：</strong><span data-ng-bind="order._id"></span></li> 
+      <li> <strong>下单时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li> 
+      <li> <strong>支付信息：</strong><span data-ng-bind="order.trade_no"></span></li> 
+      <li> <strong>支付时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li>
+      <li class="last"> <strong>发货时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li> 
+     </ul> 
+     <!--订单信息 end--> 
+     <!--收货和物流信息 start--> 
+     <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />收货和物流信息</h3> 
+     <ul class="cell-logistics-info"> 
+      <li> <strong>收货地址：</strong> <span class="wpr"> 段波, 13926515211, 广东省 深圳市 宝安区 观澜黎光工业路茗语华苑7栋401 (518000) </span> </li>
+      <li> <strong>运单编号：</strong> <span class="wpr"> 100398684095 </span> </li> 
+      <li> <strong>物流编号：</strong> <span class="wpr"> &nbsp; 已发货 </span> </li> 
+     </ul> 
+     <table class="cell-info-box cell-bor-2" cellpadding="0" cellspacing="0"> 
+      <colgroup>
+       <col class="col-order" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-productNum" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-name" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-spec" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-num" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-price" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-promotion" />
+      </colgroup> 
+      <colgroup>
+       <col class="col-money" />
+      </colgroup> 
+      <thead> 
+       <tr> 
+        <th>序号</th> 
+        <th>货号</th> 
+        <th>货品名称</th> 
+        <th>规格</th> 
+        <th>数量</th> 
+        <th>单价</th> 
+        <th>优惠（元）</th> 
+        <th>金额（元）</th> 
+       </tr> 
+      </thead> 
+      <tbody data-ng-repeat="item in order.detail"> 
+       <tr> 
+        <td class="title ali-center">
+         <div class="td-ct">
+          1
+         </div></td> 
+        <td class="ali-center"> 
+         <div class="td-ct"> 
+          <span class="productNum wpr"> -- </span> 
+         </div> </td> 
+        <td> 
+         <div class="td-ct"> 
+          <span class="name wpr" data-ng-bind="item.goods.title"></span>
+         </div> 
+         <!-- 地平线新增 START --> 
+         <!-- 地平线新增 END --> </td> 
+        <td class="c3"> 
+         <div class="td-ct">
+           颜色：颜色混发 
+          <br /> 规格：中细款 
+         </div> </td> 
+        <td class="ali-center">
+         <div class="td-ct">
+          <span class="num wpr" data-ng-bind="item.amount"></span>
+         </div></td> 
+        <td class="ali-center">
+         <div class="td-ct">
+          <span class="price wpr" data-ng-bind="item.price">元/<span data-ng-bind="item.spec"></span></span>
+         </div></td> 
+        <td class="ali-center"> 
+         <div class="td-ct">
+         </div> </td> 
+        <td class="ali-center">
+         <div class="td-ct">
+          <span class="money wpr" data-ng-bind="order.total"></span>
+         </div></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     <!--总计start--> 
+     <!--运费折扣--> 
+     <table class="total-order-info"> 
+      <tbody>
+       <tr> 
+        <td width="20%">货品合计：<span data-ng-bind="order.total | number:2"></span> 元</td>
+        <td width="25%"> </td>
+        <td class="right-cell" width="30%" rowspan="2"> 实付款 ： <strong> <span data-ng-bind="order.total | number:2"></span> 元 </strong> </td> 
+       </tr> 
+       <tr> 
+        <td>货品总量：60</td> 
+        <td> 优惠： 0.00 元 </td> 
+       </tr> 
+      </tbody>
+     </table> 
+     <!--总计 end--> 
+     <div class="line-box"></div> 
+     <!--买家留言 start--> 
+     <h3 class="msg-tit">买家留言</h3>
+     <span class="text-muted h6" data-ng-bind="order.bz"></span>
+     <!--买家留言 end--> 
+    </div> 
+    <!-- 输入分页符 --> 
+    <div class="mod-title-info"> 
+     <a class="btn btn-print" href="#" title="打印">打&nbsp;印</a> 
+    </div> 
+   </div>
+  </div>
+<style>
+  .footer,.ftcy{display: none;}
+</style>

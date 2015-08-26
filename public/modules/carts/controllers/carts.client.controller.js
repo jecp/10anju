@@ -11,16 +11,18 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			var date = new Date();
 			var created_day = date.getFullYear().toString() + (date.getMonth() + 1).toString() + date.getDate().toString();
 			var cartName = created_day + '-' + window.user.username + '-' + '的购物篮';
+			console.log(this.good.for_free || this.good.free_try);
+			var _price = (this.good.for_free || this.good.free_try) ? 0 : this.good.price;
 			var cart = new Carts ({
 				name: cartName,
 				number: Date.now(),
 				day: created_day,
 				detail:{
 					goods:this.good._id,
-					amount: this.good.amount,
-					price: this.good.price,
+					amount: this.good.amount || 1,
+					price: _price
 				},
-				total: this.good.price
+				total: this.good.amount*_price
 			});
 
 			// Clear form fields
@@ -31,6 +33,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			$scope.amount = '';
 			$scope.spec = '';
 			$scope.total = '';
+
 
 			// Redirect after save
 			cart.$save(function(response) {
@@ -98,6 +101,19 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			});
 		};
 
+		// // checked box
+		// $scope.checkAll = function (){
+		// 	// console.log(this.cart);
+		// 	$scope.checkbox = true;
+		// 	console.log(this.cart.detail);
+		// 	// var arr = this.order.detail;
+		// 	// $scope.$apply(function (){
+		// 	// 	arr.forEach(function (err){
+		// 	// 		arr.checked = true;
+		// 	// 	});
+		// 	// });
+		// }
+
 		// Remove existing Cart
 		$scope.del = function(cart) {
 			var cart_ = this.cart;
@@ -139,11 +155,16 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 		$scope.changeAmount = function (goodId){
 			var cart_good = this.item.goods,
 				_amount = this.item.amount,
-				_total;
-				_total = (cart_good.price*_amount);
+				_total = cart_good.price*_amount;
 
-			$http.post('/carts_goods', {cart:$scope.cart,cart_amount:_amount,goodId:cart_good._id,total:_total}).success(function (response){
+			var total_amount = 0;
+			for (var i=0;i<this.cart.detail.length;i++){
+				total_amount+=parseInt(this.cart.detail[i].amount);
+			}
+
+			$http.post('/carts_goods', {cart:$scope.cart,cart_amount:_amount,goodId:cart_good._id,total:_total,total_amount:total_amount}).success(function (response){
 				$scope.success = true;
+				$scope.cart.total_amount = total_amount;
 				$scope.cart.total = response.total;
 				$location.path('carts/' + response._id);
 			}).error(function (response){

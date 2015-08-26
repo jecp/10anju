@@ -1,48 +1,10 @@
-<script language=javascript>
-	function doPrint() {
-		bdhtml=window.document.body.innerHTML; //获取当前页的html代码
-		sprnstr="<!--startprint-->"; //设置打印开始区域 
-		eprnstr="<!--endprint-->"; //设置打印结束区域  
-		prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始代码向后取html 
-		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //从结束代码向前取html   
-		window.document.body.innerHTML=prnhtml;  
-		window.print();
-	}
-</script>
-<script language="JavaScript">
-	var hkey_root,hkey_path,hkey_key
-		hkey_root="HKEY_CURRENT_USER"
-		hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\" //设置网页打印的页眉页脚为空 
-		function pagesetup_null(){ 
-			try{
-				var RegWsh = new ActiveXObject("WScript.Shell")
-				hkey_key="header"
-				RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"")
-				hkey_key="footer"
-				RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"")
-			}catch(e){}
-			}  //设置网页打印的页眉页脚为默认值
-			function pagesetup_default(){
-				try{
-					var RegWsh = new ActiveXObject("WScript.Shell")
-						hkey_key="header"
-						RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&w&b页码，&p/&P")
-						hkey_key="footer"
-						RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&u&b&d")
-				}catch(e)
-				{}
-			}
-</script>
-<input type="button" value="清空页码" onclick=pagesetup_null()>
-<input type="button" value="恢复页码" onclick=pagesetup_default()>
 <section data-ng-controller="OrdersController" data-ng-init="findOne()">
 	<div class="mt20">
-		<!--startprint-->
 		<div class="od_top col-md-12 col-xs-12">
 			<div class="odt_title">
 				<span class="label label-default" data-ng-bind="order.status"></span>
 				<span class="h3" data-ng-bind="order.name"></span>
-				<a href="javascript:" class="btn btn-default" onClick="doPrint()">打印</a>
+				<a href="/#!/order_print/{{order._id}}" class="btn btn-default">打印</a>
 			</div>
 		</div>
 		<div class="od_header col-md-12 col-xs-12" data-ng-controller="CcentersController" ng-init="findU()">
@@ -74,14 +36,19 @@
 				<tbody data-ng-repeat="item in order.detail">
 					<tr>
 						<!-- <td><span></span></td> -->
-						<td class="col-md-3 col-xs-6">
+						<td class="">
 		                    <a href="/#!/goods/{{item.goods._id}}">
 		                        <img ng-src="{{item.goods.main_img}}-64" alt="" class="thumbnail">
 		                    </a>
 						</td>
 						<td><span data-ng-bind="item.goods.title"></span></td>
-						<td><input type="text" data-ng-model="item.amount">
-							<button ng-if="order.status === false" type="btn btn-primary" ng-click="changeAmount()" >更新</button></td>
+						<td>
+							<div ng-if="order.status">
+								<span data-ng-bind="item.amount"></span>
+							</div>
+							<div ng-if="order.status === false">
+								<span ng-if="item.goods.free_try || item.goods.for_free" data-ng-bind="item.amount"></span><input ng-hide="item.goods.free_try || item.goods.for_free" ng-if="order.status === false"type="text" data-ng-model="item.amount"><button ng-hide="item.goods.free_try || item.goods.for_free" type="btn btn-primary" ng-click="changeAmount()" >更新</button>
+							</div></td>
 						<td><span data-ng-bind="item.price"></span></td>
 		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
 						<td><span data-ng-bind="item.amount*item.price"></span></td>
@@ -91,7 +58,7 @@
 			</table>
 		</div>
 		<div class="od_footer form-group mt20">
-			<div>商品种类：<span data-ng-bind="order.detail.length"></span> 实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
+			<div>商品种类：<span data-ng-bind="order.detail.length"></span>商品数量：<span data-ng-bind="order.total_amount"></span>实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
 			<div class="col-md-12 col-xs-12">
 				<div class="col-md-2 col-xs-2"><label class="control-label">备注：<span data-ng-bind="order.bz"></span></label></div>
 				<div class="col-md-10 col-xs-10"><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz" class="col-md-12"></div>
@@ -99,8 +66,7 @@
 		</div>
 		<div class="od_submit mt20">
 			<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()">支付宝支付</a></div>
-			<a class="btn btn-default" href="javascript:;" onClick="doPrint()">打印</a>
+			<a href="/#!/order_print/{{order._id}}" class="btn btn-default">打印</a>
 		</div>
-		<!--endprint-->
 	</div>
 </section>

@@ -13,16 +13,22 @@ var mongoose = require('mongoose'),
  * Create a Cart
  */
 exports.create = function(req, res) {
-	var sgoods = req.body.detail.goods;
-	var sprice = req.body.detail.price;
-	var _total = req.body.total;
-	var _goods = {
+	var sgoods = req.body.detail.goods,
+		sprice = req.body.detail.price,
+		samount = req.body.detail.amount,
+		_total = req.body.total ? _.ceil(req.body.total,2) : _.ceil(sprice*samount,2),
+		_total_amount,
+		_goods = {
 			goods:sgoods,
-			amount:1,
+			amount:samount,
 			price:sprice,
 		};
+
+		console.log(req.body.detail);
+		console.log('samount'+samount);
+		console.log(_goods);
 	if (sgoods){
-		Cart.findOne({user:req.user,day:req.body.day,order_status:false,'detail.goods':sgoods},function(err,cart){
+		Cart.findOne({user:req.user,order_status:false,'detail.goods':sgoods},function(err,cart){
 			if (err){console.log(err);}
 			else if(cart){
 				var i = cart.detail.length;
@@ -32,7 +38,9 @@ exports.create = function(req, res) {
 						cart.total += sprice;
 					}
 				}
-				if (i){				
+				if (i){
+					_total_amount = _.sum(cart.detail,'amount');
+					console.log(_total_amount);	
 					cart.save(function (err,cart){
 						if (err){console.log(err);}
 						else {
@@ -40,20 +48,24 @@ exports.create = function(req, res) {
 						}
 					});
 				} else {
-					cart.update({$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
+					cart.update({$push:{detail:_goods},$inc:{total:_total,total_amount:_goods.amount}},function (err,cart){
 						res.send(cart);
 					});
 				}
 			} else{
-				Cart.findOneAndUpdate({user:req.user,day:req.body.day,order_status:false},{$push:{detail:_goods},$inc:{total:_total}},function (err,cart){
+				Cart.findOneAndUpdate({user:req.user,order_status:false},{$push:{detail:_goods},$inc:{total:_total,total_amount:_goods.amount}},function (err,cart){
 					if(err){console.log(err);}
 					else if(cart){
+						console.log(cart);
 						res.send(cart);
 					}
 					else {
 						var _cart = new Cart(req.body);
 						_cart.user = req.user;
 						_cart.detail = _goods;
+						_cart.total = _total;
+						_cart.total_amount = samount;
+						console.log(_cart.amount);
 						_cart.save(function (err,cart) {
 							if (err) {
 								return res.status(400).send({
@@ -101,18 +113,18 @@ exports.update = function(req, res) {
  */
 exports.changeAmount = function(req, res) {
 	Cart.findOne({_id:req.body.cart._id},function (err,cart) {
-
 		var i = cart.detail.length;
 		while(i--){
 			if (req.body.goodId.toString() === cart.detail[i].goods.toString()){
 				cart.total += cart.detail[i].price * (req.body.cart_amount-cart.detail[i].amount);
 				cart.detail[i].amount = req.body.cart_amount;
 			}
-		}			
+		}
+		cart.total_amount = req.body.total_amount;
 		cart.save(function (err,cart){
 			if (err){console.log(err);}
 			else {
-				res.jsonp(cart);
+				res.send(cart);
 			}
 		});
 	});
