@@ -14,7 +14,8 @@ angular.module('collects').controller('CollectsController', ['$scope', '$http', 
 			var obj = $location.url().split('/')[1];
 			var value = $location.url().split('/')[2];
 			var collect = new Collects ({
-				obj ,value
+				obj:obj,
+				value:value
 			});
 
 			// Redirect after save
