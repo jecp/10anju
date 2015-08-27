@@ -9,6 +9,7 @@
           <span>全部</span>
         </tab-heading>
         <div class="row good_list_all" >
+          <div ng-if="!goods || goods.length < 1"><div ng-hide="goods.length > 0"><img src="modules/core/img/loaders/loader.gif" style="margin:50px;background:#fff;clear:both;"></div></div>
           <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
             <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
           </div>             
