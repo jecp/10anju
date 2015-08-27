@@ -279,12 +279,13 @@ exports.changeAmount = function(req, res) {
 				_goodId = order.detail[i].goods._id;
 			}
 		}
+		var change = req.body.total_amount - order.total_amount;
 		order.updated = Date.now();
 		order.total_amount = req.body.total_amount;
 		order.save(function (err,order){
 			if (err){console.log(err);}
 			else {
-				Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:req.body.order_amount-1}},function(err){
+				Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:change}},function (err){
 					if (err){ console.log(err);}
 					else{
 						res.send(order);
@@ -292,9 +293,9 @@ exports.changeAmount = function(req, res) {
 				});
 			}
 		});
-		Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:req.body.order_amount}},function (err){
-			if(err){console.log(err);}
-		});
+		// Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:change}},function (err){
+		// 	if(err){console.log(err);}
+		// });
 	});
 };
 

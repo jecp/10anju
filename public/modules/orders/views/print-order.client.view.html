@@ -123,7 +123,7 @@
         <th>规格</th> 
         <th>数量</th> 
         <th>单价</th> 
-        <th>优惠（元）</th> 
+        <th>赠品/试用品</th> 
         <th>金额（元）</th> 
        </tr> 
       </thead> 
@@ -145,8 +145,8 @@
          <!-- 地平线新增 END --> </td> 
         <td class="c3"> 
          <div class="td-ct">
-           颜色：颜色混发 
-          <br /> 规格：中细款 
+           <span data-ng-bind="item.goods.weight"></span>
+           <span data-ng-bind="item.goods.spec"></span> 
          </div> </td> 
         <td class="ali-center">
          <div class="td-ct">
@@ -157,7 +157,7 @@
           <span class="price wpr" data-ng-bind="item.price">元/<span data-ng-bind="item.spec"></span></span>
          </div></td> 
         <td class="ali-center"> 
-         <div class="td-ct">
+         <div class="td-ct"><span ng-if="item.for_free">赠品</span><span ng-if="item.free_try">试用品</span>
          </div> </td> 
         <td class="ali-center">
          <div class="td-ct">

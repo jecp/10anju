@@ -233,7 +233,6 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 		$scope.changeAmount = function (goodId){
 			var order_good = this.item.goods;
 			var _amount = Math.abs(this.item.amount);
-			console.log(_amount);
 			var _total = this.order.total + this.item.price*_amount;
 			var total_amount = 0;
 			for (var i=0;i<this.order.detail.length;i++){
