@@ -4,7 +4,7 @@
 angular.module('visithistorys').controller('VisithistorysController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Visithistorys',
 	function($scope, $http, $stateParams, $location, Authentication, Visithistorys) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('/');
 		}
 

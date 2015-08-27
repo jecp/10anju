@@ -4,7 +4,7 @@
 angular.module('ccenters').controller('CcentersController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Ccenters',
 	function($scope, $http, $stateParams, $location, Authentication, Ccenters) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin')  && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('/');
 		}
 

@@ -4,7 +4,7 @@
 angular.module('collects').controller('CollectsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Collects',
 	function($scope, $http, $stateParams, $location, Authentication, Collects) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('/');
 		}
 

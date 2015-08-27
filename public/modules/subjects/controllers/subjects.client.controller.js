@@ -4,7 +4,7 @@
 angular.module('subjects').controller('SubjectsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Subjects',
 	function($scope, $http, $stateParams, $location, Authentication, Subjects) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('subjects');
 		}
 

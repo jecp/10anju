@@ -4,7 +4,7 @@
 angular.module('orders').controller('OrdersController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Orders',
 	function($scope, $http, $stateParams, $location, Authentication, Orders) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('orders');
 		}
 

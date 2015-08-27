@@ -4,7 +4,7 @@
 angular.module('comments').controller('CommentsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments',
 	function($scope, $http, $stateParams, $location, Authentication, Comments) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
 			$location.path('/');
 		}
 
