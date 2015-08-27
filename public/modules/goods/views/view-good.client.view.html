@@ -317,7 +317,7 @@
 				<div class="good_detail_samecat">
 					<ul class="breadcrumb text-right">同类精选<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 					<div class="good_subcat_list" data-ng-init="listSubcat()">
-						<li data-ng-repeat="item in goods | filter:good.subcat">
+						<li data-ng-repeat="item in goods | filter:good.subcat | limitTo:6">
 							<a href="/#!/goods/{{item._id}}" class="right_subcat_list">
 								<img ng-src="{{item.main_img}}-260" alt="" class="thumbnail">
 								<label for="" data-ng-bind="item.title" class="h5"></label>
