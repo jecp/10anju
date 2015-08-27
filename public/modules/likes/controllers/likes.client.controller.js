@@ -14,7 +14,8 @@ angular.module('likes').controller('LikesController', ['$scope', '$stateParams',
 			var obj = $location.url().split('/')[1];
 			var value = $location.url().split('/')[2];
 			var like = new Likes ({
-				obj ,value
+				obj:obj,
+				value:value
 			});
 
 			// Redirect after save
