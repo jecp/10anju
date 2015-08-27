@@ -3,6 +3,9 @@
 angular.module('articles').controller('ArticlesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Articles',
 	function($scope, $http, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('/');
+		}
 
 		$scope.create = function() {
 			var article = new Articles({

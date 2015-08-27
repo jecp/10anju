@@ -4,6 +4,9 @@
 angular.module('collects').controller('CollectsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Collects',
 	function($scope, $http, $stateParams, $location, Authentication, Collects) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('/');
+		}
 
 		// Create new Collect
 		$scope.create = function() {

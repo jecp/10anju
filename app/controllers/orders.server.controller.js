@@ -293,9 +293,6 @@ exports.changeAmount = function(req, res) {
 				});
 			}
 		});
-		// Good.findOneAndUpdate({_id:req.body.goodId},{$inc:{sold:change}},function (err){
-		// 	if(err){console.log(err);}
-		// });
 	});
 };
 

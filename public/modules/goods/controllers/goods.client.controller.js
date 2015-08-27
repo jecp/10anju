@@ -4,6 +4,9 @@
 angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
 	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('goods');
+		}
 
 		// Create new Good
 		$scope.create = function() {
@@ -43,30 +46,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-
-			// Clear form fields
-			// $scope.name = '';
-			// $scope.subcat = '';
-			// $scope.category = '';
-			// $scope.title = '';
-			// $scope.summary = '';
-			// $scope.spec = '';
-			// $scope.price = '';
-			// $scope.weight = '';
-			// $scope.origin = '';
-			// $scope.delivery = '';
-			// $scope.detail = '';
-			// $scope.main_img = '';
-			// $scope.img = '';
-			// $scope.stock = '';
-			// $scope.wiki = '';
-			// $scope.suitable = '';
-			// $scope.sale = '';
-			// $scope.feature = '';
-			// $scope.nutrition = '';
-			// $scope.therapy = '';
-			// $scope.avoid = '';
-			// $scope.recipes = '';
 		};
 
 		// Remove existing Good
@@ -107,12 +86,24 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Edit list Good
 		$scope.edit = function() {
-			$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
-				$scope.good = response;
-			}).error(function(response){				
-				$scope.error = response.message;
-				$location.path('goods');
-			});
+			if($location.path().search('edit')){
+				if(!Authentication && Authentication.user.roles.length<2){
+					alert('您没有权限！请检查！');
+					$location.path('goods');
+				}
+				else {
+					for (var i=0;i<Authentication.user.roles.length;i++){
+						if(Authentication.user.roles[i]==='admin'){
+							$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
+								$scope.good = response;
+							}).error(function(response){				
+								$scope.error = response.message;
+								$location.path('goods');
+							});
+						}
+					}
+				}
+			}
 		};
 
 		// Find a list of Goods

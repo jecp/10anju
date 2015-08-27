@@ -4,6 +4,9 @@
 angular.module('likes').controller('LikesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Likes',
 	function($scope, $stateParams, $location, Authentication, Likes) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('/');
+		}
 
 		// Create new Like
 		$scope.create = function() {

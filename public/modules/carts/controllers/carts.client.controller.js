@@ -4,6 +4,9 @@
 angular.module('carts').controller('CartsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Carts',
 	function($scope, $http, $stateParams, $location, Authentication, Carts) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('/');
+		}
 
 		// Create new Cart
 		$scope.create = function() {

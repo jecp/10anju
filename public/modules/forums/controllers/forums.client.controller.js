@@ -4,6 +4,9 @@
 angular.module('forums').controller('ForumsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Forums',
 	function($scope, $http, $stateParams, $location, Authentication, Forums) {
 		$scope.authentication = Authentication;
+		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
+			$location.path('forums');
+		}
 
 		// Create new Forum
 		$scope.create = function() {
