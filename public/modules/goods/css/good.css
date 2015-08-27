@@ -72,13 +72,13 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;}
     width:100%;
     padding:0 0 0 5px; 
     height:30px;
-    background: rgba(250,170,52,0.70);
+    background: rgba(0,0,0,0.70);
     bottom:0;
     left:0;
     display: block;
     position: absolute;
     font: bold 18px/30px "黑体";
-    color:white;
+    color:orange;
 }
 .good_list_thumbnail img{border: 1px solid #fff;height:100%;width:100%;overflow: hidden;}
 .gl_detail{width:100%;color:#ccc;border-bottom: 1px solid #ccc;}

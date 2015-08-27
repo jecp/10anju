@@ -59,10 +59,6 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,fieldset,lengend,bu
 body,button,input,select,textarea{
 	font:14px/1.5 Tahoma,Arial,"\5b8b\4f53",sans-serif
 }
-h1,h2,h3,h4,h5,h6{
-	font-size:100%;
-	font-weight:400
-}
 address,cite,dfn,em,var{
 	font-style:normal
 }

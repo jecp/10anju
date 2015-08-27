@@ -27,6 +27,7 @@ exports.create = function(req, res) {
 	good.img = req.body.img ? req.body.img.split(',') : '';
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : '';
 	good.feature = req.body.feature? req.body.feature.split(',') : '';
+	good.status = 0;
 
 	if(cate){
 		good.category = cate;
@@ -247,7 +248,7 @@ exports.list = function(req, res) {
 			}
 		});
 	} else {
-		Good.find().sort('-created').exec(function(err, goods) {
+		Good.find({}).sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
@@ -281,7 +282,7 @@ exports.modify = function(req, res) {
 	Good.findOne({_id:req.body._id},function (err,good){
 		if(err){console.log(err);}
 		var goodObj = _.extend(good , req.body);
-		good.detail = markdown.toHTML(req.body.markdown);
+		good.detail = req.body.markdown ? markdown.toHTML(req.body.markdown) : '';
 
 		goodObj.user = req.user._id;
 		goodObj.img = req.body.img ? req.body.img.toString().split(',') : '';

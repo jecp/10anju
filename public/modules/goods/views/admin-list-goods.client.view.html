@@ -6,28 +6,30 @@
 				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
-							<th>细类/商品名称</th>
-							<th>商品图片</th>
-							<th>商品标题</th>
-							<th>商品价格/净重/规格</th>
-							<th>简介</th>
+							<th>细类/名称/产地</th>
+							<th>图片</th>
+							<th>标题/简介</th>
+							<th>价格/净重/规格</th>
+							<th>详情</th>
 							<th>配图/功效/适宜人群/疾病</th>
 							<th>销量</th>
 							<th>浏览量</th>
+							<th>仓库/上架</th>
 							<th>编辑</th>
 							<th>删除</th>
 						</tr>
 					</thead>
 					<tbody data-ng-repeat="good in goods" >
 						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
-							<td><div><input type="text" data-ng-model="good.subcat" id="subcat" class="form-control" placeholder="商品细类，如叶菜类、根茎类" required></div><div><input type="text" data-ng-model="good.name" id="name" class="form-control" placeholder="商品名称，例：手机" required></div></td>
-							<td><a href="/#!/goods/{{good._id}}"><img ng-src="{{good.main_img}}-64"></a><div><input type="text" data-ng-model="good.main_img" id="main_img" class="form-control" placeholder="商品图片网址" required></div></td>
-							<td><input type="text" data-ng-model="good.title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
-							<td><input type="text" data-ng-model="good.price" id="price" class="form-control" placeholder="价格，精确到小数点后2位" required><input type="text" data-ng-model="good.weight" id="weight" class="form-control" placeholder="净重，仅能用数字" required><input type="text" data-ng-model="good.spec" id="spec" class="form-control" placeholder="规格，例g ml" required></td>
-							<td><input type="text" data-ng-model="good.summary" id="summary" class="form-control" placeholder="简介" required></td>
-							<td><input type="text" data-ng-model="good.img" id="img" class="form-control" placeholder="配图" required><input type="text" data-ng-model="good.feature" id="feature" class="form-control" placeholder="功效" required><input type="text" data-ng-model="good.suitable" id="suitable" class="form-control" placeholder="适宜人群" required><input type="text" data-ng-model="good.therapy" id="therapy" class="form-control" placeholder="适宜疾病" required></td>
-							<td data-ng-bind="good.sold"></td>
-							<td data-ng-bind="good.pv"></td>
+							<td><div><input type="text" data-ng-model="good.subcat" id="subcat" class="form-control" required></div><div><input type="text" data-ng-model="good.name" id="name" class="form-control" required></div><div><input type="text" data-ng-model="good.origin" id="origin" class="form-control" required></div></td>
+							<td><a href="/#!/goods/{{good._id}}"><img ng-src="{{good.main_img}}-64"></a><div><input type="text" data-ng-model="good.main_img" id="main_img" class="form-control" required></div></td>
+							<td><input type="text" data-ng-model="good.title" id="title" class="form-control" required><input type="text" data-ng-model="good.summary" id="summary" class="form-control"  required></td>
+							<td><input type="text" data-ng-model="good.price" id="price" class="form-control" required><input type="text" data-ng-model="good.weight" id="weight" class="form-control"  required><input type="text" data-ng-model="good.spec" id="spec" class="form-control"  required></td>
+							<td><input type="text" data-ng-model="good.detail" id="detail" class="form-control" required></td>
+							<td><input type="text" data-ng-model="good.img" id="img" class="form-control" required><input type="text" data-ng-model="good.feature" id="feature" class="form-control"  required><input type="text" data-ng-model="good.suitable" id="suitable" class="form-control" required><input type="text" data-ng-model="good.therapy" id="therapy" class="form-control" required></td>
+							<td><input type="text" data-ng-model="good.sold" id="sold" class="form-control" required></td>
+							<td><input data-ng-model="good.pv" id="pv" class="form-control" required></td>
+							<td><input data-ng-model="good.status" id="status" class="form-control" required></td>
 							<td><a class="btn btn-primary" ng-click="modify()"><i class="glyphicon glyphicon-edit"></i></a>
 							</td>
 							<td><button class="btn btn-danger del" type="button" ng-click="remove()" name="good" id="{{good._id}}">删除</button></td>
