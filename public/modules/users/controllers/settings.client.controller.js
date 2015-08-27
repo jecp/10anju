@@ -7,9 +7,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
 
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
-			$location.path('goods');
-		}
 
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
