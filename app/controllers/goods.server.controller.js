@@ -22,7 +22,7 @@ exports.create = function(req, res) {
 	var cate = req.body.cate;
 	good.detail = req.body.detail ? markdown.toHTML(req.body.detail) : '';
 	good.markdown = req.body.detail;
-	
+	good.price = _.ceil(req.body.price,2);	
 	good.suitable = req.body.suitable ? req.body.suitable.split(',') : '';
 	good.img = req.body.img ? req.body.img.split(',') : '';
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : '';

@@ -24,6 +24,10 @@ var OrderSchema = new Schema({
 		type:Date,
 		default: Date.now
 	},
+	pay_time:{
+		type:Date,
+		default: Date.now
+	},
 	detail:[{
 		goods: {type:Schema.ObjectId,
 			ref:'Good'},

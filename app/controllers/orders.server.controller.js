@@ -15,35 +15,43 @@ var mongoose = require('mongoose'),
  * Create a Order
  */
 exports.create = function(req, res) {
-	var order = new Order(req.body);	
 	console.log(req.body);
 
 	if (req.body.detail){
-		Order.findOne({user:req.user,status:false},function (err,order){
+		Order.findOne({user:req.user,cart:req.body.cart,status:false},function (err,order){
 			if(err){console.log(err);}
 			else if(order){
-				console.log(req.body.detail);
-				var a = _.extend(order.detail,req.body.detail);
-				console.log(a);
-				order.detail = a;
-				order.save(function (err,order){
-					if(err){console.log(err);}
-					else {
-						console.log(order);
-						res.send(order);
-					}
+				return res.status(200).send({
+					message: '此购物篮已提交过，不能重复提交〜'
 				});
 			}
 			else{
-				console.log(2);
-
+				Cart.findOneAndUpdate({_id:req.body.cart},{order_status:true},function(err,cart){
+					if(err){console.log(err);}
+					else {
+						var order = new Order(req.body);
+						order.user = req.user;
+						order.detail = cart.detail;
+						order.total_amount = cart.total_amount;
+						order.save(function (err,order){
+							if(err){console.log(err);}
+							else {
+								for(var i=0;i<cart.detail.length;i++){
+									Good.findOneAndUpdate({_id:cart.detail[i].goods},{$inc:{sold:cart.detail[i].amount}},function (err,good){
+										if(err){console.log(err);}
+									});
+								};
+								res.send(order);
+							}
+						});
+					}
+				});
 			}
 		});
 	}else{
 		Order.findOne({user:req.user,status:false,'detail.goods':req.body.goods},function (err,order){
 			if(err){console.log(err);}
 			else if(order){
-				console.log(1);
 				var i = order.detail.length;
 				while(i--){
 					if (req.body.goods.toString() === order.detail[i].goods.toString()){
@@ -52,15 +60,14 @@ exports.create = function(req, res) {
 					}
 				}
 				if (i){
-					total_amount = _.sum(order.detail,'amount');
-					console.log(total_amount);	
+					order.total_amount = _.sum(order.detail,'amount');
+					order.total = _.ceil(order.total,2);
 					Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
 						if (err){ console.log(err);}
 					});
 					order.save(function (err,order){
 						if (err){console.log(err);}
 						else {
-							console.log(order);
 							res.send(order);
 						}
 					});
@@ -68,12 +75,8 @@ exports.create = function(req, res) {
 			}
 			else{
 				Order.findOne({user:req.user,status:false},function (err,order){
-					console.log(order);
-
 					if(err){console.log(err);}
-
 					else if(order){
-						console.log(1);
 						Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
 							if (err){ console.log(err);}
 						});
@@ -86,7 +89,6 @@ exports.create = function(req, res) {
 						});
 					}
 					else {
-						console.log(2);
 						var order = new Order(req.body);
 						order.user = req.user;
 						order.detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.price});
@@ -98,7 +100,6 @@ exports.create = function(req, res) {
 						order.save(function (err,order){
 							if(err){console.log(err);}
 							else{
-								console.log(order);
 								res.send(order);
 							}
 						});
@@ -108,46 +109,6 @@ exports.create = function(req, res) {
 		});
 	}
 };
-	// }
-
-	// if (req.body.detail){// If come from cart, change to order
-	// 	for (var i =0; i < req.body.detail.length; i++){
-	// 		_detail = req.body.detail[i];
-	// 		order_detail.push({goods:_detail.goods._id,amount:_detail.amount,price:_detail.price});
-	// 	}
-	// 	// order.detail = _.extend(order.detail,req.body.detail);
-	// 	// console.log( _.extend(order.detail,req.body.detail));
-
-	// 	Good.update({_id:_detail.goods._id},{$inc:{sold:1}},function(err){
-	// 		if (err){ console.log(err);}
-	// 	});
-
-	// 	// change cart status to true
-	// 	Cart.update({_id:req.body.cart},{order_status:true},function(err){
-	// 		if (err){console.log(err);}
-	// 	});
-	// } else {
-	// 	Good.update({_id:req.body.goods},{$inc:{sold:1}},function(err){
-	// 		if (err){ console.log(err);}
-	// 	});	
-	// 	order_detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.total});
-	// }
-	// // save order
-	// order.detail = order_detail;
-	// order.user = req.user;
-
-	// order.save(function (err,order) {
-	// 	if (err) {
-	// 		return res.status(400).send({
-	// 			message: errorHandler.getErrorMessage(err)
-	// 		});
-	// 	} else {
-	// 		var _sum = _.sum(order.detail,'amount')
-	// 		console.log(_sum);
-	// 		res.send(order);
-	// 	}
-	// });
-// };
 
 /**
  * Show the current Order
@@ -309,7 +270,7 @@ exports.buy_list = function(req, res) {
 exports.changeAmount = function(req, res) {
 	var _goodId;
 	Order.findOne({_id:req.body.order._id},function (err,order) {
-
+		if(err){console.log(err);}
 		var i = order.detail.length;
 		while(i--){
 			if (req.body.goodId.toString() === order.detail[i].goods.toString()){
@@ -319,6 +280,7 @@ exports.changeAmount = function(req, res) {
 			}
 		}
 		order.updated = Date.now();
+		order.total_amount = req.body.total_amount;
 		order.save(function (err,order){
 			if (err){console.log(err);}
 			else {
