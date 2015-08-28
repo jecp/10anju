@@ -4,9 +4,15 @@
 angular.module('comments').controller('CommentsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments',
 	function($scope, $http, $stateParams, $location, Authentication, Comments) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('/');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Comment
 		$scope.create = function() {

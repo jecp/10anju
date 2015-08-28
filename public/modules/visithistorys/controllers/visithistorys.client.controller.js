@@ -4,9 +4,15 @@
 angular.module('visithistorys').controller('VisithistorysController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Visithistorys',
 	function($scope, $http, $stateParams, $location, Authentication, Visithistorys) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('/');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Visithistory
 		$scope.create = function() {

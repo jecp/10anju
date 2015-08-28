@@ -4,9 +4,15 @@
 angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
 	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('goods');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Good
 		$scope.create = function() {

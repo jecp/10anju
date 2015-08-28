@@ -4,9 +4,14 @@
 angular.module('subjects').controller('SubjectsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Subjects',
 	function($scope, $http, $stateParams, $location, Authentication, Subjects) {
 		$scope.authentication = Authentication;
-		if ($scope.authentication.user) $location.path('/');
-		if($location.path().search('admin') && $scope.authentication.user.roles.length < 2){
-			$location.path('subjects');
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('subjects');
+			}
 		}
 
 		// Create new Subject

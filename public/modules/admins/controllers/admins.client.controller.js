@@ -4,9 +4,15 @@
 angular.module('admins').controller('AdminsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Admins',
 	function($scope, $http, $stateParams, $location, Authentication, Admins) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('/');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Admin
 		$scope.create = function() {

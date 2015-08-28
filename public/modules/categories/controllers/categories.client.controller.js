@@ -4,9 +4,15 @@
 angular.module('categories').controller('CategoriesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Categories',
 	function($scope, $http, $stateParams, $location, Authentication, Categories) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('/');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Category
 		$scope.create = function() {

@@ -4,9 +4,15 @@
 angular.module('porders').controller('PordersController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Porders',
 	function($scope, $http, $stateParams, $location, Authentication, Porders) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
-			$location.path('porders');
-		}
+		
+		if($location.path().search('admin')){
+			if (!$scope.authentication.user) {
+				$location.path('/');
+			}
+			else if($scope.authentication.user.roles.length < 2){
+				$location.path('/');
+			}
+		};
 
 		// Create new Porder
 		$scope.create = function() {
