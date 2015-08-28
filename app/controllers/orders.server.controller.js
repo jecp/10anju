@@ -40,7 +40,7 @@ exports.create = function(req, res) {
 									Good.findOneAndUpdate({_id:cart.detail[i].goods},{$inc:{sold:cart.detail[i].amount}},function (err,good){
 										if(err){console.log(err);}
 									});
-								};
+								}
 								res.send(order);
 							}
 						});
@@ -89,7 +89,7 @@ exports.create = function(req, res) {
 						});
 					}
 					else {
-						var order = new Order(req.body);
+						order = new Order(req.body);
 						order.user = req.user;
 						order.detail.push({goods:req.body.goods,amount:req.body.amount,price:req.body.price});
 						order.total = req.body.total;

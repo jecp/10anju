@@ -12,7 +12,7 @@ angular.module('porders').controller('PordersController', ['$scope', '$http', '$
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Porder
 		$scope.create = function() {

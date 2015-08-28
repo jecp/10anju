@@ -12,7 +12,7 @@ angular.module('visithistorys').controller('VisithistorysController', ['$scope',
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Visithistory
 		$scope.create = function() {

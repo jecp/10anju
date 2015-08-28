@@ -12,7 +12,7 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Cart
 		$scope.create = function() {

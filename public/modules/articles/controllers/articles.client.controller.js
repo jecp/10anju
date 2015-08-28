@@ -11,7 +11,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 		
 		$scope.create = function() {
 			var article = new Articles({

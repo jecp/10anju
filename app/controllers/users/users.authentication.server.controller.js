@@ -23,7 +23,7 @@ exports.signup = function(req, res) {
 	if(!req.body.authCode){
 			var now = new Date();
 			var a=now.getSeconds();
-			var authCode=Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
+			authCode=Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
 			var appkey = 'fe66303b0f83ddd916fda2884debbd2f';//用户appkey
 			// var minutes = 1000*60*3;//3分钟
 			var tpl_id = 5465;//信息模版id

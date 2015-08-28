@@ -12,7 +12,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Good
 		$scope.create = function() {

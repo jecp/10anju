@@ -12,7 +12,7 @@ angular.module('messages').controller('MessagesController', ['$scope', '$http', 
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Message
 		$scope.create = function() {

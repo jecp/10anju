@@ -12,7 +12,7 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Admin
 		$scope.create = function() {

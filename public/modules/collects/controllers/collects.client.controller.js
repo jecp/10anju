@@ -12,7 +12,7 @@ angular.module('collects').controller('CollectsController', ['$scope', '$http', 
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Collect
 		$scope.create = function() {

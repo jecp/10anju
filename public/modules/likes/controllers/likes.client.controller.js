@@ -12,7 +12,7 @@ angular.module('likes').controller('LikesController', ['$scope', '$stateParams',
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Like
 		$scope.create = function() {

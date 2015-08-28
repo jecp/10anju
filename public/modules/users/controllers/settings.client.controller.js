@@ -91,7 +91,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
 		};
 
 		// Change user password
-		$scope.changeUserPassword = function() {
+		$scope.changeUserPassword = function(isValid) {
 
 			if (isValid) {
 				$scope.success = $scope.error = null;

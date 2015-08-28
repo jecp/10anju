@@ -12,7 +12,7 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Category
 		$scope.create = function() {

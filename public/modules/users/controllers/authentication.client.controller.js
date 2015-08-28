@@ -42,7 +42,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				alert('入驻成功');
 			}).error(function (response){
 				$scope.error = response.message;
-			})
-		}
+			});
+		};
 	}
 ]);

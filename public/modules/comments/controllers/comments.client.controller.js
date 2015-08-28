@@ -12,7 +12,7 @@ angular.module('comments').controller('CommentsController', ['$scope', '$http', 
 			else if($scope.authentication.user.roles.length < 2){
 				$location.path('/');
 			}
-		};
+		}
 
 		// Create new Comment
 		$scope.create = function() {
