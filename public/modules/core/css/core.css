@@ -44,7 +44,14 @@ header, nav, article, section, aside, footer, figure {display:block}
 .protocal_head{height: 40px;border-top: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;background-color: #fafafa;box-shadow: 1px 1px 2px #f7f7f7;}
 .errorMessage{height:400px;width:60%;margin:200px;}
 .od_header{padding-top: 15px;content: '';}
-
+/* subjects */
+.ft10{font-size:10px;color:#ccc;}
+p img{width:100%;}
+.mc_subject{
+	content:'';
+	border-bottom: 1px solid #ccc;
+}
+.subject_content img{max-width: 100%;}
 /* order_print */
 html{
 	color:#000;

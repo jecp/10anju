@@ -10,7 +10,6 @@
 						<span data-ng-bind="subject.comment.length"></span>&nbsp;/
 						<span data-ng-bind="subject.pv"></span>
 						<span>&nbsp;</span>
-						<a href="" ><span data-ng-bind="subject.forum.name"></span></a>
 						&nbsp;<a href="/#!/subjects/{{subject._id}}"><span data-ng-bind="subject.title"></span></a>
 						<span class="text-muted text-right">发表于&nbsp;<span data-ng-bind="subject.created | date:'mediumDate'"></span></span>
 						<span class="pull-right" data-ng-bind="subject.comment.createdAt | limitTo:1"></span>
