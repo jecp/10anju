@@ -2,6 +2,22 @@
     <div class="row">
         <div class="col-md-9 col-xs-12">
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
+            <div class="mt20" style="margin-bottom:30px;">
+                <tabset>
+                    <tab>
+                        <tab-heading>
+                            <span>全部</span>
+                        </tab-heading>
+                    </tab>
+                    <tab data-ng-repeat="cat in categories | orderBy:'-goods.length'">
+                        <tab-heading><span data-ng-bind="cat.name"></span>
+                        </tab-heading>
+                        <ul class="nav nav-pills">
+                           <li data-ng-repeat="item in cat.subcat"><a href="/#!/goods/subcat/{{item}}" data-ng-bind="item"></a></li>
+                        </ul>
+                    </tab>
+                </tabset>
+            </div>
             <div class="row good_list_all">
                 <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
                     <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>

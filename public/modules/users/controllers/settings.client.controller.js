@@ -92,14 +92,20 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
 
 		// Change user password
 		$scope.changeUserPassword = function() {
-			$scope.success = $scope.error = null;
-			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
-				// If successful show success message and clear form
-				$scope.success = true;
-				$scope.passwordDetails = null;
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
+
+			if (isValid) {
+				$scope.success = $scope.error = null;
+				var user = new Users($scope.user);
+
+				user.$update(function(response) {
+					$scope.success = true;
+					Authentication.user = response;
+				}, function(response) {
+					$scope.error = response.data.message;
+				});
+			} else {
+				$scope.submitted = true;
+			}
 		};
 
 		// Find existing User
