@@ -13,9 +13,7 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-
 .navbar-brand{color:red;}
-
 /* */
 .mt20{margin-top:20px; }
 
@@ -23,11 +21,12 @@ a,a:visited{text-decoration:none; color:#373737;}
 a:hover {color:#FF538C;text-decoration: none;}
 
 /* help center css */
-header, nav, article, section, aside, footer, figure {
-	display:block
-}
-.hc_left{text-align: left;line-height:25px;}
-.hc_center{padding-top: 25px;padding-left: 30px;}
+header, nav, article, section, aside, footer, figure {display:block}
+.hc_left{/*position:fixed;top:70px;left:auto;width:25%;height:auto;margin-bottom:150px;*/text-align: left;line-height:25px;background: white;}
+.hctop{text-align: center;color: gray;border-bottom: 1px solid #ccc;padding:10px;}
+.hc_left ul li{display:block;text-align:center;color:#f4f4f4;}
+.hc_center{padding-top: 25px;padding-left: 30px;background: white;margin-bottom: 100px;}
+.hc_center img{max-width: 100%;}
 /* my_left */
 .my_left{background-color: #fbfbfb;margin-top:35px;}
 

@@ -75,6 +75,9 @@ var UserSchema = new Schema({
 		required: '手机号不能为空',
 		trim:true
 	},
+	authCode:{
+		type:String,
+	},
 	provider: {
 		type: String,
 		required: 'Provider is required'

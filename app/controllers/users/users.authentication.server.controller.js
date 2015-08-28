@@ -7,7 +7,9 @@ var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+	urlencode = require('urlencode'),
+	request = require('request');
 
 /**
  * Signup
@@ -15,40 +17,112 @@ var _ = require('lodash'),
 exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
+	var authCode = req.body.authCode;
+	var mobile = req.body.mobile;
 
-	// Init Variables
-	var user = new User(req.body);
-	var message = null;
+	if(!req.body.authCode){
+			var now = new Date();
+			var a=now.getSeconds();
+			var authCode=Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
+			var appkey = 'fe66303b0f83ddd916fda2884debbd2f';//用户appkey
+			// var minutes = 1000*60*3;//3分钟
+			var tpl_id = 5465;//信息模版id
+			var con = '#code#='+authCode+'&#minutes#=3';
+			console.log(con);
+			var tpl_value=urlencode(con);
+			console.log(tpl_value);
+			var url = 'http://v.juhe.cn/sms/send?mobile='+mobile+'&tpl_id='+tpl_id+'&tpl_value='+tpl_value+'&key='+appkey;
+			console.log(url);
+			request({url:url},function (err,res,body){
+				if(err){console.log(err);}
+				else if(body.error_code === 0){
+					console.log(body);
+				}else{
+					console.log(body.reason);
+				}
+			});
+		// 米微
+		// var mobile = req.body.mobile;
+		// var now = new Date();
+		// var a=now.getSeconds();
+		// var authCode=Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
+		// var postData = {
+		//     uid:'gdGKvjPIoGjf',
+		//     pas:'q84gbcu8',
+		//     mob:mobile,
+		//     con:'【茗语e家】您的验证码是：'+authCode+'，3分钟内有效。如非您本人操作，可忽略本消息。',
+		//     type:'json'
+		// };
+		// var content = querystring.stringify(postData);
+		// var options = {
+		//     host:'api.weimi.cc',
+		//     path:'/2/sms/send.html',
+		//     method:'POST',
+		//     agent:false,
+		//     rejectUnauthorized : false,
+		//     headers:{
+		//         'Content-Type' : 'application/x-www-form-urlencoded', 
+		//         'Content-Length' :content.length
+		//     }
+		// };
+		// var req = http.request(options,function(res){
+		//     res.setEncoding('utf8');
+		//     res.on('data', function (cb) {
+		//         if(cb.msg === '短信接口调用成功'){
+		//         	console.log(anthCode);
+		//         	console.log(cb);
+		//         }
+		//     });
+		//     res.on('end',function(){
+		//         console.log('over');
+		//     });
+		// });
+		// req.write(content);
+		// req.end();
+	}else if(req.body.authCode){
+		if(req.body.authCode === authCode){
+			console.log(authCode);
+			// Init Variables			
+			var user = new User(req.body);
+			var message = null;
 
-	// agreement == true,next,otherwise back
-	if (req.body.agreement === true){
-		// Add missing user fields
-		user.provider = 'local';
+			// agreement == true,next,otherwise back
+			if (req.body.agreement === true){
+				// Add missing user fields
+				user.provider = 'local';
 
-		// Then save the user 
-		user.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				// Remove sensitive data before login
-				user.password = undefined;
-				user.salt = undefined;
-
-				req.login(user, function(err) {
+				// Then save the user 
+				user.save(function(err) {
 					if (err) {
-						res.status(400).send(err);
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
 					} else {
-						res.json(user);
+						// Remove sensitive data before login
+						user.password = undefined;
+						user.salt = undefined;
+
+						req.login(user, function(err) {
+							if (err) {
+								res.status(400).send(err);
+							} else {
+								res.json(user);
+							}
+						});
 					}
 				});
 			}
-		});
-	}
-	else{
-		res.redirect('/#!/signup');
-	}
+			else{
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage('请确保同意注册协议！')
+				});
+			}
+		}else{
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage('验证码校验失败！请稍后重试！')
+			});
+		}
+	}	
 };
 
 /**
