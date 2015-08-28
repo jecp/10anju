@@ -5,7 +5,7 @@ angular.module('visithistorys').controller('VisithistorysController', ['$scope',
 	function($scope, $http, $stateParams, $location, Authentication, Visithistorys) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

@@ -5,7 +5,7 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 	function($scope, $http, $stateParams, $location, Authentication, Admins) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

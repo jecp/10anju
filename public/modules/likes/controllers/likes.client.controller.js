@@ -5,7 +5,7 @@ angular.module('likes').controller('LikesController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Likes) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

@@ -5,7 +5,7 @@ angular.module('messages').controller('MessagesController', ['$scope', '$http', 
 	function($scope, $http, $stateParams, $location, Authentication, Messages) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

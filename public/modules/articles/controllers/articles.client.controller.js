@@ -4,7 +4,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 	function($scope, $http, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

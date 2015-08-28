@@ -5,7 +5,7 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 	function($scope, $http, $stateParams, $location, Authentication, Categories) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin')){
+		if($location.path().search('admin') > 0){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}
