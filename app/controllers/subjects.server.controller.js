@@ -144,6 +144,24 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Del an Subject
+ */
+exports.del = function(req, res) {
+	var subjectId = req.body.subjectId ;
+	console.log(req.body);
+
+	Subject.remove({_id:subjectId},function (err,subject) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.send(subject);
+		}
+	});
+};
+
+/**
  * List of Subjects
  */
 exports.list = function(req, res) { 

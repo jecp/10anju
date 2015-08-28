@@ -21,14 +21,14 @@
 						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
 							<td><a href="/#!/forums/{{subject.forum._id}}"><span data-ng-bind="subject.forum.name"></span></a></td>
 							<td><input type="text" data-ng-model="subject.subcat" id="subcat" class="form-control" required></td>
-							<td><input type="text" data-ng-model="subject.name" id="name" class="form-control" required></td>
+							<td><input type="text" data-ng-model="subject.title" id="title" class="form-control" required></td>
 							<td><input type="text" data-ng-model="subject.tags" id="tags" class="form-control"  required></td>
-							<td><input type="text" data-ng-model="subject.content" id="content" class="form-control"  required></td>
+							<td><input type="text" data-ng-model="subject.markdown" id="markdown" class="form-control"  required></td>
 							<td data-ng-bind="subject.collect"></td>
 							<td data-ng-bind="subject.pv"></td>
 							<td><a class="btn btn-primary" ng-click="modify()"><i class="glyphicon glyphicon-edit"></i></a>
 							</td>
-							<td><button class="btn btn-danger del" type="button" data-ng-click="remove();" name="subject" id="{{subject._id}}">删除</button></td>
+							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="subject" id="{{subject._id}}">删除</button></td>
 						</tr>
 					</tbody>
 				</table>

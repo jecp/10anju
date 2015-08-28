@@ -103,6 +103,17 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 			});
 		};
 
+		// Del Subject From admin list
+		$scope.del = function() {
+			console.log(this.subject._id);
+			$http.delete('/subjects/admin/list', this.subject._id).success(function (response){
+				$scope.success = true;
+				console.log('del success!');
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Subject
 		$scope.findOne = function() {
 			$scope.subject = Subjects.get({ 
