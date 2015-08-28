@@ -4,7 +4,7 @@
 angular.module('subjects').controller('SubjectsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Subjects',
 	function($scope, $http, $stateParams, $location, Authentication, Subjects) {
 		$scope.authentication = Authentication;
-		if($location.path().search('admin') && !Authentication && $scope.authentication.user.roles.length < 2){
+		if($location.path().search('admin') && (!Authentication || $scope.authentication.user.roles.length < 2)){
 			$location.path('subjects');
 		}
 
@@ -106,7 +106,7 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 		// Del Subject From admin list
 		$scope.del = function() {
 			console.log(this.subject._id);
-			$http.delete('/subjects/admin/list', this.subject._id).success(function (response){
+			$http.delete('/subjects/admin_del', this.subject._id).success(function (response){
 				$scope.success = true;
 				console.log('del success!');
 			}).error(function(response){
