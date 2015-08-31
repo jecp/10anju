@@ -14,13 +14,14 @@ var mongoose = require('mongoose'),
  * Create a article
  */
 exports.create = function(req, res) {
+	console.log(req.body);
 	var article = new Article(req.body);
 	article.user = req.user;
 	article.tags = req.body.tags ? req.body.tags.split(',') : '';
-	article.content = markdown.toHTML(req.body.content) || '';
+	article.content = req.body.content ? markdown.toHTML(req.body.content) : '';
 	article.markdown = req.body.content;
 
-	article.save(function(err) {
+	article.save(function (err,article) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
