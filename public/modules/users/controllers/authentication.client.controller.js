@@ -36,13 +36,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			}
 		};
 
-		$scope.auth = function() {
-			$http.post('/auth/signup',$scope.credentials).success(function (response){
-				$scope.success = true;
-				alert('入驻成功');
-			}).error(function (response){
-				$scope.error = response.message;
-			});
+		$scope.refreshAuthImg = function() {
+			alert(1);
 		};
 	}
 ]);

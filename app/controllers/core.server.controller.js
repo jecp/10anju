@@ -3,6 +3,24 @@
 /**
  * Module dependencies.
  */
+var mongoose = require('mongoose'),
+ 	errorHandler = require('./errors.server.controller'),
+ 	Cart = mongoose.model('Cart'),
+ 	Subject = mongoose.model('Subject'),
+ 	Article = mongoose.model('Article'),
+ 	Good = mongoose.model('Good'),
+ 	User = mongoose.model('User'),
+ 	Order = mongoose.model('Order'),
+ 	Porder = mongoose.model('Porder'),
+ 	Ccenter = mongoose.model('Ccenter'),
+ 	Comment = mongoose.model('Comment'),
+ 	Visithistory = mongoose.model('Visithistory'),
+ 	//_ = require('lodash'),
+ 	request = require('request');
+
+/**
+ * Index.
+ */
 exports.index = function(req, res) {
 	res.render('index', {
 		user: req.user || null,
@@ -11,7 +29,7 @@ exports.index = function(req, res) {
 };
 
 /**
- * Module dependencies.
+ * member-rights.
  */
 exports.member_rights = function(req, res) {
 	res.render('static/member-rights', {
@@ -21,7 +39,7 @@ exports.member_rights = function(req, res) {
 };
 
 /**
- * Module dependencies.
+ * about.
  */
 exports.about = function(req, res) {
 	res.render('static/css3', {
@@ -30,3 +48,77 @@ exports.about = function(req, res) {
 	});
 };
 
+/**
+ * today weather api.
+ */
+exports.today = function(req, res) {
+	// request({url:'http://op.juhe.cn/onebox/weather/query?cityname=%E6%B7%B1%E5%9C%B3&key=3904327f0cddc28bfeb75d115050d620',gzip:true},function (err,res,body){
+	// 	if (err){console.log(err);}
+	// 	console.log(body);
+	// }).pipe(request.post(req.hostname+'/core/today'));
+};
+
+/**
+ *  Data Summary.
+ */
+exports.summary = function(req, res) {
+	var goodsCount,
+		cartsCount,
+		ordersCount,
+		pordersCount,
+		ccentersCount,
+		usersCount,
+		fusersCount,
+		subjectsCount,
+		commentsCount,
+		articlesCount,
+		visithistorysCount;
+
+	Good.count(function(err, goods) {
+		if (!err) goodsCount = goods;
+		Cart.count(function(err, carts) {
+			if (!err)cartsCount = carts;
+			Order.count(function(err, orders) {
+				if (!err) ordersCount = orders;
+				Porder.count(function(err, porders) {
+					if (!err)pordersCount = porders;
+					Ccenter.count(function(err, ccenters) {
+						if (!err) ccentersCount = ccenters;
+						User.count(function(err, users) {
+							if (!err) usersCount = users;
+							User.count(function(err, fusers) {
+								if (!err)fusersCount = fusers;
+								Subject.count(function(err, subjects) {
+									if (!err)subjectsCount = subjects;
+									Comment.count(function(err, comments) {
+										if (!err) commentsCount = comments;
+										Article.count(function(err, articles) {
+											if (!err) articlesCount = articles;
+											Visithistory.count(function(err, visithistorys) {
+												if (!err) visithistorysCount = visithistorys;
+												var summary = {
+													goodsCount:goodsCount,
+													cartsCount:cartsCount,
+													ordersCount:ordersCount,
+													pordersCount:pordersCount,
+													ccentersCount:ccentersCount,
+													usersCount:usersCount,
+													fusersCount:fusersCount,
+													subjectsCount:subjectsCount,
+													commentsCount:commentsCount,
+													articlesCount:articlesCount,
+													visithistorysCount:visithistorysCount
+													};
+												res.send(summary);
+											});
+										});
+									});
+								});
+							});							
+						});						
+					});
+				});
+			});
+		});
+	});	
+};

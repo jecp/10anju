@@ -264,13 +264,13 @@ exports.list = function(req, res) {
  * Count of Goods
  */
 exports.count = function(req, res) {
-	Good.count().exec(function(err, goods) {
+	Good.count(function(err, goods) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(goods);
+			res.send(goods);
 		}
 	});
 };

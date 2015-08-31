@@ -22,6 +22,7 @@ module.exports = function(app) {
 	app.route('/auth/forgot').post(visithistory.vh_log, users.forgot);
 	app.route('/auth/reset/:token').get(visithistory.vh_log, users.validateResetToken);
 	app.route('/auth/reset/:token').post(visithistory.vh_log, users.reset);
+	app.route('/auth/img').get(visithistory.vh_log, users.ccap);
 
 	// Register in an ccenter
 	app.route('/users_ccenter/').post(visithistory.vh_log, users.register);

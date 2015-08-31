@@ -1,6 +1,6 @@
 <section data-ng-controller="CartsController" data-ng-init="findOne()">
 	<div class="mt20">
-		<div class="col-md-10 col-xs-12">
+		<div class="col-md-12 col-xs-12">
 			<div class="page-header">
 				<div class="title">
 					<span class="h1">&nbsp;我的购物篮</span>
@@ -17,9 +17,7 @@
 						<table class="table table-hover table-response">
 							<thead>
 								<tr><input ng-if="cart.order_status === false" type="checkbox" data-ng-model="All" ng-checked="checkAll()">
-									<th>
-										全选
-									</th>
+									<th>全选</th>
 									<th>货品</th>
 									<th>数量</th>
 									<th>单价(元)</th>

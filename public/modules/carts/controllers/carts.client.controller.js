@@ -4,8 +4,8 @@
 angular.module('carts').controller('CartsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Carts',
 	function($scope, $http, $stateParams, $location, Authentication, Carts) {
 		$scope.authentication = Authentication;
-
-		if($location.path().search('admin') > 0){
+		
+		if($location.path().search('admin')){
 			if (!$scope.authentication.user) {
 				$location.path('/');
 			}

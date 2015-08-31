@@ -20,8 +20,8 @@
  */
  'use strict';
 
-var crypto = require('crypto');
-var mongoose = require('mongoose'),
+var crypto = require('crypto'),
+    mongoose = require('mongoose'),
  	errorHandler = require('./errors.server.controller'),
 	Order = mongoose.model('Order'),
 	Good = mongoose.model('Good'),

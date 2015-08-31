@@ -164,46 +164,62 @@ exports.vh_log = function(req, res, next) {
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
 
-	if (req.user && req.user !== undefined){
-		Visithistory.findOne({user:req.user._id,originalUrl:req.originalUrl},function (err,visithistory,next){
-			if (err) {console.log(err);} 
-			else if (visithistory){
-				return;
-			}
-		});
-	} else{
-		Visithistory.findOne({sessionID:req.sessionID,originalUrl:req.originalUrl},function (err,visithistory,next){
-			if (err) {console.log(err);} 
-			else if (visithistory){
-				return;
-			} 
-		});
-	}
-
 	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
 		if (err){console.log(err);}
 		else if(body){
 			if(_.startsWith(body,'<')) {
-				return;
+				return false;
 			}
 			else{
 				areaObj = JSON.parse(body);
-				if (areaObj.code === 1){return;}
+				if (areaObj.code === 1){return false;}
 
-				logObj.customCountry = areaObj.data.country;
-				logObj.customCountry_id = areaObj.data.country_id;
-				logObj.customArea = areaObj.data.area;
-				logObj.customArea_id = areaObj.data.area_id;
-				logObj.customRegion = areaObj.data.region;
-				logObj.customRegion_id = areaObj.data.region_id;
-				logObj.customCity = areaObj.data.city;
-				logObj.customCity_id = areaObj.data.city_id;
-				logObj.customIsp = areaObj.data.isp;
-				logObj.customIsp_id = areaObj.data.isp_id;
+				if (req.user && req.user !== undefined){
+					Visithistory.findOne({user:req.user._id,originalUrl:req.originalUrl},function (err,visithistory,next){
+						if (err) {console.log(err);} 
+						else if (visithistory){
+							return false;
+						}else{
+							logObj.customCountry = areaObj.data.country;
+							logObj.customCountry_id = areaObj.data.country_id;
+							logObj.customArea = areaObj.data.area;
+							logObj.customArea_id = areaObj.data.area_id;
+							logObj.customRegion = areaObj.data.region;
+							logObj.customRegion_id = areaObj.data.region_id;
+							logObj.customCity = areaObj.data.city;
+							logObj.customCity_id = areaObj.data.city_id;
+							logObj.customIsp = areaObj.data.isp;
+							logObj.customIsp_id = areaObj.data.isp_id;
 
-				logObj.save(function (err,visithistory) {
-					if (err) {console.log(err);}
-				});	
+							logObj.save(function (err,visithistory) {
+								if (err) {console.log(err);}
+							});	
+						}
+					});
+				} else{
+					Visithistory.findOne({sessionID:req.sessionID,originalUrl:req.originalUrl},function (err,visithistory,next){
+						if (err) {console.log(err);} 
+						else if (visithistory){
+							return false;
+						} 
+						else{
+							logObj.customCountry = areaObj.data.country;
+							logObj.customCountry_id = areaObj.data.country_id;
+							logObj.customArea = areaObj.data.area;
+							logObj.customArea_id = areaObj.data.area_id;
+							logObj.customRegion = areaObj.data.region;
+							logObj.customRegion_id = areaObj.data.region_id;
+							logObj.customCity = areaObj.data.city;
+							logObj.customCity_id = areaObj.data.city_id;
+							logObj.customIsp = areaObj.data.isp;
+							logObj.customIsp_id = areaObj.data.isp_id;
+
+							logObj.save(function (err,visithistory) {
+								if (err) {console.log(err);}
+							});	
+						}
+					});
+				}
 			}
 		} 
 	});

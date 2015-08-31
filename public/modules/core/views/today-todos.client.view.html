@@ -1,33 +1,33 @@
-<div data-ng-bind="HeaderController" ng-init="summary()">
-	<!--<div class="panel panel-info" data-ng-controller="HeaderController" ng-init="TodayWeather()">
+<div data-ng-controller="HeaderController" ng-init="Summary()">
+<!-- 	<div class="panel panel-info" ng-init="TodayWeather()">
 		<div class="panel-heading">
 			Tips
 		</div>
-	 	<div class="panel-body"  ng-if="weather">
+	 	<div class="panel-body">
 			<div class="weather">
 				{{weather}}
 			</div>
 		</div> 
-	</div>-->
-	<div ng-if="goodsCount !== undefined" class="panel panel-default">
+	</div> -->
+	<div class="panel panel-default">
 		<div class="panel-heading">
 			全站统计
 		</div>
 		<div class="panel-body">
 			<div>
-				<div data-ng-bind="GoodsController" ng-init="Count()">商品总数：<span data-ng-bind="goodsCount"></span></div>
-				<div data-ng-bind="CartsController" ng-init="Count()">购物篮数：<span data-ng-bind="cartsCount"></span></div>
-				<div data-ng-bind="OrdersController" ng-init="Count()">订单总数：<span data-ng-bind="ordersCount"></span></div>
-				<div data-ng-bind="PordersController" ng-init="Count()">私人定制：<span data-ng-bind="pordersCount"></span></div>
-				<div data-ng-bind="CcentersController" ng-init="Count()">入驻社区：<span data-ng-bind="ccentersCount"></span></div>
-				<div data-ng-bind="SettingsController" ng-init="Count()">
-					<div>注册用户：<span data-ng-bind="usersCount"></span></div>
-					<div>认证用户：<span data-ng-bind="fusersCount"></span></div>
+				<div>商品总数：<span data-ng-bind="data.goodsCount"></span></div>
+				<div>购物篮数：<span data-ng-bind="data.cartsCount"></span></div>
+				<div>订单总数：<span data-ng-bind="data.ordersCount"></span></div>
+				<div>私人定制：<span data-ng-bind="data.pordersCount"></span></div>
+				<div>签约社区：<span data-ng-bind="data.ccentersCount"></span></div>
+				<div>
+					<div>注册用户：<span data-ng-bind="data.usersCount"></span></div>
+					<div>认证用户：<span data-ng-bind="data.fusersCount"></span></div>
 				</div>
-				<div data-ng-bind="SubjectsController" ng-init="Count()">论坛贴子：<span data-ng-bind="subjectsCount"></span></div>
-				<div data-ng-bind="CommentsController" ng-init="Count()">回复总数：<span data-ng-bind="commentsCount"></span></div>
-				<div data-ng-bind="ArticlesController" ng-init="Count()">博客文章：<span data-ng-bind="subjectsCount"></span></div>
-				<div data-ng-bind="VisithistorysController" ng-init="Count()">访问人数：<span class="label label-default" data-ng-bind="visithistorysCount"></span><span data-ng-bind="ccentersCount"></span></div>
+				<div>论坛贴子：<span data-ng-bind="data.subjectsCount"></span></div>
+				<div>回复总数：<span data-ng-bind="data.commentsCount"></span></div>
+				<div>博客文章：<span data-ng-bind="data.articlesCount"></span></div>
+				<div>访问PV：<span class="label label-default" data-ng-bind="data.visithistorysCount"></span><span data-ng-bind="ccentersCount"></span></div>
 			</div>
 		</div>
 	</div>

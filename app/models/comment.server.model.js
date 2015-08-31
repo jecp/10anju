@@ -29,6 +29,10 @@ var CommentSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	user_from:{
+		type:Schema.ObjectId,
+		ref:'User'
+	},
 	user_to:{
 		type: Schema.ObjectId,
 		ref: 'User'

@@ -102,21 +102,6 @@ exports.list = function(req, res) {
 };
 
 /**
- * Count of Articles
- */
-exports.count = function(req, res) {
-	Article.count().exec(function(err, articles) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.send(articles);
-		}
-	});
-};
-
-/**
  * Modify a Article
  */
 exports.modify = function(req, res) {

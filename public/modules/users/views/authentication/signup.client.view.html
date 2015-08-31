@@ -1,14 +1,14 @@
 <section class="row" data-ng-controller="AuthenticationController">
-	<div class="user_signin">
+	<div class="user_signin col-md-12 col-xs-12">
 		<div class="col-md-6 col-xs-12 user_signin_profile">
 			<h2 class="col-md-12 text-center">会员权益</h2>
-			<div class="col-md-12">
+			<div class="col-md-12 mt20">
 				<p>
 					<ol>
 						<li>1. 享受<strong>小区直配(免费)</strong>服务</li>
 						<li>2. 一定额度内<strong>先购买享用后付费</strong></li>
 						<li>3. 食安居会员专享“菜篮子”</li>
-						<li>4. 完全免费的代购服务，<strong>指定商品规格指定价格</strong>，我们跑腿送上门</li>
+						<li>4. 私人订制服务，<strong>指定商品规格指定价格</strong>，我们跑腿送上门</li>
 						<li>5. 食安居日常精选 <strong>赠品/试用品</strong> 服务</li>
 						<li>6. <strong>无货退款/无条件退款</strong></li>
 					</ol>
@@ -24,51 +24,61 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title text-right">
-						食安居会员注册
+						食安居--茗语e家会员注册
 					</div>
 				</div>
 				<div class="panel-body">
-					<div class="row">
+					<div class="mt20">
 						<form name="userForm" class="signin form-horizontal" novalidate autocomplete="off">
-							<fieldset class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
+							<fieldset class="">
 								<div>
 									<div class="form-group">
-										<label for="username" class="col-md-2 control-label">用户名</label>
-										<div class="col-md-10">
+										<label for="username" class="col-md-3 col-xs-3 control-label">用户名</label>
+										<div class="col-md-9 col-xs-9">
 											<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="用户名，可用中文">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="mobile" class="col-md-2 control-label">手机号</label>
-										<div class="col-md-10">
+										<label for="mobile" class="col-md-3 col-xs-3 control-label">手机号</label>
+										<div class="col-md-9 col-xs-9">
 											<input type="text" id="mobile" name="mobile" class="form-control" data-ng-model="credentials.mobile" placeholder="手机号，全数字">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="email" class="col-md-2 control-label">邮箱</label>
-										<div class="col-md-10">
+										<label for="email" class="col-md-3 col-xs-3 control-label">邮箱</label>
+										<div class="col-md-9 col-xs-9">
 											<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="常用邮箱，验证及找回密码时必需">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="password" class="col-md-2 control-label">密码</label>
-										<div class="col-md-10">
+										<label for="password" class="col-md-3 col-xs-3 control-label">密码</label>
+										<div class="col-md-9 col-xs-9">
 											<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="密码">
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-md-6 col-xs-6">
-											<input type="authCode" id="authCode" name="authCode" class="form-control" data-ng-model="credentials.authCode" placeholder="验证码">
+										<label for="authimg" class="col-md-3 col-xs-3 control-label">验证码:</label>
+										<div class="col-md-5 col-xs-5">
+											<input type="authimg" id="authimg" name="authimg" class="form-control" data-ng-model="credentials.authimg" placeholder="验证码，不区分大小写">
 										</div>
-										<div class="col-md-6 col-xs-6">
-											<button class="btn btn-default"  for="authCode" class="col-md-2 control-label" ng-click="auth()">发送验证码</button>
+										<div class="col-md-4 col-xs-4 authimg">
+											<img class="code_img" ng-src="/auth/img" alt="">
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-md-offset-2 col-md-10">
+										<label for="password" class="col-md-3 col-xs-3 control-label">手机验证码</label>
+										<div class="col-md-5 col-xs-5">
+											<input type="authCode" id="authCode" name="authCode" class="form-control" data-ng-model="credentials.authCode" placeholder="验证码，6位数字" required>
+										</div>
+										<div class="col-md-4 col-xs-4">
+											<button class="btn btn-default"  for="authCode" ng-click="signup()">发送验证码</button>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-offset-2 col-md-9 col-xs-9">
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" id="agreement" name="agreement" ng-click="agreement == true" data-ng-model="credentials.agreement" ng-change="true">阅读并接受<a href="/#!/protocal" target="_blank">用户协议</a>
+													<input type="checkbox" id="agreement" name="agreement" data-ng-model="credentials.agreement" ng-change="true">我已阅读并接受<a href="/#!/protocal">《食安居用户服务协议》</a>
 												</label>
 											</div>
 										</div>

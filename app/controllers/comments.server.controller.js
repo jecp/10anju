@@ -21,6 +21,7 @@ exports.create = function(req, res) {
 	var comment = new Comment(req.body);
 	comment.user = req.user;
 	comment.content = markdown.toHTML(req.body.content) || '';
+	comment.markdown = req.body.content;
 
 	if (obj === 'articles'){
 		comment.articles = req.body.value;
@@ -118,6 +119,11 @@ exports.list = function(req, res) {
 				res.jsonp(comments);
 			}
 		});
+	}else {
+		Comment.find().sort('-created').populate('user','username').populate('subjects','title').populate('articles','title').populate('goods','title').exec(function (err,comments){
+			if(err){console.log(err);}
+			res.send(comments);
+		})
 	}
 };
 

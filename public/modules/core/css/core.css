@@ -52,6 +52,46 @@ p img{width:100%;}
 	border-bottom: 1px solid #ccc;
 }
 .subject_content img{max-width: 100%;}
+/* cart */
+.user_cart{margin-top:15px;}
+/* article */
+.article_list_top{margin-top:20px;padding:5px;}
+.article_content_top{margin-top:5px;border-top:1px dashed #ccc;margin-bottom:25px;}
+.list-group-item-text{color:#000;font-size:14px;}
+
+/* User */
+@media (min-width: 992px) {
+	.nav-users {
+		position: fixed;
+	}
+}
+.remove-account-container {
+	display: inline-block;
+	position: relative;
+}
+.btn-remove-account {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+}
+/* user_signin */
+.user_signin{margin:0 auto;clear:both;margin-top: 86px;min-height:480px;padding-bottom: 190px;}
+.user_signin_profile{font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;color: #444443;}
+.authimg img{max-width: 100%;}
+/* user_profile_left */
+.user_profile_left{float:auto;margin-bottom: 80px;}
+.user_profile_detail{background-color: #ccc;}
+
+/* avatar */
+/*.avatar img{padding:5px;width: 230px;height: 230px;overflow: hidden;}*/
+
+/* star_num */
+.user_profile_attr{border-top:1px solid #eee;border-bottom:1px solid #eee;padding-top:15px;padding-bottom: 10px;padding-left:15px;margin-bottom:10px;  }
+.vcard_star{float: left;width: 33.333%;font-size: 11px;text-transform: capitalize;}
+
+/* user_cart*/
+.user_cart_list img{max-width: 120px;overflow: hidden;}
+
 /* order_print */
 html{
 	color:#000;
