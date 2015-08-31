@@ -6,6 +6,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 		
+		console.log('如果你有胸怀有热忱有激情，加入我们吧，小伙伴们携手创辉煌〜');
+		
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
@@ -26,7 +28,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 
 		// Summary
 		$scope.Summary = function(){
-			console.log('如果你有胸怀有热忱有激情，加入我们吧，小伙伴们携手创辉煌〜');
 			$http.get('/core/summary').success(function (response){
 				$scope.data = response;
 			}).error(function (response){
