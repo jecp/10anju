@@ -60,6 +60,9 @@ var GoodSchema = new Schema({
 		//required: '请填写商品促销价/Please fill Good sale',
 		trim: true
 	},
+	tiaoma:{
+		type:String
+	},
 	weight:{
 		type:Number,
 		default: '',
