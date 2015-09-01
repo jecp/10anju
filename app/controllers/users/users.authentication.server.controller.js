@@ -14,6 +14,48 @@ var _ = require('lodash'),
 
 var captcha = ccap();
 var ary,txt,buf;
+var recCode;
+
+/**
+ *  Auth
+ */
+var auth = function (req,res){
+	if (req.agreement && req.agreement === true){
+		if (req.authimg && req.authimg.toUpperCase() === txt){
+			if(!req.authCode){
+				var now = new Date();
+				var a = now.getSeconds();
+				var authCode = Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
+				var appkey = 'fe66303b0f83ddd916fda2884debbd2f';//用户appkey
+				// var minutes = 1000*60*3;//3分钟
+				var tpl_id = 5465;//信息模版id
+				var con = '#code#='+authCode+'&#minuetes#=10';
+				var tpl_value=urlencode(con);
+				var url = 'http://v.juhe.cn/sms/send?mobile='+req.mobile+'&tpl_id='+tpl_id+'&tpl_value='+tpl_value+'&key='+appkey;
+				if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(req.mobile))){
+					return res.status(400).send('wrong mobile format');
+				}
+				request({url:url},function (err,res,body){
+					if(err){console.log(err);}
+					else{
+						console.log(body);
+					}
+				});
+				return authCode;
+			}
+		}
+		else{
+			return res.status(400).send({
+				message:('图形验证码校验失败！请稍后重试！')
+			});
+		}
+	}
+	else{
+		return res.status(400).send({
+			message:('请确保同意注册协议！')
+		});
+	}
+ };
 
 /**
  * Signup
@@ -24,68 +66,13 @@ exports.signup = function(req, res) {
 	var mobile = req.body.mobile;
 
 	if (req.body.agreement && req.body.agreement === true){
-		if (req.body.authimg){
-			if(req.body.authimg.toUpperCase() === txt){
-				if(!req.body.authCode){
-					var now = new Date();
-					var a = now.getSeconds();
-					var authCode = Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
-					var appkey = 'fe66303b0f83ddd916fda2884debbd2f';//用户appkey
-					// var minutes = 1000*60*3;//3分钟
-					var tpl_id = 5465;//信息模版id
-					var con = '#code#='+authCode+'&#minuetes#=10';
-					var tpl_value=urlencode(con);
-					var url = 'http://v.juhe.cn/sms/send?mobile='+mobile+'&tpl_id='+tpl_id+'&tpl_value='+tpl_value+'&key='+appkey;
-					if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(mobile))){
-						return res.status(400).send('wrong mobile format');
-					}
-					request({url:url},function (err,res,body){
-						if(err){console.log(err);}
-						else{
-							console.log(body);
-							return;
-						}
-					});
-					return res.status(200).send({
-						message:('手机验证码发送成功！请留意下发的信息！')
-					});
-				}
-				else if(req.body.authCode){
-					if(req.body.authCode === authCode){
-						// Init Variables
-						var user = new User(req.body);
-						var message = null;
-
-						// Add missing user fields
-						user.provider = 'local';
-
-						// Then save the user 
-						user.save(function(err) {
-							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								// Remove sensitive data before login
-								user.password = undefined;
-								user.salt = undefined;
-
-								req.login(user, function(err) {
-									if (err) {
-										return res.status(400).send(err);
-									} else {
-										return res.json(user);
-									}
-								});
-							}
-						});
-					}
-					else{
-						return res.status(400).send({
-							message:('手机验证码校验失败！请稍后重试！')
-						});
-					}
-				}
+		if (!req.body.authCode){
+			if(req.body.authimg && req.body.authimg.toUpperCase() === txt){
+				var req = req.body;
+				recCode = auth(req);
+				return res.status(200).send({
+					message:('手机验证码发送成功！')
+				});
 			}
 			else{
 				return res.status(400).send({
@@ -93,10 +80,41 @@ exports.signup = function(req, res) {
 				});
 			}
 		}
-		else{
-			return res.status(400).send({
-				message:('图形验证码校验失败！请稍后重试！')
-			});
+		else if(req.body.authCode){
+			if(req.body.authCode.toString() === recCode.toString()){
+				// Init Variables
+				var user = new User(req.body);
+				var message = null;
+
+				// Add missing user fields
+				user.provider = 'local';
+
+				// Then save the user 
+				user.save(function(err) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						// Remove sensitive data before login
+						user.password = undefined;
+						user.salt = undefined;
+
+						req.login(user, function(err) {
+							if (err) {
+								return res.status(400).send(err);
+							} else {
+								return res.json(user);
+							}
+						});
+					}
+				});
+			}
+			else{
+				return res.status(400).send({
+					message:('手机验证码校验失败！请稍后重试！')
+				});
+			}
 		}
 	}
 	else{
@@ -150,6 +168,7 @@ exports.ccap = function(req, res) {
 	ary = captcha.get(),
 	txt = ary[0],
 	buf = ary[1];
+	console.log(txt);
 	res.send(buf);
 };
 

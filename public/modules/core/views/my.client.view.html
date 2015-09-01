@@ -20,7 +20,7 @@
 					<div class="email">
 						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
 						<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
-						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter.length > 0"><a href="/#!/ccenters">入驻社区</a></span></p>
+						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter === undefined"><a href="/#!/ccenters">入驻社区</a></span></p>
 					</div>
 				</div>
 				<div class="vcard_stars">

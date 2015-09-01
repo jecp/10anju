@@ -9,8 +9,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 		$scope.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
-				if (response.message === '手机验证码发送成功！请留意下发的信息！'){
-					$scope.message === response.message;
+				if (response.message === '手机验证码发送成功！'){
+					$scope.message = response.message;
 				}else{
 					// If successful we assign the response to the global user model
 					$scope.authentication.user = response;
@@ -31,6 +31,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 					// And redirect to the index page
 					$location.path('/settings/profile');
+				}).error(function(response) {
+					$scope.error = response.message;
+				});
+			}
+			else{
+				$location.path('/signin');
+			}
+		};
+
+		$scope.auth = function() {
+			if ($scope.credentials.agreement === true){
+				$http.post('/auth/auth', $scope.credentials).success(function(response) {
+					// If successful we assign the response to the global user model
+					$scope.message = response;
 				}).error(function(response) {
 					$scope.error = response.message;
 				});

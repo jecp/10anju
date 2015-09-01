@@ -23,7 +23,7 @@ module.exports = function(app) {
 	app.route('/auth/reset/:token').get(visithistory.vh_log, users.validateResetToken);
 	app.route('/auth/reset/:token').post(visithistory.vh_log, users.reset);
 	app.route('/auth/img').get(visithistory.vh_log, users.ccap);
-
+	
 	// Register in an ccenter
 	app.route('/users_ccenter/').post(visithistory.vh_log, users.register);
 
@@ -34,6 +34,7 @@ module.exports = function(app) {
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(visithistory.vh_log, users.signup);
 	app.route('/auth/signin').post(visithistory.vh_log, users.signin);
+	// app.route('/auth/auth').post(visithistory.vh_log, users.auth);
 	app.route('/auth/signout').get(visithistory.vh_log, users.signout);
 
 	// Setting the facebook oauth routes
