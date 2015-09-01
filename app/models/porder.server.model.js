@@ -10,12 +10,6 @@ var mongoose = require('mongoose'),
  * Porder Schema
  */
 var PorderSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Porder name',
-		trim: true
-	},
 	created: {
 		type: Date,
 		default: Date.now

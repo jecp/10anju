@@ -12,7 +12,6 @@ var mongoose = require('mongoose'),
  * Create a Porder
  */
 exports.create = function(req, res) {
-	console.log(req.body.goods);
 	var porder = new Porder(req.body);
 	porder.user = req.user;
 	porder.goods = req.body.goods;
