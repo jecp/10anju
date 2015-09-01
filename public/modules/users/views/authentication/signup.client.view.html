@@ -88,6 +88,7 @@
 										<button type="submit" ng-if="credentials.agreement==true" class="btn btn-large btn-primary" ng-click="signup()" >注册</button>&nbsp; or&nbsp;
 										<a href="/#!/signin" class="show-signup">登录</a>
 									</div>
+									<div data-ng-show="message" class="text-center text-success"><strong data-ng-bind="message"></strong></div>
 									<div data-ng-show="error" class="text-center text-danger">
 										<strong data-ng-bind="error"></strong>
 									</div>
