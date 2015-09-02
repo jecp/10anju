@@ -85,7 +85,6 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 		$scope.modify = function(){
 			$http.post('/categories/admin/list', this.cat).success(function (response){
 				$scope.success = true;
-				this.cat = response;
 			}).error(function (response){
 				$scope.error = response.message;
 			});

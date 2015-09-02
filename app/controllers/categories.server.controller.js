@@ -87,7 +87,7 @@ exports.delete = function(req, res) {
  * List of Categories
  */
 exports.list = function(req, res) {
-	Category.find().sort('-created').exec(function(err, categories) {
+	Category.find().sort('-created').populate('goods','name main_img price title delivery').exec(function(err, categories) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
