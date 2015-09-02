@@ -17,6 +17,7 @@
 		            </thead>
 		            <tbody data-ng-repeat="ccenter in ccenters" >
 		                <tr>
+		                	<div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
 		                    <td><input data-ng-model="ccenter.province"><input data-ng-model="ccenter.city"></td>
 		                    <td><input data-ng-model="ccenter.district"><input data-ng-model="ccenter.street"></td>
 		                    <td><input type="text" data-ng-model="ccenter.detail"></td>
@@ -26,7 +27,6 @@
 		                    <td><button class="btn btn-danger" ng-click="del()">删除</button></td>
 		                </tr>
 		            </tbody>
-		            <div ng-if="message"><span class="label-success" data-ng-bind="message"></span></div>
 		        </table>
 		    </div>
 		</div>

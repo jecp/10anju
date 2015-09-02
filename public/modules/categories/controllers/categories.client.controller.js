@@ -81,6 +81,16 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 			});
 		};
 
+		// Admin list Modify 
+		$scope.modify = function(){
+			$http.post('/categories/admin/list', this.cat).success(function (response){
+				$scope.success = true;
+				this.cat = response;
+			}).error(function (response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Find existing Category
 		$scope.findOne = function() {
 			$scope.category = Categories.get({ 

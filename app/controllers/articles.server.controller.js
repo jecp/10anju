@@ -14,7 +14,6 @@ var mongoose = require('mongoose'),
  * Create a article
  */
 exports.create = function(req, res) {
-	console.log(req.body);
 	var article = new Article(req.body);
 	article.user = req.user;
 	article.tags = req.body.tags ? req.body.tags.split(',') : '';
@@ -107,15 +106,19 @@ exports.list = function(req, res) {
  */
 exports.modify = function(req, res) {
 	var articleObj = req.body;
-	Article.findOneAndUpdate({_id:articleObj._id},{subcat:articleObj.subcat,name:articleObj.name,title:articleObj.title,price:articleObj.price},function (err,article) {
-		if (err) {
-			console.log(err);
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(article);
-		}
+	Article.findById(req.body._id,function (err,article){
+		if(err){console.log(err);}
+		var user = article.user;
+		articleObj = _.extend(article,articleObj);
+		articleObj.user = null;
+		console.log(articleObj.user);
+		articleObj.user = user;
+		console.log(articleObj.user);
+		console.log(articleObj.user+'\n'+article.user);
+		articleObj.save(function (err,article){
+			if(err){console.log(err);}
+			res.send(article);
+		});		
 	});
 };
 

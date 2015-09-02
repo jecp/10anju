@@ -91,7 +91,7 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 		// Admin list modify
 		$scope.modify = function(){
 			$http.post('/ccenters/admin/list', this.ccenter).success(function (response){
-				$scope.message = response.message;
+				$scope.success = true;
 			}).error(function (response){
 				$scope.error = response.message;
 			});

@@ -71,6 +71,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 			});
 		};
 
+		// Admin list Modify 
+		$scope.modify = function(){
+			$http.post('/articles/admin/list', this.article).success(function (response){
+				$scope.success = true;
+			}).error(function (response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Count of Articles
 		$scope.Count = function() {
 			$http.get('/articles/count').success(function (response){

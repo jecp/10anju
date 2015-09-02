@@ -87,7 +87,7 @@ exports.delete = function(req, res) {
  * List of Categories
  */
 exports.list = function(req, res) {
-	Category.find().sort('-created').populate('user', 'displayName').populate('goods','name main_img price title delivery').exec(function(err, categories) {
+	Category.find().sort('-created').exec(function(err, categories) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -103,15 +103,14 @@ exports.list = function(req, res) {
  */
 exports.modify = function(req, res) {
 	var categoryObj = req.body;
-	Category.findOneAndUpdate({_id:categoryObj._id},{subcat:categoryObj.subcat,name:categoryObj.name,title:categoryObj.title,price:categoryObj.price},function (err,category) {
-		if (err) {
-			console.log(err);
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(category);
-		}
+	Category.findById(req.body._id,function (err,category){
+		if(err){console.log(err);}
+		categoryObj = _.extend(category,categoryObj);
+		categoryObj.user = category.user;
+		categoryObj.save(function (err,category){
+			if(err){console.log(err);}
+			res.send(category);
+		});		
 	});
 };
 

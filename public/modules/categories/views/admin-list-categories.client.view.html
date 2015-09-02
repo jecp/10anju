@@ -8,10 +8,6 @@
 						<tr>
 							<th>分类</th>
 							<th>细类</th>
-							<th>商品图片</th>
-							<th>商品名称</th>
-							<th>商品标题</th>
-							<th>商品价格</th>
 							<th>销量</th>
 							<th>浏览量</th>
 							<th>编辑</th>
@@ -21,16 +17,11 @@
 					<tbody data-ng-repeat="cat in categories" >
 						<tr>
 							<div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
-							<td><a href="/#!/categories/{{cat.category._id}}"><span data-ng-bind="cat.category.name"></span></a></td>
-							<td data-ng-bind="cat.subcat"></td>
-							<td><a href="/#!/cats/{{cat._id}}"><img src="{{cat.main_img}}" style="max-width:80px;"></a></td>
-							<td data-ng-bind="cat.name"></td>
-							<td data-ng-bind="cat.title"></td>
-							<td data-ng-bind="cat.price"></td>
+							<td><a href="/#!/categories/{{cat.category._id}}"><span data-ng-bind="cat.name"></span></a></td>
+							<td><input type="text" data-ng-model="cat.subcat"></td>
 							<td data-ng-bind="cat.sold"></td>
 							<td data-ng-bind="cat.pv"></td>
-							<td><a class="btn btn-primary" href="/#!/cats/{{cat._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
-							</td>
+							<td><button class="btn btn-primary" ng-click="modify()" id="cat">更新</button></td>
 							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="cat" id="{{cat._id}}">删除</button></td>
 						</tr>
 					</tbody>
