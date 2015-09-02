@@ -5,9 +5,15 @@
 	    <button class="btn btn-default" type="button" ng-keydown="search()" ng-click="search()">Go!</button>
 	  </span>
 	</div>
-	<div ng-if="results" class="col-md-12" style="background:#FFF;margin-top:5px;margin-bottom:20px;">
-	  <li style="margin-top:5px;border-bottom:1px solid #C6E4F4;" data-ng-repeat="re in results">
-	    <a href="/#!/goods/{{re._id}}"><span data-ng-bind="re.title"></span></a>
-	  </li>
+	<div ng-if="results">
+		<ul class="list-group">
+			<li class="list-group-item" style="margin-top:5px;border-bottom:1px solid #C6E4F4;height:100%;" data-ng-repeat="re in results">
+				<label for="">
+					<div class="col-xs-6"><a href="/#!/goods/{{re._id}}" style="display:block;"><img ng-src="{{re.main_img}}-64" alt=""></a></div>
+					<div class="col-xs-6"><div class="col-xs-12"><span data-ng-bind="re.title"></span></div>
+					<div class="col-xs-12 text-muted">&yen;<span data-ng-bind="re.price" class="gl_f40"></span></div></div>
+				</label>
+			</li>
+		</ul>
 	</div>
 </section>

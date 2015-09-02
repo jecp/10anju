@@ -37,8 +37,8 @@ module.exports = {
 		options: {
 			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+				user: process.env.MAILER_EMAIL_ID || '501538106@qq.com',
+				pass: process.env.MAILER_PASSWORD || '52tsinghua'
 			}
 		}
 	}

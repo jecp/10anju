@@ -42,6 +42,7 @@ exports.forgot = function(req, res, next) {
 					} else {
 						user.resetPasswordToken = token;
 						user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+						console.log('1 hour');
 
 						user.save(function(err) {
 							done(err, token, user);
@@ -59,7 +60,8 @@ exports.forgot = function(req, res, next) {
 				name: user.displayName,
 				appName: config.app.title,
 				url: 'http://' + req.headers.host + '/auth/reset/' + token
-			}, function(err, emailHTML) {
+			}, function (err, emailHTML) {
+				if (err){console.log(err);}
 				done(err, emailHTML, user);
 			});
 		},

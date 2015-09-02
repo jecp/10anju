@@ -88,6 +88,15 @@ angular.module('ccenters').controller('CcentersController', ['$scope', '$http', 
 			});
 		};
 
+		// Admin list modify
+		$scope.modify = function(){
+			$http.post('/ccenters/admin/list', this.ccenter).success(function (response){
+				$scope.message = response.message;
+			}).error(function (response){
+				$scope.error = response.message;
+			});
+		};
+
 		// Count of Ccenters
 		$scope.Count = function() {
 			$http.get('/ccenters/count').success(function (response){

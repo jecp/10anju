@@ -123,7 +123,7 @@ exports.list = function(req, res) {
 		Comment.find().sort('-created').populate('user','username').populate('subjects','title').populate('articles','title').populate('goods','title').exec(function (err,comments){
 			if(err){console.log(err);}
 			res.send(comments);
-		})
+		});
 	}
 };
 

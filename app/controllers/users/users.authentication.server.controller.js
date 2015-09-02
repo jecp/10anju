@@ -68,7 +68,7 @@ exports.signup = function(req, res) {
 	if (req.body.agreement && req.body.agreement === true){
 		if (!req.body.authCode){
 			if(req.body.authimg && req.body.authimg.toUpperCase() === txt){
-				var req = req.body;
+				req = req.body;
 				recCode = auth(req);
 				return res.status(200).send({
 					message:('手机验证码发送成功！')
