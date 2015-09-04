@@ -10,11 +10,45 @@ var _ = require('lodash'),
 	User = mongoose.model('User'),
 	urlencode = require('urlencode'),
 	request = require('request'),
-	ccap = require('ccap');
+	ccap = require('ccap'),
+	nodemailer = require('nodemailer');
 
 var captcha = ccap();
 var ary,txt,buf;
 var recCode;
+
+/**
+ * nodemailer
+ */
+ // create reusable transporter object using SMTP transport
+ var transporter = nodemailer.createTransport({
+     service: 'QQ',
+     auth: {
+         user: '501538106@qq.com',
+         pass: '52tsinghua'
+     }
+ });
+
+ // NB! No need to recreate the transporter object. You can use
+ // the same transporter object for all e-mails
+
+ // setup e-mail data with unicode symbols
+ var mailOptions = {
+     from: '501538106@qq.com', // sender address
+     to: '501538106@qq.com', // list of receivers
+     subject: 'Hello ✔', // Subject line
+     text: 'Hello world ✔', // plaintext body
+     html: '<b>Hello world ✔</b>' // html body
+ };
+
+ // send mail with defined transport object
+ // transporter.sendMail(mailOptions, function(error, info){
+ //     if(error){
+ //         return console.log(error);
+ //     }
+ //     console.log('Message sent: ' + info.response);
+
+ // });
 
 /**
  *  Auth
@@ -104,6 +138,12 @@ exports.signup = function(req, res) {
 							if (err) {
 								return res.status(400).send(err);
 							} else {
+								transporter.sendMail(mailOptions, function(error, info){
+								    if(error){
+								        return console.log(error);
+								    }
+								    console.log('Message sent: ' + info.response);
+								});
 								return res.json(user);
 							}
 						});
@@ -129,6 +169,12 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	if (req.body.authimg.toUpperCase() === txt){
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        return console.log(error);
+		    }
+		    console.log('Message sent: ' + info.response);
+		});
 		txt = null;
 		passport.authenticate('local', function(err, user, info) {
 			if (err || !user) {
