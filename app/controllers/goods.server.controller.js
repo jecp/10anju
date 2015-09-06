@@ -248,7 +248,7 @@ exports.list = function(req, res) {
 			}
 		});
 	} else {
-		Good.find({}).sort('-created').exec(function(err, goods) {
+		Good.find({}).limit(30).sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)

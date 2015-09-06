@@ -16,7 +16,7 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, visithistory.vh_log, categories.hasAuthorization, users.adminRequired, categories.delete);
 
 	app.route('/categories/admin/list')
-		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, categories.list)
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, categories.admin_list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, categories.modify);
 
 	// Finish by binding the Category middleware

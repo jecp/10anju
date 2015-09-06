@@ -99,6 +99,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Categories
+ */
+exports.admin_list = function(req, res) {
+	Category.find().sort('-created').exec(function (err, categories) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});			
+		} else {
+			res.jsonp(categories);
+		}
+	});
+};
+
+/**
  * Modify a Category
  */
 exports.modify = function(req, res) {
@@ -107,6 +122,7 @@ exports.modify = function(req, res) {
 		if(err){console.log(err);}
 		categoryObj = _.extend(category,categoryObj);
 		categoryObj.user = category.user;
+		categoryObj.subcat = req.body.subcat ? req.body.subcat.toString().split(',') : ''; 
 		categoryObj.save(function (err,category){
 			if(err){console.log(err);}
 			res.send(category);
