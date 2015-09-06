@@ -8,16 +8,16 @@
 			</div>
 		</div>
 		<div class="od_header" data-ng-controller="CcentersController" ng-init="findU()">
-			<div class="col-md-3 col-xs-12">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div>
-			<div class="col-md-3 col-xs-12">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div>
-			<div class="col-md-6 col-xs-12">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div>
-			<div class="col-md-3 col-xs-12">社区名称：<span class="text-muted" data-ng-bind="ccenter.name"></span></div>
-			<div class="col-md-3 col-xs-12">社区地址：<span class="text-muted" data-ng-bind="ccenter.province"></span>/<span class="text-muted" data-ng-bind="ccenter.city"></span>/<span class="text-muted" data-ng-bind="ccenter.district"></span></div>
-			<div class="col-md-6 col-xs-12">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="order.user.roomNum"></span></div>
-			<div class="col-md-3 col-xs-12">支付方式：<span class="text-muted" ng-if="order.pay_method === 'alipay'">支付宝</span><span class="text-muted" ng-if="order.pay_method === 'cash'">现金</span><span class="text-muted" ng-if="order.pay_method === 'pos'">pos刷卡</span></div>
+			<div class="col-md-3 col-xs-6">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div>
+			<div class="col-md-3 col-xs-6">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div>
+			<div class="col-md-6 col-xs-6">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div>
+			<div class="col-md-3 col-xs-6">社区名称：<span class="text-muted" data-ng-bind="ccenter.name"></span></div>
+			<div class="col-md-3 col-xs-6">社区地址：<span class="text-muted" data-ng-bind="ccenter.province"></span>/<span class="text-muted" data-ng-bind="ccenter.city"></span>/<span class="text-muted" data-ng-bind="ccenter.district"></span></div>
+			<div class="col-md-6 col-xs-6">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="order.user.roomNum"></span></div>
+			<div class="col-md-3 col-xs-6">支付方式：<span class="text-muted" ng-if="order.pay_method === 'alipay'">支付宝</span><span class="text-muted" ng-if="order.pay_method === 'cash'">现金</span><span class="text-muted" ng-if="order.pay_method === 'pos'">pos刷卡</span></div>
 			<div class="col-xs-9">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div>
-			<div class="col-md-3 col-xs-12">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div>
-			<div class="col-md-6 col-xs-12">支付编号：<span ng-if="order.trade_no !== undefined" class="text-muted" data-ng-bind="order.trade_no"></span><span ng-if="order.pos_no !== undefined" class="text-muted" data-ng-bind="order.pos_no"></span></div>			
+			<div class="col-md-3 col-xs-6">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div>
+			<div class="col-md-6 col-xs-6">支付编号：<span ng-if="order.trade_no !== undefined" class="text-muted" data-ng-bind="order.trade_no"></span><span ng-if="order.pos_no !== undefined" class="text-muted" data-ng-bind="order.pos_no"></span></div>			
 		</div>
 		<div class="od_table mt20">
 			<table class="table table-hover table-bordered">
