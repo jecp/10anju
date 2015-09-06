@@ -35,6 +35,8 @@ var CcenterSchema = new Schema({
 	detail:{type:String},
 	lng:{type:String},
 	lat:{type:String},
+	qqqun:{type:Number},
+	customcell:{type:Number},
 	pv:{
 		type:Number,
 		default:0

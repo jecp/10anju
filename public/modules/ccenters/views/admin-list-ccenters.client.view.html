@@ -11,6 +11,7 @@
 		                    <th>详细地址</th>
 		                    <th>地图/坐标</th>
 		                    <th>小区名称</th>
+		                    <th>QQ群</th>
 		                    <th>更新</th>
 		                    <th>删除</th>
 		                </tr>
@@ -23,6 +24,7 @@
 		                    <td><input type="text" data-ng-model="ccenter.detail"></td>
 		                    <td><input data-ng-model="ccenter.lat"><input data-ng-model="ccenter.lng"></td>
 		                    <td><a href="/#!/ccenters/{{ccenter._id}}"><input data-ng-model="ccenter.name"></a></td>
+		                    <td><input data-ng-model="ccenter.qqqun"></td>
 		                    <td><button class="btn btn-primary" ng-click="modify()" id="ccenter">更新</button></td>
 		                    <td><button class="btn btn-danger" ng-click="del()">删除</button></td>
 		                </tr>

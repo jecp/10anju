@@ -1,71 +1,55 @@
 <section data-ng-controller="OrdersController" data-ng-init="findOne()">
-	<div class="mt20">
+	<div class="mt20" data-ng-controller="CcentersController" ng-init="findU()">
 		<div class="od_top">
 			<div class="odt_title">
 				<h3>食安居--茗语e家</h3>
 				<span class="label label-default" data-ng-bind="order.status"></span>
 				<span class="h3" data-ng-bind="order.name"></span>
 			</div>
+			<div class="col-md-12 col-xs-12 text-right">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div>
 		</div>
-		<div class="od_header" data-ng-controller="CcentersController" ng-init="findU()">
-			<div class="col-md-3 col-xs-6">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div>
-			<div class="col-md-3 col-xs-6">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div>
-			<div class="col-md-6 col-xs-6">购买时间：<span class="text-muted" data-ng-bind="order.created | date:'medium'"></span></div>
-			<div class="col-md-3 col-xs-6">社区名称：<span class="text-muted" data-ng-bind="ccenter.name"></span></div>
-			<div class="col-md-3 col-xs-6">社区地址：<span class="text-muted" data-ng-bind="ccenter.province"></span>/<span class="text-muted" data-ng-bind="ccenter.city"></span>/<span class="text-muted" data-ng-bind="ccenter.district"></span></div>
-			<div class="col-md-6 col-xs-6">收货地址：<span class="text-muted" data-ng-bind="ccenter.street"></span><span class="text-muted" data-ng-bind="ccenter.detail"></span>&nbsp;房间号：<span data-ng-bind="order.user.roomNum"></span></div>
-			<div class="col-md-3 col-xs-6">支付方式：<span class="text-muted" ng-if="order.pay_method === 'alipay'">支付宝</span><span class="text-muted" ng-if="order.pay_method === 'cash'">现金</span><span class="text-muted" ng-if="order.pay_method === 'pos'">pos刷卡</span></div>
-			<div class="col-xs-9">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div>
-			<div class="col-md-3 col-xs-6">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div>
+		<div class="od_header">			
+			<div>房间号：<span class="h1" data-ng-bind="order.user.roomNum"></span></div>
+			<div class="col-md-6 col-xs-6">姓名：<span class="text-muted" data-ng-bind="order.user.username"></span></div>
+			<div class="col-md-6 col-xs-6">联系方式：<span class="text-muted" data-ng-bind="order.user.mobile"></span></div>
+			<div class="col-md-6 col-xs-6">支付方式：<span class="text-muted" ng-if="order.pay_method === 'alipay'">支付宝</span><span class="text-muted" ng-if="order.pay_method === 'cash'">现金</span><span class="text-muted" ng-if="order.pay_method === 'pos'">pos刷卡</span></div>
+			<div class="col-md-6 col-xs-6">订单编号：<span class="text-muted" data-ng-bind="order._id"></span></div>
+			<div class="col-md-6 col-xs-6">支付状态：<span class="text-muted" ng-if="order.status === false">未付款</span><span class="text-muted" ng-if="order.status === true">已付款</span></div>
 			<div class="col-md-6 col-xs-6">支付编号：<span ng-if="order.trade_no !== undefined" class="text-muted" data-ng-bind="order.trade_no"></span><span ng-if="order.pos_no !== undefined" class="text-muted" data-ng-bind="order.pos_no"></span></div>			
 		</div>
 		<div class="od_table mt20">
 			<table class="table table-hover table-bordered">
 				<thead>
 		    		<tr>
-		    			<!-- <th>id</th>
-		    			<th>序号</th> -->
 		    			<th>商品名称</th>
 		    			<th>数量</th>
 		    			<th>单价</th>
 		                <th>赠品/试用品</th>
 		    			<th>实付</th>
-		    			<th>删除</th>
 		    		</tr>
 				</thead>
 				<tbody data-ng-repeat="item in order.detail">
 					<tr>
-						<!-- <td><span></span></td>
-						<td class="">
-		                    <a href="/#!/goods/{{item.goods._id}}">
-		                        <img ng-src="{{item.goods.main_img}}-64" alt="" class="thumbnail">
-		                    </a>
-						</td> -->
-						<td><span data-ng-bind="item.goods.title"></span></td>
+						<td><span data-ng-bind="item.goods.name | limitTo:10"></span></td>
 						<td>
 							<div ng-if="order.status">
 								<span data-ng-bind="item.amount"></span>
 							</div>
-							<div ng-if="order.status === false">
-								<span ng-if="item.goods.free_try || item.goods.for_free" data-ng-bind="item.amount"></span><input ng-hide="item.goods.free_try || item.goods.for_free" ng-if="order.status === false"type="text" data-ng-model="item.amount"><button ng-hide="item.goods.free_try || item.goods.for_free" type="btn btn-primary" ng-click="changeAmount()" >更新</button>
-							</div></td>
+						</td>
 						<td><span data-ng-bind="item.price"></span></td>
 		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
 						<td><span data-ng-bind="item.amount*item.price"></span></td>
-						<td><button ng-if="order.status === false" class="btn btn-danger del" type="button" data-ng-click="delOrder();" id="{{item._id}}">删除</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="od_footer form-group mt20">
+		<div class="od_footer mt20">
 			<div>商品种类：<span data-ng-bind="order.detail.length"></span>商品数量：<span data-ng-bind="order.total_amount"></span>实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
 			<div class="col-md-12 col-xs-12">
-				<div class="col-md-2 col-xs-2"><label class="control-label">备注：<span data-ng-bind="order.bz"></span></label></div>
-				<div class="col-md-10 col-xs-10"><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz" class="col-md-12"></div>
-			</div>				
-		</div>
-		<div class="od_submit mt20">
-			<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()">支付宝支付</a></div>
+				备注：<span data-ng-bind="order.bz"></span>
+			</div>
+			<div class="col-md-6 col-xs-6">茗语e家QQ群:&nbsp;<span data-ng-bind="ccenter.qqqun"></span></div>
+			<div class="col-md-6 col-xs-6">投诉电话:&nbsp;<span data-ng-bind="ccenter.customcell"></span></div>
 		</div>
 	</div>
 </section>

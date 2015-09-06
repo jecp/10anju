@@ -28,6 +28,7 @@ window.onload = loadScript;
                         <th>地图/坐标</th>
                         <th>小区名称</th>
                         <th>房间号</th>
+                        <th>QQ群</th>
                         <th>入驻</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@ window.onload = loadScript;
                         <td><div>经度:<span data-ng-bind="ccenter.lat"></span>/纬度:<span data-ng-bind="ccenter.lng"></span></div></td>
                         <td><a href="/#!/ccenters/{{ccenter._id}}"><span data-ng-bind="ccenter.name"></span></a></td>
                         <td><input type="text" data-ng-model="ccenterDetails.roomNum"></td>
+                        <td><input type="text" data-ng-model="ccenterDetails.qqqun"></td>
                         <td data-ng-controller="SettingsController"><button name="ccenterId" value="ccenter._id" ng-click="register()">入驻</button></td>
                     </tr>
                 </tbody>
