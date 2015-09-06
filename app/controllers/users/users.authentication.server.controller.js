@@ -24,31 +24,10 @@ var recCode;
  var transporter = nodemailer.createTransport({
      service: 'QQ',
      auth: {
-         user: '501538106@qq.com',
+         user: 'admin@havemay.cn',
          pass: '52tsinghua'
      }
  });
-
- // NB! No need to recreate the transporter object. You can use
- // the same transporter object for all e-mails
-
- // setup e-mail data with unicode symbols
- var mailOptions = {
-     from: '501538106@qq.com', // sender address
-     to: '501538106@qq.com', // list of receivers
-     subject: 'Hello ✔', // Subject line
-     text: 'Hello world ✔', // plaintext body
-     html: '<b>Hello world ✔</b>' // html body
- };
-
- // send mail with defined transport object
- // transporter.sendMail(mailOptions, function(error, info){
- //     if(error){
- //         return console.log(error);
- //     }
- //     console.log('Message sent: ' + info.response);
-
- // });
 
 /**
  *  Auth
@@ -134,6 +113,21 @@ exports.signup = function(req, res) {
 						user.password = undefined;
 						user.salt = undefined;
 
+						var email = req.body.email;
+						var mailOptions = {
+						    from: 'admin@havemay.cn', // sender address
+						    to: email, // list of receivers
+						    subject: 'Hello ✔', // Subject line
+						    // text: 'Hello world ✔', // plaintext body
+						    html: '<b>欢迎入驻 食安居 ✔</b><br />您的用户名是'+req.body.username // html body
+						};
+						transporter.sendMail(mailOptions, function(error, info){
+						    if(error){
+						        return console.log(error);
+						    }
+						    console.log('Message sent: ' + info.response);
+						});
+
 						req.login(user, function(err) {
 							if (err) {
 								return res.status(400).send(err);
@@ -169,12 +163,6 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	if (req.body.authimg.toUpperCase() === txt){
-		transporter.sendMail(mailOptions, function(error, info){
-		    if(error){
-		        return console.log(error);
-		    }
-		    console.log('Message sent: ' + info.response);
-		});
 		txt = null;
 		passport.authenticate('local', function(err, user, info) {
 			if (err || !user) {

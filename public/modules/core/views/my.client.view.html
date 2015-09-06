@@ -1,71 +1,50 @@
 <section data-ng-controller="SettingsController">
-	<div class="col-md-12 col-xs-12">
-		<div class="col-md-12 user_profile_left">
-			<div class="avatar" >
-				<img ng-if="user.avatar !== undefined" ng-src="{{user.avatar}}">
-			</div>
-			<div ng-if="user.avatar === undefined" style="width:200px;height:200px;border-radius:30px 30px 30px 30px;background-color:#ccc;">
-				<div class="text-center">
-					<span style="font-size:65px;">面子呢*_^</span>
-					<div><a href="/#!/usercenter">现在上传</a></div>
-				</div>
-			</div>
-			<div>
-				<div class="mt10"></div>			
-				<div class="username">
-					<a href="/#!/settings/edit" class="pull-right"><span>编辑资料</span></a>
-					<p data-ng-bind="user.username"></p>
-				</div>
-				<div class="user_profile_attr" data-ng-controller="CcentersController" data-ng-init="findU()">
-					<div class="email">
-						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
-						<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
-						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter === undefined"><a href="/#!/ccenters">入驻社区</a></span></p>
-					</div>
-				</div>
-				<div class="vcard_stars">
-					<div>
-						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.followers.length"></h4><span class="text-muted">粉丝</span></a>
-						<a  class="vcard_star" href="#"><h4>7</h4><span class="text-muted">圈子</span></a>
-						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.following.length"></h4><span class="text-muted">关注</span></a>
-					</div>
-				</div>
+	<div class="mt20 user_profile_left">
+		<div class="avatar" >
+			<img ng-if="user.avatar !== undefined" ng-src="{{user.avatar}}">
+		</div>
+		<div ng-if="user.avatar === undefined" style="width:200px;height:200px;border-radius:30px 30px 30px 30px;background-color:#ccc;">
+			<div class="text-center">
+				<span style="font-size:65px;">面子呢*_^</span>
+				<div><a href="/#!/usercenter">现在上传</a></div>
 			</div>
 		</div>
+		<div class="mt20">
+			<div class="mt20">
+				<a href="/#!/settings/edit" class="pull-right"><span>编辑资料</span></a>
+				<p data-ng-bind="user.username"></p>
+			</div>
+			<div class="user_profile_attr" data-ng-controller="CcentersController" data-ng-init="findU()">
+				<div class="email">
+					<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
+					<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
+					<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter === undefined"><a href="/#!/ccenters">入驻社区</a></span></p>
+				</div>
+			</div>
+			<!-- <div class="vcard_stars">
+				<div>
+					<a  class="vcard_star" href="#"><h4 data-ng-bind="user.followers.length"></h4><span class="text-muted">粉丝</span></a>
+					<a  class="vcard_star" href="#"><h4>7</h4><span class="text-muted">圈子</span></a>
+					<a  class="vcard_star" href="#"><h4 data-ng-bind="user.following.length"></h4><span class="text-muted">关注</span></a>
+				</div>
+			</div> -->
+		</div>
 	</div>
-	<div class="my_count col-md-12">
-		<div class="my_count_sub">
-			<div data-ng-controller="OrdersController" ng-init="find()">
-				<a class="my_count_num" href="#"><h4>0</h4><span class="text-muted">余额</span></a>
+	<div data-ng-controller="OrdersController" ng-init="find()">
+		<div class="my_count">
+			<div class="my_count_sub">
+				<a class="my_count_num" href="#"><h4 data-ng-bind="user.pay_total"></h4><span class="text-muted">余额</span></a>
 				<a class="my_count_num" href="#"><h4 data-ng-bind="user.pay_total"></h4><span class="text-muted">积分</span></a>
 				<a class="my_count_num" href="#"><h4 data-ng-bind="orders.length"></h4><span class="text-muted">订单</span></a>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="my_left col-md-12">
+		<div class="my_left">
 			<ul>
-				<li>
-					订单
-					<ul data-ng-controller="OrdersController" data-ng-init="find()">
-						<li ><a href="/#!/orders">订单列表</a></li>
-						<li><a href="/#!/orders?status=false">未付款订单<span class="badge" data-ng-bind="orders.length"></span></a></li>
-						<li></li>
-					</ul>
-				</li>
+				<li><a href="/#!/orders?status=false">未付款订单<span class="badge" data-ng-bind="orders.length"></span></a></li>
+				<li ><a href="/#!/orders">历史订单</a></li>
+				<li><a href="/#!/carts">购物篮</a></li>
 			</ul>
 		</div>
-		<div class="my_left col-md-12">
-			<ul>
-				<li>
-					购物篮
-					<ul>
-						<li><a href="/#!/carts">购物篮</a></li>
-						<li></li>
-					</ul>
-				</li>
-			</ul>
-		</div>	
 	</div>
 </section>
 

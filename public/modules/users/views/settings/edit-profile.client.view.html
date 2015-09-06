@@ -1,35 +1,9 @@
 <section class="row" data-ng-controller="SettingsController">
 	<div class="col-md-12 mt20">
-		<div class="col-md-4 user_profile_left">
-			<div class="avatar">
-				<img ng-src="{{user.avatar}}" ng-if="user.avatar !== null" alt="" ng-mouseenter="item.popover= true" ng-mouseleave ="item.popover = false">
-				<img ng-src="http://gravatar.com/avatar/cfd8a518f61419ed239a2cc9bef7ddf1?s=256" ng-if="user.avatar === null" alt="">
-				
-			</div>
-			<div>
-				<div class="mt10"></div>			
-				<div class="username">
-					<a href="" class="pull-right"><span>提交资料</span></a>
-					<p data-ng-bind="user.username"></p>
-				</div>
-				<div class="user_profile_attr" data-ng-controller="CcentersController" data-ng-init="findU()">
-					<div class="email">
-						<p><span class="text-muted glyphicon glyphicon-envelope">&nbsp;</span><span data-ng-bind="user.email"></span></p>
-						<p><span class="glyphicon glyphicon-time">&nbsp;</span>注册于<span data-ng-bind="user.created | date"></span></p>
-						<p><span class="glyphicon glyphicon-home">&nbsp;</span><span data-ng-bind="ccenter.name"></span><span ng-if="ccenter.length > 0"><a href="/#!/ccenters">入驻社区</a></span></p>
-					</div>
-				</div>
-				<div class="vcard_stars">
-					<div>
-						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.followers.length"></h4><span class="text-muted">粉丝</span></a>
-						<a  class="vcard_star" href="#"><h4>7</h4><span class="text-muted">圈子</span></a>
-						<a  class="vcard_star" href="#"><h4 data-ng-bind="user.following.length"></h4><span class="text-muted">关注</span></a>
-					</div>
-				</div>
-			</div>
+		<div class="col-md-4 col-xs-12 user_profile_left">
+			<div ng-include="'modules/core/views/my.client.view.html'"></div>
 		</div>
-		<!-- add -->
-		<div class="col-md-8 pull-right">
+		<div class="col-md-8 col-xs-12 pull-right">
 			<div class="breadcrumb"><strong>Tips:</strong><span>在这里可以上传头像，查看/修改个人资料</span></div>
 			<div class="col-md-12 col-xs-12">
 				<form class="form-horizontal" autocomplete="off" novalidate>
