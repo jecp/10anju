@@ -30,7 +30,7 @@
          </div></td> 
         <td>
          <div class="td-ct">
-          <span class="buyer-name wpr"> </span>
+          <span class="buyer-name wpr"></span>
          </div></td> 
         <td class="title">
          <div class="td-ct">
@@ -39,7 +39,7 @@
         <td> 
          <div class="td-ct"> 
           <span class="saler-name wpr" data-ng-bind="order.user.username"></span> 
-         </div> </td> 
+         </div></td> 
        </tr> 
        <tr> 
         <td class="title">
@@ -91,8 +91,8 @@
      <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />收货和物流信息</h3> 
      <ul class="cell-logistics-info"> 
       <li style="clear:both;"><strong>收货地址：</strong><div class="clearfix"><span data-ng-bind="ccenter.province"></span><span data-ng-bind="ccenter.city"></span><span data-ng-bind="ccenter.strict"></span><span data-ng-bind="ccenter.street"></span><span data-ng-bind="ccenter.detail"></span><span data-ng-bind="ccenter.name"></span><span data-ng-bind="order.user.roomNum"></span></div></li>
-      <li><strong>运单编号：</strong> <span class="wpr"> 100398684095 </span></li> 
-      <li><strong>物流编号：</strong> <span class="wpr"> &nbsp; 已发货 </span></li> 
+      <li><strong>运单编号：</strong><span class="wpr"></span></li> 
+      <li><strong>物流编号：</strong><span class="wpr"> &nbsp; 已发货 </span></li> 
      </ul> 
      <table class="cell-info-box cell-bor-2" cellpadding="0" cellspacing="0"> 
       <colgroup>
@@ -140,18 +140,18 @@
         <td class="ali-center"> 
          <div class="td-ct"> 
           <span class="productNum wpr"> -- </span> 
-         </div> </td> 
+         </div></td> 
         <td> 
          <div class="td-ct"> 
           <span class="name wpr" data-ng-bind="item.goods.title"></span>
          </div> 
          <!-- 地平线新增 START --> 
-         <!-- 地平线新增 END --> </td> 
+         <!-- 地平线新增 END --></td> 
         <td class="c3"> 
          <div class="td-ct">
            <span data-ng-bind="item.goods.weight"></span>
            <span data-ng-bind="item.goods.spec"></span> 
-         </div> </td> 
+         </div></td> 
         <td class="ali-center">
          <div class="td-ct">
           <span class="num wpr" data-ng-bind="item.amount"></span>
@@ -162,7 +162,7 @@
          </div></td> 
         <td class="ali-center"> 
          <div class="td-ct"><span ng-if="item.for_free">赠品</span><span ng-if="item.free_try">试用品</span>
-         </div> </td> 
+         </div></td> 
         <td class="ali-center">
          <div class="td-ct">
           <span class="money wpr" data-ng-bind="order.total"></span>
@@ -176,8 +176,8 @@
       <tbody>
        <tr> 
         <td width="20%">货品合计：<span data-ng-bind="order.total | number:2"></span> 元</td>
-        <td width="25%"> </td>
-        <td class="right-cell" width="30%" rowspan="2"> 实付款 ： <strong> <span data-ng-bind="order.total | number:2"></span> 元 </strong> </td> 
+        <td width="25%"></td>
+        <td class="right-cell" width="30%" rowspan="2"> 实付款 ： <strong><span data-ng-bind="order.total | number:2"></span> 元 </strong></td> 
        </tr> 
        <tr> 
         <td>货品总量：<span data-ng-bind="order.total_amount"></span></td> 

@@ -68,8 +68,35 @@
 			<div ng-if="order.status === false" ><a type="submit" class="btn btn-default" ng-click="pay()">支付宝支付</a></div>
 			<a href="/#!/orders_print/{{order._id}}" class="btn btn-default">打印</a>
 		</div>
+		<div class="delivery">
+			<div class="good_detail_common_h3"><span class="h3 g_d_common">配送说明</span></div>
+			<p class="good_detail_common_delivery">
+				<ol>
+					<li>1. 时间: 初定每日6：30AM-10:30AM</li>
+					<li>2. 地点: 小区直配--送至小区固定位置(详见<a href="/#!/ccenters/">小区目录</a>)</li>
+					<li>3. 分发: 除老弱病残等不便自取者外，所有货物请客户在上述时间范围内至上述地点自提。</li>
+					<li>4. 逾期未收货: 顺延至次日分发。(生鲜订单除外)，建议与邻居协商代领。</li>
+				</ol>
+			</p>
+		</div>
+		<div class="confirm">
+			<div class="good_detail_common_h3 good_detail_common_confirm"><span class="h3 g_d_common">收货&确认</span></div>
+			<p class="good_detail_common_delivery">
+				<ol>
+					<li>1. 随货配有订单，共三联(订单联、支付确认联及送货联)</li>
+					<li>2. 订单联客户收存</li>
+					<li>3. 支付确认联，如已支付，由客户保存，否则签字后交至工作人员处。</li>
+					<li>4. 送货联，客户签字后交由工作人员收回。</li>
+				</ol>
+			</p>
+		</div>
+		<div class="quality">
+			<div class="good_detail_common_h3 good_detail_common_quality"><span class="h3 g_d_common">质量保证&无货退款</span></div>
+			<p class="good_detail_common_delivery">
+				<ol>
+					<li>1. 保证所有产品均可当面退货、拒收(全部或部分)</li>
+					<li>2. 所有产品均可无货退款，需填写退货单并写明原由，帮助我们改进。</li>
+				</ol></p>
+		</div>
 	</div>
 </section>
-<style>
-  .footer{display: none;}
-</style>
