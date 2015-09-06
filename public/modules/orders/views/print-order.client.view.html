@@ -49,8 +49,10 @@
         <td colspan="3"> 
          <div class="td-ct"> 
           <span class="addr wpr">
-            <span data-ng-bind="ccenter.province"></span><span data-ng-bind="ccenter.city"></span><span data-ng-bind="ccenter.strict"></span><span data-ng-bind="ccenter.street"></span><span data-ng-bind="ccenter.detail"></span><span data-ng-bind="ccenter.name"></span><span data-ng-bind="order.user.roomNum"></span></span>
-         </div> </td> 
+            <span data-ng-bind="ccenter.province"></span><span data-ng-bind="ccenter.city"></span><span data-ng-bind="ccenter.strict"></span><span data-ng-bind="ccenter.street"></span><span data-ng-bind="ccenter.detail"></span><span data-ng-bind="ccenter.name"></span><span data-ng-bind="order.user.roomNum"></span>
+          </span>
+         </div>
+        </td> 
        </tr> 
        <tr> 
         <td class="title">
@@ -75,20 +77,22 @@
      <!--买家信息 end--> 
      <!--订单信息 start--> 
      <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />订单信息</h3> 
-     <ul class="cell-order-info"> 
-      <li> <strong>交易订单号：</strong><span data-ng-bind="order._id"></span></li> 
-      <li> <strong>下单时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li> 
-      <li> <strong>支付信息：</strong><span data-ng-bind="order.trade_no"></span></li> 
-      <li> <strong>支付时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li>
-      <li class="last"> <strong>发货时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></li> 
+     <ul class="cell-order-info row"> 
+      <li>
+        <div class="col-md-6 col-xs-6"><strong>交易订单号：</strong><span data-ng-bind="order._id"></span><strong></div>
+        <div class="col-md-6 col-xs-6">下单时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></div>
+      </li>
+      <li>
+        <div class="col-md-6 col-xs-6"><strong>支付信息：</strong><span data-ng-bind="order.trade_no"></span></div>
+        <div class="col-md-6 col-xs-6"><strong>支付时间：</strong><span data-ng-bind="order.created | date:'medium'"></span></div></li>
      </ul> 
      <!--订单信息 end--> 
      <!--收货和物流信息 start--> 
      <h3><img src="//cbu01.alicdn.com/cms/upload/2011/202/160/61202_1446014988.png" align="absmiddle" alt="" />收货和物流信息</h3> 
      <ul class="cell-logistics-info"> 
-      <li> <strong>收货地址：</strong> <span class="wpr"> 段波, 13926515211, 广东省 深圳市 宝安区 观澜黎光工业路茗语华苑7栋401 (518000) </span> </li>
-      <li> <strong>运单编号：</strong> <span class="wpr"> 100398684095 </span> </li> 
-      <li> <strong>物流编号：</strong> <span class="wpr"> &nbsp; 已发货 </span> </li> 
+      <li style="clear:both;"><strong>收货地址：</strong><div class="clearfix"><span data-ng-bind="ccenter.province"></span><span data-ng-bind="ccenter.city"></span><span data-ng-bind="ccenter.strict"></span><span data-ng-bind="ccenter.street"></span><span data-ng-bind="ccenter.detail"></span><span data-ng-bind="ccenter.name"></span><span data-ng-bind="order.user.roomNum"></span></div></li>
+      <li><strong>运单编号：</strong> <span class="wpr"> 100398684095 </span></li> 
+      <li><strong>物流编号：</strong> <span class="wpr"> &nbsp; 已发货 </span></li> 
      </ul> 
      <table class="cell-info-box cell-bor-2" cellpadding="0" cellspacing="0"> 
       <colgroup>

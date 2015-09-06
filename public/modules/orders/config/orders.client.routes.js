@@ -24,6 +24,10 @@ angular.module('orders').config(['$stateProvider',
 		state('printOrder', {
 			url: '/order_print/:orderId',
 			templateUrl: 'modules/orders/views/print-order.client.view.html'
+		}).
+		state('printOrders', {
+			url: '/orders_print/:orderId',
+			templateUrl: 'modules/orders/views/print-orders.client.view.html'
 		});
 	}
 ]);
