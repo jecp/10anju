@@ -20,7 +20,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			}
 			$scope.busy = true;
 			$scope.limit = 30;
-			console.log(this.goods.length);
 			$scope.busy = true;
 			var page = 2;
 			var skip = this.goods.length;
@@ -28,7 +27,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			
 			$http.get('/goods?p='+page+'&skip='+skip+'&limit='+limit).success(function(response){
 				$scope.busy = false;
-				console.log(response.length);
 				for(var i = 0;i<response.length;i++){
 					$scope.goods.push(response[i]);
 				}
