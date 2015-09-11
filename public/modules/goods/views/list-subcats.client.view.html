@@ -4,7 +4,7 @@
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
             <div class="mt20" data-ng-controller="CategoriesController" data-ng-init="find()">
                 <tabset data-ng-repeat="cat in categories | filter:subcat">
-                    <tab active="subcat" data-ng-repeat="item in cat.subcat">
+                    <tab active="subcat" ng-click="listSubcat()" data-ng-repeat="item in cat.subcat">
                         <tab-heading><span data-ng-bind="item"></span>
                         </tab-heading>
 <!--                         <ul class="nav nav-pills">
