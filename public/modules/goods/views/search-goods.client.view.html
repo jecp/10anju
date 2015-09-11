@@ -13,7 +13,7 @@
 						<div class="col-xs-6"><a href="/#!/goods/{{re._id}}" style="display:block;"><img ng-src="{{re.main_img}}-64" alt=""></a></div>
 						<div class="col-xs-6 text-muted">&yen;<span data-ng-bind="re.price" class="gl_f40"></span></div>
 					</div>					
-					<div class="col-xs-12 col-md-12"><span data-ng-bind="re.title"></span></div>
+					<div class="col-xs-12 col-md-12"><span data-ng-bind="re.title | limitTo:30"></span></div>
 				</label>
 			</li>
 		</ul>

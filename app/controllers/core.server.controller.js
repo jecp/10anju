@@ -17,6 +17,8 @@ var mongoose = require('mongoose'),
  	Visithistory = mongoose.model('Visithistory'),
  	//_ = require('lodash'),
  	request = require('request');
+ 	// node_xj = require('xls-to-json'),
+ 	// fs = require('fs');
 
 /**
  * Index.
@@ -122,3 +124,25 @@ exports.summary = function(req, res) {
 		});
 	});	
 };
+
+/**
+ * today weather api.
+ */
+/*exports.test = function(req, res) {
+	// var txt='hello,world,你好。'
+	// fs.writeFile('a.txt',txt,function (err){
+	// 	if(err) {console.log(err);}
+	// 	console.log('saved');
+	// });
+	node_xj({
+		input:'全店商品资料.xls',
+		output:'out.json',
+		sheet:'sheetname',
+	}, function(err,result){
+		if(err){console.log(err);}
+		else{
+			console.log(result);
+		}
+	});
+
+};*/

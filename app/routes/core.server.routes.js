@@ -9,4 +9,5 @@ module.exports = function(app) {
 	app.route('/about').get(visithistory.vh_log, core.about);
 	app.route('/core/today').get(visithistory.vh_log,core.today);
 	app.route('/core/summary').get(visithistory.vh_log,core.summary);
+	// app.route('/test').get(core.test);
 };

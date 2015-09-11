@@ -248,7 +248,7 @@ exports.list = function(req, res) {
 			}
 		});
 	} else {
-		Good.find({}).limit(30).sort('-created').exec(function(err, goods) {
+		Good.find({}).skip(req.query.skip).limit(req.query.limit).sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
@@ -264,7 +264,7 @@ exports.list = function(req, res) {
  * Count of Goods
  */
 exports.count = function(req, res) {
-	Good.count(function(err, goods) {
+	Good.count(function (err, goods) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

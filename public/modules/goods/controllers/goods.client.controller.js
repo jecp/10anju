@@ -1,7 +1,7 @@
 'use strict';
 
 // Goods controller
-angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
+angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods',  
 	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
 		
@@ -13,6 +13,27 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$location.path('/');
 			}
 		}
+
+		$scope.loadMore = function() {
+			if ($scope.busy){
+				return false;
+			}
+			$scope.busy = true;
+			$scope.limit = 30;
+			console.log(this.goods.length);
+			$scope.busy = true;
+			var page = 2;
+			var skip = this.goods.length;
+			var limit = 30;
+			
+			$http.get('/goods?p='+page+'&skip='+skip+'&limit='+limit).success(function(response){
+				$scope.busy = false;
+				console.log(response.length);
+				for(var i = 0;i<response.length;i++){
+					$scope.goods.push(response[i]);
+				}
+			});
+		};
 
 		// Create new Good
 		$scope.create = function() {
@@ -44,7 +65,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				for_free: this.for_free,
 				free_try: this.free_try
 			});
-
 
 			// Redirect after save
 			good.$save(function(response) {
@@ -114,7 +134,9 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.find = function() {
-			$scope.goods = Goods.query();
+			$scope.goods = Goods.query({
+				limit:30
+			});
 		};
 
 		// Admin list of Goods

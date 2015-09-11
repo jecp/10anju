@@ -103,38 +103,15 @@ exports.count = function(req, res) {
  */
 exports.modify = function(req, res) {
 	var ccenterObj = req.body;
-	console.log(ccenterObj);
 	Ccenter.findById(req.body._id,function (err,ccenter){
 		if(err){console.log(err);}
-		console.log(ccenter);
 		ccenterObj = _.extend(ccenter,ccenterObj);
 		ccenterObj.user = ccenter.user;
-		console.log(ccenterObj);
 		ccenterObj.save(function (err,ccenter){
 			if(err){console.log(err);}
 			res.send(ccenter);
-		});		
+		});	
 	});
-
-	// ccenterObj = _.extend(ccenterObj,req.body);
-	// console.log(typeof ccenterObj);
-	// ccenterObj.save(function (err,ccenter){
-	// 	if(err){console.log(err);}
-	// 	console.log(ccenter);
-	// 	res.send(ccenter);
-	// });
-
-	// Ccenter.findOneAndUpdate({_id:ccenterObj._id},{subcat:ccenterObj.subcat,name:ccenterObj.name,title:ccenterObj.title,price:ccenterObj.price},function (err,ccenter) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 		return res.status(400).send({
-	// 			message: errorHandler.getErrorMessage(err)
-	// 		});
-	// 	} else {
-	// 		console.log(typeof ccenter);
-	// 		res.jsonp(ccenter);
-	// 	}
-	// });
 };
 
 /**

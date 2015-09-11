@@ -1,4 +1,4 @@
-<section data-ng-controller="GoodsController" data-ng-init="listSubcat()">
+<section data-ng-controller="GoodsController" data-ng-init="find()">
     <div class="row">
         <div class="col-md-9 col-xs-12">
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
@@ -19,7 +19,7 @@
                 </tabset>
             </div>
             <div class="row good_list_all">
-                <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
+                <div data-ng-repeat="good in goods | filter:subcat" class="col-md-3 fl col-xs-6">
                     <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
                 </div>            
             </div>

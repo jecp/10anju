@@ -8,17 +8,11 @@ angular.module('goods').factory('Goods', ['$resource',
 			update: {
 				method: 'PUT'
 			}
-		});
+		}, {
+			query: {
+				method: 'GET', isArray:true
+			}
+		}
+		);
 	}
-])
-// .factory('Goods', ['$http',
-//  	function($http) {
-// 		return $http('goods_like', { goodId: '@_id'
-// 		}, {
-// 			update: {
-// 				method: 'POST'
-// 			}
-// 		});
-// 	}
-// ])
-;
+]);

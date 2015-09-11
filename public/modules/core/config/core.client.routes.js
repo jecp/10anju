@@ -27,6 +27,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		.state('results',{
 			url: '/results',
 			templateUrl: 'modules/core/views/results.client.view.html'
+		})
+		.state('demo',{
+			url: '/demo',
+			templateUrl: 'modules/goods/views/demo.client.view.html'
 		});
 	}
 ]);

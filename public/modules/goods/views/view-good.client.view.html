@@ -20,11 +20,11 @@
 							<div class="col-md-6 pull-left">
 								<!-- 图片部分 -->
 								<div class="good_detail_bigimg">
-									<img ng-src="{{good.main_img}}" class="good_main_img" alt="{{good.title}}">
+									<img ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
 								</div>
 								<div class="good_img_array">
-									<label data-ng-repeat="item in good.img" class="good_detail_img_array">
-										<img class="good_detail_img_small" ng-src="{{item}}" alt="">
+									<label class="good_detail_img_array">
+										<img data-ng-repeat="item in good.img" class="good_detail_img_small" ng-src="{{item}}" alt="">
 									</label>
 								</div>
 								<div class="good_detail_sharezone">
@@ -210,7 +210,7 @@
 							<div class="good_detail_detail">
 								<p class="good_detail_text_14px" ng-bind-html="good.detail" class="good_detail"></p>
 								<img ng-src="{{good.main_img}}" alt="">
-								<img data-ngng-src="{{good.img[0]}}" alt="">
+								<img data-ng-repeat="item in good.img" ng-src="{{item}}" alt="">
 							</div>
 						</tab>
 						<tab>

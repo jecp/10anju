@@ -1,19 +1,17 @@
 'use strict';
 
-angular.module('goods').directive('goods', [
+angular.module('goods').directive('whenScrolled', 
 	function() {
-		return {
-			template: '<div></div>',
-			restrict: 'E',
-			link: function postLink(scope, element, attrs) {
-				// Goods directive logic
-				// ...
-				// element.bind('like', function() {
-				// 	Goods.like({'like'});
-				// })
+		return function(scope, elm, attr){
+			$(window).scroll(function(){
+				var scrollTop = $(this).scrollTop();
+				var scrollHeight = $(document).height();
+				var windowHeight = $(this).height();
 
-				// element.text('this is the goods directive');
-			}
+				if(scrollTop + windowHeight === scrollHeight){
+					scope.$apply(attr.whenScrolled);
+				}
+			});
 		};
 	}
-]);
+);
