@@ -2,21 +2,12 @@
     <div class="row">
         <div class="col-md-9 col-xs-12">
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
-            <div class="mt20" data-ng-controller="CategoriesController" data-ng-init="find()">
-                <tabset data-ng-repeat="cat in categories | filter:subcat">
-                    <tab active="subcat" data-ng-repeat="item in cat.subcat">
-                        <tab-heading ng-click="listSubcat()"><span data-ng-bind="item"></span>
-                        </tab-heading>
-<!--                         <ul class="nav nav-pills">
-                           <li data-ng-repeat="item in cat.subcat"><a href="/#!/goods/subcat/{{item}}" data-ng-bind="item"></a></li>
-                        </ul> -->
-                        <div class="row good_list_all">
-                            <div data-ng-repeat="good in goods | filter:item" class="col-md-3 fl col-xs-6">
-                                <div  when-scrolled="loadMore()" ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
-                            </div>            
-                        </div>
-                    </tab>
-                </tabset>
+            <div class="mt20">
+                <div class="row good_list_all">
+                    <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
+                        <div  when-scrolled="loadMore()" ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                    </div>            
+                </div>
             </div>
         </div>
         <div class="col-md-3 col-xs-12">
