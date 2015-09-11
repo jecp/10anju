@@ -261,21 +261,6 @@ exports.list = function(req, res) {
 };
 
 /**
- * Count of Goods
- */
-exports.count = function(req, res) {
-	Good.count(function (err, goods) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.send(goods);
-		}
-	});
-};
-
-/**
  * Modify a Good
  */
 exports.modify = function(req, res) {

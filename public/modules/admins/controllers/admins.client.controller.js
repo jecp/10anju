@@ -14,10 +14,6 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 			}
 		}
 
-		$scope.test = function(){
-			
-		};
-
 		// Create new Admin
 		$scope.create = function() {
 			// Create new Admin object

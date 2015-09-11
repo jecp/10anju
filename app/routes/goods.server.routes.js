@@ -6,9 +6,6 @@ module.exports = function(app) {
 		goods = require('../../app/controllers/goods.server.controller');
 
 	// Goods Routes
-	app.route('/goods/count')
-		.get(visithistory.vh_log, goods.count);
-
 	app.route('/goods/total')
 		.get(visithistory.vh_log, goods.list);
 

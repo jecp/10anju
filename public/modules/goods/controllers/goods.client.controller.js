@@ -148,11 +148,14 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Admin list of Goods
 		$scope.list = function() {
-			$http.get('/goods/admin/list').success(function (response){
-				$scope.goods = response;
-			}).error(function(response){
-				$scope.error = response.message;
+			$scope.goods = Goods.query({
+				limit:30
 			});
+			// $http.get('/goods/admin/list').success(function (response){
+			// 	$scope.goods = response;
+			// }).error(function(response){
+			// 	$scope.error = response.message;
+			// });
 		};
 
 		// Count of Goods

@@ -28,10 +28,6 @@ angular.module('admins').config(['$stateProvider',
 		state('adminListAdmins', {
 			url: '/admins/admin/list',
 			templateUrl: 'modules/admins/views/admin-list-admins.client.view.html'
-		}).
-		state('testAdmins', {
-			url: '/admin_test',
-			templateUrl: 'modules/admins/views/test-admin.client.view.html'
 		});
 	}
 ]);
