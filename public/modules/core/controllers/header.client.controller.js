@@ -25,14 +25,5 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 				$scope.error = response;
 			});
 		};
-
-		// Summary
-		$scope.Summary = function(){
-			$http.get('/core/summary').success(function (response){
-				$scope.data = response;
-			}).error(function (response){
-				$scope.error = response;
-			});
-		};
 	}
 ]);

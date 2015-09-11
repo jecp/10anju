@@ -72,6 +72,15 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			});
 		};
 
+		// Summary
+		$scope.Summary = function(){
+			$http.get('/core/summary').success(function (response){
+				$scope.data = response;
+			}).error(function (response){
+				$scope.error = response;
+			});
+		};
+
 		// Remove existing Good
 		$scope.remove = function(good) {
 			if ( good ) { 
