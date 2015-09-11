@@ -193,6 +193,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			$scope.goods = Goods.query({ 
 				subcat: $stateParams.subcat
 			});
+			$scope.subcat = $stateParams.subcat;
 		};
 
 		// search function
