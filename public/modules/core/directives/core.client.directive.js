@@ -20,4 +20,4 @@ function addScript(url,callback){
         };
     }
     document.getElementsByTagName('body')[0].appendChild(elt);
-};
+}

@@ -35,7 +35,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 					total:total
 				});
 			} else {
-				var goodsObj = new Array();
+				var goodsObj = [];
 				for (var i=0; i < this.carts.length; i++){
 					goodsObj.push(this.carts[i]);
 					console.log(goodsObj);

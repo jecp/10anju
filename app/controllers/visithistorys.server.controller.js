@@ -160,7 +160,8 @@ exports.vh_log = function(req, res, next) {
 	logObj.remoteAddress = ip;
 
 	logObj.user_agent = req.headers['user-agent'];
-	logObj.customOs = req.headers['user-agent'].split(') ')[0]+')';
+	var os = req.headers['user-agent'] ? ['user-agent'].split(') ') : '(';
+	logObj.customOs = os+')';
 	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
 
