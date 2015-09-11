@@ -11,7 +11,7 @@
                            <li data-ng-repeat="item in cat.subcat"><a href="/#!/goods/subcat/{{item}}" data-ng-bind="item"></a></li>
                         </ul> -->
                         <div class="row good_list_all">
-                            <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
+                            <div data-ng-repeat="good in goods | filter:item" class="col-md-3 fl col-xs-6">
                                 <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
                             </div>            
                         </div>
