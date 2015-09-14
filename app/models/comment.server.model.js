@@ -11,8 +11,7 @@ var mongoose = require('mongoose'),
  */
 var CommentSchema = new Schema({
 	content: {
-		type: String,
-		required: 'Please fill content',
+		type: String
 	},
 	markdown:{
 		type:String

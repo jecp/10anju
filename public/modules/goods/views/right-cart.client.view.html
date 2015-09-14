@@ -1,7 +1,7 @@
 <div ng-if="authentication.user.username !== undefined" data-ng-controller="CartsController" data-ng-init="find()">
 	<div data-ng-repeat="cart in carts | limitTo:1 | filter: {'order_status': 'false'}" class="panel panel-default" ng-if="carts.length > 0">
     <div class="panel-heading">
-      <div class="panel-title"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购物篮</div>
+      <div class="panel-title"><a href="/#!/carts"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购物篮</a></div>
     </div>
     <div>
       <li>

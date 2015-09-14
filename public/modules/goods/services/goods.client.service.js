@@ -8,11 +8,6 @@ angular.module('goods').factory('Goods', ['$resource',
 			update: {
 				method: 'PUT'
 			}
-		}, {
-			query: {
-				method: 'GET', isArray:true
-			}
-		}
-		);
+		});
 	}
 ]);

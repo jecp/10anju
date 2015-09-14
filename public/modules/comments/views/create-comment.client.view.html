@@ -8,19 +8,7 @@
     @import "dist/emoji/Sysmbols.css";
     @import "dist/emoji/twemoji.css";
 </style>
-<script src="dist/javascripts/thinker-md.vendor.min.js"></script>
-<script>
-    $("textarea[data-provide='markdown']").markdown({
-        language: 'zh',
-        fullscreen: {
-            enable: true
-        },
-        resize: 'vertical',
-        localStorage: '10anju_md',
-        imgurl: '/cors/upload/ajaxUpload',
-        base64url: '/cors/upload/base64Upload'
-    });
-</script>
+<script src="dist/javascripts/thinker-md.vendor.js"></script>
 <section data-ng-controller="CommentsController">
     <div class="panel panel-primary">
         <div class="panel-heading text-right">只言片语证明我来过</div>

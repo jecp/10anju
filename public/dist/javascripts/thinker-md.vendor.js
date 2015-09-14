@@ -3,6 +3,7 @@
  Syntax highlighting with language autodetection.
  https://highlightjs.org/
  */
+'use strict';
 
 (function (factory) {
 
@@ -16306,7 +16307,6 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
  * ========================================================== */
 
 !function ($) {
-
 // jshint ;_;
 
     /* MARKDOWN CLASS DEFINITION
@@ -17166,8 +17166,7 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
                         }
                     }
                 };
-
-                xhr.open('POST', imgUrl, true);
+                xhr.open('POST','/core/upload',true);
                 xhr.setRequestHeader("Cache-Control", "no-cache");
                 xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
                 xhr.send(formData);
@@ -17216,7 +17215,7 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
                 var sanitizedLink = $('<div>' + _link + '</div>').text();
 
                 // transform selection and set the cursor into chunked text
-                instance.replaceSelection('![' + chunk + '](' + sanitizedLink + ' "' + instance.__localize('enter image title here') + '")');
+                instance.replaceSelection('![' + chunk + '](' + sanitizedLink + ')');
                 cursor = selected.start + 2;
 
                 // Set the next tab
@@ -18034,9 +18033,9 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
         height: 'inherit',
         resize: 'none',
         iconlibrary: 'glyph',
-        language: 'en',  //默认国际化语言
+        language: 'zh',  //默认国际化语言
         initialstate: 'editor',
-        imgurl: '',
+        imgurl: 'http://upload.qiniu.com',
         base64url: '',
         localStorage: '',
         flowChart: false,//    flowChart.js 只支持 IE9+
@@ -18877,7 +18876,7 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
         'Cancle': "取消",
         'Insert':'插入',
         'ImageTip':'本地图片仅支持JPG、GIF、PNG格式,并且文件小于512Kb(1kb=1024字节).网络图片地址以http://、https://或ftp://格式开头',
-        'ImageInputTip':'请填入网络图片地址或点击按钮上传本地图片到服务器.',
+        'ImageInputTip':'请填入网络图片地址或点击按钮上传本地图片到服务器.∆如仅输入图片将不会被显示∆',
         'BrowerSupportTip':'你的浏览器不被支持(IE10+)!',
         'Progress':'上传进度',
         'ProgressLoaded':'上传完成',

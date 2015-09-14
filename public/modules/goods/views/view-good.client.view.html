@@ -1,7 +1,6 @@
 <section data-ng-controller="GoodsController" data-ng-init="findOne()">
 	<div class="mt20 row">
 		<div class="col-md-9 xol-xs-12">
-			<!-- 分类导航及标题 -->
 			<div>
 				<div class="good_detail_top_nav">
 					<ol class="breadcrumb">
@@ -13,12 +12,10 @@
 					</ol>
 					<h3 data-ng-bind="good.title"></h3>
 				</div>
-				<!-- 商品详情 -->
 				<div class="good_detail_top">
 					<div class="row">
 						<div class="good_detail_up">
 							<div class="col-md-6 pull-left">
-								<!-- 图片部分 -->
 								<div class="good_detail_bigimg">
 									<img ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
 								</div>
@@ -90,9 +87,7 @@
 										<div class="mt5"></div>
 										</div>
 										<div class="row"></div>
-											<!-- 购物按钮 -->
 											<div class="good_detail_action well">
-												<!-- 购物逻辑 -->
 												<div class="good_detail_buy_icon">
 													<div class="good_for_sale" ng-show="good.sale !== null">
 														<div>
@@ -106,7 +101,7 @@
 													<div class="col-md-6 col-xs-6">
 														<div class="buy" data-ng-controller="OrdersController">
 															<div class="form-group">
-																<input type="submit" id="buy_action" name="id:{{good._id}};name:{{good.name}}" class="btn btn-default" value="立即购买" ng-click="buy()">
+																<button type="btn" id="buy_action" name="{{good.name}}" class="btn btn-warning" value="立即购买" ng-click="buy()">立即购买</button>
 															</div>
 															<div data-ng-show="error" class="text-danger">
 																<strong data-ng-bind="error"></strong>
@@ -116,7 +111,7 @@
 													<div class="col-md-6 col-xs-6 pull-right">
 														<div class="cart" data-ng-controller="CartsController">
 															<div class="form-group">
-																<button ng-click="create()" class="btn btn-default">加入购物篮</button>
+																<button ng-click="create()" class="btn btn-primary">加入购物篮</button>
 															</div>
 															<div data-ng-show="error" class="text-danger">
 																<strong data-ng-bind="error"></strong>

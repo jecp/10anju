@@ -162,7 +162,8 @@ exports.vh_log = function(req, res, next) {
 	logObj.user_agent = req.headers['user-agent'];
 	var os = req.headers['user-agent'] ? req.headers['user-agent'].split(') ') : '(';
 	logObj.customOs = os+')';
-	logObj.customBrowser = (req.headers['user-agent'].split(') ').length > 1) ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
+	// var Browser = req.headers['user-agent'] ? req.headers['user-agent'].split(') ') : '(';
+	logObj.customBrowser = req.headers['user-agent'] ? req.headers['user-agent'].split(') ')[1]+')' : req.headers['user-agent'].split(';')[1];
 	logObj.customLanguage = req.headers['accept-language'];
 
 	request({url:'http://ip.taobao.com/service/getIpInfo.php?ip='+ip,gzip:true},function (err,res,body){
