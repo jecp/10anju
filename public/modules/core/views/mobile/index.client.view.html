@@ -20,9 +20,9 @@
 	.footer{display: none;}
 </style>
 <section data-ng-controller="GoodsController" ng-init="find()">
-	<div class="col-xs-12 row">
+	<div class="row">
 		<div class="row clearfix banner">
-			<img src="http://placehold.it/480x200/E97452/fff" style="overflow:hidden;" alt="">
+			<img src="http://placehold.it/480x200/E97452/fff" class=" col-xs-12" style="overflow:hidden;" alt="">
 		</div>
 		<div class="pageheader">
 			<div>
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<div when-scrolled="loadMore()">
-			<ul class="row">
+			<ul>
 				<li class="good_list" ng-repeat="good in goods" style="overflow:hidden;border-bottom:1px solid #ccc;" >
 					<div class="col-xs-5">
 						<label for="">
