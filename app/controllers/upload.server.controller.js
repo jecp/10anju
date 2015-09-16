@@ -17,9 +17,10 @@ var SECRET_KEY = 'W8azbHlC_Ck_79lltXlH9UV47q19NiqPg5J88q8S';
  */
 function uploadFile(localFile, key, uptoken) {
 	var extra = new qiniu.io.PutExtra();
-
 	qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-	    if(err) {console.log(err);}
+	    if(err) {
+	    	console.log(err,ret);
+	    }
 	});
 };
 
@@ -35,6 +36,16 @@ function uptoken(bucketname) {
 
 exports.saveFile = function (req,res){
 	var uploadToken = uptoken('havemay');
-	uploadFile(req.files.img.path,req.files.img.name,uploadToken);
-	res.send('http://img.havemay.cn/'+req.files.img.name);
+	var key = Date.now()+req.files.img.name;
+
+	var extra = new qiniu.io.PutExtra();
+	qiniu.io.putFile(uploadToken, key, req.files.img.path, extra, function(err, ret) {
+	    if(err) {
+	    	console.log(err,ret);
+	    	res.send('Something goes wrong,please retry!');
+	    }
+	    else{
+	    	res.send('http://img.havemay.cn/'+key);
+	    }
+	});	
 };
