@@ -1,6 +1,6 @@
 <section data-ng-controller="GoodsController" data-ng-init="findOne()">
 	<div class="mt20 good_detail_top good_detail_up">
-		<div class="col-md-6 pull-left">
+		<div class="col-md-6 col-xs-12 pull-left">
 			<div class="good_detail_bigimg">
 				<img ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
 			</div>
@@ -138,5 +138,91 @@
 					</div>							
 				</div>
 			</div>
+				<div class="good_detail_content">
+					<!-- new tab -->
+					<tabset>
+						<tab>
+							<tab-heading class="panel-heading">商品详情</tab-heading>
+							<div class="good_detail_detail">
+								<p class="good_detail_text_14px" ng-bind-html="good.detail" class="good_detail"></p>
+								<img ng-src="{{good.main_img}}" alt="">
+								<img data-ng-repeat="item in good.img" ng-src="{{item}}" alt="">
+							</div>
+						</tab>
+						<tab>
+							<tab-heading class="panel-heading">营养价值</tab-heading>
+							<div class="good_detail_yingyang">
+								<p class="good_detail_text_14px" ng-bind-html="good.nutrition"></p>
+							</div>
+						</tab>
+						<tab ng-if="good.recipes">
+							<tab-heading class="panel-heading">家常菜谱</tab-heading>
+							<div class="good_detail_shiyongfangfa">
+								<p class="good_detail_text_14px" ng-bind-html="good.recipes"></p>
+							</div>
+						</tab>
+						<tab ng-if="good.collection">
+							<tab-heading class="panel-heading">健康搭配</tab-heading>
+							<div class="good_detail_collection">
+								<p class="good_detail_text_14px" ng-bind-html="good.collection"></p>
+							</div>
+						</tab>
+						<tab ng-if="good.wiki">
+							<tab-heading class="panel-heading">小百科</tab-heading>
+							<div class="good_detail_wiki">
+								<p class="good_detail_text_14px" ng-bind-html="good.wiki"></p>
+							</div>
+						</tab>
+					</tabset>
+				</div>
+				<div class="good_detail_common">
+					<div class="pay">
+						<div class="good_detail_common_h3"><span class="h3 g_d_common">下单&支付</span></div>
+						<p class="good_detail_common_text">
+							<ol>
+								<li>1. 注册会员(需验证手机号，无需支付任何费用)</li>
+								<li>2. 浏览心仪商品，下单</li>
+								<li>3. 选择合适支付方式
+									<ol>
+										<li>3.1 在线支付.(预售商品中的生鲜产品需称重后付款，不适于此项)</li>
+										<li>3.2 隔日付/当面付。可以通过支付宝/pos机/现金方式，最长支付期限达5天。</li>
+									</ol>
+								</li>
+								<li>4. 支付成功将有回单，请向工作人员索取。(在线支付回单会随商品送达。)</li>		
+							</ol>
+						</p>
+					</div>
+					<div class="delivery">
+						<div class="good_detail_common_h3"><span class="h3 g_d_common">配送说明</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 时间: 初定每日6：30AM-10:30AM</li>
+								<li>2. 地点: 小区直配--送至小区固定位置(详见<a href="/#!/ccenters/">小区目录</a>)</li>
+								<li>3. 分发: 除老弱病残等不便自取者外，所有货物请客户在上述时间范围内至上述地点自提。</li>
+								<li>4. 逾期未收货: 顺延至次日分发。(生鲜订单除外)，建议与邻居协商代领。</li>
+							</ol>
+						</p>
+					</div>
+					<div class="confirm">
+						<div class="good_detail_common_h3 good_detail_common_confirm"><span class="h3 g_d_common">收货&确认</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 随货配有订单，共三联(订单联、支付确认联及送货联)</li>
+								<li>2. 订单联客户收存</li>
+								<li>3. 支付确认联，如已支付，由客户保存，否则签字后交至工作人员处。</li>
+								<li>4. 送货联，客户签字后交由工作人员收回。</li>
+							</ol>
+						</p>
+					</div>
+					<div class="quality">
+						<div class="good_detail_common_h3 good_detail_common_quality"><span class="h3 g_d_common">质量保证&无货退款</span></div>
+						<p class="good_detail_common_delivery">
+							<ol>
+								<li>1. 保证所有产品均可当面退货、拒收(全部或部分)</li>
+								<li>2. 所有产品均可无货退款，需填写退货单并写明原由，帮助我们改进。</li>
+							</ol></p>
+					</div>
+				</div>
+		    </div>
 	</div>
 </section>
