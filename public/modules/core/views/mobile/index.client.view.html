@@ -15,11 +15,12 @@
 	<link rel="apple-touch-startup-image" href="/images/start.jpg" />
 	<link rel="apple-touch-startup-image" href="/images/start.jpg" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
 </head>
-<!-- <style>
-	.navbar-fixed-top{display: none;}
-</style> -->
+<style>
+	/*.navbar-fixed-top{display: none;}*/
+	.footer{display: none;}
+</style>
 <section data-ng-controller="GoodsController" ng-init="find()">
-	<div class="col-xs-12">
+	<div class="col-xs-12 row">
 		<div class="row clearfix banner">
 			<img src="http://placehold.it/480x200/E97452/fff" style="overflow:hidden;" alt="">
 		</div>
@@ -29,7 +30,7 @@
 			</div>
 		</div>
 		<div when-scrolled="loadMore()">
-			<ul class="">
+			<ul class="row">
 				<li class="good_list" ng-repeat="good in goods" style="overflow:hidden;border-bottom:1px solid #ccc;" >
 					<div class="col-xs-5">
 						<label for="">
