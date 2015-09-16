@@ -13,32 +13,24 @@ var mongoose = require('mongoose'),
  */
 function uploadFile(localFile, key, uptoken) {
 	var extra = new qiniu.io.PutExtra();
-	//extra.params = params;
-	//extra.mimeType = mimeType;
-	//extra.crc32 = crc32;
-	//extra.checkCrc = checkCrc;
 
 	qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-	     if(!err) {
-	       // 上传成功， 处理返回值
-	       // console.log(key, ret.hash);
-	       // ret.key & ret.hash
-	     } else {
-	       // 上传失败， 处理返回代码
-	       console.log(err);
-	       // http://developer.qiniu.com/docs/v6/api/reference/codes.html
-	     }
-	   });
+	    if(!err) {
+	    	console.log(key, ret.hash);
+	    } else {
+	    	console.log(err);
+	    }
+	});
 };
 
 function uptoken(bucketname) {
   var putPolicy = new qiniu.rs.PutPolicy(bucketname);
-
   return putPolicy.token();
 }
 
 exports.saveFile = function (req,res){
+	var att = req.files.img.name.split('.')[1];
 	var uploadToken = uptoken('havemay');
 	uploadFile(req.files.img.path,req.files.img.name,uploadToken);
-	res.send('http://img.havemay.cn/'+req.files.img.name);
+	res.send('http://img.havemay.cn/pic_'+att+'/'+req.files.img.name);
 };
