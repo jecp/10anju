@@ -28,9 +28,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/results',
 			templateUrl: 'modules/core/views/results.client.view.html'
 		})
-		.state('demo',{
-			url: '/demo',
-			templateUrl: 'modules/goods/views/demo.client.view.html'
+		.state('mobile',{
+			url: '/m',
+			templateUrl: 'modules/core/views/mobile/index.client.view.html'
+		})
+		.state('m_goods',{
+			url: '/m/goods/:goodId',
+			templateUrl: 'modules/core/views/mobile/view-good.client.view.html'
 		});
 	}
 ]);

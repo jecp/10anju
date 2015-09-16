@@ -37,7 +37,7 @@ module.exports = {
 		options: {
 			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'admin@havemay.cn',
+				user: process.env.MAILER_EMAIL_ID || 'info@havemay.cn',
 				pass: process.env.MAILER_PASSWORD || '52tsinghua'
 			}
 		}

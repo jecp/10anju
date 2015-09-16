@@ -1,0 +1,142 @@
+<section data-ng-controller="GoodsController" data-ng-init="findOne()">
+	<div class="mt20 good_detail_top good_detail_up">
+		<div class="col-md-6 pull-left">
+			<div class="good_detail_bigimg">
+				<img ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
+			</div>
+			<div class="good_img_array">
+				<label class="good_detail_img_array">
+					<img data-ng-repeat="item in good.img" class="good_detail_img_small" ng-src="{{item}}" alt="">
+				</label>
+			</div>
+			<div class="good_detail_sharezone">
+				<!-- <div class="col-xs-12">分享到</div> -->
+				<div class="col-xs-6" data-ng-controller="CollectsController">
+					<a ng-click="create()"><i class="glyphicon glyphicon-star"></i><span>收藏<span data-ng-bind="good.collect"></span></span></a>
+				</div>
+				<div class="col-xs-6" data-ng-controller="LikesController">
+					<a ng-click="create()">
+						<span class="glyphicon glyphicon-thumbs-up">赞<span data-ng-bind="good.like" class="text-muted"></span></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 good_detail_formfield">
+			<div class="good_detail_mainattr">
+				<form class="form-horizontal" novalidate>
+					<div class="detail_top">
+						<div>
+							<p>
+								<span class="text-muted h5" data-ng-bind="good.summary"></span>
+							</p>
+						</div>
+					<div class="mt5"></div>
+					<div ng-if="good.origin.length > 0">
+						<p>
+							<span class="text-muted col-xs-4">产地</span>
+							<span class="col-xs-8" data-ng-bind="good.origin"></span>
+						</p>
+					</div>
+					<div>
+						<div class="col-xs-4">
+							<span class="text-muted">净重</span>
+						</div>
+						<div class="col-xs-8"><span data-ng-bind="good.weight"></span>&nbsp;<span class="text-muted strong" data-ng-bind="good.spec"></span></div>
+					</div>
+					<div>
+						<span class="text-muted col-xs-4">储存方法</span>
+						<span class="col-xs-8" data-ng-bind="good.storage_method"></span>
+						<span class="pull-right label label-default"><span class="h3">生鲜商品</span>以实际送达重量为准<span class="h3">!</span></span>
+					</div>
+					<div class="mt5"></div>
+					<div class="good_detail_price">
+						<ul class="price-meta">
+							<li class="">
+								<span class="col-xs-4">价格</span>
+								<div class="">
+									<strong><em>&yen;&nbsp;</em><b class="good_price" data-ng-bind="good.price | number:2"></b></strong>
+								<span class="pull-right">
+									<em class="per" data-ng-bind="good.price/good.weight*500 | number:2"></em>
+									<span class="text-muted">元/500g</span>
+								</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<p>
+							<span class="text-muted col-xs-4">配送方式</span>
+							<span class="col-xs-8" data-ng-bind="good.delivery"></span>
+						</p>
+					</div>
+					<div class="mt5"></div>
+					</div>
+					<div class="row"></div>
+						<div class="good_detail_action well">
+							<div class="good_detail_buy_icon">
+								<div class="good_for_sale" ng-show="good.sale !== null">
+									<div>
+										<h6>
+											<span class="text-muted col-xs-5">促销价</span>
+											<span class="col-xs-7"><i>&yen;&nbsp;</i><em data-ng-bind="good.sale"></em></span>
+										</h6>
+									</div>
+								</div>
+								<div class="mt10"></div>
+								<div class="col-md-6 col-xs-6">
+									<div class="buy" data-ng-controller="OrdersController">
+										<div class="form-group">
+											<button type="btn" id="buy_action" name="{{good.name}}" class="btn btn-warning" value="立即购买" ng-click="buy()">立即购买</button>
+										</div>
+										<div data-ng-show="error" class="text-danger">
+											<strong data-ng-bind="error"></strong>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-xs-6 pull-right">
+									<div class="cart" data-ng-controller="CartsController">
+										<div class="form-group">
+											<button ng-click="create()" class="btn btn-primary">加入购物篮</button>
+										</div>
+										<div data-ng-show="error" class="text-danger">
+											<strong data-ng-bind="error"></strong>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mt5"></div>
+						</div>
+					</form>
+					<div class="good_feature_icon h3 pull-right">
+						<span class="feature_icon feature_icon_local"><span class="glyphicon glyphicon-picture"></span>产地直供</span>
+						<span class="feature_icon feature_icon_origin"><span class="glyphicon glyphicon-leaf"></span>绿色优选</span>
+						<span class="feature_icon feature_icon_freedelivery"><span class="glyphicon glyphicon-home"></span>免费配送</span>
+					</div>
+					<div class="mt5"></div>
+					<div class="clearfix">
+						<div class="mt10"></div>
+						<div class="good_detail_amount">
+							<div class="col-xs-4">
+								<span class="text-muted h7">售出:&nbsp;</span>
+								<a href="#">	
+									<span class="red" data-ng-bind="good.sold"></span>
+								</a>
+							</div>
+<!-- 												<div class="col-xs-4">
+								<span class="h7 text-muted">评论:</span>
+								<a href="">
+									<span class="red" data-ng-bind="good.comments"></span>
+								</a>
+							</div> -->
+							<div class="col-xs-4">
+								<span class="h7 text-muted">展现:&nbsp;</span>
+								<a href="">
+									<span class="red" data-ng-bind="good.pv"></span>
+								</a>
+							</div>
+						</div>
+					</div>							
+				</div>
+			</div>
+	</div>
+</section>

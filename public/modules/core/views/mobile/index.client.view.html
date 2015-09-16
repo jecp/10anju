@@ -1,0 +1,50 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>{{title}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Remote Camera" />
+
+	<link rel="apple-touch-icon-precomposed" href="/images/54.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/72.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/114.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/144.jpg">
+
+	<link rel="apple-touch-startup-image" href="/images/start.jpg" />
+	<link rel="apple-touch-startup-image" href="/images/start.jpg" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+</head>
+<!-- <style>
+	.navbar-fixed-top{display: none;}
+</style> -->
+<section data-ng-controller="GoodsController" ng-init="find()">
+	<div class="col-xs-12">
+		<div class="row clearfix banner">
+			<img src="http://placehold.it/480x200/E97452/fff" style="overflow:hidden;" alt="">
+		</div>
+		<div class="pageheader">
+			<div>
+				<span>今日精选</span>
+			</div>
+		</div>
+		<div when-scrolled="loadMore()">
+			<ul class="">
+				<li class="good_list" ng-repeat="good in goods" style="overflow:hidden;border-bottom:1px solid #ccc;" >
+					<div class="col-xs-5">
+						<label for="">
+							<a href="/#!/m/goods/{{good._id}}">
+								<img class="" ng-src="{{good.main_img}}-100" alt="">
+							</a>
+						</label>
+					</div>
+					<div class="col-xs-7 pull-right">
+						<div><span data-ng-bind="good.title"></span></div>
+						<div class="gl_f40">&yen;<span data-ng-bind="good.price"></span></div>
+						<div><span class="glyphicon glyphicon-user"></span>&nbsp;<span data-ng-bind="good.sold"></span>&nbsp;人已购买</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>

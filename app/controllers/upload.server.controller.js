@@ -30,11 +30,12 @@ function uploadFile(localFile, key, uptoken) {
 	     }
 	   });
 };
+
 function uptoken(bucketname) {
   var putPolicy = new qiniu.rs.PutPolicy(bucketname);
 
   return putPolicy.token();
-};
+}
 
 exports.saveFile = function (req,res){
 	var uploadToken = uptoken('havemay');

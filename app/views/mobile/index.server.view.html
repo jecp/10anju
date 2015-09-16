@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>{{title}}</title>
+	<!-- //加入响应式布局 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+	<!-- //设置safari的属性 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Remote Camera" />
+
+	<!-- //设置桌面图标 -->
+	<link rel="apple-touch-icon-precomposed" href="/images/54.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/72.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/114.jpg">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/144.jpg">
+
+	<!-- //设置初始界面 -->
+	<link rel="apple-touch-startup-image" href="/images/start.jpg" />
+	<link rel="apple-touch-startup-image" href="/images/start.jpg" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+</head>
+<body data-ui-view>
+	<!--Embedding The User Object-->
+	<script type="text/javascript">
+		var user = {{ user | json | safe }};
+		// var goods = JSON.parse({{goods}});
+		// console.log(typeof goods);
+		// console.log(goods.length);
+		// console.log({{goods[0].valueOf()}});
+	</script>
+	<div class="warp" >
+		<div class="nav nav-bar">
+			2
+		</div>
+		<h7>{{goods}}</h7>
+		<div class="container">
+			<li ng-repeat="good in goods">
+				<img ng-src="{good.main_img}" alt="">
+			</li>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+</body>
+</html>
