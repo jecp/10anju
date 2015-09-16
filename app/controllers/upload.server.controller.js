@@ -15,14 +15,6 @@ var SECRET_KEY = 'W8azbHlC_Ck_79lltXlH9UV47q19NiqPg5J88q8S';
 /**
  * Save file 
  */
-function uploadFile(localFile, key, uptoken) {
-	var extra = new qiniu.io.PutExtra();
-	qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-	    if(err) {
-	    	console.log(err,ret);
-	    }
-	});
-};
 
 function uptoken(bucketname) {
 	var putPolicy = new qiniu.rs.PutPolicy(bucketname);
