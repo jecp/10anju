@@ -8,6 +8,10 @@ var mongoose = require('mongoose'),
  	Visithistory = mongoose.model('Visithistory'),
  	qiniu = require('qiniu');
 
+var ACCESS_KEY = '0rt9hdCjFHSrix70dahquToz_sRvkryXYuaoTytN';
+var SECRET_KEY = 'W8azbHlC_Ck_79lltXlH9UV47q19NiqPg5J88q8S';
+
+
 /**
  * Save file 
  */
@@ -15,22 +19,22 @@ function uploadFile(localFile, key, uptoken) {
 	var extra = new qiniu.io.PutExtra();
 
 	qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-	    if(!err) {
-	    	console.log(key, ret.hash);
-	    } else {
-	    	console.log(err);
-	    }
+	    if(err) {console.log(err);}
 	});
 };
 
 function uptoken(bucketname) {
-  var putPolicy = new qiniu.rs.PutPolicy(bucketname);
-  return putPolicy.token();
+	var putPolicy = new qiniu.rs.PutPolicy(bucketname);
+	var flags = putPolicy.getFlags();
+	var encodedFlags = qiniu.util.urlsafeBase64Encode(JSON.stringify(flags));
+	var encoded = qiniu.util.hmacSha1(encodedFlags, SECRET_KEY);
+	var encodedSign = qiniu.util.base64ToUrlSafe(encoded);
+	var uploadToken = ACCESS_KEY + ':' + encodedSign + ':' + encodedFlags;
+	return uploadToken;
 }
 
 exports.saveFile = function (req,res){
-	var att = req.files.img.name.split('.')[1];
 	var uploadToken = uptoken('havemay');
 	uploadFile(req.files.img.path,req.files.img.name,uploadToken);
-	res.send('http://img.havemay.cn/pic_'+att+'/'+req.files.img.name);
+	res.send('http://img.havemay.cn/'+req.files.img.name);
 };
