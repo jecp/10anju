@@ -1,5 +1,5 @@
 <style>
-	@media (min-width: 320px) {
+	@media screen and (max-width: 992px) {
   .goods_index_mobile{display: none;}
 }
 </style>
@@ -9,6 +9,9 @@
 			<div class="mt20"></div>
 			<div ng-include="'modules/core/views/navbar.client.view.html'"></div>
 			<div ng-include="'modules/goods/views/list-goods.client.view.html'"></div>
+			<div class="scroll">
+				<span class="text-muted">下拉加载更多...</span>
+			</div>
 		</div>
         <div class="col-md-3 col-xs-12 pull-right goods_index_mobile">
 	        <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>

@@ -17,7 +17,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var obj = req.body.obj;
-	console.log(req.body);
 
 	var comment = new Comment(req.body);
 	comment.user = req.user;

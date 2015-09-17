@@ -48,8 +48,8 @@
 									<div class="col-md-5 col-xs-5">
 										<input type="authimg" id="authimg" name="authimg" class="form-control" data-ng-model="credentials.authimg" placeholder="验证码，不区分大小写">
 									</div>
-									<div class="col-md-4 col-xs-4 authimg">
-										<img class="code_img" ng-src="/auth/img" alt="">
+									<div class="col-md-4 col-xs-4 authimg" id="authimg">
+										<img class="code_img" id="captchaImg" ng-src="/auth/img" ng-click="refreshcapture()" style="cursor:hand;" alt="">
 									</div>
 								</div>
 								<div class="form-group">
