@@ -49,7 +49,7 @@
 										<input type="authimg" id="authimg" name="authimg" class="form-control" data-ng-model="credentials.authimg" placeholder="验证码，不区分大小写">
 									</div>
 									<div class="col-md-4 col-xs-4 authimg" id="authimg">
-										<img class="code_img" id="captchaImg" ng-src="/auth/img" ng-click="refreshcapture()" style="cursor:hand;" alt="">
+										<img alt="看不清,请点击我！" id="imageValidateCode" src="/auth/img" title="看不清,请点击我！"  onclick="this.src=this.src+'?'" /> 
 									</div>
 								</div>
 								<div class="form-group">
