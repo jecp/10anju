@@ -16,9 +16,12 @@
 .navbar-brand{color:red;}
 /* */
 .mt20{margin-top:20px; }
-
 a,a:visited{text-decoration:none; color:#373737;}
 a:hover {color:#FF538C;text-decoration: none;}
+
+/* m-index */
+.banner{margin:0 auto;}
+.m_index_banner_img{width:100%;}
 
 /* help center css */
 header, nav, article, section, aside, footer, figure {display:block}
