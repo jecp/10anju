@@ -23,10 +23,11 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			$scope.busy = true;
 			$scope.limit = 12;
 			var page = 2;
+			var skip = this.goods.length;
 			var limit = 12;
 			var catId = $stateParams.categoryId || '';
 			
-			$http.get('/goods?p='+page+'&skip='+limit+'&limit='+limit+'&catId='+catId).success(function(response){
+			$http.get('/goods?p='+page+'&skip='+skip+'&limit='+limit+'&catId='+catId).success(function(response){
 				$scope.busy = false;
 				for(var i = 0;i<response.length;i++){
 					$scope.goods.push(response[i]);
