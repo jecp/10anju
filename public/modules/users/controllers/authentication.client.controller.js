@@ -7,20 +7,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 
-		$scope.refreshcapture = function(){
-			var code_img=document.getElementById('authimg');
-			console.log(code_img);
-			$('authimg').html('abc');
-			console.log($('authimg'));
-			$http.get('/auth/img').success(function (response){
-				console.log(response);
-				code_img = response;
-			});
-			$("#xx").html("abc");
-			code_img.setAttribute('src','/auth/img?'+Math.random());
-		//加入随机数不然地址相同 
-		}
-
 		$scope.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				if (response.message === '手机验证码发送成功！'){

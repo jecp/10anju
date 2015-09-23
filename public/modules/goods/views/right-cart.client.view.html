@@ -1,7 +1,7 @@
 <div ng-if="authentication.user.username !== undefined" data-ng-controller="CartsController" data-ng-init="find()">
 	<div data-ng-repeat="cart in carts | limitTo:1 | filter: {'order_status': 'false'}" class="panel panel-default" ng-if="carts.length > 0">
     <div class="panel-heading">
-      <div class="panel-title"><a href="/#!/carts"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购物篮</a></div>
+      <div class="panel-title"><a href="/#!/carts"><i class="fa fa-shopping-cart"></i>&nbsp;购物篮</a></div>
     </div>
     <div>
       <li>
@@ -17,7 +17,7 @@
               <td>
                 <div>
                   <a href="/#!/carts/{{cart._id}}">
-                    <label for="" data-ng-bind="item.goods.title | limitTo:30" class="text-muted" style="font-size:4px;"></label><span>&yen;</span><span style="color:red;font-size: 10px;" data-ng-bind="item.goods.price | number:2"></span>
+                    <label for="" data-ng-bind="item.goods.title | limitTo:30" class="text-muted" style="font-size:4px;"></label><i class="fa fa-jpy"></i><span style="color:red;font-size: 10px;" data-ng-bind="item.goods.price | number:2"></span>
                   	<label data-ng-bind="item.goods.delivery" class="badge badge-info" style="font-size:6px;background-color:green;"></label>
                   	<label class="for_free" ng-if="item.goods.for_free===true">赠</label>
                   	<label class="free_try" ng-if="item.goods.free_try===true">试</label>

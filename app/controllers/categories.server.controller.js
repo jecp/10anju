@@ -33,13 +33,13 @@ exports.read = function(req, res) {
 	var catId = req.params.categoryId;
 
 	if(catId){
-		Category.findById(catId).populate('goods','title main_img price delivery').exec(function (err,categories){
+		Category.findById(catId).populate('goods','title main_img price delivery').exec(function (err,category){
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				res.jsonp(categories);
+				res.jsonp(category);
 			}
 		});
 	} else{
@@ -133,7 +133,7 @@ exports.modify = function(req, res) {
 /**
  * Category middleware
  */
-exports.categoryByID = function(req, res, next, id) { 
+exports.categoryByID = function(req, res, next, id) {
 	Category.update({_id:id},{$inc:{pv:1}},function(err,next){
 	  if(err){
 	  	console.log(err);

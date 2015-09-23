@@ -1,4 +1,3 @@
-<!-- <script type="text/javascript" src="lib/nginfinitescroll/build/ng-infinite-scroll.js"></script> -->
 <section data-ng-controller="GoodsController" data-ng-init="find()">
   <div data-ng-controller="CategoriesController" data-ng-init="find()">
     <div>
@@ -9,7 +8,7 @@
                 <img ng-src="good.main_img" alt="">
                 <span data-ng-bind="good.title"></span>
               </label>
-            <span class="fl">您好,<span ng-if="authentication.user.username !== undefined" class="gl_f40" data-ng-bind="authentication.user.username"></span><span ng-if="authentication.user.username === undefined" class="gl_f40"><a href="/#!/signup">注册</a>/<a href="/#!/signin">登录</a></span></span><span class="fl"><span class="h5">！&nbsp;截至目前，已更新<span data-ng-init="Summary()" class="gl_f40" data-ng-bind="data.goodsCount"></span>件商品。&nbsp;</span></span><span class="fl"><span ng-if="ccenter === undefined" class="h5">您还未入驻社区,<a href="/#!/ccenters">现在加入</a>！</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
+            <span class="fl">您好，<span ng-if="authentication.user.username !== undefined" class="gl_f40" data-ng-bind="authentication.user.username"></span><span ng-if="authentication.user.username === undefined" class="gl_f40"><a href="/#!/signup" class="h5">注册</a>/<a href="/#!/signin" class="h5">登录</a></span></span><span class="fl"><span>！&nbsp;截至目前，已更新<span data-ng-controller="HomeController" class="gl_f40" data-ng-bind="data.goodsCount"></span>件商品。&nbsp;</span></span><span class="fl"><span ng-if="ccenter === undefined">您还未入驻社区，<a href="/#!/ccenters" class="h5">现在加入</a>！</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
           </div>
           <tab-heading>
             <span>全部</span>
@@ -25,14 +24,15 @@
           <tab-heading>
             <span data-ng-bind="cat.name"></span>
           </tab-heading>
-          <div class="goods_list_tip">
+          <div ng-include="'modules/goods/views/list-subcats-goods.client.view.html'"></div>
+          <!-- <div class="goods_list_tip">
             <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in cat.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
           </div>
           <div class="row good_list_all">
             <div data-ng-repeat="good in goods | filter:cat._id" class="col-md-3 fl col-xs-6">
               <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
             </div>
-          </div>
+          </div> -->
         </tab>
       </tabset>
     </div>    

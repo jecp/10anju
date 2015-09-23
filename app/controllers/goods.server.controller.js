@@ -236,6 +236,7 @@ exports.del = function(req, res) {
  */
 exports.list = function(req, res) {
 	var subcat = req.query.subcat;
+	var cat = req.query.catId;
 
 	if(subcat){
 		Good.find({'subcat':subcat}).sort('-updated').exec(function (err,goods){
@@ -247,8 +248,18 @@ exports.list = function(req, res) {
 				res.jsonp(goods);
 			}
 		});
-	} else {
-		Good.find({}).skip(req.query.skip).limit(req.query.limit).sort('-created').exec(function(err, goods) {
+	} else if(cat){
+		Good.find({category:cat}).skip(req.query.skip).limit(req.query.limit).sort('-created').exec(function(err, goods) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(goods);
+			}
+		});
+	} else{
+		Good.find().skip(req.query.skip).limit(req.query.limit).sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)

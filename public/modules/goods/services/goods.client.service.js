@@ -8,6 +8,6 @@ angular.module('goods').factory('Goods', ['$resource',
 			update: {
 				method: 'PUT'
 			}
-		});
+		});	
 	}
 ]);

@@ -1,15 +1,17 @@
 'use strict';
 
 // Goods controller
-angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods',  
+angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
 	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
 		
-		if($location.path().search('admin') > 0){
+		if($location.path().search('admin') > 0 || $location.path().search('edit') > 0){
 			if (!$scope.authentication.user) {
+				alert('您没有权限！请检查！');
 				$location.path('/');
 			}
 			else if($scope.authentication.user.roles.length < 2){
+				alert('您没有权限！请检查！');
 				$location.path('/');
 			}
 		}
@@ -19,13 +21,12 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				return false;
 			}
 			$scope.busy = true;
-			$scope.limit = 30;
-			$scope.busy = true;
+			$scope.limit = 12;
 			var page = 2;
-			var skip = this.goods.length;
-			var limit = 30;
+			var limit = 12;
+			var catId = $stateParams.categoryId || '';
 			
-			$http.get('/goods?p='+page+'&skip='+skip+'&limit='+limit).success(function(response){
+			$http.get('/goods?p='+page+'&skip='+limit+'&limit='+limit+'&catId='+catId).success(function(response){
 				$scope.busy = false;
 				for(var i = 0;i<response.length;i++){
 					$scope.goods.push(response[i]);
@@ -72,15 +73,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			});
 		};
 
-		// Summary
-		$scope.Summary = function(){
-			$http.get('/core/summary').success(function (response){
-				$scope.data = response;
-			}).error(function (response){
-				$scope.error = response;
-			});
-		};
-
 		// Remove existing Good
 		$scope.remove = function(good) {
 			if ( good ) { 
@@ -119,22 +111,14 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Edit list Good
 		$scope.edit = function() {
-			if($location.path().search('edit')){
-				if(!Authentication && Authentication.user.roles.length<2){
-					alert('您没有权限！请检查！');
-					$location.path('goods');
-				}
-				else {
-					for (var i=0;i<Authentication.user.roles.length;i++){
-						if(Authentication.user.roles[i]==='admin'){
-							$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
-								$scope.good = response;
-							}).error(function(response){				
-								$scope.error = response.message;
-								$location.path('goods');
-							});
-						}
-					}
+			for (var i=0;i<Authentication.user.roles.length;i++){
+				if(Authentication.user.roles[i]==='admin'){
+					$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
+						$scope.good = response;
+					}).error(function(response){				
+						$scope.error = response.message;
+						$location.path('goods');
+					});
 				}
 			}
 		};
@@ -142,7 +126,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Find a list of Goods
 		$scope.find = function() {
 			$scope.goods = Goods.query({
-				limit:30
+				limit:12
 			});
 		};
 
@@ -206,6 +190,12 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$scope.error = response.message;
 			});
 		};
+
+		// subcats
+
+		// $scope.tab_subcats = function() {
+		// 	console.log(this.categories);
+		// }
 
 		// Remove existing Good
 		// $scope.del = function() {

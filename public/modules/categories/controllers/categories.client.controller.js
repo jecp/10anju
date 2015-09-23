@@ -96,6 +96,12 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 				categoryId: $stateParams.categoryId
 			});
 		};
+
+		$scope.findOneCat = function () {
+			$scope.category = Categories.get({ 
+				categoryId: this.cat._id
+			});
+		};
 	}
 ]);
 
