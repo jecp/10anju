@@ -193,10 +193,12 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		};
 
 		// subcats
-
-		// $scope.tab_subcats = function() {
-		// 	console.log(this.categories);
-		// }
+		$scope.findOneCat = function() {
+			var catId = this.cat._id;
+			$http.get('/goods?catId='+catId).success(function (response){
+				$scope.goodsArr = response.goods;
+			});
+		};
 
 		// Remove existing Good
 		// $scope.del = function() {

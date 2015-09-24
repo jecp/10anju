@@ -255,7 +255,11 @@ exports.list = function(req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				res.jsonp(goods);
+				var data = {
+					count:goods.length,
+					goods:goods
+				}
+				res.jsonp(data);
 			}
 		});
 	} else{
