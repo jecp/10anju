@@ -220,9 +220,6 @@ exports.modify = function(req, res) {
  */
 exports.buy_list = function(req, res) {
 	var userId = req.user._id;
-	console.log(Date.now());
-	console.log(Date.now);
-	console.log(new Date().getDate());
 	if (req.user){
 		if(_.contains(req.user.roles,'admin')){
 			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function (err, orders) {
@@ -240,6 +237,12 @@ exports.buy_list = function(req, res) {
 						console.log('历史订单');
 					}
 
+					console.log('``````````');
+					var a = orders.filter(function (total){
+						return total;
+					});
+					console.log(a);
+
 					var feeArray = _.flatten(orders,'total');
 					console.log(feeArray);
 
@@ -256,8 +259,7 @@ exports.buy_list = function(req, res) {
 
 					res.jsonp(orders);
 				} else{
-					console.log(err);
-					res.send(err);
+					res.send(orders);
 				}
 			});
 		}

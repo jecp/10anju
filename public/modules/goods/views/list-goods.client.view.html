@@ -1,5 +1,5 @@
-<section data-ng-controller="GoodsController" data-ng-init="find()">
-  <div data-ng-controller="CategoriesController" data-ng-init="find()">
+<section data-ng-controller="CategoriesController" data-ng-init="find()">
+  <div data-ng-controller="GoodsController" data-ng-init="find()">
     <div>
       <tabset>
         <tab>
@@ -20,7 +20,7 @@
             </div>
           </div>
         </tab>
-        <tab data-ng-repeat="cat in categories | orderBy:'-goods.length'">
+        <tab data-ng-repeat="cat in categories | orderBy:'-goods.length'" ng-click="findOneCat()">
           <tab-heading>
             <span data-ng-bind="cat.name"></span>
           </tab-heading>

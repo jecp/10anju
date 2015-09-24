@@ -1,4 +1,4 @@
-<section data-ng-controller="GoodsController" data-ng-init="findOneCat()">
+<section data-ng-controller="GoodsController" >
 	<div class="goods_list_tip">
         <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in cat.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
 	</div>
@@ -8,6 +8,6 @@
 	    </div>
 	</div>
 	<div>
-		<i class="fa fa-spinner fa-pulse"></i><a href="/#!/categories/{{category._id}}"><span class="text-muted">点击查看更多......</span></a>
+		<i class="fa fa-spinner fa-pulse"></i><a href="/#!/categories/{{cat._id}}"><span class="text-muted">点击查看更多......</span></a>
 	</div>
 </section>
