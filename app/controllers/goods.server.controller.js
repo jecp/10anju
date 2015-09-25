@@ -258,7 +258,7 @@ exports.list = function(req, res) {
 				var data = {
 					count:goods.length,
 					goods:goods
-				}
+				};
 				res.jsonp(data);
 			}
 		});
