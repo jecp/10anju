@@ -249,7 +249,7 @@ exports.list = function(req, res) {
 			}
 		});
 	} else if(cat){
-		Good.find({category:cat}).limit(12).sort('-created').exec(function(err, goods) {
+		Good.find({category:cat}).skip(req.query.skip).limit(req.query.limit).sort('-created').exec(function(err, goods) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
