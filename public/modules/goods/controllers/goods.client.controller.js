@@ -161,8 +161,9 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.findByCategory = function() {
-			var cat = $scope.category.length ? $scope.category : $stateParams.categoryId;
-			$http.get('/goods?catId='+cat).success(function (response){
+			var limit = 12;
+			var catId = $scope.category.length ? $scope.category : $stateParams.categoryId;
+			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){
 				$scope.goods = response;
 			});
 		};
