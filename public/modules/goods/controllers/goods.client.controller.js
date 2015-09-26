@@ -196,8 +196,9 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// subcats
 		$scope.findOneCat = function() {
 			var catId = this.cat._id;
+			var limit = 12;
 			$scope.goods=null;
-			$http.get('/goods?catId='+catId).success(function (response){
+			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){
 				$scope.goods = response;
 			});
 		};
