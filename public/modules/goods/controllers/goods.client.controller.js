@@ -23,9 +23,9 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			$scope.busy = true;
 			$scope.limit = 12;
 			var page = 2;
-			var skip = this.goods.length;
+			var skip = this.goods.length ? this.goods.length : $scope.goods.length;
 			var limit = 12;
-			var catId = $stateParams.categoryId || '';
+			var catId = $stateParams.categoryId ? $stateParams.categoryId : '';
 			
 			$http.get('/goods?p='+page+'&skip='+skip+'&limit='+limit+'&catId='+catId).success(function(response){
 				$scope.busy = false;
@@ -163,7 +163,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.findByCategory = function() {
 			var cat = $scope.category.length ? $scope.category : $stateParams.categoryId;
 			$http.get('/goods?catId='+cat).success(function (response){
-				$scope.goods = response.goods;
+				$scope.goods = response;
 			});
 		};
 
@@ -196,8 +196,9 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// subcats
 		$scope.findOneCat = function() {
 			var catId = this.cat._id;
+			$scope.goods=null;
 			$http.get('/goods?catId='+catId).success(function (response){
-				$scope.goodsArr = response.goods;
+				$scope.goods = response;
 			});
 		};
 

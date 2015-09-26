@@ -156,7 +156,8 @@ exports.vh_log = function(req, res, next) {
 	var ip = (req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : undefined) || 
 		req.connection.remoteAddress || 
 	    req.socket.remoteAddress ||
-	    req.connection.socket.remoteAddress;
+	    req.connection.socket.remoteAddress ||
+	    '';
 	logObj.remoteAddress = ip;
 
 	logObj.user_agent = req.headers['user-agent'];

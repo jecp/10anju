@@ -3,7 +3,7 @@
         <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in cat.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
 	</div>
 	<div class="row good_list_all">
-	    <div data-ng-repeat="good in goodsArr" class="col-md-3 fl col-xs-6">
+	    <div data-ng-repeat="good in goods | filter:cat._id" class="col-md-3 fl col-xs-6">
 	    	<div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
 	    </div>
 	</div>

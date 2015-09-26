@@ -255,11 +255,7 @@ exports.list = function(req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				var data = {
-					count:goods.length,
-					goods:goods
-				};
-				res.jsonp(data);
+				res.jsonp(goods);
 			}
 		});
 	} else{
