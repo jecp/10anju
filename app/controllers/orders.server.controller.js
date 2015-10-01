@@ -222,6 +222,19 @@ exports.buy_list = function(req, res) {
 	var userId = req.user._id;
 	if (req.user){
 		if(_.contains(req.user.roles,'admin')){
+
+			var time_24hour = Date.now();//-24*60*60*1000
+			console.log(time_24hour);
+			Order.aggregate([{$match:{status:false}},{$group:{_id:'$detail.goods'}}],function (err,orders){
+				if(err){console.log(err);}
+				else{
+					console.log(orders);
+					res.send(orders);
+				}
+			});
+
+			/*
+
 			Order.find({}).sort('-created').populate('user', 'username').populate('detail.goods', 'main_img title name amount price for_free free_try').exec(function (err, orders) {
 				if (err) {
 					return res.status(400).send({
@@ -262,6 +275,7 @@ exports.buy_list = function(req, res) {
 					res.send(orders);
 				}
 			});
+			*/
 		}
 	}
 };

@@ -64,6 +64,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		$scope.submit = function () {
 			var date = new Date();
+			console.log(this.cart);
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
 

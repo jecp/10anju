@@ -1,8 +1,8 @@
 'use strict';
 
 // Goods controller
-angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
-	function($scope, $http, $stateParams, $location, Authentication, Goods) {
+angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', '$rootScope',
+	function($scope, $http, $stateParams, $location, Authentication, Goods, $rootScope) {
 		$scope.authentication = Authentication;
 		
 		if($location.path().search('admin') > 0 || $location.path().search('edit') > 0){
@@ -112,15 +112,21 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Edit list Good
 		$scope.edit = function() {
-			for (var i=0;i<Authentication.user.roles.length;i++){
-				if(Authentication.user.roles[i]==='admin'){
-					$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
-						$scope.good = response;
-					}).error(function(response){				
-						$scope.error = response.message;
-						$location.path('goods');
-					});
+			if (Authentication.user.roles.some(function (x){
+				if (x === 'admin'){
+					console.log('admin is true');
+					return true;
 				}
+			})){
+				$http.get('/goods/edit',{params:{goodId:$stateParams.goodId}}).success(function (response){
+					$scope.good = response;
+				}).error(function(response){				
+					$scope.error = response.message;
+					$location.path('goods');
+				});
+			}
+			else {
+				$location.path('goods');
 			}
 		};
 
@@ -198,6 +204,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.findOneCat = function() {
 			var catId = this.cat._id;
 			var limit = 12;
+			console.log(this.goods.length);
 			$scope.goods=null;
 			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){
 				$scope.goods = response;
