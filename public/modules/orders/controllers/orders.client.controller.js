@@ -64,7 +64,6 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		$scope.submit = function () {
 			var date = new Date();
-			console.log(this.cart);
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
 
@@ -188,7 +187,6 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			if($location.url() === '/orders/admin/list'){
 				$http.post('/order_buy_list').success(function (response){
 					$scope.order_list = response;
-					console.log(response);
 				}).error(function (response){
 					$scope.error = response.message;
 				});

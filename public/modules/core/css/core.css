@@ -22,7 +22,10 @@ a:hover {color:#FF538C;text-decoration: none;}
 /* m-index */
 .banner{margin:0 auto;}
 .m_index_banner_img{width:100%;}
-
+/* admin cp */
+.bg-gray {color: #000;background-color: #F9F9F9;}
+.bg-gray ul li{text-align: right;}
+.tips{background-color: #f4f4f4;text-align: center;font-size: 10px;}
 /* help center css */
 header, nav, article, section, aside, footer, figure {display:block}
 .hc_left{/*position:fixed;top:70px;left:auto;width:25%;height:auto;margin-bottom:150px;*/text-align: left;line-height:25px;background: white;}

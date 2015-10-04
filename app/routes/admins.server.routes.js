@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.get(visithistory.vh_log,admins.list)
 		.post(users.requiresLogin, visithistory.vh_log, admins.create);
 
-	app.route('/admins?isArray')
+	app.route('/admins_login')
 		.post(visithistory.vh_log, admins.login);
 
 	app.route('/admins/:adminId')

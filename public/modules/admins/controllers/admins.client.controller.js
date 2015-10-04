@@ -34,12 +34,15 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 
 		// Admin Login
 		$scope.login = function() {
-			$scope.admin = Admins.query({
-				method: 'POST',
-				params:{adminName: this.username,adminPwd: this.password},
-				isArray:true				
+			$http.post('/admins_login', $scope.loginForm).success(function(response) {
+				// If successful we assign the response to the global user model
+				$scope.admins = response;
+
+				// And redirect to the index page
+				$location.path('admins/cp');
+			}).error(function(response) {
+				$scope.error = response.message;
 			});
-			console.log($scope.admin);
 		};
 
 		// Remove existing Admin

@@ -1,0 +1,25 @@
+<section data-ng-controller="HomeController" ng-init="TodayWeather()">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<div><i class="fa fa-umbrella"></i>&nbsp;今日天气</div>
+		</div>
+	 	<div class="panel-body">
+	 		<div class="fr"><i class="glyphicon glyphicon-globe"></i>&nbsp;<span data-ng-bind="weather.realtime.city_name"></span></div>
+	 		<div>日期：<span data-ng-bind="weather.realtime.date"></span></div>
+	 		<div>农历：<span data-ng-bind="weather.realtime.moon"></span></div>
+	 		<div>天气：<span data-ng-bind="weather.realtime.weather.info"></span></div>
+	 		<div>温度：<span data-ng-bind="weather.realtime.weather.temperature"></span>度</div>
+	 		<div class="tips">贴士</div>
+	 		<div>穿衣指数：<span class="text-muted" data-ng-bind="weather.life.info.chuanyi"></span></div>
+	 		<div>感冒指数：<span class="text-muted" data-ng-bind="weather.life.info.ganmao"></span></div>
+	 		<div>空调：<span class="text-muted" data-ng-bind="weather.life.info.kongtiao"></span></div>
+	 		<div>污染：<span class="text-muted" data-ng-bind="weather.life.info.wuran"></span></div>
+	 		<div>洗车：<span class="text-muted" data-ng-bind="weather.life.info.xiche"></span></div>
+	 		<div>运动：<span class="text-muted" data-ng-bind="weather.life.info.yundong"></span></div>
+	 		<div>紫外线：<span class="text-muted" data-ng-bind="weather.life.info.ziwaixian"></span></div>
+			<div class="weather">
+				<!-- {{weather}} -->
+			</div>
+		</div> 
+	</div>
+</section>

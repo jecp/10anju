@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$http', '$location', 'Authentication', 'Menus', 
-	function($scope, $http, $location, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$location', 'Authentication', 'Menus', 
+	function($scope, $location, Authentication, Menus) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -15,15 +15,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
-		});
-
-		// Weather Api from web
-		$scope.TodayWeather = function(){
-			$http.get('/core/today').success(function (response){
-				$scope.weather = response;
-			}).error(function (response){
-				$scope.error = response;
-			});
-		};
+		});		
 	}
 ]);

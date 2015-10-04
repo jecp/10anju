@@ -1,8 +1,8 @@
 'use strict';
 
 // Goods controller
-angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', '$rootScope',
-	function($scope, $http, $stateParams, $location, Authentication, Goods, $rootScope) {
+angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Goods', 
+	function($scope, $http, $stateParams, $location, Authentication, Goods) {
 		$scope.authentication = Authentication;
 		
 		if($location.path().search('admin') > 0 || $location.path().search('edit') > 0){
@@ -114,7 +114,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.edit = function() {
 			if (Authentication.user.roles.some(function (x){
 				if (x === 'admin'){
-					console.log('admin is true');
 					return true;
 				}
 			})){
