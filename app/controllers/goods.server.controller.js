@@ -84,6 +84,7 @@ exports.update = function(req, res) {
 	good.user = req.good.user._id;
 	good.detail = req.good.markdown ? markdown.toHTML(req.good.markdown) : '';
 	good.markdown = req.body.detail;
+	good.tiaoma = req.good.tiaoma;
 
 	good.img = req.good.img ? req.good.img.toString().split(',') : '';
 	good.suitable = req.good.suitable ? req.good.suitable.toString().split(',') : '';
