@@ -78,9 +78,11 @@ exports.edit = function (req,res){
  * Update a Good
  */
 exports.update = function(req, res) {
-	var good = req.good ;
+	var good = req.good;
+	// console.log(req.body);
 	good = _.extend(good , req.body);
-	good.detail = markdown.toHTML(req.good.markdown);
+	good.user = req.good.user._id;
+	good.detail = req.good.markdown ? markdown.toHTML(req.good.markdown) : '';
 	good.markdown = req.body.detail;
 
 	good.img = req.good.img ? req.good.img.toString().split(',') : '';
