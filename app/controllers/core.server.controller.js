@@ -51,29 +51,6 @@ exports.about = function(req, res) {
 };
 
 /**
- * today weather api.
- */
-var todayWeather = function(){
-	request({url:'http://op.juhe.cn/onebox/weather/query?cityname=%E6%B7%B1%E5%9C%B3&key=3904327f0cddc28bfeb75d115050d620',gzip:true},function (err,res,body){
-		if (err){console.log(err);}
-		console.log(body);
-	})
-	.pipe(request.get('http://127.0.0.1:3300/core/today'));
-};
-
-/**
- * today weather api.
- */
-exports.today = function(req, res) {
-	if(req.body.reason === 'successed!'){		
-		console.log(req.body.weather);
-		res.send(req.body.weather);
-	}else{
-		todayWeather();
-	}
-};
-
-/**
  *  Data Summary.
  */
 exports.summary = function(req, res) {

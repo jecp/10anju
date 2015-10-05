@@ -203,7 +203,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.findOneCat = function() {
 			var catId = this.cat._id;
 			var limit = 12;
-			console.log(this.goods.length);
 			$scope.goods=null;
 			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){
 				$scope.goods = response;

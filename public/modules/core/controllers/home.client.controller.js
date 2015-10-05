@@ -16,6 +16,7 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
 				type: 'get',
 				dataType: 'jsonp',
 				crossDomain: true,
+				cache:true,
 				success: function(data) {
 					$scope.weather = data.result.data;
 				}

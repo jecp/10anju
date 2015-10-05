@@ -16368,8 +16368,8 @@ var fontAwesome = '\u003c\u0064\u0069\u0076\u0020\u0063\u006c\u0061\u0073\u0073\
         //上传进度条
         this.$progress = null;
         this.$percent = null;
-        //上传文件限制512kb
-        this.$fileSize = 524288;
+        //上传文件限制2048kb
+        this.$fileSize = 2097152;
         //registe
         this.$registPaste = false;
         //end
