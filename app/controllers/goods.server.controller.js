@@ -284,6 +284,7 @@ exports.modify = function(req, res) {
 		good.detail = req.body.markdown ? markdown.toHTML(req.body.markdown) : '';
 
 		goodObj.user = req.user._id;
+		goodObj.tiaoma = req.body.tiaoma;
 		goodObj.img = req.body.img ? req.body.img.toString().split(',') : '';
 		goodObj.suitable = req.body.suitable ? req.body.suitable.toString().split(',') : '';
 		goodObj.therapy = req.body.therapy ? req.body.therapy.toString().split(',') : '';
