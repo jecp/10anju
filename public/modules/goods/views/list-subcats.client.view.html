@@ -1,28 +1,46 @@
-<section data-ng-controller="GoodsController" data-ng-init="listSubcat()">
-    <div class="row">
+<section data-ng-controller="CategoriesController" data-ng-init="findBySubcat()">
+    <div class="row" data-ng-controller="GoodsController" data-ng-init="listSubcat()">
         <div class="col-md-9 col-xs-12">
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
             <div class="mt20">
-                <div class="row good_list_all">
-                    <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
-                        <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
-                    </div>            
+                <div style="margin-bottom:30px;">
+                    <tabset>
+                        <tab>
+                            <tab-heading>
+                                <a href="/#!/categories/{{category._id}}"><span data-ng-bind="category.name"></span></a>
+                            </tab-heading>                            
+                            <div class="row good_list_all">
+                                <div data-ng-repeat="good in goods" class="col-md-3 fl col-xs-6">
+                                    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                                </div>            
+                            </div>
+                        </tab>
+                        <tab data-ng-repeat="item in category.subcat" ng-click="listSubcat()">
+                            <tab-heading><span data-ng-bind="item"></span>
+                            </tab-heading>                            
+                            <div class="row good_list_all">
+                                <div data-ng-repeat="good in goods | filter:'1'" class="col-md-3 fl col-xs-6">
+                                    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                                </div>            
+                            </div>
+                        </tab>
+                    </tabset>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-xs-12">
             <div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
                 <div class="mt20">
-                  <div class="panel panel-info">
-                    <div class="panel-heading">
-                      <div class="panel-title"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;公告</div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;公告</div>
+                        </div>
+                        <div class="panel-body">
+                            <div data-ng-controller="ArticlesController" data-ng-init="find()">
+                                <a href="/#!/articles/{{notice._id}}" data-ng-repeat="notice in articles | filter:'公告'"><p class="h5" data-ng-bind="notice.title"></p></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                      <div data-ng-controller="ArticlesController" data-ng-init="find()">
-                        <a href="/#!/articles/{{notice._id}}" data-ng-repeat="notice in articles | filter:'公告'"><p class="h5" data-ng-bind="notice.title"></p></a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div class="mt20" ng-include="'modules/core/views/today-todos.client.view.html'"></div>
                 <div ng-include="'modules/goods/views/right-cart.client.view.html'"></div>

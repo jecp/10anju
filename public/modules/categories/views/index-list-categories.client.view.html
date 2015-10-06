@@ -1,0 +1,16 @@
+<section>
+    <div class="row fl col-md-12 col-xs-12" data-ng-repeat="cat in categories | filter: cat._id">
+        <div ng-if="cat.goods.length > 0">
+            <div class="panel-body">
+                <div class="row good_list_all">
+                  <div data-ng-repeat="good in cat.goods" class="fl col-xs-6 col-md-3">
+                    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                  </div>
+                </div>
+            </div>
+            <div>
+                <a href="/#!/categories/{{cat._id}}">查看更多……</a>
+            </div>
+        </div>
+    </div>
+</section>

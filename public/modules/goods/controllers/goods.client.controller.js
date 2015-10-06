@@ -23,7 +23,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 			$scope.busy = true;
 			$scope.limit = 12;
 			var page = 2;
-			var skip = this.goods.length ? this.goods.length : $scope.goods.length;
+			var skip = this.goods ? this.goods.length : ($scope.goods ? $scope.goods.length :'');
 			var limit = 12;
 			var catId = $stateParams.categoryId ? $stateParams.categoryId : '';
 			
@@ -182,10 +182,17 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Subcat
 		$scope.listSubcat = function () {
-			$scope.goods = Goods.query({ 
-				subcat: $stateParams.subcat
-			});
-			$scope.subcat = $stateParams.subcat;
+			var subcat = this.item || '';
+			if(subcat){
+				$scope.goods = Goods.query({ 
+					subcat: subcat
+				});
+			}else{
+				$scope.goods = Goods.query({ 
+					subcat: $stateParams.subcat
+				});
+				$scope.subcat = $stateParams.subcat;
+			}			
 		};
 
 		// search function

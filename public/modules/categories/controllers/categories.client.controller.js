@@ -102,6 +102,16 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$htt
 				categoryId: this.cat._id
 			});
 		};
+
+		// Find by subcat
+		$scope.findBySubcat = function(){
+			var subcat = $stateParams.subcat;
+			$http.get('/catbysub/'+subcat).success(function (response){
+				$scope.category = response;
+			}).error(function (response){
+				$scope.error = response.message;
+			});
+		};
 	}
 ]);
 

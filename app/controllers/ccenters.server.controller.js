@@ -29,7 +29,11 @@ exports.create = function(req, res) {
  * Show the current Ccenter
  */
 exports.read = function(req, res) {
-	res.jsonp(req.ccenter);
+	// res.jsonp(req.ccenter);
+	res.render('map/ccenter',{
+		user: req.user || null,
+		request: req
+	});
 };
 
 /**

@@ -131,6 +131,24 @@ exports.modify = function(req, res) {
 };
 
 /**
+ * CatBySub
+ */
+exports.catBySub = function(req, res) {
+	console.log(req.params.subcat);
+	var subcat = req.params.subcat;
+	Category.findOne({subcat:subcat},function (err, category) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});			
+		} else {
+			console.log(category);
+			res.jsonp(category);
+		}
+	});
+};
+
+/**
  * Category middleware
  */
 exports.categoryByID = function(req, res, next, id) {

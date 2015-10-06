@@ -19,6 +19,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, categories.admin_list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, categories.modify);
 
+	app.route('/catbysub/:subcat')
+		.get(visithistory.vh_log, categories.catBySub);
+
 	// Finish by binding the Category middleware
 	app.param('categoryId', categories.categoryByID);
 };

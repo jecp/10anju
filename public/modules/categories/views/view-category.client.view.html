@@ -3,13 +3,34 @@
         <div class="col-md-9 col-xs-12" data-ng-controller="GoodsController" data-ng-init="findByCategory()">
             <div class="mt20"></div>
             <div ng-include="'modules/core/views/navbar.client.view.html'"></div>
-            <div class="goods_list_tip clearfix">
-              <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in category.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
-            </div>
-            <div class="row good_list_all" when-scrolled="loadMore()">
-                <div data-ng-repeat="good in goods" class="fl col-xs-6 col-md-3">
-                    <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
-                </div>
+            <div class="mt20" style="margin-bottom:30px;">
+                <tabset>
+                    <tab>
+                        <tab-heading>
+                            <span data-ng-bind="category.name"></span>
+                        </tab-heading>
+                        <!-- <div class="goods_list_tip clearfix">
+                            <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in category.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
+                        </div> -->
+                        <div class="row good_list_all" when-scrolled="loadMore()">
+                            <div data-ng-repeat="good in goods" class="fl col-xs-6 col-md-3">
+                                <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab data-ng-repeat="item in category.subcat | orderBy:'-goods.length'" ng-click="listSubcat()">
+                        <tab-heading><span data-ng-bind="item"></span>
+                        </tab-heading>
+                        <!-- <div class="goods_list_tip clearfix">
+                            <a href="/#!/goods/subcat/{{item}}" data-ng-repeat="item in category.subcat | limitTo:12"><span class="text-success" data-ng-bind="item"></span>&nbsp;</a>
+                        </div> -->
+                        <div class="row good_list_all" when-scrolled="loadMore()">
+                            <div data-ng-repeat="good in goods" class="fl col-xs-6 col-md-3">
+                                <div ng-include="'modules/goods/views/list-goods-item.client.view.html'"></div>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
             </div>
         </div>
         <div class="col-md-3 col-xs-12">
