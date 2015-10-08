@@ -134,7 +134,6 @@ exports.modify = function(req, res) {
  * CatBySub
  */
 exports.catBySub = function(req, res) {
-	console.log(req.params.subcat);
 	var subcat = req.params.subcat;
 	Category.findOne({subcat:subcat},function (err, category) {
 		if (err) {
@@ -142,7 +141,6 @@ exports.catBySub = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});			
 		} else {
-			console.log(category);
 			res.jsonp(category);
 		}
 	});

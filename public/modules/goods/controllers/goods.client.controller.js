@@ -46,6 +46,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				title:this.title,
 				summary:this.summary,
 				spec:this.spec,
+				tiaoma:this.tiaoma,
 				price:this.price,
 				weight:this.weight,
 				origin:this.origin,
