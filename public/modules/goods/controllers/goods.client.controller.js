@@ -39,6 +39,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.create = function() {
 			// Create new Good object			
 			var _main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
+			console.log(this.tiaoma);
 			var good = new Goods ({
 				name:this.name,
 				cate:$('.cat').html(),
