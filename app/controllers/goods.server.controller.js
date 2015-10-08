@@ -28,6 +28,7 @@ exports.create = function(req, res) {
 	good.therapy = req.body.therapy ? req.body.therapy.split(',') : '';
 	good.feature = req.body.feature? req.body.feature.split(',') : '';
 	good.status = 0;
+	good.tiaoma = req.body.tiaoma;
 
 	if(cate){
 		good.category = cate;

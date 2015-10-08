@@ -118,7 +118,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;}
 .good_detail_img_array img{max-width: 72px;}
 .good_detail_bigimg{background-color:#FFFFFF;border: 1px solid #ccc;}
 .good_detail_bigimg img{width:100%;overflow: hidden;}
-.good_detail_img_small{max-width:72px;overflow: hidden;}
+.good_detail_img_small{max-width:72px;overflow: hidden;border:1px solid #ccc;margin-right:2px;}
 
 /* good_detail_top */
 .good_detail_top{margin-bottom: 30px; padding:5px;}
