@@ -216,7 +216,7 @@
 								<div>条码：<span class="text-muted" data-ng-bind="GDSresult.code"></span></div>
 								<div>品名：<span class="text-muted" data-ng-bind="GDSresult.goodsName"></span><img ng-src="{{GDSresult.titleSrc}}"></div>
 								<div>生产商：<span class="text-muted" data-ng-bind="GDSresult.manuName"></span></div>
-								<div>价格：<span class="text-muted" data-ng-bind="GDSresult.price"></span></div>
+								<div>参考价格：<span class="text-muted" data-ng-bind="GDSresult.price"></span></div>
 								<div>商品分类：<span class="text-muted" data-ng-bind="GDSresult.sort_id"></span></div>
 								<div>国别/地区：<span class="text-muted" data-ng-bind="GDSresult.guobie"></span></div>
 								<div>供应商：<span class="text-muted" data-ng-bind="GDSresult.supplier"></span></div>
@@ -303,6 +303,7 @@
 		</div>
 		<!-- 右侧相关栏 -->
 		<div class="col-md-3 col-xs-12 pull-right" >
+			<div class="mt20" ng-include="'modules/goods/views/search-goods.client.view.html'"></div>
 			<div class="row good_detail_wikizone">
 				<ul class="breadcrumb text-right">精彩推荐<span class="glyphicon glyphicon-thumbs-up"></span></ul>
 				<!-- accordion begin -->
