@@ -2,7 +2,8 @@
 	<label>
 		<div class="good_list_thumbnail">
 			<a href="/#!/goods/{{good._id}}">
-				<img ng-src="{{good.main_img}}-260" class="good_list_img" alt="{{good.name}}">
+				<img ng-if="good.main_img" ng-src="{{good.main_img}}-260" class="good_list_img" alt="{{good.name}}">
+				<img ng-if="!good.main_img" src="http://img.havemay.cn/no_pic.jpg" class="good_list_img" alt="{{good.name}}">
 				<div class="good_list_delivery">
 					<span data-ng-bind="good.delivery"></span>
 					<span class="free_try" ng-if="good.for_free===true">赠</span>

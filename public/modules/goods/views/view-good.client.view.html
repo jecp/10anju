@@ -17,7 +17,8 @@
 						<div class="good_detail_up">
 							<div class="col-md-6 pull-left">
 								<div class="good_detail_bigimg">
-									<img ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
+									<img ng-if="good.main_img" ng-src="{{good.main_img}}-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
+									<img ng-if="!good.main_img" ng-src="http://img.havemay.cn/no_pic.jpg-400" class="good_main_img" alt="{{good.title}}" title="{{good.title}}">
 								</div>
 								<div class="good_img_array">
 									<label class="good_detail_img_array">
