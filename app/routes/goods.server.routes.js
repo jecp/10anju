@@ -33,6 +33,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.del);
 
 	app.route('/search').post(visithistory.vh_log, goods.results);
+	app.route('/goodGDS').get(visithistory.vh_log, goods.GDSresult);
 
 	// Finish by binding the Good middleware
 	app.param('goodId', goods.goodByID);

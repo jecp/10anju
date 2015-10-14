@@ -225,7 +225,7 @@ exports.buy_list = function(req, res) {
 
 			var time_24hour = Date.now();//-24*60*60*1000
 			console.log(time_24hour);
-			Order.aggregate([{$match:{status:false}},{$group:{_id:'$detail.goods'}}],function (err,orders){
+			Order.aggregate([{$match:{status:false}},{$group:{_id:'$detail'}}],function (err,orders){
 				if(err){console.log(err);}
 				else{
 					console.log(orders);

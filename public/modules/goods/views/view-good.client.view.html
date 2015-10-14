@@ -208,7 +208,23 @@
 								<img data-ng-repeat="item in good.img" ng-src="{{item}}" alt="">
 							</div>
 						</tab>
-						<tab>
+						<tab ng-if="good.tiaoma" ng-click="findGDS()">
+							<tab-heading class="panel-heading">厂商信息</tab-heading>
+							<div class="good_detail_detail">
+								<!-- <p data-ng-bind="GDSresult"></p> -->
+								<div>条码：<span class="text-muted" data-ng-bind="GDSresult.code"></span></div>
+								<div>品名：<span class="text-muted" data-ng-bind="GDSresult.goodsName"></span><img ng-src="{{GDSresult.titleSrc}}"></div>
+								<div>生产商：<span class="text-muted" data-ng-bind="GDSresult.manuName"></span></div>
+								<div>价格：<span class="text-muted" data-ng-bind="GDSresult.price"></span></div>
+								<div>商品分类：<span class="text-muted" data-ng-bind="GDSresult.sort_id"></span></div>
+								<div>国别/地区：<span class="text-muted" data-ng-bind="GDSresult.guobie"></span></div>
+								<div>供应商：<span class="text-muted" data-ng-bind="GDSresult.supplier"></span></div>
+								<div>厂家编码：<span class="text-muted" data-ng-bind="GDSresult.faccode"></span></div>
+								<div>厂家状态：<span class="text-muted" data-ng-bind="GDSresult.fac_status"></span></div>
+								<p class="good_detail_text_14px" ng-bind-html="good.tiaoma" class="good_detail"></p>
+							</div>
+						</tab>
+						<tab ng-if="good.nutrition">
 							<tab-heading class="panel-heading">营养价值</tab-heading>
 							<div class="good_detail_yingyang">
 								<p class="good_detail_text_14px" ng-bind-html="good.nutrition"></p>

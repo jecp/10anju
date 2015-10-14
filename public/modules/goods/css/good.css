@@ -111,6 +111,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;}
 }
 .btf{color:#FFF;}
 /* good_detail */
+.gds_zone{background-color: #f1f1f1;padding:5px;display:inline-block;}
 .good_detail_up{margin-bottom: 20px;}
 /*.warp_good_detail_content{}*/
 .good_main_img{max-width:370px;overflow: hidden;}

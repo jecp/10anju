@@ -134,7 +134,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Find a list of Goods
 		$scope.find = function() {
 			$scope.goods = Goods.query({
-				limit:12
+				limit:20
 			});
 		};
 
@@ -217,6 +217,15 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$scope.goods = response;
 			});
 		};
+
+		// findGDS
+		$scope.findGDS = function() {
+			var tiaoma = this.tiaoma ? this.tiaoma : this.good.tiaoma;
+			$http.get('/goodGDS?gds='+tiaoma).success(function (response){
+				$scope.GDSresult = response;
+				$scope.price = response.price;
+			});			
+		}; 
 
 		// Remove existing Good
 		// $scope.del = function() {
