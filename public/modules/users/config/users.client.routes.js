@@ -56,6 +56,10 @@ angular.module('users').config(['$stateProvider',
 		.state('upload_avatar',{
 			url: '/upload_avatar',
 			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
+		})
+		.state('usersList',{
+			url: '/users/admin/list',
+			templateUrl: 'modules/users/views/admin-list-users.client.view.html'
 		});
 	}
 ]);

@@ -33,7 +33,7 @@ exports.forgot = function(req, res, next) {
 				}, '-salt -password', function(err, user) {
 					if (!user) {
 						return res.status(400).send({
-							message: 'No account with that username has been found'
+							message: '未注册的用户名，请检查后重试。'
 						});
 					} else if (user.provider !== 'local') {
 						return res.status(400).send({
@@ -42,7 +42,6 @@ exports.forgot = function(req, res, next) {
 					} else {
 						user.resetPasswordToken = token;
 						user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-						console.log('1 hour');
 
 						user.save(function(err) {
 							done(err, token, user);
@@ -70,10 +69,11 @@ exports.forgot = function(req, res, next) {
 			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
-				from: config.mailer.from,
+				from: 'info@havemay.cn',
 				subject: 'Password Reset',
 				html: emailHTML
 			};
+			console.log(mailOptions);
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({

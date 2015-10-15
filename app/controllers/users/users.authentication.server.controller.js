@@ -50,9 +50,6 @@ var auth = function (req,res){
 				}
 				request({url:url},function (err,res,body){
 					if(err){console.log(err);}
-					else{
-						console.log(body);
-					}
 				});
 				return authCode;
 			}
@@ -115,17 +112,16 @@ exports.signup = function(req, res) {
 
 						var email = req.body.email;
 						var mailOptions = {
-						    from: 'admin@havemay.cn', // sender address
+						    from: 'info@havemay.cn', // sender address
 						    to: email, // list of receivers
-						    subject: 'Hello ✔', // Subject line
+						    subject: '欢迎入驻 茗语e家！ ✔', // Subject line
 						    // text: 'Hello world ✔', // plaintext body
-						    html: '<b>欢迎入驻 食安居 ✔</b><br />您的用户名是'+req.body.username // html body
+						    html: '<b>欢迎入驻 茗语e家 ✔</b><br />您的用户名是：'+req.body.username // html body
 						};
 						transporter.sendMail(mailOptions, function(error, info){
 						    if(error){
 						        return console.log(error);
 						    }
-						    console.log('Message sent: ' + info.response);
 						});
 
 						req.login(user, function(err) {
@@ -136,7 +132,6 @@ exports.signup = function(req, res) {
 								    if(error){
 								        return console.log(error);
 								    }
-								    console.log('Message sent: ' + info.response);
 								});
 								return res.json(user);
 							}
@@ -202,7 +197,6 @@ exports.ccap = function(req, res) {
 	ary = captcha.get(),
 	txt = ary[0],
 	buf = ary[1];
-	console.log(txt);
 	res.send(buf);
 };
 

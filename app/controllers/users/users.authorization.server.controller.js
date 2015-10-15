@@ -29,10 +29,18 @@ exports.userByID = function(req, res, next, id) {
  */
 exports.read = function(req, res) {
 	var userId = req.query.userId;
-	User.findOne({_id:userId}).populate('collect','goods articles subjects').populate('ccenter','name').exec(function (err,user){
-		if (err) {console.log(err);}
-		return res.json(user);
-	});
+	if (userId){
+		User.findOne({_id:userId}).populate('collect','goods articles subjects').populate('ccenter','name').exec(function (err,user){
+			if (err) {console.log(err);}
+			return res.json(user);
+		});
+	}
+	else{
+		User.find().populate('ccenter','name').exec(function (err,users){
+			if (err) {console.log(err);}
+			return res.json(users);
+		});
+	}
 };
 
 /**

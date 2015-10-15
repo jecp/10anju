@@ -5,31 +5,39 @@
 				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
-							<th>分类</th>
-							<th>细类</th>
-							<th>商品图片</th>
-							<th>商品名称</th>
-							<th>商品标题</th>
-							<th>商品价格</th>
-							<th>销量</th>
-							<th>浏览量</th>
-							<th>编辑</th>
-							<th>删除</th>
+							<th>会员组</th>
+							<th>用户名</th>
+							<th>头像</th>
+							<th>邮箱</th>
+							<th>手机号</th>
+							<th>入驻小区</th>
+							<th>房间号</th>
+							<th>支付宝账号</th>
+							<th>和家卡</th>
+							<th>积分</th>
+							<th>入驻时间</th>
+							<th>最后登录</th>
+							<th>修改</th>
+							<th>删除</th>	
 						</tr>
 					</thead>
-					<tbody data-ng-repeat="good in goods" >
+					<tbody data-ng-repeat="user in users" >
 						<tr>
-							<td><a href="/#!/categories/{{good.category._id}}"><span data-ng-bind="good.category.name"></span></a></td>
-							<td data-ng-bind="good.subcat"></td>
-							<td><a href="/#!/goods/{{good._id}}"><img src="{{good.main_img}}" style="max-width:80px;"></a></td>
-							<td data-ng-bind="good.name"></td>
-							<td data-ng-bind="good.title"></td>
-							<td data-ng-bind="good.price"></td>
-							<td data-ng-bind="good.sold"></td>
-							<td data-ng-bind="good.pv"></td>
-							<td><a class="btn btn-primary" href="/#!/goods/{{good._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
+							<td><span data-ng-bind=""></span></td>
+							<td><a href="/#!/users/{{user._id}}"><span data-ng-bind="user.username"></span></a></td>
+							<td><a href="/#!/users/{{user._id}}"><img ng-src="{{user.avatar}}" style="max-width:80px;"></a></td>
+							<td data-ng-bind="user.email"></td>
+							<td data-ng-bind="user.mobile"></td>
+							<td data-ng-bind="user.ccenter.name"></td>
+							<td data-ng-bind="user.roomNum"></td>
+							<td data-ng-bind="user.buyer_email"></td>
+							<td data-ng-bind="user.card_id"></td>
+							<td data-ng-bind="user.pay_total"></td>
+							<td data-ng-bind="user.created"></td>
+							<td data-ng-bind="user.updated"></td>
+							<td><a class="btn btn-primary" href="/#!/users/{{user._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
 							</td>
-							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="good" id="{{good._id}}">删除</button></td>
+							<td><button class="btn btn-danger del" type="button" data-ng-click="del();" name="user" id="{{user._id}}">删除</button></td>
 						</tr>
 					</tbody>
 				</table>

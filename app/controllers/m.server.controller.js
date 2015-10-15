@@ -23,7 +23,7 @@ var // mongoose = require('mongoose'),
  */
 exports.index = function(req, res) {
 
-	console.log(typeof req.user);
+	// console.log(typeof req.user);
 	// var template = swig.compile('<p>{% block content %}</p>',{user:req.user});
 	// var renderedHtml = template({goods:'111'});
 	// console.log(renderedHtml);
@@ -48,11 +48,10 @@ exports.index = function(req, res) {
 	});
 */
 	
-	var url = 'http://127.0.0.1:3300/goods';
-	request.get(url,function (err,res,body){
-		console.log(res,body);
-		return body;
-	});
+	// var url = 'http://127.0.0.1:3300/goods';
+	// request.get(url,function (err,res,body){		
+	// 	return body;
+	// });
 	res.render('mobile/index', {
 		user: req.user || null,
 		request: req

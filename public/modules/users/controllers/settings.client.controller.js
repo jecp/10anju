@@ -114,5 +114,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
 				userId: $stateParams.userId
 			});
 		};
+
+		// Find existing User
+		$scope.find = function() {
+			$scope.users = Users.query();
+		};
 	}
 ]);
