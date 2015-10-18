@@ -38,8 +38,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Create new Good
 		$scope.create = function() {
 			// Create new Good object			
-			var _main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
-			console.log(this.tiaoma);
+			var main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
 			var good = new Goods ({
 				name:this.name,
 				cate:$('.cat').html(),
@@ -53,7 +52,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				origin:this.origin,
 				delivery:this.delivery,
 				detail:this.detail,
-				main_img:_main_img,
+				main_img:main_img,
 				img:this.img,
 				stock:this.stock,
 				wiki:this.wiki,
@@ -222,8 +221,13 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.findGDS = function() {
 			var tiaoma = this.tiaoma ? this.tiaoma : this.good.tiaoma;
 			$http.get('/goodGDS?gds='+tiaoma).success(function (response){
-				$scope.GDSresult = response;
-				$scope.price = response.price;
+				if(response){
+					$scope.success = '查询成功';
+					$scope.GDSresult = response;
+					$scope.price = response.price;
+				}else{
+					$scope.success = '未查到该条码的商品信息';
+				}
 			});			
 		}; 
 

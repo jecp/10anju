@@ -286,22 +286,26 @@ exports.GDSresult = function(req, res) {
 		else if (!gds){
 			request.post({url:'http://tiaoma.cnaidc.com/jbestd.asp?ean='+req.query.gds,gzip:true},function (err,res,body){
 				var obj = eval('('+body+')');
-				var gdsObj = new Gds({
-					code : obj.ean,
-					goodsName : obj.name,
-					manuName : obj.fac_name,
-					price : obj.price,
-					sort_id : obj.sort_id,
-					guobie : obj.guobie,
-					titleSrc : obj.titleSrc,
-					supplier : obj.supplier,
-					faccode : obj.faccode,
-					fac_status : obj.fac_status
-				});
-				
-				gdsObj.save(function (err,gds){
-					if(err){console.log(err);}
-				});
+				if (obj.titleSrc && obj.goodsName) {
+					var gdsObj = new Gds({
+						code : obj.ean,
+						goodsName : obj.name,
+						manuName : obj.fac_name,
+						price : obj.price,
+						sort_id : obj.sort_id,
+						guobie : obj.guobie,
+						titleSrc : obj.titleSrc,
+						supplier : obj.supplier,
+						faccode : obj.faccode,
+						fac_status : obj.fac_status
+					});
+					
+					gdsObj.save(function (err,gds){
+						if(err){console.log(err);}
+					});
+				} else{
+					return;
+				}			
 			});
 
 			Gds.findOne({code:req.query.gds},function (err,result){
