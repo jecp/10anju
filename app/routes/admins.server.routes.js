@@ -22,6 +22,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.modify);
 
+	app.route('/gds')
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.findGds)
+
 	// Finish by binding the Admin middleware
 	app.param('adminId', admins.adminByID);
 };

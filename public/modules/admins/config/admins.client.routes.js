@@ -32,6 +32,10 @@ angular.module('admins').config(['$stateProvider',
 		state('adminListAdmins', {
 			url: '/admins/admin/list',
 			templateUrl: 'modules/admins/views/admin-list-admins.client.view.html'
+		}).		
+		state('adminListGds', {
+			url: '/gds/admin/list',
+			templateUrl: 'modules/admins/views/gds-list-admins.client.view.html'
 		});
 	}
 ]);

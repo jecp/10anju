@@ -93,5 +93,34 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 				adminId: $stateParams.adminId
 			});
 		};
+
+		// Find existing Admin
+		$scope.findGds = function() {
+			$http.get('/gds').success(function (response){
+				$scope.gdss = response;
+			})
+		};
+
+		// Update existing Gds
+		$scope.updateGds = function() {
+			var gds = $scope.gds;
+			console.log(gds)
+
+			gds.$update(function() {
+				$location.path('gdss/' + gds._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Update Gds From admin list
+		$scope.modifyGds = function() {
+			$http.post('/gdss/admin/list', this.gds).success(function (response){
+				$location.path('gdss/'+response._id);
+				$scope.success = true;
+			}).error(function(response){
+				$scope.error = response.message;
+			});
+		};
 	}
 ]);

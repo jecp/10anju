@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Admin = mongoose.model('Admin'),
+	Gds = mongoose.model('Gds'),
 	_ = require('lodash');
 
 /**
@@ -115,6 +116,21 @@ exports.modify = function(req, res) {
 			});
 		} else {
 			res.jsonp(admin);
+		}
+	});
+};
+
+/**
+ * Find List of Gds
+ */
+exports.findGds = function(req, res) { 
+	Gds.find().sort('-created').exec(function(err, gdss) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(gdss);
 		}
 	});
 };

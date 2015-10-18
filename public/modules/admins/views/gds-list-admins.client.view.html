@@ -1,0 +1,59 @@
+<section data-ng-controller="AdminsController" data-ng-init="findGds()">
+	<div class="mt20">
+		<div>
+			<div class="findGds" data-ng-controller="GoodsController">
+				<div class="form-group col-md-12 gds_zone">
+				    <div class=" col-md-4">
+				        <div><label class="control-label" for="tiaoma">商品条码*</label><span class="text-info" data-ng-bind="success"></span></div>
+				        <div class="controls">
+				            <input type="text" data-ng-model="tiaoma" id="tiaoma" class="form-control" placeholder="商品条码，如6937110330410" required>
+				        </div>
+				        <button class="btn btn-default" ng-click="findGDS()">查询商品信息</button>				        
+				        <img ng-src="{{GDSresult.titleSrc}}">
+				    </div>
+				    <div class="col-md-8">
+				        <!-- {{GDSresult}} -->
+				        <div>条码：<span class="text-muted" data-ng-bind="GDSresult.code"></span></div>
+				        <div>品名：<span class="text-muted" data-ng-bind="GDSresult.goodsName"></span></div>
+				        <div>生产商：<span class="text-muted" data-ng-bind="GDSresult.manuName"></span></div>
+				        <div>价格：<span class="text-muted" data-ng-bind="GDSresult.price"></span></div>
+				        <div>商品分类：<span class="text-muted" data-ng-bind="GDSresult.sort_id"></span></div>
+				        <div>国别/地区：<span class="text-muted" data-ng-bind="GDSresult.guobie"></span></div>
+				        <div>供应商：<span class="text-muted" data-ng-bind="GDSresult.supplier"></span></div>
+				        <div>厂家编码：<span class="text-muted" data-ng-bind="GDSresult.faccode"></span></div>
+				        <div>厂家状态：<span class="text-muted" data-ng-bind="GDSresult.fac_status"></span></div>
+				    </div>
+				</div>
+			</div>
+			<table class="table table-bordered table-hovered">
+				<thead>
+					<tr>
+						<th>分类</th>
+						<th>分类代码</th>
+						<th>条码</th>
+						<th>商品名称</th>
+						<th>商品标题</th>
+						<th>参考价格</th>
+						<!-- <th>查询</th> -->
+						<th>编辑</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+				<tbody data-ng-repeat="gds in gdss" >
+					<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
+						<td></td>
+						<td><span data-ng-bind="gds.sort_id"></span></td>
+						<td><input type="txt" data-ng-model="gds.code" id="code"></></td>
+						<td><img ng-src="{{gds.titleSrc}}"></td>
+						<td><input type="text" data-ng-model="gds.title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
+						<td><input type="text" data-ng-model="gds.price" id="price" class="col-md-1 col-xs-1 form-control"></td>
+						<!-- <td data-ng-controller="GoodsController"><button ng-click="findGDS()" class="btn btn-success">查询</button></td> -->
+						<td><a class="btn btn-primary" ng-click="modifyGds()"><i class="glyphicon glyphicon-edit"></i></a>
+						</td>
+						<td><button class="btn btn-danger del" type="button" data-ng-click="delGds();" name="gds" id="{{gds._id}}">删除</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
