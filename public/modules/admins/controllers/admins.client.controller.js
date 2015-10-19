@@ -113,11 +113,11 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 
 		// delete Gds From admin list
 		$scope.delGds = function() {
-			var gdsId = this.gds._id;
-			$http.delete('/gds?='+gdsId).success(function (response){
+			var gds = this.gds;
+			$http.delete('/gds?='+gds._id).success(function (response){
 				//$location.path('gdss/'+response._id);
 				for (var i in $scope.gdss) {
-					if ($scope.gdss [i] === this.gds) {
+					if ($scope.gdss [i] === gds) {
 						$scope.gdss.splice(i, 1);
 					}
 				}
