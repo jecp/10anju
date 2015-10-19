@@ -136,6 +136,40 @@ exports.findGds = function(req, res) {
 };
 
 /**
+ * update a Gds
+ */
+exports.updateGds = function(req, res) { 
+	Gds.findById(req.body._id,function (err, gds) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			var gdsObj = _.extend(gds,req.body);
+			gdsObj.save(function (err,doc){
+				if(err){console.log(err);}
+				res.send(doc);
+			});
+		}
+	});
+};
+
+/**
+ * Delete a Gds
+ */
+exports.delGds = function(req, res) { 
+	Gds.findOneAndRemove(req.query.gds,function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.send('ok');
+		}
+	});
+};
+
+/**
  * Admin middleware
  */
 exports.adminByID = function(req, res, next, id) { 

@@ -103,20 +103,24 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 
 		// Update existing Gds
 		$scope.updateGds = function() {
-			var gds = $scope.gds;
-			console.log(gds)
-
-			gds.$update(function() {
-				$location.path('gdss/' + gds._id);
+			var gds = this.gds;
+			$http.post('/gds',gds).success(function (response) {
+				$scope.success = true;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
-		// Update Gds From admin list
-		$scope.modifyGds = function() {
-			$http.post('/gdss/admin/list', this.gds).success(function (response){
-				$location.path('gdss/'+response._id);
+		// delete Gds From admin list
+		$scope.delGds = function() {
+			var gdsId = this.gds._id;
+			$http.delete('/gds?='+gdsId).success(function (response){
+				//$location.path('gdss/'+response._id);
+				for (var i in $scope.gdss) {
+					if ($scope.gdss [i] === this.gds) {
+						$scope.gdss.splice(i, 1);
+					}
+				}
 				$scope.success = true;
 			}).error(function(response){
 				$scope.error = response.message;

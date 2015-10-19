@@ -286,6 +286,7 @@ exports.GDSresult = function(req, res) {
 		else if (!gds){
 			request.post({url:'http://tiaoma.cnaidc.com/jbestd.asp?ean='+req.query.gds,gzip:true},function (err,res,body){
 				var obj = eval('('+body+')');
+				console.log(body);
 				if (obj.titleSrc && obj.price) {
 					var gdsObj = new Gds({
 						code : obj.ean,

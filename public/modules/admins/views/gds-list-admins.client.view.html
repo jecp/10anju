@@ -45,10 +45,10 @@
 						<td><span data-ng-bind="gds.sort_id"></span></td>
 						<td><input type="txt" data-ng-model="gds.code" id="code"></></td>
 						<td><img ng-src="{{gds.titleSrc}}"></td>
-						<td><input type="text" data-ng-model="gds.title" id="title" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
+						<td><input type="text" data-ng-model="gds.goodsName" id="goodsName" class="form-control" placeholder="商品标题，字数不限，建议30字，超出部分不显示" required></td>
 						<td><input type="text" data-ng-model="gds.price" id="price" class="col-md-1 col-xs-1 form-control"></td>
 						<!-- <td data-ng-controller="GoodsController"><button ng-click="findGDS()" class="btn btn-success">查询</button></td> -->
-						<td><a class="btn btn-primary" ng-click="modifyGds()"><i class="glyphicon glyphicon-edit"></i></a>
+						<td><a class="btn btn-primary" ng-click="updateGds()"><i class="glyphicon glyphicon-edit"></i></a>
 						</td>
 						<td><button class="btn btn-danger del" type="button" data-ng-click="delGds();" name="gds" id="{{gds._id}}">删除</button></td>
 					</tr>

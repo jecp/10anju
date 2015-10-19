@@ -24,6 +24,8 @@ module.exports = function(app) {
 
 	app.route('/gds')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.findGds)
+		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.updateGds)
+		.delete(users.requiresLogin, visithistory.vh_log, users.adminRequired, admins.delGds);
 
 	// Finish by binding the Admin middleware
 	app.param('adminId', admins.adminByID);
