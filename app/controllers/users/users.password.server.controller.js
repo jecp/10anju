@@ -66,7 +66,13 @@ exports.forgot = function(req, res, next) {
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
+			var smtpTransport = nodemailer.createTransport({
+				service: 'QQ',
+				auth: {
+					user: 'info@havemay.cn',
+					pass: '52tsinghua'
+				}
+			});
 			var mailOptions = {
 				to: user.email,
 				from: 'info@havemay.cn',
@@ -77,7 +83,7 @@ exports.forgot = function(req, res, next) {
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
-						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+						message: '邮件发送至： ' + user.email + ' 成功，请按提示操作。'
 					});
 				}
 

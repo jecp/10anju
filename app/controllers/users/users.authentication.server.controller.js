@@ -21,13 +21,13 @@ var recCode;
  * nodemailer
  */
  // create reusable transporter object using SMTP transport
- var transporter = nodemailer.createTransport({
-     service: 'QQ',
-     auth: {
-         user: 'admin@havemay.cn',
-         pass: '52tsinghua'
-     }
- });
+var transporter = nodemailer.createTransport({
+	service: 'QQ',
+	auth: {
+		user: 'info@havemay.cn',
+		pass: '52tsinghua'
+	}
+});
 
 /**
  *  Auth

@@ -58,7 +58,7 @@
 			</tab>
 			<tab ng-click="showBuyList()">
 		    	<tab-heading>
-					<span>以采购单查看</span>
+					<span>以采购单查看</span>{{order_list}}
 				</tab-heading>
 				<div>
 					<table class="table table-hover table-bordered">
@@ -68,17 +68,19 @@
 								<th>分类</th>
 								<th>商品</th>
 								<th>数量</th>
+								<th>单价</th>
 								<th>金额</th>
 								<th>备注</th>
 							</tr>
 						</thead>
-						<tbody data-ng-repeat="order in orders">
-							<tr data-ng-repeat="g in order.detail">
+						<tbody data-ng-repeat="order in order_list">
+							<tr data-ng-repeat="g in order._id">
 								<td></td>
 								<td><span data-ng-bind="g.goods.subcat"></span></td>
-								<td><span data-ng-bind="g.goods.name"></span></td>
-								<td><span data-ng-bind="g.goods.sum"></span></td>
-								<td><span data-ng-bind="g.goods.sum"></span></td>
+								<td><span data-ng-bind="g.goods"></span></td>
+								<td><span data-ng-bind="g.amount"></span></td>
+								<td><span data-ng-bind="g.price"></span></td>
+								<td><span data-ng-bind="g.price*g.amount | number:2"></span></td>
 								<td></td>
 							</tr>
 						</tbody>
