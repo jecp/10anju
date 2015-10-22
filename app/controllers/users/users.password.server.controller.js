@@ -58,7 +58,7 @@ exports.forgot = function(req, res, next) {
 			res.render('templates/reset-password-email', {
 				name: user.displayName,
 				appName: config.app.title,
-				url: 'http://' + req.headers.host + '/auth/reset/' + token
+				url: 'http://www.havemay.cn/auth/reset/' + token
 			}, function (err, emailHTML) {
 				if (err){console.log(err);}
 				done(err, emailHTML, user);
