@@ -37,8 +37,12 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Create new Good
 		$scope.create = function() {
-			// Create new Good object			
-			var main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
+			// Create new Good object
+			if (this.main_img){
+				var main_img = this.main_img.split(':').length>1 ? this.main_img : 'http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/'+this.main_img;
+			}else{
+				main_img = null;
+			}
 			var good = new Goods ({
 				name:this.name,
 				cate:$('.cat').html(),
@@ -158,7 +162,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// Update Good From admin list
 		$scope.modify = function() {
 			$http.post('/goods/admin/list', this.good).success(function (response){
-				$location.path('goods/'+response._id);
+				// $location.path('goods/'+response._id);
 				$scope.success = true;
 			}).error(function(response){
 				$scope.error = response.message;
