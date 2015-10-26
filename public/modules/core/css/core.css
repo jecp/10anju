@@ -52,6 +52,22 @@ header, nav, article, section, aside, footer, figure {display:block}
 .protocal_head{height: 40px;border-top: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;background-color: #fafafa;box-shadow: 1px 1px 2px #f7f7f7;}
 .errorMessage{height:400px;width:60%;margin:200px;}
 .od_header{padding-top: 15px;content: '';}
+/* avatar */
+.avatar .avatar-face{display: inline-block;position: relative;zoom:1;}
+.avatar .avatar-face img{border-radius: 50%;width:40px;height: 40px;background:#f7f7f7;overflow: hidden;line-height:12px;font-size:12px;text-align:left;box-shadow:0 0 1px #ddd; }
+.thread-title{position:absolute;top:5px;font-size:22px;margin-bottom:6px;}
+/* forums */
+.forum-content .forum-container .forum-papel{background:#ffffff;-webkit-box-shadow:0 0 3px #eeeeee;box-shadow:0 0 3px #eeeeee,inset 0 0 3px #ffffff;border:solid 1px #e1e1e1;min-height:178px;padding:20px;margin-bottom:20px;}
+.forum-heading{color:#646b75;font-size:24px;border-bottom:solid 1px #e1e1e1;padding-bottom:10px;}
+.thread-item .thread-list .forum-container .forum-content .forum-category-warpper{padding-bottom: 20px;position:relative;}
+.thread-item .text .thread-title a{display: block;width:100%;overflow: hidden;white-space:nowrap;text-overflow:ellipsis;color:#3e485c;font-size:16px;margin-top:5px;margin-left:5px;}
+.forum-badge{background:none repeat scroll 0 0 #F9F9F7;border:1px solid #E1E1E1;border-radius: 3px;color:#AAAAAA;display: inline-block;font-size:12px;line-height: 16px;padding:0 4px;}
+.forum-container{max-width:980px;margin-right:auto;margin-left:auto;padding-top:25px;margin-bottom:30px;}
+.page-navbar-warp{max-width:980px;margin-right:auto;margin-left:auto;}
+.btn-danger:link {color:#fff;background-color:#da4f4a;border-color:#d4322c;}
+
+.text{cursor:default;position: relative;}
+.wt-row{padding:10px 0 10px 0;border-bottom:solid 1px #e1e1e1;}
 /* subjects */
 .ft10{font-size:10px;color:#ccc;}
 p img{width:100%;}

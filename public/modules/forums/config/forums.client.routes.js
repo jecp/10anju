@@ -6,7 +6,7 @@ angular.module('forums').config(['$stateProvider',
 		// Forums state routing
 		$stateProvider.
 		state('listForums', {
-			url: '/forums',
+			url: '/forums/list',
 			templateUrl: 'modules/forums/views/index-forum.client.view.html'
 		}).
 		state('createForum', {
@@ -20,6 +20,10 @@ angular.module('forums').config(['$stateProvider',
 		state('adminListForums', {
 			url: '/forums/admin/list',
 			templateUrl: 'modules/forums/views/admin-list-forums.client.view.html'
+		}).
+		state('indexForums', {
+			url: '/forums',
+			templateUrl: 'modules/forums/views/index.client.view.html'
 		});
 	}
 ]);

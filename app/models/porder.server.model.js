@@ -21,8 +21,8 @@ var PorderSchema = new Schema({
 	goods:[{
 		name:{type:String},
 		spec:{type:String},
-		price:{type:Number},
-		amount:{type:Number}
+		price:{type:String},
+		amount:{type:String}
 	}],
 	total:{
 		type:Number

@@ -1,0 +1,104 @@
+<section class="inner">
+	<div class="page-container">
+		<div class="page_navbar">			
+			<div class="col-md-12 col-xs-12 page-navbar-warp">
+				<div class="title">
+					<h3>
+						<a href="/#!/forums">
+							<i class="fa fa-comments-o"></i>&nbsp;业主论坛
+						</a>
+					</h3>
+				</div>
+				<div class="main">
+					<div class="toolbar_panel pull-right">
+						<a class="btn btn-danger" href="/#!/subjects/create" target="_self">我要发贴</a>
+					</div>
+				</div>				
+			</div>
+		</div>
+		<div class="forum-panel">
+			<div class="forum-container">
+				<div class="col-md-9 col-xs-12">
+					<div class="mb_10">
+						<a href=""  target="_blank">
+							<img src="https://dn-wtbox.qbox.me/img/club/banner_newworktile.png" alt="">
+						</a>
+					</div>
+					<div class="forum-content">
+						<div class="forum-category-warpper">
+							<div class="forum-heading">
+								<h3>所有贴子</h3>
+							</div>
+							<div class="thread-list" data-ng-controller="SubjectsController" data-ng-init="find()">
+								<div class="wt-row thread-item" data-ng-repeat="sub in subjects">
+									<div class="thread-item-inner">
+										<div class="row">
+											<div class="col-sm-1 col-md-2 col-xs-2 avatar avatar-40">
+												<span class="avatar-face" avatar="" displayname="sub.user.username">
+													<img ng-src="{{sub.user.avatar}}" alt="sub.user.username">		
+												</span>
+											</div>
+											<div class="col-sm-11 col-md-10 col-xs-10 text">
+												<div class="row primary">
+													<div class="col-sm-9 col-xs-9 thread-title">
+														<a href="/#!/subjects/{{sub._id}}">
+															<span class="forum-badge" data-ng-bind="sub.subcat"></span>&nbsp<span data-ng-bind="sub.title"></span>
+														</a>
+													</div>
+													<div class="thread-counts col-xs-3 col-md-3 col-sm-3">
+														<span class="thread-total-comment" data-ng-bind=""></span>
+													</div>
+												</div>
+												<div class="row secondary hidden-xs">
+													<div class="col-sm-7 col-md-7 col-xs-7 thread-meta">
+														<span data-ng-bind="sub.user.username"></span>&nbsp;发布于&nbsp;
+														<span data-ng-bind="sub.created | date:midiumDate"></span>
+													</div>
+													<div class="col-sm-4 col-xs-4 thread-comment-meta" ng-if="">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-12 hidden-sm hidden-xs sidebar">
+			<div class="sidebar-widget">
+				<h4>搜索</h4>
+				<form ng-click="expression">
+					<div class="input-group">
+						<input name="q" type="text" class="form-control" placeholder="搜搜看...">
+						<span class="btn input-group-btn">
+							<button class="btn button-success plr_10">搜索</button>
+						</span>
+					</div>
+				</form>
+			</div>
+			<div class="sidebar-widget">
+				<h4>版块</h4>
+				<ul>
+					<li>
+						<a href="/#!/subjects/list">所有贴子</a>
+					</li>
+					<li data-ng-repeat="item in forums">
+						<a href="/#!/subjects/"><span data-ng-bind=""></span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="sidebar-widget">
+				<h4>关注微信</h4>
+				<div class="contact-code">
+					<img ng-src="">
+				</div>
+			</div>
+			<div class="sidebar-widget">
+				
+			</div>
+		</div>
+	</div>
+</section>
