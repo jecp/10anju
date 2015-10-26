@@ -1,7 +1,7 @@
 <section class="inner">
 	<div class="page-container">
 		<div class="page_navbar">			
-			<div class="col-md-12 col-xs-12 page-navbar-warp">
+			<div class="page-navbar-warp">
 				<div class="title">
 					<h3>
 						<a href="/#!/forums">
@@ -18,7 +18,7 @@
 		</div>
 		<div class="forum-panel">
 			<div class="forum-container">
-				<div class="col-md-9 col-xs-12">
+				<div class="col-md-9 col-sm-9 col-xs-12">
 					<div class="mb_10">
 						<a href=""  target="_blank">
 							<img src="https://dn-wtbox.qbox.me/img/club/banner_newworktile.png" alt="">
@@ -33,7 +33,7 @@
 								<div class="wt-row thread-item" data-ng-repeat="sub in subjects">
 									<div class="thread-item-inner">
 										<div class="row">
-											<div class="col-sm-1 col-md-2 col-xs-2 avatar avatar-40">
+											<div class="col-sm-1 col-md-1 col-xs-2 avatar avatar-40">
 												<span class="avatar-face" avatar="" displayname="sub.user.username">
 													<img ng-src="{{sub.user.avatar}}" alt="sub.user.username">		
 												</span>
@@ -42,7 +42,7 @@
 												<div class="row primary">
 													<div class="col-sm-9 col-xs-9 thread-title">
 														<a href="/#!/subjects/{{sub._id}}">
-															<span class="forum-badge" data-ng-bind="sub.subcat"></span>&nbsp<span data-ng-bind="sub.title"></span>
+															<span class="forum-badge" data-ng-bind="sub.subcat"></span>&nbsp;<span data-ng-bind="sub.title"></span>
 														</a>
 													</div>
 													<div class="thread-counts col-xs-3 col-md-3 col-sm-3">
@@ -65,39 +65,44 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-xs-12 hidden-sm hidden-xs sidebar">
-			<div class="sidebar-widget">
-				<h4>搜索</h4>
-				<form ng-click="expression">
-					<div class="input-group">
-						<input name="q" type="text" class="form-control" placeholder="搜搜看...">
-						<span class="btn input-group-btn">
-							<button class="btn button-success plr_10">搜索</button>
-						</span>
+				<div class="col-md-3 col-xs-12 hidden-sm hidden-xs sidebar">
+					<div class="sidebar-widget">
+						<h4>搜索</h4>
+						<form ng-click="expression">
+							<div class="input-group">
+								<input name="q" type="text" class="form-control" placeholder="搜搜看...">
+								<span class="input-group-btn">
+									<button class="btn button-success plr_10">搜索</button>
+								</span>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-			<div class="sidebar-widget">
-				<h4>版块</h4>
-				<ul>
-					<li>
-						<a href="/#!/subjects/list">所有贴子</a>
-					</li>
-					<li data-ng-repeat="item in forums">
-						<a href="/#!/subjects/"><span data-ng-bind=""></span></a>
-					</li>
-				</ul>
-			</div>
-			<div class="sidebar-widget">
-				<h4>关注微信</h4>
-				<div class="contact-code">
-					<img ng-src="">
+					<div class="sidebar-widget">
+						<h4>版块</h4>
+						<ul>
+							<li>
+								<a href="/#!/subjects/list">所有贴子</a>
+							</li>
+							<li data-ng-repeat="item in forums">
+								<a href="/#!/subjects/"><span data-ng-bind=""></span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="sidebar-widget">
+						<h4>关注我们</h4>
+						<div class="contact-code col-md-10 col-xs-10">
+							<img ng-src="http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/ppmn8ti27yahkhmuce.png" style="max-width:215px;overflow:hidden;">
+							支付宝服务窗
+						</div>
+						<div class="contact-code col-md-10 col-xs-10">
+							<img ng-src="http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/qrcode_for_gh_71bec90f0f4b_258.jpg" style="max-width:215px;overflow:hidden;">
+							微信公众号
+						</div>
+					</div>
+					<div class="sidebar-widget">
+						
+					</div>
 				</div>
-			</div>
-			<div class="sidebar-widget">
-				
 			</div>
 		</div>
 	</div>
