@@ -224,7 +224,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// findGDS
 		$scope.findGDS = function() {
 			var tiaoma = this.tiaoma ? this.tiaoma : this.good.tiaoma;
-			console.log(tiaoma);
 			$http.get('/goodGDS?gds='+tiaoma).success(function (response){
 				if(response){
 					$scope.success = '查询成功';
@@ -232,6 +231,19 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 					$scope.price = response.price;
 				}else{
 					$scope.success = '未查到该条码的商品信息';
+				}
+			});			
+		}; 
+
+		// find sameGoods
+		$scope.findSame = function() {
+			var goodsName = this.goods.name;
+			console.log(goodsName);
+			$http.get('/goodSame?sameGoods='+sameGoods).success(function (response){
+				if(response){
+					$scope.sameGoods = response;
+				}else{
+					$scope.success = '未查到相关的商品信息';
 				}
 			});			
 		}; 

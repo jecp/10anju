@@ -34,6 +34,7 @@ module.exports = function(app) {
 
 	app.route('/search').post(visithistory.vh_log, goods.results);
 	app.route('/goodGDS').get(visithistory.vh_log, goods.GDSresult);
+	app.route('/goodSame').get(visithistory.vh_log, goods.findSame);
 
 	// Finish by binding the Good middleware
 	app.param('goodId', goods.goodByID);

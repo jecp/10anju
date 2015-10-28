@@ -345,6 +345,22 @@ exports.modify = function(req, res) {
 };
 
 /**
+ * find Same Goods
+*/
+exports.findSame = function (req,res){
+ 	var same = req.body.sameGoods;
+ 	var query = new RegExp(same);
+ 	if(query){
+ 		Good.find({title:query},function (err,goods){
+ 			if (err){console.log(err);}
+ 			else {
+ 				res.send(goods);
+ 			}
+ 		});
+ 	}
+};
+
+/**
  * Good middleware
  */
 exports.goodByID = function(req, res, next, id) {
