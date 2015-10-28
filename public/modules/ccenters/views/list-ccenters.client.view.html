@@ -40,7 +40,7 @@ window.onload = loadScript;
                         <td><div>经度:<span data-ng-bind="ccenter.lat"></span>/纬度:<span data-ng-bind="ccenter.lng"></span></div></td>
                         <td><a href="/#!/ccenters/{{ccenter._id}}"><span data-ng-bind="ccenter.name"></span></a></td>
                         <td><input type="text" data-ng-model="ccenterDetails.roomNum"></td>
-                        <td><input type="text" data-ng-model="ccenterDetails.qqqun"></td>
+                        <td><span data-ng-bind="ccenter.qqqun"></span></td>
                         <td data-ng-controller="SettingsController"><button name="ccenterId" value="ccenter._id" ng-click="register()">入驻</button></td>
                     </tr>
                 </tbody>

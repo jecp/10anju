@@ -98,7 +98,7 @@ angular.module('admins').controller('AdminsController', ['$scope', '$http', '$st
 		$scope.findGds = function() {
 			$http.get('/gds').success(function (response){
 				$scope.gdss = response;
-			})
+			});
 		};
 
 		// Update existing Gds
