@@ -21,6 +21,10 @@ angular.module('goods').config(['$stateProvider',
 			url: '/goods/:goodId/edit',
 			templateUrl: 'modules/goods/views/edit-good.client.view.html'
 		}).
+		state('free',{
+			url: '/goods/free',
+			templateUrl: 'modules/goods/views/free-goods.client.view.html'
+		}).
 		state('viewGood', {
 			url: '/goods/:goodId',
 			templateUrl: 'modules/goods/views/view-good.client.view.html'

@@ -18,7 +18,9 @@ window.onload = loadScript;
 </script>
 <section data-ng-controller="CcentersController" data-ng-init="find()">
     <div class="mt20 list-group">
+    <div data-ng-controller="CcentersController" ng-init="findU()">您已入驻社区<span data-ng-bind="ccenter.name"></span></div>
         <div>
+          <h4 class="">社区列表</h4>
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>

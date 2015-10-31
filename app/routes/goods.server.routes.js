@@ -13,6 +13,12 @@ module.exports = function(app) {
 		.get(visithistory.vh_log, goods.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.create);
 
+	app.route('/goods/free')
+		.get(visithistory.vh_log, goods.findFree);
+
+	app.route('/goods/freetry')
+		.get(visithistory.vh_log, goods.freeTry);
+
 	app.route('/goods/edit')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, goods.edit);
 

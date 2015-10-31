@@ -22,6 +22,7 @@ padding:5px 0;
 .mt10{height:10px;}
 .mt5{height:5px;clear:both;}
 .mt20{margin-top:20px;}
+.mr10{margin-right:10px;}
 .fr{float:right;}
 .fl{float: left;}
 .free_try{font: bold 14px/30px "黑体";background-color: green;color:white;border-radius:10px 10px 10px 10px;}
@@ -164,3 +165,6 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 20px rgba(0, 0, 0, 0.1) inset;}
 .good_detail_text_14px{padding:10px 5px 5px 5px;font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;color: #444443;}
 .good_detail_common_h3{margin-top:20px;border-bottom:1px solid green;margin-bottom: 5px;}
 .g_d_common{background-color:green;color:white;}
+
+/* free_zone */
+.free_zone{display: inline-block;}

@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label class="control-label" for="goods.name">商品名称</label>
                         <div class="controls">
-                            <input type="text" data-ng-model="goods.name" id="goods.name" class="form-control" placeholder="商品名称" required>
+                            <input type="text" data-ng-model="goods.name" id="goods.name" class="form-control" placeholder="商品名称" required ng-keydown="findSame()">
                         </div>
                         <label class="control-label" for="goods.spec">商品规格</label>
                         <div class="controls">

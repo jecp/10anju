@@ -43,6 +43,7 @@
 /*.page-container {
   background: url("http://img.havemay.cn/1446046727448banner.jpg") repeat-x #ffffff;
 }*/
+.banner_img{background:url("http://img.havemay.cn/1446047419055banner.jpg") no-repeat #ffffff;}
 .page_navbar {
   height: 59px;
   border-bottom: 0px solid #e1e1e1;

@@ -239,14 +239,32 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		$scope.findSame = function() {
 			var goodsName = this.goods.name;
 			console.log(goodsName);
-			$http.get('/goodSame?sameGoods='+sameGoods).success(function (response){
-				if(response){
-					$scope.sameGoods = response;
-				}else{
-					$scope.success = '未查到相关的商品信息';
-				}
-			});			
-		}; 
+			if (goodsName) {
+				$http.get('/goodSame?sameGoods='+goodsName).success(function (response){
+					if(response){
+						$scope.sameGoods = response;
+					}else{
+						$scope.success = '未查到相关的商品信息';
+					}
+				});	
+			} else{
+				return;
+			};		
+		};
+
+		// Find a list of Goods
+		$scope.findFree = function() {
+			$http.get('/goods/free').success(function (response){
+				$scope.goods = response;
+			});
+		};
+
+		// Find a list of Goods
+		$scope.freeTry = function() {
+			$http.get('/goods/freetry').success(function (response){
+				$scope.goods = response;
+			});
+		};
 
 		// Remove existing Good
 		// $scope.del = function() {
