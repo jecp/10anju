@@ -278,6 +278,37 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Goods
+ */
+exports.findFree = function (req, res){
+	Good.find({for_free:true},function (err,goods){
+		if(err){
+			console.log(err);
+		}else{
+			Good.find({free_try:true},function (err,fgoods){
+				if(err){console.log(err);}
+				else{
+					res.send({'for_free':goods,'free_try':fgoods});
+				}
+			});
+			// res.send(goods);
+		}
+	});
+};
+/**
+ * List of freeTry
+ */
+exports.freeTry = function (req, res){
+	Good.find({free_try:true},function (err,goods){
+		if(err){console.log(err);}
+		else{
+			res.send(goods);
+		}
+	});
+};
+
+
+/**
  * Delete an Good
  */
 exports.GDSresult = function(req, res) {
