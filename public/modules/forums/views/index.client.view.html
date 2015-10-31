@@ -68,47 +68,7 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-xs-12 hidden-sm hidden-xs sidebar">
-					<div class="sidebar-widget">
-						<h4>搜索</h4>
-						<form ng-click="expression">
-							<div class="input-group">
-								<input name="q" type="text" class="form-control" placeholder="搜搜看...">
-								<span class="input-group-btn">
-									<button class="btn button-success plr_10">搜索</button>
-								</span>
-							</div>
-						</form>
-					</div>
-					<div class="sidebar-widget">
-						<h4>版块</h4>
-						<ul>
-							<li>
-								<a href="/#!/subjects/list">所有贴子</a>
-							</li>
-							<li data-ng-repeat="item in forums">
-								<a href="/#!/subjects/"><span data-ng-bind=""></span></a>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<h4>关注我们</h4>
-						<label>
-							<div class="contact-code col-md-10 col-xs-10">
-								<img ng-src="http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/ppmn8ti27yahkhmuce.png-100" style="max-width:215px;overflow:hidden;">
-								<label>支付宝服务窗</label>
-							</div>
-							<div class="contact-code col-md-10 col-xs-10">
-								<img ng-src="http://7xjuxp.com1.z0.glb.clouddn.com/pic_jpg/qrcode_for_gh_71bec90f0f4b_258.jpg-100" style="max-width:215px;overflow:hidden;">
-								<label>微信公众号</label>
-							</div>
-						</label>
-						
-					</div>
-					<div class="sidebar-widget">
-						<a href="/#!/help">
-							帮助中心
-						</a>
-					</div>
+					<div ng-include="'modules/forums/views/right-widget.client.view.html'"></div>
 				</div>
 			</div>
 		</div>
