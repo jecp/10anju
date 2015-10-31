@@ -17,7 +17,7 @@
 					<tbody data-ng-repeat="cat in categories" >
 						<tr>
 							<div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
-							<td><a href="/#!/categories/{{cat.category._id}}"><span data-ng-bind="cat.name"></span></a></td>
+							<td><a href="/#!/categories/{{cat._id}}"><span data-ng-bind="cat.name"></span></a></td>
 							<td><input type="text" data-ng-model="cat.subcat"></td>
 							<td data-ng-bind="cat.sold"></td>
 							<td data-ng-bind="cat.pv"></td>
