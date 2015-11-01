@@ -223,6 +223,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// findGDS
 		$scope.findGDS = function() {
+			$scope.GDSresult = null;
 			var tiaoma = this.tiaoma ? this.tiaoma : this.good.tiaoma;
 			$http.get('/goodGDS?gds='+tiaoma).success(function (response){
 				if(response){
