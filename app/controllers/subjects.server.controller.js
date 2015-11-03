@@ -147,8 +147,7 @@ exports.delete = function(req, res) {
  * Del an Subject
  */
 exports.del = function(req, res) {
-	var subjectId = req.body.subjectId ;
-	console.log(req.body);
+	var subjectId = req.query.subjectId ;
 
 	Subject.remove({_id:subjectId},function (err,subject) {
 		if (err) {
@@ -156,7 +155,7 @@ exports.del = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.send(subject);
+			res.send('success');
 		}
 	});
 };

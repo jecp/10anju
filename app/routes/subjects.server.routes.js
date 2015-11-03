@@ -16,6 +16,9 @@ module.exports = function(app) {
 		.get(visithistory.vh_log, subjects.list)
 		.post(users.requiresLogin, visithistory.vh_log, subjects.create);
 
+	app.route('/subjects/admin_del')
+		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.del);
+
 	app.route('/subjects/:subjectId')
 		.get(visithistory.vh_log, subjects.read)
 		.put(users.requiresLogin, visithistory.vh_log, subjects.hasAuthorization, subjects.update)
@@ -27,10 +30,6 @@ module.exports = function(app) {
 	app.route('/subjects/admin/list')
 		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.list)
 		.post(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.modify);
-	
-	app.route('/subjects/admin_del')
-		.get(users.requiresLogin, visithistory.vh_log, users.adminRequired, subjects.del);
-
 
 	// Finish by binding the Subject middleware
 	app.param('subjectId', subjects.subjectByID);

@@ -1,6 +1,6 @@
 <section data-ng-controller="SubjectsController" data-ng-init="list()">
 	<div class="mt20">
-		<div ng-if="error" class="errorMessage"><span class="glyphicon glyphicon-error"></span><span class="label label-danger" data-ng-bind="error"></span></div>
+		<div ng-if="error" class="errorMessage col-md-12"><i class="fa fa-close"></i><span class="label label-danger" data-ng-bind="error"></span></div>
 		<div ng-if="subjects">
 			<div>
 				<table class="table table-hover table-bordered">
@@ -18,7 +18,7 @@
 						</tr>
 					</thead>
 					<tbody data-ng-repeat="subject in subjects" >
-						<tr><div class="text-success" ng-if="success"><span class="label label-success" >修改成功！</span></div>
+						<tr><div class="text-success" ng-if="success"><span class="label label-success col-md-12"><i class="fa fa-check"></i>修改成功！</span></div>
 							<td><a href="/#!/forums/{{subject.forum._id}}"><span data-ng-bind="subject.forum.name"></span></a></td>
 							<td><input type="text" data-ng-model="subject.subcat" id="subcat" class="form-control" required></td>
 							<td><input type="text" data-ng-model="subject.title" id="title" class="form-control" required></td>

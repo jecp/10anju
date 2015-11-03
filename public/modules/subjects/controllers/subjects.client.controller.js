@@ -111,10 +111,18 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 
 		// Del Subject From admin list
 		$scope.del = function() {
-			console.log(this.subject._id);
-			$http.delete('/subjects/admin_del', this.subject._id).success(function (response){
-				$scope.success = true;
-				console.log('del success!');
+			var subject = this.subject
+			$http.get('/subjects/admin_del?subjectId='+subject._id).success(function (response){
+				if (response === 'success'){
+					$scope.success = true;
+					for (var i in $scope.subjects) {
+						if ($scope.subjects [i] === subject) {
+							$scope.subjects.splice(i, 1);
+						}
+					}
+				} else {
+					$scope.success = false;
+				}
 			}).error(function(response){
 				$scope.error = response.message;
 			});
