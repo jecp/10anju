@@ -33,13 +33,12 @@ exports.create = function(req, res) {
 exports.login = function(req, res) {
 	var aname = req.body.username;
 	var apwd = req.body.password;
-	console.log(req.body);
-	console.log('username:'+req.body.username+';password:'+req.body.password);
+	// console.log(req.body);
+	// console.log('username:'+req.body.username+';password:'+req.body.password);
 
 	Admin.findOne({name:aname},function (err,admin){
 		if (err) {console.log(err);}
 		if (!admin){
-			console.log(admin);
 			res.redirect('/#!/goods');
 		}
 	});

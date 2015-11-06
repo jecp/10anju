@@ -22,7 +22,6 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
 			var price = (this.good.for_free || this.good.free_try) ? 0 : this.good.price;
-			console.log(price);
 			var total = this.good.amount*price;
 			
 			if ($location.url() === '/orders/create'){

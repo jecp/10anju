@@ -111,10 +111,7 @@ exports.modify = function(req, res) {
 		var user = article.user;
 		articleObj = _.extend(article,articleObj);
 		articleObj.user = null;
-		console.log(articleObj.user);
 		articleObj.user = user;
-		console.log(articleObj.user);
-		console.log(articleObj.user+'\n'+article.user);
 		articleObj.save(function (err,article){
 			if(err){console.log(err);}
 			res.send(article);

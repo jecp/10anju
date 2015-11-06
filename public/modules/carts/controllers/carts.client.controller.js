@@ -20,7 +20,6 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			var date = new Date();
 			var created_day = date.getFullYear().toString() + (date.getMonth() + 1).toString() + date.getDate().toString();
 			var cartName = created_day + '-' + window.user.username + '-' + '的购物篮';
-			console.log(this.good.for_free || this.good.free_try);
 			var _price = (this.good.for_free || this.good.free_try) ? 0 : this.good.price;
 			var cart = new Carts ({
 				name: cartName,
@@ -110,19 +109,6 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 			});
 		};
 
-		// // checked box
-		// $scope.checkAll = function (){
-		// 	// console.log(this.cart);
-		// 	$scope.checkbox = true;
-		// 	console.log(this.cart.detail);
-		// 	// var arr = this.order.detail;
-		// 	// $scope.$apply(function (){
-		// 	// 	arr.forEach(function (err){
-		// 	// 		arr.checked = true;
-		// 	// 	});
-		// 	// });
-		// }
-
 		// Remove existing Cart
 		$scope.del = function(cart) {
 			var cart_ = this.cart;
@@ -136,7 +122,6 @@ angular.module('carts').controller('CartsController', ['$scope', '$http', '$stat
 					}
 				}
 			} else {
-				console.log(2);
 				$scope.cart_.$remove(function() {
 					$location.path('carts');
 				});

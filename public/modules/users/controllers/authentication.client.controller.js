@@ -56,9 +56,5 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$location.path('/signin');
 			}
 		};
-
-		$scope.refreshAuthImg = function() {
-			alert(1);
-		};
 	}
 ]);

@@ -266,19 +266,5 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				$scope.goods = response;
 			});
 		};
-
-		// Remove existing Good
-		// $scope.del = function() {
-		// 	$http.get('/goods/admin/delete',{this.good._id}).success(function (response){
-		// 		for (var i in $scope.goods) {
-		// 			if ($scope.goods [i] === this.good) {
-		// 				$scope.goods.splice(i, 1);
-		// 			}
-		// 		}
-		// 		$scope.success = true;
-		// 	}).error(function (response){
-		// 		$scope.error = response.message;
-		// 	});
-		// };
 	}
 ]);

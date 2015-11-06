@@ -24,9 +24,6 @@ exports.create = function(req, res) {
 			price:sprice,
 		};
 
-		console.log(req.body.detail);
-		console.log('samount'+samount);
-		console.log(_goods);
 	if (sgoods){
 		Cart.findOne({user:req.user,order_status:false,'detail.goods':sgoods},function(err,cart){
 			if (err){console.log(err);}
@@ -40,7 +37,6 @@ exports.create = function(req, res) {
 				}
 				if (i){
 					_total_amount = _.sum(cart.detail,'amount');
-					console.log(_total_amount);	
 					cart.save(function (err,cart){
 						if (err){console.log(err);}
 						else {
@@ -56,7 +52,6 @@ exports.create = function(req, res) {
 				Cart.findOneAndUpdate({user:req.user,order_status:false},{$push:{detail:_goods},$inc:{total:_total,total_amount:_goods.amount}},function (err,cart){
 					if(err){console.log(err);}
 					else if(cart){
-						console.log(cart);
 						res.send(cart);
 					}
 					else {
@@ -65,7 +60,6 @@ exports.create = function(req, res) {
 						_cart.detail = _goods;
 						_cart.total = _total;
 						_cart.total_amount = samount;
-						console.log(_cart.amount);
 						_cart.save(function (err,cart) {
 							if (err) {
 								return res.status(400).send({

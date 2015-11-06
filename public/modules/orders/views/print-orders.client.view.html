@@ -36,20 +36,20 @@
 								<span data-ng-bind="item.amount"></span>
 							</div>
 						</td>
-						<td><span data-ng-bind="item.price"></span></td>
+						<td><span data-ng-bind="item.price | number:2"></span>元</td>
 		                <td><span ng-if="item.goods.for_free == true">赠品</span><span ng-if="item.goods.free_try == true">试用品</span></td>
-						<td><span data-ng-bind="item.amount*item.price"></span></td>
+						<td><span data-ng-bind="item.amount*item.price | number:2"></span>元</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="od_footer mt20">
-			<div>商品种类：<span data-ng-bind="order.detail.length"></span>&nbsp;商品数量：<span data-ng-bind="order.total_amount"></span>&nbsp;实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
+			<div>商品种类：<span data-ng-bind="order.detail.length"></span>&nbsp;商品数量：<span data-ng-bind="order.total_amount"></span>&nbsp;实付金额：<span data-ng-bind="order.total | number:2"></span>元&nbsp;客户签收：</div>
 			<div class="col-md-12 col-xs-12">
 				备注：<span data-ng-bind="order.bz"></span>
 			</div>
 			<div class="col-md-6 col-xs-6">茗语e家QQ群:&nbsp;<span data-ng-bind="ccenter.qqqun"></span></div>
-			<div class="col-md-6 col-xs-6">投诉电话:&nbsp;<span data-ng-bind="ccenter.customcell"></span></div>
+			<div class="col-md-6 col-xs-6">投诉电话:&nbsp;13926515211<span data-ng-bind="ccenter.customcell"></span></div>
 		</div>
 	</div>
 </section>

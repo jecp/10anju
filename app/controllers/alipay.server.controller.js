@@ -422,6 +422,7 @@ exports.paynotify=function(req,res){
 exports.payreturn=function(req,res){
     //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
     var params=req.query;
+    console.log(req.query);
 
     var trade_no = req.query.trade_no;				//支付宝交易号
     var order_no = req.query.out_trade_no;	        //获取订单号
