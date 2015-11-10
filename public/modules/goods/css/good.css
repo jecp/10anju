@@ -28,6 +28,7 @@ padding:5px 0;
 .free_try{font: bold 14px/30px "黑体";background-color: green;color:white;border-radius:10px 10px 10px 10px;}
 /* good_list */
 .goods_list_tip{display:block;padding:6px;height: 30px;background-color:#fff1dc;border: 1px solid #ffe3b8;}
+.test_warning{display: block;padding:2px;height:30px;background-color: #f40;color:#fff;border:1px solid #ffe3b8;}
 .gl_f40{color:#f40;}
 .mark {
     width: 220px;
