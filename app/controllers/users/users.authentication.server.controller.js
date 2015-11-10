@@ -75,7 +75,7 @@ exports.signup = function(req, res) {
 	delete req.body.roles;
 	var mobile = req.body.mobile;
 
-	if (req.body.agreement && req.body.agreement === true){
+	//if (req.body.agreement && req.body.agreement === true){
 		if (!req.body.authCode){
 			if(req.body.authimg && req.body.authimg.toUpperCase() === txt){
 				req = req.body;
@@ -145,12 +145,12 @@ exports.signup = function(req, res) {
 				});
 			}
 		}
-	}
+	/* }
 	else{
 		return res.status(400).send({
 			message:('请确保同意注册协议！')
 		});
-	}
+	} */
 };
 
 /**
