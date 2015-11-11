@@ -10,7 +10,7 @@
               </label>
             <span class="fl">您好，<span ng-if="authentication.user.username !== undefined" class="gl_f40" data-ng-bind="authentication.user.username"></span><span ng-if="authentication.user.username === undefined" class="gl_f40"><a href="/#!/signup" class="h5">注册</a>/<a href="/#!/signin" class="h5">登录</a></span></span><span class="fl"><span>！&nbsp;截至目前，已更新<span data-ng-controller="HomeController" class="gl_f40" data-ng-bind="data.goodsCount"></span>件商品。&nbsp;</span></span><span class="fl"><span ng-if="ccenter === undefined">您还未入驻社区，<a href="/#!/ccenters" class="h5">现在加入</a>！</span><span ng-if="ccenter !== undefined" class="h5">您的小区<span class="gl_f40" data-ng-bind="ccenter.name"></span>共入驻了<span class="gl_f40" data-ng-bind="ccenter.user.length"></span>位邻居。</span></span>
           </div>
-          <div class="col-md-12 col-xs-12 text-center test_warning"><label for=""><i class="fa fa-warning"></i>&nbsp;内测期间，支付宝付款成功后才能安排发货（安装），敬请谅解。</label></div>
+          <div class="col-md-12 col-xs-12 text-center test_warning"><label for=""><i class="fa fa-warning"></i>&nbsp;内测期间，支付宝付款成功后才能安排发货（默认周末统一安装），敬请谅解。</label></div>
           <tab-heading>
             <span>全部</span>
           </tab-heading>
