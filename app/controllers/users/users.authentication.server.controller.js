@@ -116,7 +116,7 @@ exports.signup = function(req, res) {
 						    to: email, // list of receivers
 						    subject: '欢迎入驻 茗语e家！ ✔', // Subject line
 						    // text: 'Hello world ✔', // plaintext body
-						    html: '<b>欢迎入驻 茗语e家 ✔</b><br />您的用户名是：'+req.body.username // html body
+						    html: '<b>欢迎入驻 茗语e家 ✔</b><br />您的用户名是：'+req.body.username +'<br />购物答疑QQ群：374986752'// html body
 						};
 						transporter.sendMail(mailOptions, function(error, info){
 						    if(error){
