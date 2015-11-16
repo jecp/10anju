@@ -262,8 +262,9 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 		$scope.pay = function(order){
 			var _odetail = this.order;
 			var _gdetail = this.order.detail;
+			var bz = document.getElementById('bz').value;
 
-			$http.post('/order_submit',{order_detail:_odetail,goodId:_gdetail,bz:$scope.bz}).success(function (response){
+			$http.post('/order_submit',{order_detail:_odetail,goodId:_gdetail,bz:bz}).success(function (response){
 				// $location.path(response);
 				window.location.href = response;
 				// window.open(response);

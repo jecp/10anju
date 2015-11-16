@@ -239,7 +239,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 		// find sameGoods
 		$scope.findSame = function() {
 			var goodsName = this.goods.name;
-			console.log(goodsName);
+			//console.log(goodsName);
 			if (goodsName) {
 				$http.get('/goodSame?sameGoods='+goodsName).success(function (response){
 					if(response){

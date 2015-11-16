@@ -57,14 +57,14 @@
 			</table>
 		</div>
 		<div class="od_footer form-group mt20">
-			<div>商品种类：<span data-ng-bind="order.detail.length"></span>&nbsp;商品数量：<span data-ng-bind="order.total_amount"></span>&nbsp;实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>
-			<div class="col-md-12 form-group col-xs-12">
-				<label class="control-label">备注：</label><span data-ng-bind="order.bz"></span><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" name="bz" data-ng-model="bz" class="col-md-12">
-			</div>				
+			<div>商品种类：<span data-ng-bind="order.detail.length"></span>&nbsp;商品数量：<span data-ng-bind="order.total_amount"></span>&nbsp;实付金额：<span data-ng-bind="order.total | number:2"></span>元</div>				
 		</div>
 		<div class="od_submit mt20">
+			<div class="col-md-12 form-group col-xs-12">
+				<form><label class="control-label">备注：</label><span ng-if="order.bz" data-ng-bind="order.bz"></span><input ng-if="order.status === false" type="text" placeholder="如有特殊要求，请于此注明。" id="bz" data-ng-model="bz" class="col-md-12 bz"></form>
+			</div>
 			<div ng-if="order.status === false"><a type="submit" class="btn btn-warning" ng-click="pay()">支付宝支付</a></div>
-			<a href="/#!/orders_print/{{order._id}}" class="btn btn-default">打印</a>
+			<a ng-if="authentication.user.roles.length > 1" href="/#!/orders_print/{{order._id}}" class="btn btn-default">打印</a>
 		</div>
 	</div>
 </section>

@@ -220,7 +220,6 @@ exports.alipayto = function (req, res) {
     //提成信息集
     var royalty_parameters = '';
     var _bz = req.body.bz ? req.body.bz : '';
-    console.log(_bz+'req.body'+req.body);
     //注意：
     //与需要结合商户网站自身情况动态获取每笔交易的各分润收款账号、各分润金额、各分润说明。最多只能设置10条
     //各分润金额的总和须小于等于total_fee
@@ -232,7 +231,6 @@ exports.alipayto = function (req, res) {
     //////////////////////////////////////////////////////////////////////////////////
     Order.findOneAndUpdate({_id:out_trade_no},{bz:_bz},function (err,order){
         if (err){console.log(err);}
-        console.log('!!!bz:'+order);
     });
 
     //把请求参数打包成数组
