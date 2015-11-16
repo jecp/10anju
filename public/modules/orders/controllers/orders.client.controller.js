@@ -90,6 +90,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		$scope.buy = function() {
 			//Create new Order object
+			console.log(window.user.username);
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
