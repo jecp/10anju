@@ -312,6 +312,17 @@ exports.changeAmount = function(req, res) {
 	});
 };
 
+/**
+ * Payreturn page
+ */
+exports.payreturn = function(req,res){
+	console.log(req.query);
+	var orderId = req.query.out_trade_no;
+	res.render('pay/payreturn',{
+		message:'支付成功，即将跳转至订单详情页！',
+		orderId:orderId
+	})
+};
 
 /**
  * Delete an Order.goods

@@ -48,7 +48,7 @@ var AlipayConfig = {
 
 // 当前页面跳转后的页面 要用 http://格式的完整路径，不允许加?id:123这类自定义参数
 // 域名不能写成http://localhost/create_direct_pay_by_user_jsp_utf8/return_url.jsp ，否则会导致return_url执行无效
-    return_url:'http://www.havemay.cn/#!/payreturn',
+    return_url:'http://www.havemay.cn/payreturn',
 
 //      支付宝通知验证地址
 
