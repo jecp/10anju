@@ -33,7 +33,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, visithistory.vh_log, alipay.alipayto);
 
 	app.route('/payreturn')
-		.get(users.requiresLogin, visithistory.vh_log, orders.payreturn);
+		.get(users.requiresLogin, visithistory.vh_log, alipay.payreturn);
 
 	app.route('/paynotify')
 		.get(users.requiresLogin, visithistory.vh_log, alipay.paynotify);
