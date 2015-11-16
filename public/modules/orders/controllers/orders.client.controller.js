@@ -90,7 +90,7 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 
 		$scope.buy = function() {
 			//Create new Order object
-			console.log(window.user.username);
+			//console.log(window.user.username+'&'+$scope.authentication.username);
 			var date = new Date();
 			var created_day = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
 			var orderName = created_day + '-' + window.user.username + '-' + '的订单';
@@ -228,9 +228,11 @@ angular.module('orders').controller('OrdersController', ['$scope', '$http', '$st
 					$location.path('orders');
 				}
 				else{
-					$scope.order.detail.splice(order_good,1);
-					$scope.order.total = response.total;
-					$location.path('orders/' + response._id);
+					$scope.order = null;
+					$scope.order = response.order;
+					// $scope.order.detail.splice(order_good,1);
+					// $scope.order.total = response.total;
+					// $location.path('orders/' + response._id);
 				}
 			}).error(function (response){
 				$scope.error = response.message;

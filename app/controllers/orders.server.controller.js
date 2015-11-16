@@ -321,6 +321,7 @@ exports.deleteGoods = function(req, res) {
 	Order.findOne({_id:req.body.order._id,'detail._id':req.body.goodId._id},function (err,order){
 		if(err){console.log(err);}
 		else{
+			console.log(order.detail.length);
 			var i = order.detail.length;
 			if (i > 1){
 				while (i--){
@@ -329,10 +330,10 @@ exports.deleteGoods = function(req, res) {
 						_total = goodObj.price * goodObj.amount;
 					}
 				}
-				Order.findOneAndUpdate({_id:req.body.order._id},{$pull:{detail:goodObj},$inc:{total:-_total},updated:Date.now()},function (err,order){
+				Order.findOneAndUpdate({_id:req.body.order._id},{$pull:{detail:goodObj},$inc:{total:-_total,total_amount:-goodObj.amount},updated:Date.now()},function (err,order){
 					if(err){console.log(err);}
 					else {
-						res.send(order);
+						res.send({res_no:'success',order:order});
 					}
 				});
 				Good.findOneAndUpdate({_id:goodObj._id},{$inc:{sold:-goodObj.amount}},function (err){
