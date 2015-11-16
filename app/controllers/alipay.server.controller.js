@@ -44,7 +44,7 @@ var AlipayConfig = {
 
 // 支付宝服务器通知的页面 要用 http://格式的完整路径，不允许加?id:123这类自定义参数
 // 必须保证其地址能够在互联网中访问的到
-    notify_url:'http://www.havemay.cn/#!/paynotify',
+    notify_url:'http://www.havemay.cn/paynotify',
 
 // 当前页面跳转后的页面 要用 http://格式的完整路径，不允许加?id:123这类自定义参数
 // 域名不能写成http://localhost/create_direct_pay_by_user_jsp_utf8/return_url.jsp ，否则会导致return_url执行无效
@@ -220,6 +220,7 @@ exports.alipayto = function (req, res) {
     //提成信息集
     var royalty_parameters = '';
     var _bz = req.body.bz ? req.body.bz : '';
+    console.log(_bz+'req.body'+req.body);
     //注意：
     //与需要结合商户网站自身情况动态获取每笔交易的各分润收款账号、各分润金额、各分润说明。最多只能设置10条
     //各分润金额的总和须小于等于total_fee
@@ -229,8 +230,9 @@ exports.alipayto = function (req, res) {
     //royalty_parameters	= '111@126.com^0.01^分润备注一|222@126.com^0.01^分润备注二'
 
     //////////////////////////////////////////////////////////////////////////////////
-    Order.findOneAndUpdate({_id:out_trade_no},{bz:_bz},function (err){
+    Order.findOneAndUpdate({_id:out_trade_no},{bz:_bz},function (err,order){
         if (err){console.log(err);}
+        console.log('!!!bz:'+order);
     });
 
     //把请求参数打包成数组
