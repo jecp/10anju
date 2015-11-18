@@ -79,7 +79,7 @@ exports.forgot = function(req, res, next) {
 				subject: 'Password Reset',
 				html: emailHTML
 			};
-			console.log(mailOptions);
+			//console.log(mailOptions);
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({

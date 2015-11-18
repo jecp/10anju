@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function(property) {
-	console.log(property);
+	//console.log(property);
 	if(property){
 		return ((this.provider !== 'local' && !this.updated) || property.length);
 	}
