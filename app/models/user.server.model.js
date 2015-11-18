@@ -12,7 +12,12 @@ var mongoose = require('mongoose'),
  */
 var validateLocalStrategyProperty = function(property) {
 	console.log(property);
-	return ((this.provider !== 'local' && !this.updated) || property.length);
+	if(property){
+		return ((this.provider !== 'local' && !this.updated) || property.length);
+	}
+	else {
+		return (this.provider !== 'local' && !this.updated);
+	}	
 };
 
 /**
