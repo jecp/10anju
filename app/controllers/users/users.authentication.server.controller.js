@@ -40,6 +40,7 @@ var auth = function (req,res){
 				var a = now.getSeconds();
 				var authCode = Math.ceil(Math.random()*1000000)+a+Math.round(Math.random()*10+1);
 				var appkey = 'fe66303b0f83ddd916fda2884debbd2f';//用户appkey
+				console.log(authCode);
 				// var minutes = 1000*60*3;//3分钟
 				var tpl_id = 5465;//信息模版id
 				var con = '#code#='+authCode+'&#minuetes#=10';

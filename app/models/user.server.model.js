@@ -126,7 +126,7 @@ var UserSchema = new Schema({
 		ref:'Ccenter'
 	},
 	roomNum: {
-		type: Number,
+		type: String,
 	},
 	avatar:{
 		type:String

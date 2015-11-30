@@ -87,6 +87,8 @@ exports.delete = function(req, res) {
  * List of Categories
  */
 exports.list = function(req, res) {
+	console.log(res.header);
+	res.header("Access-Control-Allow-Origin","*");
 	Category.find().sort('-created').populate('goods','name main_img price title delivery').exec(function(err, categories) {
 		if (err) {
 			return res.status(400).send({

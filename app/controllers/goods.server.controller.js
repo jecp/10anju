@@ -281,7 +281,7 @@ exports.list = function(req, res) {
  * List of Goods
  */
 exports.findFree = function (req, res){
-	Good.find({for_free:true},function (err,goods){
+	Good.find({title://},function (err,goods){
 		if(err){
 			console.log(err);
 		}else{

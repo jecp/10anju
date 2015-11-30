@@ -171,6 +171,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.findByCategory = function() {
+			console.log(this.cat);
 			var limit = 12;
 			var catId = $scope.category.length ? $scope.category : $stateParams.categoryId;
 			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){
@@ -250,7 +251,7 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 				});	
 			} else{
 				return;
-			};		
+			}
 		};
 
 		// Find a list of Goods

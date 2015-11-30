@@ -14,28 +14,129 @@
 
 	<link rel="apple-touch-startup-image" href="/images/start.jpg" />
 	<link rel="apple-touch-startup-image" href="/images/start.jpg" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+	<link rel="stylesheet" href="/modules/core/css/normalize.css">
 </head>
 <style>
 	/*.navbar-fixed-top{display: none;}*/
 	.footer{display: none;}
 </style>
 <section data-ng-controller="GoodsController" data-ng-init="find()">
-	<div class="row">
-		<div class="banner row">
-			<img src="http://placehold.it/480x200/E97452/fff" class="m_index_banner_img" style="overflow:hidden;" alt="">
+	<!-- <div class="header search-fixed" id="hd" style="is-point-hide:false;">
+		<div class="search-logo">
+			<img src="https://cbu01.alicdn.com/cms/upload/2015/584/194/2491485_561512040.png_60x90q90.jpg_.webp" alt="">
 		</div>
-		<div class="pageheader" data-ng-controller="CategoriesController" data-ng-init="find()">
-			<div>
-				<span>今日精选</span>
+		<div class="search-input fui-search show-search-btn" style="width:491px;" href="#search">
+			<span class="search-text">请输入产品关键字</span>
+			<i class="fa fa-search"></i>
+		</div>
+		<div class="search-cat">
+			<img src="https://cbu01.alicdn.com/cms/upload/2015/334/494/2494433_561512040.png_20x20q90.jpg_.webp" alt="">
+		</div>
+	</div>
+	<div class="search-page" id="searchPage" style="display:none;">
+		<form action="" class="form-search">
+			<div class="search-bar">
+				<div class="s-type-button">
+					<span class="s-type-value">产品</span>
+				</div>
+				<div class="search-input">
+					<input type="text" placeholder="请输入产品关键字">
+				</div>
+				<a href="" class="search-btn">
+					<i class="fa fa-search"></i>
+				</a>
 			</div>
-			<div class="controls">
+			<span class="search-cancel btn">取消</span>
+		</form>
+		<div class="s-history">
+			<div class="no-history" style="transform-origin:0px 0px 0px;opacity:1;transform:scale(1,1);">
+				<div class="no-result">
+					<div class="text">
+						<i class="fa fa-search"></i>暂无搜索记录
+					</div>
+				</div>
+			</div>
+			<div class="s-history-list" style="display:none;"></div>
+			<div id="clear-history" style="display:none;">
+				<span>清除搜索历史</span>
+			</div>
+		</div>	
+	</div> -->
+	<div class="">
+		<!-- <div class="banner">
+			<img src="http://placehold.it/480x200/E97452/fff" class="m_index_banner_img" alt="">
+		</div> -->
+		<!-- <div id="myCarousel" class="carousel slide">
+			<ol class="carousel-indicators">
+				<li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="http://img.hjxmall.com/info/info/20151118112206960757.jpg" alt="">
+				</div>
+				<div class="item">
+					<img src="http://img.hjxmall.com/info/info/20151030041529817659.jpg" alt="">
+				</div>
+				<div class="item">
+					<img src="http://img.hjxmall.com/info/info/20151123055716360877.jpg" alt="">
+				</div>
+			</div>
+			<a href="#myCarousel" data-slide="prev" class="carousel-control left">&lsaquo;</a>
+			<a href="#myCarousel" data-slide="next" class="carousel-control right">&rsaquo;</a>
+		</div> -->
+		<div class="wap-app" style="margin-bottom:1px;margin-top:0px;padding-bottom:18px;">
+			<ul>
+				<li><a href="/#!/categories"><img src="https://cbu01.alicdn.com/cms/upload/2015/219/684/2486912_561512040.png_50x50q90.jpg" alt=""><span class="txt">分类</span></a></li>
+				<li><a href="/#!/carts"><img src="https://cbu01.alicdn.com/cms/upload/2015/747/094/2490747_561512040.png_50x50q90.jpg" alt=""><span class="txt">购物篮</span></a></li>
+				<li><a href="/#!/forums"><img src="https://cbu01.alicdn.com/cms/upload/2015/516/494/2494615_561512040.png_50x50q90.jpg" alt=""><span class="txt">论坛</span></a></li>
+				<li><a href="/#!/usercenter"><img src="https://cbu01.alicdn.com/cms/upload/2015/795/694/2496597_561512040.png_50x50q90.jpg" alt=""><span class="txt">用户中心</span></a></li>
+			</ul>
+		</div>
+		<!-- <div class="top_hot">
+			<div style="height:100px;width:100%;background-image:url(http://img.hjxmall.com/info/info/20151118112206960757.jpg);display:inline-block;">
+				今日精选
+			</div>
+		</div> -->
+		<div class="pageheader row" data-ng-controller="CategoriesController" data-ng-init="find()">
+			<div data-ng-repeat="cat in categories" class="col-md-12 col-xs-12" style="padding-left:-15px;padding-right:-15px;">
+				<div>
+					<div class="row" style="background-color:rgb(255,255,255);height:60px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;">
+						<div class="col-xs-4 col-md-4">
+							<span data-ng-bind="cat.name" style="font-size:30px;margin-left:15px;color:rgb(62,62,62);"></span>
+						</div>
+						<div class="col-md-8 col-xs-8">
+							<li class="wa_subcat grid" data-ng-repeat="t in cat.subcat">
+								<a href="/#!/goods/subcat/{{t}}"><span data-ng-bind="t"></span></a>
+							</li>
+							<a href="/#!/categories/{{cat._id}}"><span class="pull-right text-muted" style="right:0px;padding-top:3px;">更多</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-4 col-md-4 top_cat" >
+					<a href="/#!/categories/{{cat._id}}">
+						<img ng-src="{{cat.img}}" style="margin-left:-10px;margin-right:-10px;" alt="">
+					</a>
+				</div>				
+				<div class="col-md-8 col-xs-8">
+					<div class="row pull-right" data-ng-repeat="good in goods | limitTo:6 |filter:cat._id" style="float:left;">
+						<div class="mgoods">
+							<a href="/#!/m/goods/{{good._id}}">
+								<img ng-src="{{good.main_img}}" alt="">
+							</a>
+						</div>
+					</div>
+				</div>				
+			</div>
+			<!-- <div class="controls" data-ng-controller="GoodsController">
 			    <select ng-model="cat" ng-options="cat._id as cat.name for cat in categories">
-			        <option value="">请选择分类:</option>
+			        <option value="" ng-change="findByCategory();">请选择分类:</option>
 			    </select>
 			    {{cat}}
-			</div>
+			</div> -->
 		</div>
-		<div when-scrolled="loadMore()">
+		<!-- <div when-scrolled="loadMore()">
 			<ul>
 				<li class="good_list" ng-repeat="good in goods | filter:category.id" style="overflow:hidden;border-top:1px solid #ccc;" >
 					<div class="col-xs-5">
@@ -57,6 +158,6 @@
 					</div>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </section>

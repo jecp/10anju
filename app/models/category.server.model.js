@@ -17,6 +17,9 @@ var CategorySchema = new Schema({
 		required: 'Please fill Category name',
 		trim: true
 	},
+	img: {
+		type:String
+	},
 	subcat: [{
 		type:String,
 		unique: '子分类不可重复',

@@ -111,7 +111,7 @@ angular.module('subjects').controller('SubjectsController', ['$scope', '$http', 
 
 		// Del Subject From admin list
 		$scope.del = function() {
-			var subject = this.subject
+			var subject = this.subject;
 			$http.get('/subjects/admin_del?subjectId='+subject._id).success(function (response){
 				if (response === 'success'){
 					$scope.success = true;
