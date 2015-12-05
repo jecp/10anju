@@ -136,14 +136,14 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.find = function() {
-			if($location.path().search('tab') > 0){
-				console.log($location.path());
-				alert('1');
-			} else{
-				console.log($location.path());
-				alert('2');
-			}
-			alert('3');
+			// if($location.path().search('tab') > 0){
+			// 	console.log($location.path());
+			// 	alert('1');
+			// } else{
+			// 	console.log($location.path());
+			// 	alert('2');
+			// }
+			// alert('3');
 			$scope.goods = Goods.query({
 				limit:20
 			});
