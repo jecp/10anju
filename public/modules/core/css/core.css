@@ -23,8 +23,9 @@
 .sort-inner ul{list-style: none;margin:0px;padding:0px;width:auto;}
 .sort-inner ul li{float:left;padding:1px;margin-left:2px;}
 .sort-inner ul li a,.sort-inner ul li a:visited{background:#f5f5f5;display: block;line-height:36px;text-decoration: none;white-space:nowrap;}
-.sort-inner ul li a:hover{background-color:#e8e8e8;color: #f5f5f5;text-decoration: none;}
+.sort-inner ul li a:hover{background-color:#e8e8e8;color: #f50;text-decoration: none;}
 .sort-inner ul li a:active{background-color: #fff;color:#f40;text-decoration: none;}
+.sorts .active{background-color:#e6e6e6;}
 /*.sort-inner ul li {list-style:none;margin:0 ;padding:0;}*/
 .mt20{margin-top:20px; }
 a,a:visited{text-decoration:none; color:#373737;}

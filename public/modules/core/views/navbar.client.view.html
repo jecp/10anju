@@ -5,22 +5,31 @@
 		<li><a href="/#!/categories">分类</a></li>
 		<li><a href="/#!/porders/create"><span class="gl_f40">私人订制</span></a></li>
 		<li><a href="/#!/goods/free"><span class="gl_f40">活动专区</span></a></li>
-		<!-- <a class="pull-right" href="http://sighttp.qq.com/oauthd?OIDKEY=" target="_blank">
-			<img  style="CURSOR: pointer" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=3132918437&o=茗语e家&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:3132918437:3 alt="在线咨询">
-		</a> -->
-		<a class="pull-right" href="http://wpa.qq.com/msgrd?v=3&uin=3132918437&site=qq&menu=yes" target="_blank">
-			<img src="http://wpa.qq.com/pa?p=1:3132918437:1" border=0>
-		</a>
+		<div class="sortbar pull-right" data-ng-controller="GoodsController">
+			<div class="main-sortbar">
+				<div class="sort-row">
+					<div class="sort-inner">
+						<ul class="sorts">
+							<li class="sort active"><a href="/#!/" data-ng-model="sort" value="default" ng-click="sortAll()" title="综合排序">综合排序</a></li>
+							<li class="sort"><a href="/#!/goods?tab=hot" data-ng-model="sort" value="hot" title="人气">人气</a></li>
+							<li class="sort"><a href="/#!/" data-ng-model="sort" value="sales" ng-click="sortAll()" title="销量">销量</a></li>
+							<li class="sort"><a href="/#!/" data-ng-model="sort" value="price" ng-click="sortAll()" title="价格">价格</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="filter-row"></div>
+			</div>
+		</div>
 	</ul>
-	<!-- <div class="sortbar">
+	<!-- <div class="sortbar pull-right" data-ng-controller="GoodsController">
 		<div class="main-sortbar">
 			<div class="sort-row">
 				<div class="sort-inner">
 					<ul class="sorts">
-						<li class="sort active"><a href="#" title="综合排序">综合排序</a></li>
-						<li class="sort"><a href="#" title="人气">人气</a></li>
-						<li class="sort"><a href="#" title="销量">销量</a></li>
-						<li class="sort"><a href="#" title="价格">价格</a></li>
+						<li class="sort active"><a href="/#!/" data-ng-model="default" title="综合排序">综合排序</a></li>
+						<li class="sort"><a href="/#!/" data-ng-model="person" title="人气">人气</a></li>
+						<li class="sort"><a href="/#!/" data-ng-model="sales" title="销量">销量</a></li>
+						<li class="sort"><a href="/#!/" data-ng-model="price" title="价格">价格</a></li>
 					</ul>
 				</div>
 			</div>

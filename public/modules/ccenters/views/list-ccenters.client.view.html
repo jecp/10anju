@@ -18,8 +18,8 @@ window.onload = loadScript;
 </script>
 <section data-ng-controller="CcentersController" data-ng-init="find()">
     <div class="mt20 list-group">
-    <div data-ng-controller="CcentersController" ng-init="findU()">您已入驻社区<span data-ng-bind="ccenter.name"></span></div>
-        <div>
+    <div data-ng-controller="CcentersController" ng-init="findU()">您已入驻社区<span class="gl_f40" data-ng-bind="ccenter.name"></span></div>
+        <div class="mt20">
           <h4 class="">社区列表</h4>
             <table class="table table-hover table-bordered">
                 <thead>
@@ -50,5 +50,8 @@ window.onload = loadScript;
             </table>
         </div>
     </div>
-    <div id="mapDiv" style="background:#ccc;width:500px;height:320px"></div>
+    <div class="tips">
+      <h1>房间号是我们对业主进行认证的重要渠道，请输入正确的房间号，茗语e家不会以任何形式泄露业主资料。</h1>
+    </div>
+    <!-- <div id="mapDiv" style="background:#ccc;width:500px;height:320px"></div> -->
 </section>

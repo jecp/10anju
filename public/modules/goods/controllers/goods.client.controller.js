@@ -136,9 +136,27 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.find = function() {
+			if($location.path().search('tab') > 0){
+				console.log($location.path());
+				alert('1');
+			} else{
+				console.log($location.path());
+				alert('2');
+			}
+			alert('3');
 			$scope.goods = Goods.query({
 				limit:20
 			});
+		};
+
+		// Sort goods
+		$scope.sortAll = function() {
+			var sort_type = this.sort;
+			$location.path('/goods_sort_type');
+			$http.get('/goods_sort_type?='+sort_type).success(function (response){
+				$scope.goods = null;
+			});
+			// $scope.goods = null;
 		};
 
 		// Admin list of Goods
@@ -171,7 +189,6 @@ angular.module('goods').controller('GoodsController', ['$scope', '$http', '$stat
 
 		// Find a list of Goods
 		$scope.findByCategory = function() {
-			console.log(this.cat);
 			var limit = 12;
 			var catId = $scope.category.length ? $scope.category : $stateParams.categoryId;
 			$http.get('/goods?limit='+limit+'&catId='+catId).success(function (response){

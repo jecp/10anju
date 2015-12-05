@@ -280,6 +280,24 @@ exports.list = function(req, res) {
 /**
  * List of Goods
  */
+exports.sort = function(req, res) {
+	console.log(req.query);
+	var sort_type = req.query.sort;
+
+	Good.find().skip(req.query.skip).limit(req.query.limit).sort('-sale').exec(function(err, goods) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(goods);
+		}
+	});
+};
+
+/**
+ * List of Goods
+ */
 exports.findFree = function (req, res){
 	Good.find({for_free:true},function (err,goods){
 		if(err){

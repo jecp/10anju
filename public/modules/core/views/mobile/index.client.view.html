@@ -18,9 +18,9 @@
 </head>
 <style>
 	/*.navbar-fixed-top{display: none;}*/
-	.footer{display: none;}
+	/*.footer{display: none;}*/
 </style>
-<section data-ng-controller="GoodsController" data-ng-init="find()">
+<section>
 	<!-- <div class="header search-fixed" id="hd" style="is-point-hide:false;">
 		<div class="search-logo">
 			<img src="https://cbu01.alicdn.com/cms/upload/2015/584/194/2491485_561512040.png_60x90q90.jpg_.webp" alt="">
@@ -102,7 +102,7 @@
 		<div class="pageheader row" data-ng-controller="CategoriesController" data-ng-init="find()">
 			<div data-ng-repeat="cat in categories" class="col-md-12 col-xs-12" style="padding-left:-15px;padding-right:-15px;">
 				<div>
-					<div class="row" style="background-color:rgb(255,255,255);height:60px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;">
+					<div class="row" style="background-color:rgb(255,255,255);height:60px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;background:url({{cat.img}})">
 						<div class="col-xs-4 col-md-4">
 							<span data-ng-bind="cat.name" style="font-size:30px;margin-left:15px;color:rgb(62,62,62);"></span>
 						</div>
@@ -114,17 +114,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-4 col-md-4 top_cat" >
+				<!-- <div class="col-xs-4 col-md-4 top_cat" >
 					<a href="/#!/categories/{{cat._id}}">
-						<img ng-src="{{cat.img}}" style="margin-left:-10px;margin-right:-10px;" alt="">
+						<img ng-src="{{cat.img}}" style="margin-left:-10px;margin-right:-10px;width:100%;overflow:hidden;" alt="">
 					</a>
-				</div>				
-				<div class="col-md-8 col-xs-8">
-					<div class="row pull-right" data-ng-repeat="good in goods | limitTo:6 |filter:cat._id" style="float:left;">
+				</div> -->				
+				<div class="col-md-12 col-xs-12">
+					<div class="row" data-ng-repeat="good in cat.goods | limitTo:12" style="float:left;">
 						<div class="mgoods">
-							<a href="/#!/m/goods/{{good._id}}">
-								<img ng-src="{{good.main_img}}" alt="">
-							</a>
+							<li >
+								<a href="/#!/m/goods/{{good._id}}">
+									<img ng-src="{{good.main_img}}-100" alt="">
+								</a>
+							</li>
 						</div>
 					</div>
 				</div>				
