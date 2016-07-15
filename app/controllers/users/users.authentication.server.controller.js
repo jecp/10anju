@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 	service: 'QQ',
 	auth: {
 		user: 'info@havemay.cn',
-		pass: '52tsinghua'
+		pass: ''
 	}
 });
 
